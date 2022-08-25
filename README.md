@@ -4,7 +4,7 @@
 
 - Fernando Eduardo Pinto Moreira - desenvolvedor front-end;
 - Gilliard Gabriel Rodrigues - desenvolvedor back-end;
-- Maila Ferreira Silva - desenvolvedora front-end;
+- Maíla Ferreira Silva - desenvolvedora front-end;
 - Samuel William Almeida Santos - desenvolvedor back-end.
 
 ### Funcional (objetivo do sistema, principais features, etc)
