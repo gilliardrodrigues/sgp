@@ -42,3 +42,6 @@ Os clientes conseguem:
 	- PostgreSQL
 - Deploy
   - AWS ou Heroku
+
+### Diagrama de Classes
+![Diagrama de Classes](diagrama_de_classes.png)
