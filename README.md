@@ -63,7 +63,7 @@ Os clientes conseguem:
 
 - Como administrador, eu gostaria de gerar relatórios de forma agrupada para os fornecedores a respeito dos pedidos após fechar uma temporada.
 
-- Como administrador, eu gostaria de notificar os clientes a respeito do tempo de entrega específico de cada tipo de produto, de acordo com o tempo do fornecedor.
+- Como administrador, eu gostaria de poder notificar os clientes a respeito do tempo de entrega previsto de cada produto de acordo com o tempo do fornecedor e também quando algum produto chegasse.
 
 ### Sprint Backlog
 
