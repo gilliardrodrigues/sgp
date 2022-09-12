@@ -111,7 +111,7 @@ Os clientes conseguem:
 
 - [ ] Implementar interface web. [Fernando]
 
-- [ ] Implementar CRUD de fornecedores. [Samuel]
+- [x] Implementar CRUD de fornecedores. [Gilliard]
 
 - [ ] Implementar lógica das observações e histórico com fornecedores. [Samuel]
 
@@ -177,15 +177,15 @@ Os clientes conseguem:
 
 **Tarefas técnicas**
 
-- [ ] Preparar estrutura de arquivos para arquitetura hexagonal. [Gilliard]
+- [x] Preparar estrutura de arquivos para arquitetura hexagonal. [Gilliard]
 
-- [ ] Discutir e definir diagrama das classes de domínio. [Gilliard]
+- [x] Discutir e definir diagrama das classes de domínio. [Gilliard]
 
-- [ ] Criar banco de dados no PostgreSQL. [Gilliard]
+- [x] Criar banco de dados no PostgreSQL. [Gilliard]
 
 - [ ] Implementar camada de persistência.  [Gilliard]
 
-- [ ] Implementar esqueleto da arquitetura hexagonal. [Gilliard]
+- [x] Implementar esqueleto da arquitetura hexagonal. [Gilliard]
 
 - [ ] Implementar autenticação e autorização de usuários. [Gilliard]
 
