@@ -19,9 +19,11 @@ public class AdministradorMapper {
         return modelMapper.map(entity, Administrador.class);
     }
     public Administrador requestToDomain(AdministradorRequest request) {
+
         return modelMapper.map(request, Administrador.class);
     }
     public AdministradorResponse domainToResponse(Administrador administrador) {
+
         return modelMapper.map(administrador, AdministradorResponse.class);
     }
 }
