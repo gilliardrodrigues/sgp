@@ -7,6 +7,7 @@ import lombok.Setter;
 @Setter
 public class AdministradorRequest {
 
+
     private String username;
     private String password;
 }

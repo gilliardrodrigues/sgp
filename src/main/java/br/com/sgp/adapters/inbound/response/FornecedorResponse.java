@@ -1,11 +1,11 @@
-package br.com.sgp.application.core.domain;
+package br.com.sgp.adapters.inbound.response;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class Fornecedor {
+public class FornecedorResponse {
 
     private Long id;
     private String razaoSocial;
