@@ -69,7 +69,7 @@ Os clientes conseguem:
 
 **História:** Como administrador, eu gostaria de poder iniciar temporadas de recebimento de pedidos, informando os itens que estarão à venda.
 
-- [ ] Projetar tela de gerenciamento de temporada no Figma e validar design. [Maíla]
+- [x] Projetar tela de gerenciamento de temporada no Figma e validar design. [Maíla]
 
 - [ ] Implementar interface web. [Fernando]
 
@@ -86,9 +86,9 @@ Os clientes conseguem:
 
 **História:** Como administrador, eu gostaria de dar baixa de pagamento parcial ou total de pedidos
 
-- [ ] Projetar tela de gerenciamento de pedidos no Figma e validar design. [Maíla]
+- [x] Projetar tela de gerenciamento de pedidos no Figma e validar design. [Fernando]
 
-- [ ] Implementar interface web. [Fernando]
+- [ ] Implementar interface web. [Maíla]
 
 - [ ] Criar e implementar rota para pesquisar pedidos existentes. [Gilliard]
 
@@ -107,7 +107,7 @@ Os clientes conseguem:
 
 **História:** Como administrador, eu gostaria de cadastrar fornecedores com observações específicas para cada um.
 
-- [ ]  Projetar tela de cadastro e edição de fornecedores no Figma e validar design. [Maíla]
+- [x]  Projetar tela de cadastro e edição de fornecedores no Figma e validar design. [Maíla, Fernando]
 
 - [ ] Implementar interface web. [Fernando]
 
@@ -118,9 +118,9 @@ Os clientes conseguem:
 
 **História:** Como administrador, eu gostaria de cadastrar produtos do inventário.
 
-- [ ] Projetar tela com visão administrativa de produtos no Figma e validar design. [Maíla]
+- [x] Projetar tela com visão administrativa de produtos no Figma e validar design. [Fernando]
 
-- [ ] Implementar interface web. [Fernando]
+- [ ] Implementar interface web. [Maíla]
 
 - [ ] Criar e implementar rota para popular o inventário. [Samuel]
 
@@ -131,7 +131,7 @@ Os clientes conseguem:
 
 **História:** Como usuário, eu gostaria de poder consultar o inventário de produtos disponíveis à pronta-entrega.
 
-- [ ] Projetar tela de consulta do usuário no Figma e validar design. [Maíla]
+- [x] Projetar tela de consulta do usuário no Figma e validar design. [Maíla, Fernando]
 
 - [ ] Implementar interface web. [Fernando]
 
@@ -139,7 +139,7 @@ Os clientes conseguem:
 
 **História:** Como usuário, eu gostaria de poder realizar um pedido
 
-- [ ] Projetar telas relativas ao processo de abertura de pedido no Figma e validar design. [Maíla]
+- [x] Projetar telas relativas ao processo de abertura de pedido no Figma e validar design. [Maíla, Fernando]
 
 - [ ] Implementar interface web. [Fernando]
 
@@ -148,7 +148,7 @@ Os clientes conseguem:
 
 **História:** Como usuário, eu gostaria de acompanhar a situação do meu pedido, tendo transparência sobre a situação de pagamento e previsão de retirada.
 
-- [ ] Projetar tela de acompanhamento de pedidos e validar design. [Maíla]
+- [x] Projetar tela de acompanhamento de pedidos e validar design. [Maíla]
 
 - [ ] Implementar interface web. [Fernando]
 
@@ -159,7 +159,7 @@ Os clientes conseguem:
 
 **História:** Como administrador, eu gostaria de poder fechar temporadas de recebimento de pedidos, gerando aviso aos clientes de que o pedido já foi repassado para a produção.
 
-- [ ] Projetar tela de acompanhamento de pedidos da temporada. [Maíla]
+- [x] Projetar tela de acompanhamento de pedidos da temporada. [Maíla]
 
 - [ ] Implementar interface web. [Fernando]
 
@@ -168,9 +168,9 @@ Os clientes conseguem:
 
 **História:** Como administrador, eu gostaria de notificar os clientes a respeito do tempo de entrega específico de cada tipo de produto, de acordo com o tempo do fornecedor.
 
-- [ ] Projetar tela de acompanhamento de pedidos da temporada. [Maíla]
+- [ ] Projetar tela de acompanhamento de pedidos da temporada. [Fernando]
 
-- [ ] Implementar interface web. [Fernando]
+- [ ] Implementar interface web. [Maíla]
 
 - [ ] Criar e testar rota para definir o prazo de entrega dos pedidos de uma temporada. [Samuel]
 
@@ -189,9 +189,9 @@ Os clientes conseguem:
 
 - [ ] Implementar autenticação e autorização de usuários. [Gilliard]
 
-- [ ] Projetar telas de login, cadastro e tela principal do administrador no Figma e validar design. [Maíla]
+- [ ] Projetar telas de login, cadastro e tela principal do administrador no Figma e validar design. [Fernando]
 
-- [ ] Implementar telas de login, cadastro e tela principal do administrador. [Fernando]
+- [ ] Implementar telas de login, cadastro e tela principal do administrador. [Maíla]
 
 
 ### Diagrama de Classes
