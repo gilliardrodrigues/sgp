@@ -113,7 +113,7 @@ Os clientes conseguem:
 
 - [x] Implementar CRUD de fornecedores. [Gilliard]
 
-- [ ] Implementar lógica das observações e histórico com fornecedores. [Samuel]
+- [x] Implementar lógica das observações e histórico com fornecedores. [Gilliard]
 
 
 **História:** Como administrador, eu gostaria de cadastrar produtos do inventário.
@@ -189,7 +189,7 @@ Os clientes conseguem:
 
 - [ ] Implementar autenticação e autorização de usuários. [Gilliard]
 
-- [ ] Projetar telas de login, cadastro e tela principal do administrador no Figma e validar design. [Fernando]
+- [x] Projetar telas de login e tela principal do administrador no Figma e validar design. [Fernando]
 
 - [ ] Implementar telas de login, cadastro e tela principal do administrador. [Maíla]
 
