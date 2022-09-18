@@ -2,7 +2,7 @@ package br.com.sgp.application.core.domain;
 
 public enum StatusPagamento {
 
-    PAGO("Pago"),
+    INTEGRALMENTE_PAGO("Pago"),
     PARCIALMENTE_PAGO("Parcialmente pago"),
     NAO_PAGO("Não pago");
 

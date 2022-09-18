@@ -3,8 +3,9 @@ package br.com.sgp.application.core.domain;
 public enum StatusPedido {
 
     AGUARDANDO_PAGAMENTO("Aguardando pagamento..."),
-    PEDIDO_FEITO("Pedido feito!"),
-    CONCLUIDO("Concluído!");
+    CONFIRMADO("Pedido confirmado!"),
+    PARCIALMENTE_ENTREGUE("Pedido parcialmente entregue!"),
+    PEDIDO_ENTREGUE("Pedido entregue!");
 
     private final String descricao;
 

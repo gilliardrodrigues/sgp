@@ -13,8 +13,9 @@ public class Pedido {
     private Long id;
     private Date data;
     private Double valor;
-    private StatusPedido status;
-    private StatusPagamento situacaoPagamento;
+    private StatusPedido situacao;
+    private StatusPagamento statusPagamento;
+    private Double valorPago;
     private Temporada temporada;
     private Aluno aluno;
     private List<Produto> produtos;
