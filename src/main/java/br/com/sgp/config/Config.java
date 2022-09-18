@@ -3,7 +3,9 @@ package br.com.sgp.config;
 import br.com.sgp.adapters.outbound.AutenticarAdministradorAdapter;
 import br.com.sgp.application.core.usecase.AutenticarAdministradorUseCase;
 import br.com.sgp.application.core.usecase.FornecedorUseCase;
+import br.com.sgp.application.core.usecase.ObservacaoUseCase;
 import br.com.sgp.application.ports.out.FornecedorUseCaseOutboundPort;
+import br.com.sgp.application.ports.out.ObservacaoUseCaseOutboundPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,5 +21,10 @@ public class Config {
     public FornecedorUseCase fornecedorUseCase(FornecedorUseCaseOutboundPort outboundPort) {
 
         return new FornecedorUseCase(outboundPort);
+    }
+    @Bean
+    public ObservacaoUseCase observacaoUseCase(ObservacaoUseCaseOutboundPort outboundPort) {
+
+        return new ObservacaoUseCase(outboundPort);
     }
 }
