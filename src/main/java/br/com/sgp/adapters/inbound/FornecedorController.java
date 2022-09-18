@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -33,17 +32,14 @@ public class FornecedorController {
     @GetMapping("/{id}")
     public ResponseEntity<FornecedorResponse> buscarPeloId(@PathVariable Long id) {
 
-        if(inboundPort.fornecedorExiste(id)){
-            var fornecedor = inboundPort.buscarPeloId(id);
-            return ResponseEntity.ok(mapper.domainToResponse(fornecedor));
-        }
-        return ResponseEntity.notFound().build();
+        var fornecedor = inboundPort.buscarPeloId(id);
+        return ResponseEntity.ok(mapper.domainToResponse(fornecedor));
     }
 
     @GetMapping("/pesquisa/{texto}")
     public ResponseEntity<List<FornecedorResponse>> pesquisarPorNomeOuCnpj(@PathVariable(required = false) String texto) {
 
-        List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
+        List<Fornecedor> fornecedores;
         if (texto.matches("^[^A-Za-z]+$")) {
             fornecedores = inboundPort.buscarPeloCNPJ(texto);
         } else {
@@ -79,4 +75,5 @@ public class FornecedorController {
         inboundPort.excluir(id);
         return ResponseEntity.noContent().build();
     }
+
 }
