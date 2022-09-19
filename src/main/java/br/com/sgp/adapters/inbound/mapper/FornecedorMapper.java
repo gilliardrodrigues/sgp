@@ -4,7 +4,6 @@ import br.com.sgp.adapters.inbound.entity.FornecedorEntity;
 import br.com.sgp.adapters.inbound.request.FornecedorRequest;
 import br.com.sgp.adapters.inbound.response.FornecedorResponse;
 import br.com.sgp.application.core.domain.Fornecedor;
-import lombok.Getter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
