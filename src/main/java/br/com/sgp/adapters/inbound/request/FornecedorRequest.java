@@ -2,6 +2,7 @@ package br.com.sgp.adapters.inbound.request;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.br.CNPJ;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -14,6 +15,7 @@ public class FornecedorRequest {
     @NotBlank(message = "Campo obrigatório não preenchido!")
     private String razaoSocial;
 
+    @CNPJ
     @NotBlank(message = "Campo obrigatório não preenchido!")
     private String CNPJ;
 
