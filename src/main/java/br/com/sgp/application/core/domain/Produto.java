@@ -8,11 +8,11 @@ import lombok.Setter;
 public class Produto {
 
     protected Long id;
-    protected String nome;
     protected Double valor;
     protected Boolean entregue;
     protected Boolean prontaEntrega;
     protected Boolean chegou;
     protected Pedido pedido;
     protected Fornecedor fornecedor;
+    protected TipoProduto tipo;
 }

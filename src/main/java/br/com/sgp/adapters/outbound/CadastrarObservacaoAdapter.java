@@ -1,6 +1,7 @@
 package br.com.sgp.adapters.outbound;
 
 import br.com.sgp.adapters.inbound.entity.FornecedorEntity;
+import br.com.sgp.adapters.inbound.entity.ObservacaoEntity;
 import br.com.sgp.adapters.inbound.mapper.GenericMapper;
 import br.com.sgp.adapters.outbound.repository.ObservacaoRepository;
 import br.com.sgp.application.core.domain.Observacao;
@@ -21,15 +22,9 @@ public class CadastrarObservacaoAdapter implements ObservacaoUseCaseOutboundPort
 
     @Transactional
     @Override
-    public Observacao cadastrar(Long idFornecedor, String comentario) {
+    public Observacao cadastrar(ObservacaoEntity observacaoEntity) {
 
-        if(!fornecedorUseCaseOutboundPort.fornecedorExiste(idFornecedor)) {
-            throw new EntidadeNaoEncontradaException("Fornecedor não encontrado!");
-        }
-        var fornecedor = fornecedorUseCaseOutboundPort.buscarPeloId(idFornecedor);
-        var fornecedorEntity = mapper.mapTo(fornecedor, FornecedorEntity.class);
-        var observacao = fornecedorEntity.cadastrarObservacao(comentario);
-
-        return mapper.mapTo(repository.save(observacao), Observacao.class);
+        var observacaoSalva = repository.save(observacaoEntity);
+        return mapper.mapTo(observacaoSalva, Observacao.class);
     }
 }

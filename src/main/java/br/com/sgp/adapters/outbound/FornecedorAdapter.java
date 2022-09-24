@@ -35,7 +35,8 @@ public class FornecedorAdapter implements FornecedorUseCaseOutboundPort {
             throw new NegocioException("Já existe um fornecedor cadastrado com esse CNPJ!");
 
         var fornecedorEntity = mapper.mapTo(fornecedor, FornecedorEntity.class);
-        return mapper.mapTo(repository.save(fornecedorEntity), Fornecedor.class);
+        var fornecedorSalvo = repository.save(fornecedorEntity);
+        return mapper.mapTo(fornecedorSalvo, Fornecedor.class);
     }
 
     @Override

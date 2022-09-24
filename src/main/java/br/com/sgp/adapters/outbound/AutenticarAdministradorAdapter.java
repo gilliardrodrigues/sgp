@@ -20,7 +20,8 @@ public class AutenticarAdministradorAdapter implements AutenticarAdministradorPo
     public Administrador autenticar(String username, String password) throws EntidadeNaoEncontradaException {
 
         var administradorEntity = repository.findByUsernameAndPassword(username, password);
-        return mapper.mapTo(administradorEntity.
-                orElseThrow(() -> new EntidadeNaoEncontradaException("Administrador não encontrado.")), Administrador.class);
+        var administradorAutenticado = administradorEntity.
+                orElseThrow(() -> new EntidadeNaoEncontradaException("Administrador não encontrado."));
+        return mapper.mapTo(administradorAutenticado, Administrador.class);
     }
 }
