@@ -1,12 +1,13 @@
 package br.com.sgp.adapters.inbound;
 
-import br.com.sgp.adapters.inbound.mapper.FornecedorMapper;
+import br.com.sgp.adapters.inbound.mapper.GenericMapper;
 import br.com.sgp.adapters.inbound.request.FornecedorRequest;
 import br.com.sgp.adapters.inbound.response.FornecedorResponse;
 import br.com.sgp.application.core.domain.Fornecedor;
 import br.com.sgp.application.core.exception.NegocioException;
 import br.com.sgp.application.ports.in.FornecedorUseCaseInboundPort;
 import lombok.AllArgsConstructor;
+import org.modelmapper.TypeToken;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,20 +21,20 @@ import java.util.List;
 public class FornecedorController {
 
     private final FornecedorUseCaseInboundPort inboundPort;
-    private final FornecedorMapper mapper;
+    private final GenericMapper mapper;
 
     @GetMapping
     public List<FornecedorResponse> listar() {
 
         var fornecedores = inboundPort.buscarTodos();
-        return mapper.domainListToResponseList(fornecedores);
+        return mapper.mapToList(fornecedores, new TypeToken<List<FornecedorResponse>>() {}.getType());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<FornecedorResponse> buscarPeloId(@PathVariable Long id) {
 
         var fornecedor = inboundPort.buscarPeloId(id);
-        return ResponseEntity.ok(mapper.domainToResponse(fornecedor));
+        return ResponseEntity.ok(mapper.mapTo(fornecedor, FornecedorResponse.class));
     }
 
     @GetMapping("/pesquisa/{texto}")
@@ -45,24 +46,24 @@ public class FornecedorController {
         } else {
             fornecedores = inboundPort.buscarPeloNome(texto);
         }
-        return fornecedores.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(mapper.domainListToResponseList(fornecedores));
+        return fornecedores.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(mapper.mapToList(fornecedores, new TypeToken<List<FornecedorResponse>>() {}.getType()));
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public void salvar(@Valid @RequestBody FornecedorRequest fornecedorRequest) throws NegocioException {
 
-        var fornecedor = mapper.requestToDomain(fornecedorRequest);
+        var fornecedor = mapper.mapTo(fornecedorRequest, Fornecedor.class);
         inboundPort.salvar(fornecedor);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<FornecedorResponse> alterar(@Valid @PathVariable Long id, @RequestBody FornecedorRequest fornecedorRequest) throws NegocioException {
 
-        var fornecedor = mapper.requestToDomain(fornecedorRequest);
+        var fornecedor = mapper.mapTo(fornecedorRequest, Fornecedor.class);
         fornecedor.setId(id);
         return inboundPort.fornecedorExiste(id)
-                ? ResponseEntity.ok(mapper.domainToResponse(inboundPort.salvar(fornecedor)))
+                ? ResponseEntity.ok(mapper.mapTo(inboundPort.salvar(fornecedor), FornecedorResponse.class))
                 : ResponseEntity.notFound().build();
     }
 
