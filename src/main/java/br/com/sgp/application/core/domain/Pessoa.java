@@ -1,5 +1,6 @@
 package br.com.sgp.application.core.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
