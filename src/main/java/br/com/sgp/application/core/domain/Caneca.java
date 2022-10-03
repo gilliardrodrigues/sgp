@@ -8,4 +8,9 @@ import lombok.Setter;
 public class Caneca extends Produto {
 
     private String modelo;
+
+    public Caneca() {
+        tipo = TipoProduto.CANECA;
+    }
+
 }

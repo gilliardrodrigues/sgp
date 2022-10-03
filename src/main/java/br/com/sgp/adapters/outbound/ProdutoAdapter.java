@@ -1,7 +1,8 @@
 package br.com.sgp.adapters.outbound;
 
 import br.com.sgp.adapters.inbound.entity.CamisaEntity;
-import br.com.sgp.adapters.inbound.entity.ProdutoEntity;
+import br.com.sgp.adapters.inbound.entity.CanecaEntity;
+import br.com.sgp.adapters.inbound.entity.TiranteEntity;
 import br.com.sgp.adapters.inbound.mapper.GenericMapper;
 import br.com.sgp.adapters.outbound.repository.ProdutoRepository;
 import br.com.sgp.application.core.domain.*;
@@ -37,12 +38,12 @@ public class ProdutoAdapter implements ProdutoUseCaseOutboundPort {
             return mapper.mapTo(camisaSalva, Camisa.class);
         }
         else if (produto.getTipo().equals(TipoProduto.CANECA)) {
-            var canecaEntity = mapper.mapTo(produto, Caneca.class);
+            var canecaEntity = mapper.mapTo(produto, CanecaEntity.class);
             var canecaSalva = repository.save(canecaEntity);
             return mapper.mapTo(canecaSalva, Caneca.class);
         }
         else {
-            var tiranteEntity = mapper.mapTo(produto, Tirante.class);
+            var tiranteEntity = mapper.mapTo(produto, TiranteEntity.class);
             var tiranteSalvo = repository.save(tiranteEntity);
             return mapper.mapTo(tiranteSalvo, Tirante.class);
         }

@@ -10,4 +10,8 @@ public class Camisa extends Produto {
     private Curso curso;
     private TamanhoCamisa tamanho;
     private CorCamisa cor;
+
+    public Camisa() {
+        tipo = TipoProduto.CAMISA;
+    }
 }
