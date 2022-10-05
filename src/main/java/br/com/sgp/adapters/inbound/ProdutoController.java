@@ -16,7 +16,6 @@ import org.modelmapper.TypeToken;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import br.com.sgp.application.core.domain.TipoProduto;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -38,11 +37,13 @@ public class ProdutoController {
     }
 
     @GetMapping("/camisas")
-    public List<CamisaResponse> listarCamisas() {
+    public ResponseEntity<List<CamisaResponse>> pesquisarCamisaPelaCor(@RequestParam(required = false) String cor,
+            @RequestParam(required = false) String tamanho, @RequestParam(required = false) String curso) {
 
-        var camisas = inboundPort.buscarTodasCamisas();
-        return mapper.mapToList(camisas, new TypeToken<List<CamisaResponse>>() {
-        }.getType());
+        List<Camisa> camisas = inboundPort
+                .buscarCamisa(cor, tamanho, curso);
+        return ResponseEntity.ok(mapper.mapToList(camisas, new TypeToken<List<CamisaResponse>>() {
+        }.getType()));
     }
 
     @GetMapping("/canecas")
@@ -95,31 +96,6 @@ public class ProdutoController {
 
         List<Caneca> canecas = inboundPort.buscarCanecaPeloModelo(modelo);
         return ResponseEntity.ok(mapper.mapToList(canecas, new TypeToken<List<CanecaResponse>>() {
-        }.getType()));
-    }
-
-    @GetMapping("/camisas/filtro/{cor}")
-    public ResponseEntity<List<CamisaResponse>> pesquisarCamisaPelaCor(@PathVariable(required = false) CorCamisa cor) {
-
-        List<Camisa> camisas = inboundPort.buscarPelaCor(cor);
-        return ResponseEntity.ok(mapper.mapToList(camisas, new TypeToken<List<CamisaResponse>>() {
-        }.getType()));
-    }
-
-    @GetMapping("/camisas/filtro/{tamanho}")
-    public ResponseEntity<List<CamisaResponse>> pesquisarCamisaPeloTamanho(
-            @PathVariable(required = false) TamanhoCamisa tamanho) {
-
-        List<Camisa> camisas = inboundPort.buscarPeloTamanho(tamanho);
-        return ResponseEntity.ok(mapper.mapToList(camisas, new TypeToken<List<CamisaResponse>>() {
-        }.getType()));
-    }
-
-    @GetMapping("/camisas/filtro/{curso}")
-    public ResponseEntity<List<CamisaResponse>> pesquisarCamisaPeloCurso(@PathVariable(required = false) Curso curso) {
-
-        List<Camisa> camisas = inboundPort.buscarPeloCurso(curso);
-        return ResponseEntity.ok(mapper.mapToList(camisas, new TypeToken<List<CamisaResponse>>() {
         }.getType()));
     }
 

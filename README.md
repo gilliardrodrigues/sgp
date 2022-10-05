@@ -122,7 +122,7 @@ Os clientes conseguem:
 
 - [ ] Implementar interface web. [Maíla]
 
-- [ ] Criar e implementar rota para popular o inventário. [Samuel]
+- [x] Criar e implementar rota para popular o inventário. [Samuel]
 
 - [ ] Criar e implementar rota para editar produtos. [Samuel]
 

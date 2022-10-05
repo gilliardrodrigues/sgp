@@ -13,6 +13,7 @@ public class ProdutoResponse {
     private Boolean entregue;
     private Boolean prontaEntrega;
     private Boolean chegou;
-    //private Long pedidoId;
-    //private Long fornecedorId;
+    private TipoProduto tipo;
+    // private Long pedidoId;
+    // private Long fornecedorId;
 }

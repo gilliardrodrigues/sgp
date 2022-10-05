@@ -1,7 +1,5 @@
 package br.com.sgp.adapters.inbound.request;
 
-import br.com.sgp.application.core.domain.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,7 +11,7 @@ public class ProdutoRequest {
     protected Boolean entregue;
     protected Boolean prontaEntrega;
     protected Boolean chegou;
-    //protected Pedido pedido;
-    //protected Fornecedor fornecedor;
+    // protected Pedido pedido;
+    // protected Fornecedor fornecedor;
 
 }

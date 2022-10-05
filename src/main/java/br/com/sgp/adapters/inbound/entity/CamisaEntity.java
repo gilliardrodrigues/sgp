@@ -25,4 +25,5 @@ public class CamisaEntity extends ProdutoEntity {
     @Column(name = "COR_CAMISA")
     @Enumerated(value = EnumType.STRING)
     private CorCamisa cor;
+
 }

@@ -1,6 +1,5 @@
 package br.com.sgp.adapters.inbound.entity;
 
-import br.com.sgp.application.core.domain.Produto;
 import br.com.sgp.application.core.domain.StatusPagamento;
 import br.com.sgp.application.core.domain.StatusPedido;
 import lombok.Getter;
@@ -8,7 +7,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.OffsetDateTime;
-import java.util.List;
 
 @Getter
 @Setter

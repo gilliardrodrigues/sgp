@@ -9,19 +9,27 @@ import java.util.List;
 public interface ProdutoUseCaseOutboundPort {
 
     Produto salvar(Produto produto) throws NegocioException;
+
     List<Produto> buscarTodos();
+
     List<Camisa> buscarTodasCamisas();
+
     List<Caneca> buscarTodasCanecas();
+
     List<Tirante> buscarTodosTirantes();
+
     void excluir(Long id);
+
     Produto buscarPeloId(Long id) throws Throwable;
-    //List<Produto> buscarPeloIdPedido(Long idPedido) throws NegocioException;
+
+    // List<Produto> buscarPeloIdPedido(Long idPedido) throws NegocioException;
     List<Produto> buscarInventario();
+
     List<Tirante> buscarTirantePeloModelo(String modelo);
+
     List<Caneca> buscarCanecaPeloModelo(String modelo);
-    List<Camisa> buscarPelaCor(CorCamisa cor);
-    List<Camisa> buscarPeloTamanho(TamanhoCamisa tamanho);
-    List<Camisa> buscarPeloCurso(Curso curso);
+
+    List<Camisa> buscarCamisa(String cor, String tamanho, String curso);
 
     Boolean produtoExiste(Long id);
 }

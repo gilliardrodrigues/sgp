@@ -15,10 +15,12 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
 
         this.outboundPort = outboundPort;
     }
+
     public Boolean produtoExiste(Long id) {
 
         return outboundPort.produtoExiste(id);
     }
+
     @Override
     public Produto salvar(Produto produto) throws NegocioException {
 
@@ -80,20 +82,9 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
     }
 
     @Override
-    public List<Camisa> buscarPelaCor(CorCamisa cor) {
+    public List<Camisa> buscarCamisa(String cor, String tamanho, String curso) {
 
-        return outboundPort.buscarPelaCor(cor);
+        return outboundPort.buscarCamisa(cor, tamanho, curso);
     }
 
-    @Override
-    public List<Camisa> buscarPeloTamanho(TamanhoCamisa tamanho) {
-
-        return outboundPort.buscarPeloTamanho(tamanho);
-    }
-
-    @Override
-    public List<Camisa> buscarPeloCurso(Curso curso) {
-
-        return outboundPort.buscarPeloCurso(curso);
-    }
 }

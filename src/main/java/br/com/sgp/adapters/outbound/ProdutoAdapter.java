@@ -10,9 +10,12 @@ import br.com.sgp.application.core.exception.EntidadeNaoEncontradaException;
 import br.com.sgp.application.core.exception.NegocioException;
 import br.com.sgp.application.ports.out.ProdutoUseCaseOutboundPort;
 import lombok.AllArgsConstructor;
+
 import org.modelmapper.TypeToken;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -28,21 +31,22 @@ public class ProdutoAdapter implements ProdutoUseCaseOutboundPort {
         return repository.existsById(id);
     }
 
+    @Autowired
+    EntityManager em;
+
     @Override
     @Transactional
     public Produto salvar(Produto produto) throws NegocioException {
 
-        if(produto.getTipo().equals(TipoProduto.CAMISA)) {
+        if (produto.getTipo().equals(TipoProduto.CAMISA)) {
             var camisaEntity = mapper.mapTo(produto, CamisaEntity.class);
             var camisaSalva = repository.save(camisaEntity);
             return mapper.mapTo(camisaSalva, Camisa.class);
-        }
-        else if (produto.getTipo().equals(TipoProduto.CANECA)) {
+        } else if (produto.getTipo().equals(TipoProduto.CANECA)) {
             var canecaEntity = mapper.mapTo(produto, CanecaEntity.class);
             var canecaSalva = repository.save(canecaEntity);
             return mapper.mapTo(canecaSalva, Caneca.class);
-        }
-        else {
+        } else {
             var tiranteEntity = mapper.mapTo(produto, TiranteEntity.class);
             var tiranteSalvo = repository.save(tiranteEntity);
             return mapper.mapTo(tiranteSalvo, Tirante.class);
@@ -52,29 +56,33 @@ public class ProdutoAdapter implements ProdutoUseCaseOutboundPort {
     @Override
     public List<Produto> buscarTodos() {
 
-       var produtos = repository.findAll();
-       return mapper.mapToList(produtos, new TypeToken<List<Produto>>() {}.getType());
+        var produtos = repository.findAll();
+        return mapper.mapToList(produtos, new TypeToken<List<Produto>>() {
+        }.getType());
     }
 
     @Override
     public List<Camisa> buscarTodasCamisas() {
 
         var camisas = repository.findAllCamisas();
-        return mapper.mapToList(camisas, new TypeToken<List<Camisa>>() {}.getType());
+        return mapper.mapToList(camisas, new TypeToken<List<Camisa>>() {
+        }.getType());
     }
 
     @Override
     public List<Caneca> buscarTodasCanecas() {
 
         var canecas = repository.findAllCanecas();
-        return mapper.mapToList(canecas, new TypeToken<List<Caneca>>() {}.getType());
+        return mapper.mapToList(canecas, new TypeToken<List<Caneca>>() {
+        }.getType());
     }
 
     @Override
     public List<Tirante> buscarTodosTirantes() {
 
         var tirantes = repository.findAllTirantes();
-        return mapper.mapToList(tirantes, new TypeToken<List<Tirante>>() {}.getType());
+        return mapper.mapToList(tirantes, new TypeToken<List<Tirante>>() {
+        }.getType());
     }
 
     @Override
@@ -93,51 +101,81 @@ public class ProdutoAdapter implements ProdutoUseCaseOutboundPort {
     }
 
     /*
-    @Override
-    public List<Produto> buscarPeloIdPedido(Long idPedido) throws NegocioException {
-
-        var produto = repository.buscarPeloIdPedido(idPedido);
-    }
-    */
+     * @Override
+     * public List<Produto> buscarPeloIdPedido(Long idPedido) throws
+     * NegocioException {
+     * 
+     * var produto = repository.buscarPeloIdPedido(idPedido);
+     * }
+     */
     @Override
     public List<Produto> buscarInventario() {
 
         var inventario = repository.buscarInventario();
-        return mapper.mapToList(inventario, new TypeToken<List<Produto>>() {}.getType());
+        return mapper.mapToList(inventario, new TypeToken<List<Produto>>() {
+        }.getType());
     }
 
     @Override
     public List<Tirante> buscarTirantePeloModelo(String modelo) {
 
         var tirantes = repository.findTiranteByModelo(modelo);
-        return mapper.mapToList(tirantes, new TypeToken<List<Tirante>>() {}.getType());
+        return mapper.mapToList(tirantes, new TypeToken<List<Tirante>>() {
+        }.getType());
     }
 
     @Override
     public List<Caneca> buscarCanecaPeloModelo(String modelo) {
 
         var canecas = repository.findCanecaByModelo(modelo);
-        return mapper.mapToList(canecas, new TypeToken<List<Caneca>>() {}.getType());
+        return mapper.mapToList(canecas, new TypeToken<List<Caneca>>() {
+        }.getType());
     }
 
     @Override
-    public List<Camisa> buscarPelaCor(CorCamisa cor) {
+    public List<Camisa> buscarCamisa(String cor, String tamanho, String curso) {
+        try {
+            if (cor != null && tamanho != null && curso != null) {
+                var camisas = repository.findByCorAndTamanhoAndCurso(CorCamisa.valueOf(cor.toUpperCase()),
+                        TamanhoCamisa.valueOf(tamanho.toUpperCase()),
+                        Curso.valueOf(curso.toUpperCase()));
+                return mapper.mapToList(camisas, new TypeToken<List<Camisa>>() {
+                }.getType());
+            } else if (cor != null && tamanho != null) {
+                var camisas = repository.findByCorAndTamanho(CorCamisa.valueOf(cor.toUpperCase()),
+                        TamanhoCamisa.valueOf(tamanho.toUpperCase()));
+                return mapper.mapToList(camisas, new TypeToken<List<Camisa>>() {
+                }.getType());
+            } else if (tamanho != null && curso != null) {
+                var camisas = repository.findByTamanhoAndCurso(TamanhoCamisa.valueOf(tamanho.toUpperCase()),
+                        Curso.valueOf(curso.toUpperCase()));
+                return mapper.mapToList(camisas, new TypeToken<List<Camisa>>() {
+                }.getType());
+            } else if (cor != null && curso != null) {
+                var camisas = repository.findByCorAndCurso(CorCamisa.valueOf(cor.toUpperCase()),
+                        Curso.valueOf(curso.toUpperCase()));
+                return mapper.mapToList(camisas, new TypeToken<List<Camisa>>() {
+                }.getType());
+            } else if (cor != null) {
+                var camisas = repository.findByCor(CorCamisa.valueOf(cor.toUpperCase()));
+                return mapper.mapToList(camisas, new TypeToken<List<Camisa>>() {
+                }.getType());
+            } else if (tamanho != null) {
+                var camisas = repository.findByTamanho(TamanhoCamisa.valueOf(tamanho.toUpperCase()));
+                return mapper.mapToList(camisas, new TypeToken<List<Camisa>>() {
+                }.getType());
+            } else if (curso != null) {
+                var camisas = repository.findByCurso(Curso.valueOf(curso.toUpperCase()));
+                return mapper.mapToList(camisas, new TypeToken<List<Camisa>>() {
+                }.getType());
+            } else {
+                var camisas = repository.findAllCamisas();
+                return mapper.mapToList(camisas, new TypeToken<List<Camisa>>() {
+                }.getType());
+            }
+        } catch (Throwable e) {
+            throw new EntidadeNaoEncontradaException("Camisa não encontrada.");
+        }
 
-        var camisas = repository.findByCor(cor.getDescricao());
-        return mapper.mapToList(camisas, new TypeToken<List<Camisa>>() {}.getType());
-    }
-
-    @Override
-    public List<Camisa> buscarPeloTamanho(TamanhoCamisa tamanho) {
-
-        var camisas = repository.findByTamanho(tamanho.getDescricao());
-        return mapper.mapToList(camisas, new TypeToken<List<Camisa>>() {}.getType());
-    }
-
-    @Override
-    public List<Camisa> buscarPeloCurso(Curso curso) {
-
-        var camisas = repository.findByCurso(curso.getDescricao());
-        return mapper.mapToList(camisas, new TypeToken<List<Camisa>>() {}.getType());
     }
 }
