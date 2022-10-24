@@ -3,7 +3,7 @@ package br.com.sgp.application.core.domain;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @Getter
@@ -11,7 +11,14 @@ import java.util.List;
 public class Temporada {
 
     private Long id;
-    private Date dataInicio;
-    private Date dataFim;
-    List<Pedido> pedidos;
+    private String descricao;
+    private OffsetDateTime dataInicio;
+    private OffsetDateTime dataFim;
+    private List<TipoProduto> produtosDisponiveis;
+    private List<Pedido> pedidos;
+
+    public void habilitarProduto(TipoProduto tipoDeProduto) {
+
+        this.getProdutosDisponiveis().add(tipoDeProduto);
+    }
 }
