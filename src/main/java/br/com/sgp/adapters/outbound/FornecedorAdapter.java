@@ -27,12 +27,14 @@ public class FornecedorAdapter implements FornecedorUseCaseOutboundPort {
     }
 
     @Override
+    public Boolean existePeloCNPJ(String CNPJ) {
+
+        return repository.existsByCNPJ(CNPJ);
+    }
+
+    @Override
     @Transactional
     public Fornecedor salvar(Fornecedor fornecedor) throws NegocioException {
-
-        var cnpjEmUso = repository.existsByCNPJ(fornecedor.getCNPJ());
-        if(cnpjEmUso)
-            throw new NegocioException("Já existe um fornecedor cadastrado com esse CNPJ!");
 
         var fornecedorEntity = mapper.mapTo(fornecedor, FornecedorEntity.class);
         var fornecedorSalvo = repository.save(fornecedorEntity);
