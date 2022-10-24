@@ -73,13 +73,13 @@ Os clientes conseguem:
 
 - [ ] Implementar interface web. [Fernando]
 
-- [ ] Criar e implementar rota para pesquisar temporadas existentes. [Gilliard]
+- [x] Criar e implementar rota para pesquisar temporadas existentes. [Gilliard]
 
-- [ ] Criar e implementar rota para abrir uma nova temporada de pedidos. [Gilliard]
+- [x] Criar e implementar rota para abrir uma nova temporada de pedidos. [Gilliard]
 
-- [ ] Criar e implementar rota para editar informações da temporada. [Gilliard]
+- [x] Criar e implementar rota para editar informações da temporada. [Gilliard]
 
-- [ ] Criar e implementar rota para excluir uma temporada. [Gilliard]
+- [x] Criar e implementar rota para excluir uma temporada. [Gilliard]
 
 - [ ] Implementar regras de negócio de encerramento de temporada e contabilização de pedidos. [Gilliard]
 
