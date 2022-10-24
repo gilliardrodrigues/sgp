@@ -18,8 +18,9 @@ public class CadastrarObservacaoAdapter implements ObservacaoUseCaseOutboundPort
 
     @Transactional
     @Override
-    public Observacao cadastrar(ObservacaoEntity observacaoEntity) {
+    public Observacao cadastrar(Observacao observacao) {
 
+        var observacaoEntity = mapper.mapTo(observacao, ObservacaoEntity.class);
         var observacaoSalva = repository.save(observacaoEntity);
         return mapper.mapTo(observacaoSalva, Observacao.class);
     }
