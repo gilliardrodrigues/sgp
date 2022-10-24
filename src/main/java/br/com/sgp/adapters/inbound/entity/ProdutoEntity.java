@@ -33,10 +33,9 @@ public class ProdutoEntity {
     @Enumerated(value = EnumType.STRING)
     protected TipoProduto tipo;
 
-    //@Column(name = "PEDIDO")
-    //@ManyToOne
-    //@JoinColumn(name = "pedidoId", nullable = false)
-    //protected PedidoEntity pedido;
+    @ManyToOne
+    @JoinColumn(name = "pedidoId", nullable = false)
+    protected PedidoEntity pedido;
 
     @OneToMany
     protected List<FornecedorEntity> fornecedores;
