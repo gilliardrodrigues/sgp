@@ -37,11 +37,11 @@ public class ProdutoController {
     }
 
     @GetMapping("/camisas")
-    public ResponseEntity<List<CamisaResponse>> pesquisarCamisaPelaCor(@RequestParam(required = false) String cor,
+    public ResponseEntity<List<CamisaResponse>> listarCamisas(@RequestParam(required = false) String cor,
             @RequestParam(required = false) String tamanho, @RequestParam(required = false) String curso) {
 
         List<Camisa> camisas = inboundPort
-                .buscarCamisa(cor, tamanho, curso);
+                .buscarCamisas(cor, tamanho, curso);
         return ResponseEntity.ok(mapper.mapToList(camisas, new TypeToken<List<CamisaResponse>>() {
         }.getType()));
     }
