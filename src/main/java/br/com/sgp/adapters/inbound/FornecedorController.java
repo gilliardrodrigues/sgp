@@ -63,7 +63,7 @@ public class FornecedorController {
         var fornecedor = mapper.mapTo(fornecedorRequest, Fornecedor.class);
         fornecedor.setId(id);
         return inboundPort.fornecedorExiste(id)
-                ? ResponseEntity.ok(mapper.mapTo(inboundPort.salvar(fornecedor), FornecedorResponse.class))
+                ? ResponseEntity.ok(mapper.mapTo(inboundPort.alterar(fornecedor), FornecedorResponse.class))
                 : ResponseEntity.notFound().build();
     }
 

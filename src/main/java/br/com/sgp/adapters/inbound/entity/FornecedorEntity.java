@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,15 +33,4 @@ public class FornecedorEntity {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fornecedor")
     private List<ObservacaoEntity> observacoes = new ArrayList<>();
 
-    public ObservacaoEntity cadastrarObservacao(String comentario) {
-
-        ObservacaoEntity observacao = new ObservacaoEntity();
-        observacao.setComentario(comentario);
-        observacao.setData(OffsetDateTime.now());
-        observacao.setFornecedor(this);
-
-        this.getObservacoes().add(observacao);
-
-        return observacao;
-    }
 }

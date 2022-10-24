@@ -34,8 +34,7 @@ public class ObservacaoController {
     public ResponseEntity<List<ObservacaoResponse>> listar(@PathVariable Long idFornecedor) {
 
         if(fornecedorUseCaseInboundPort.fornecedorExiste(idFornecedor)) {
-            var fornecedor = fornecedorUseCaseInboundPort.buscarPeloId(idFornecedor);
-            return ResponseEntity.ok(mapper.mapToList(fornecedor.getObservacoes(), new TypeToken<List<ObservacaoResponse>>() {}.getType()));
+            return ResponseEntity.ok(mapper.mapToList(inboundPort.listarPorFornecedor(idFornecedor), new TypeToken<List<ObservacaoResponse>>() {}.getType()));
         }
         return ResponseEntity.notFound().build();
     }

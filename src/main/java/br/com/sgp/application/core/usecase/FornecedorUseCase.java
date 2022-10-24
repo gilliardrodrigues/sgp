@@ -25,6 +25,14 @@ public class FornecedorUseCase implements FornecedorUseCaseInboundPort {
     @Override
     public Fornecedor salvar(Fornecedor fornecedor) throws NegocioException {
 
+        if(outboundPort.existePeloCNPJ(fornecedor.getCNPJ()))
+            throw new NegocioException("Já existe um fornecedor cadastrado com esse CNPJ!");
+        return outboundPort.salvar(fornecedor);
+    }
+
+    @Override
+    public Fornecedor alterar(Fornecedor fornecedor) {
+
         return outboundPort.salvar(fornecedor);
     }
 

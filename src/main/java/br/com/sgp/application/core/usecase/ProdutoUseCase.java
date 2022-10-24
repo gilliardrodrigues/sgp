@@ -82,9 +82,9 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
     }
 
     @Override
-    public List<Camisa> buscarCamisa(String cor, String tamanho, String curso) {
+    public List<Camisa> buscarCamisas(String cor, String tamanho, String curso) {
 
-        return outboundPort.buscarCamisa(cor, tamanho, curso);
+        return outboundPort.buscarCamisas(cor, tamanho, curso);
     }
 
 }

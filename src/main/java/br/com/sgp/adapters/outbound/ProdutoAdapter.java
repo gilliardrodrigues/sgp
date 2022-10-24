@@ -133,7 +133,7 @@ public class ProdutoAdapter implements ProdutoUseCaseOutboundPort {
     }
 
     @Override
-    public List<Camisa> buscarCamisa(String cor, String tamanho, String curso) {
+    public List<Camisa> buscarCamisas(String cor, String tamanho, String curso) {
         try {
             if (cor != null && tamanho != null && curso != null) {
                 var camisas = repository.findByCorAndTamanhoAndCurso(CorCamisa.valueOf(cor.toUpperCase()),

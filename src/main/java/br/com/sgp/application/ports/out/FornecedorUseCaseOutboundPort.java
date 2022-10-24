@@ -8,6 +8,7 @@ import java.util.List;
 public interface FornecedorUseCaseOutboundPort {
 
     Boolean fornecedorExiste(Long id);
+    Boolean existePeloCNPJ(String CNPJ);
     Fornecedor salvar(Fornecedor fornecedor) throws NegocioException;
     List<Fornecedor> buscarTodos();
     void excluir(Long id);

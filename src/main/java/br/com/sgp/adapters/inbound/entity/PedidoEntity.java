@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.OffsetDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -35,9 +36,13 @@ public class PedidoEntity {
     @Column(name = "VALOR_PAGO")
     private Double valorPago;
 
-    //private TemporadaEntity temporada;
+    @ManyToOne
+    @JoinColumn(name = "temporadaId", nullable = false)
+    private TemporadaEntity temporada;
+
     //private AlunoEntity aluno;
 
-    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido")
-    //private List<ProdutoEntity> produtos;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido")
+    private List<ProdutoEntity> produtos;
+
 }

@@ -9,6 +9,7 @@ public interface FornecedorUseCaseInboundPort {
 
     Boolean fornecedorExiste(Long id);
     Fornecedor salvar(Fornecedor fornecedor) throws NegocioException;
+    Fornecedor alterar(Fornecedor fornecedor);
     List<Fornecedor> buscarTodos();
     void excluir(Long id);
     Fornecedor buscarPeloId(Long id);
