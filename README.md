@@ -109,7 +109,7 @@ Os clientes conseguem:
 
 - [x]  Projetar tela de cadastro e edição de fornecedores no Figma e validar design. [Maíla, Fernando]
 
-- [ ] Implementar interface web. [Fernando]
+- [x] Implementar interface web. [Fernando]
 
 - [x] Implementar CRUD de fornecedores. [Gilliard]
 
@@ -120,7 +120,7 @@ Os clientes conseguem:
 
 - [x] Projetar tela com visão administrativa de produtos no Figma e validar design. [Fernando]
 
-- [ ] Implementar interface web. [Maíla]
+- [x] Implementar interface web. [Maíla]
 
 - [x] Criar e implementar rota para popular o inventário. [Samuel]
 
