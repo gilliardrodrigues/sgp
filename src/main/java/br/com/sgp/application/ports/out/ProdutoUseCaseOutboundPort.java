@@ -10,7 +10,9 @@ import java.util.List;
 
 public interface ProdutoUseCaseOutboundPort {
 
-    Produto salvar(Produto produto) throws NegocioException;
+    Camisa salvarCamisa(Camisa camisa) throws NegocioException;
+    Caneca salvarCaneca(Caneca caneca) throws NegocioException;
+    Tirante salvarTirante(Tirante tirante) throws NegocioException;
 
     List<Produto> buscarTodos();
 
@@ -24,7 +26,7 @@ public interface ProdutoUseCaseOutboundPort {
 
     Produto buscarPeloId(Long id) throws Throwable;
 
-    // List<Produto> buscarPeloIdPedido(Long idPedido) throws NegocioException;
+    List<Produto> buscarPeloIdPedido(Long idPedido) throws NegocioException;
     List<Produto> buscarInventario();
 
     List<Tirante> buscarTirantePeloModelo(String modelo);

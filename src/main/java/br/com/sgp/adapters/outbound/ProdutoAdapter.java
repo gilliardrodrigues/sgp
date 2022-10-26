@@ -10,12 +10,9 @@ import br.com.sgp.application.core.exception.EntidadeNaoEncontradaException;
 import br.com.sgp.application.core.exception.NegocioException;
 import br.com.sgp.application.ports.out.ProdutoUseCaseOutboundPort;
 import lombok.AllArgsConstructor;
-
 import org.modelmapper.TypeToken;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -31,26 +28,31 @@ public class ProdutoAdapter implements ProdutoUseCaseOutboundPort {
         return repository.existsById(id);
     }
 
-    @Autowired
-    EntityManager em;
+    @Override
+    @Transactional
+    public Camisa salvarCamisa(Camisa camisa) throws NegocioException {
+
+        var camisaEntity = mapper.mapTo(camisa, CamisaEntity.class);
+        var camisaSalva = repository.save(camisaEntity);
+        return mapper.mapTo(camisaSalva, Camisa.class);
+    }
 
     @Override
     @Transactional
-    public Produto salvar(Produto produto) throws NegocioException {
+    public Caneca salvarCaneca(Caneca caneca) throws NegocioException {
 
-        if (produto.getTipo().equals(TipoProduto.CAMISA)) {
-            var camisaEntity = mapper.mapTo(produto, CamisaEntity.class);
-            var camisaSalva = repository.save(camisaEntity);
-            return mapper.mapTo(camisaSalva, Camisa.class);
-        } else if (produto.getTipo().equals(TipoProduto.CANECA)) {
-            var canecaEntity = mapper.mapTo(produto, CanecaEntity.class);
-            var canecaSalva = repository.save(canecaEntity);
-            return mapper.mapTo(canecaSalva, Caneca.class);
-        } else {
-            var tiranteEntity = mapper.mapTo(produto, TiranteEntity.class);
-            var tiranteSalvo = repository.save(tiranteEntity);
-            return mapper.mapTo(tiranteSalvo, Tirante.class);
-        }
+        var canecaEntity = mapper.mapTo(caneca, CanecaEntity.class);
+        var canecaSalva = repository.save(canecaEntity);
+        return mapper.mapTo(canecaSalva, Caneca.class);
+    }
+
+    @Override
+    @Transactional
+    public Tirante salvarTirante(Tirante tirante) throws NegocioException {
+
+        var tiranteEntity = mapper.mapTo(tirante, TiranteEntity.class);
+        var tiranteSalvo = repository.save(tiranteEntity);
+        return mapper.mapTo(tiranteSalvo, Tirante.class);
     }
 
     @Override
@@ -100,20 +102,18 @@ public class ProdutoAdapter implements ProdutoUseCaseOutboundPort {
         return mapper.mapTo(produto, Produto.class);
     }
 
-    /*
-     * @Override
-     * public List<Produto> buscarPeloIdPedido(Long idPedido) throws
-     * NegocioException {
-     * 
-     * var produto = repository.buscarPeloIdPedido(idPedido);
-     * }
-     */
+
+     @Override
+     public List<Produto> buscarPeloIdPedido(Long idPedido) throws NegocioException {
+
+        var produtos = repository.buscarPeloIdPedido(idPedido);
+         return mapper.mapToList(produtos, new TypeToken<List<Produto>>() {}.getType());
+     }
     @Override
     public List<Produto> buscarInventario() {
 
         var inventario = repository.buscarInventario();
-        return mapper.mapToList(inventario, new TypeToken<List<Produto>>() {
-        }.getType());
+        return mapper.mapToList(inventario, new TypeToken<List<Produto>>() {}.getType());
     }
 
     @Override
