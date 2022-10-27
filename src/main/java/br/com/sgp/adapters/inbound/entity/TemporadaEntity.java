@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.util.HashMap;
 import java.util.List;
 
 @Getter
@@ -32,6 +34,10 @@ public class TemporadaEntity {
     @Column(name = "PRODUTO_DISPONIVEL", nullable = false)
     @Enumerated(EnumType.STRING)
     private List<TipoProduto> produtosDisponiveis;
+
+    @MapKeyColumn
+    @MapKeyEnumerated(EnumType.STRING)
+    private HashMap<TipoProduto, BigDecimal> valores;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "temporada")
     List<PedidoEntity> pedidos;

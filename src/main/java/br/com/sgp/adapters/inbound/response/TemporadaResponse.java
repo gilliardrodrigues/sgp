@@ -4,7 +4,9 @@ import br.com.sgp.application.core.domain.TipoProduto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.util.HashMap;
 import java.util.List;
 
 @Getter
@@ -16,4 +18,5 @@ public class TemporadaResponse {
     private OffsetDateTime dataInicio;
     private OffsetDateTime dataFim;
     private List<TipoProduto> produtos;
+    private HashMap<TipoProduto, BigDecimal> valores;
 }
