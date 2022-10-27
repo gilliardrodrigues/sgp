@@ -12,6 +12,7 @@ public class Camisa extends Produto {
     private CorCamisa cor;
 
     public Camisa() {
+
         tipo = TipoProduto.CAMISA;
     }
 }

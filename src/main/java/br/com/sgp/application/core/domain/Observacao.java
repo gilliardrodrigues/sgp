@@ -13,4 +13,5 @@ public class Observacao {
     private String comentario;
     private OffsetDateTime data;
     private Fornecedor fornecedor;
+    private Administrador autor;
 }
