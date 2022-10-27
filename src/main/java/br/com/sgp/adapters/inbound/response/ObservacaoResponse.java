@@ -13,4 +13,5 @@ public class ObservacaoResponse {
     private String comentario;
     private OffsetDateTime data;
     private Long fornecedorId;
+    //private Long administradorId;
 }

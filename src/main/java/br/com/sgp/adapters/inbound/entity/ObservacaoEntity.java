@@ -29,4 +29,9 @@ public class ObservacaoEntity {
     @JoinColumn(name = "fornecedorId", nullable = false)
     @NotNull(message = "Campo obrigatório não preenchido!")
     private FornecedorEntity fornecedor;
+
+    //@ManyToOne
+    //@JoinColumn(name = "administradorId", nullable = false)
+    //@NotNull(message = "Campo obrigatório não preenchido!")
+    //private AdministradorEntity autor;
 }
