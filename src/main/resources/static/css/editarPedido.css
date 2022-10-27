@@ -1,0 +1,30 @@
+
+.main-title {
+  font-family: 'Open Sans';
+  font-weight: 700;
+  font-size: 30px;
+  color: #352446;
+  margin-top: 60px;
+}
+
+.label-attribute {
+  font-family: 'Open Sans';
+  font-weight: 700;
+  font-size: 16px;
+  color: #7F5BA3;
+  margin-top: 50px;
+}
+
+.select-situacao,
+.select-status {
+  height: 54px;
+  padding: 0 30px;
+  border-radius: 10px;
+  border-width: 0;
+  background-color: #F5F3F8;
+  color: #6D6969;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+}

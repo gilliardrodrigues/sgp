@@ -1,0 +1,90 @@
+body {
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+}
+
+.content {
+  margin: 0 auto;
+  width: 980px;
+  position: relative;
+}
+
+.title-area-admin {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 49px;
+  color: #472D62;
+}
+
+.container {
+  margin: 0 auto;
+  width: 980px;
+  padding-bottom: 100px;
+}
+
+.boxes {
+  height: 510px;
+}
+
+.box-destaque-container {
+  width: 50%;
+  float: left;
+  cursor: pointer;
+}
+
+.box-destaque {
+  height: 510px;
+  background-image: url('../img/box-pedidos.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 90%;
+  border-radius: 20px;
+}
+
+.box-sec-container {
+  width: 50%;
+  float: left;
+  cursor: pointer;
+}
+
+.box-sec {
+  width: 100%;
+  background-image: url('../img/box-vendas.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 240px;
+  border-radius: 20px;
+}
+
+.box-sec-2 {
+  width: 100%;
+  margin-top: 30;
+  background-image: url('../img/box-produtos.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 240px;
+  border-radius: 20px;
+}
+
+.box-sec-3 {
+  width: 100%;
+  margin-top: 30;
+  background-image: url('../img/box-fornecedor.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 150px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.text-title {
+  position: absolute;
+  font-family: 'Open Sans';
+  font-weight: 100;
+  font-size: 30px;
+  color: #FFFFFF;
+  margin: 40px;
+}
