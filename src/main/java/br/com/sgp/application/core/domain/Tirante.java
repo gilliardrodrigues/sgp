@@ -10,6 +10,7 @@ public class Tirante extends Produto {
     private String modelo;
 
     public Tirante() {
+
         tipo = TipoProduto.TIRANTE;
     }
 }
