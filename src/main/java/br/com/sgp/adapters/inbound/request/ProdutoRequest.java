@@ -7,11 +7,8 @@ import lombok.Setter;
 @Setter
 public class ProdutoRequest {
 
-    private Double valor;
+    protected Double valor;
     protected Boolean entregue;
-    protected Boolean prontaEntrega;
     protected Boolean chegou;
-    // protected Pedido pedido;
-    // protected Fornecedor fornecedor;
 
 }

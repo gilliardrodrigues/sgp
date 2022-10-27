@@ -2,9 +2,9 @@ package br.com.sgp.application.core.domain;
 
 public enum TipoProduto {
 
-    CAMISA("Camisa"),
-    CANECA("Caneca"),
-    TIRANTE("Tirante");
+    CAMISA("CAMISA"),
+    CANECA("CANECA"),
+    TIRANTE("TIRANTE");
 
     private final String descricao;
 
