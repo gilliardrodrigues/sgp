@@ -1,6 +1,7 @@
 package br.com.sgp.adapters.inbound.entity;
 
 
+import br.com.sgp.application.core.domain.TipoProduto;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -32,5 +33,11 @@ public class FornecedorEntity {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fornecedor")
     private List<ObservacaoEntity> observacoes = new ArrayList<>();
+
+    @ElementCollection(targetClass = TipoProduto.class)
+    @JoinTable(name = "FORNECEDOR_PRODUTO_OFERECIDO", joinColumns = @JoinColumn(name = "id"))
+    @Column(name = "PRODUTO_OFERECIDO", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private List<TipoProduto> produtosOferecidos;
 
 }
