@@ -81,7 +81,7 @@ Os clientes conseguem:
 
 - [x] Criar e implementar rota para excluir uma temporada. [Gilliard]
 
-- [ ] Implementar regras de negócio de encerramento de temporada e contabilização de pedidos. [Gilliard]
+- [x] Implementar regras de negócio de encerramento de temporada e contabilização de pedidos. [Gilliard]
 
 
 **História:** Como administrador, eu gostaria de dar baixa de pagamento parcial ou total de pedidos
@@ -101,7 +101,7 @@ Os clientes conseguem:
 
 **História:** Como administrador, eu gostaria de poder filtrar os itens dos pedidos por suas características, como tamanho, cor, curso, data, status de pagamento e situação de entrega, para fins de conferência.
 
-- [ ] Implementar filtros de busca na tabela de pedidos no back-end. [Gilliard]
+- [ ] Implementar filtros de busca na tabela de pedidos no back-end. [Gilliard, Samuel]
 
 - [ ] Implementar esses filtros no front-end. [Fernando]
 
@@ -124,9 +124,9 @@ Os clientes conseguem:
 
 - [x] Criar e implementar rota para popular o inventário. [Samuel]
 
-- [ ] Criar e implementar rota para editar produtos. [Samuel]
+- [x] Criar e implementar rota para editar produtos. [Samuel]
 
-- [ ] Criar e implementar rota para remover produtos. [Samuel]
+- [x] Criar e implementar rota para remover produtos. [Samuel]
 
 
 **História:** Como usuário, eu gostaria de poder consultar o inventário de produtos disponíveis à pronta-entrega.
@@ -135,7 +135,7 @@ Os clientes conseguem:
 
 - [ ] Implementar interface web. [Fernando]
 
-- [ ] Criar e implementar rota para mostrar apenas produtos disponíveis à pronta-entrega. [Samuel]
+- [x] Criar e implementar rota para mostrar apenas produtos disponíveis à pronta-entrega. [Gilliard]
 
 **História:** Como usuário, eu gostaria de poder realizar um pedido
 
@@ -183,7 +183,7 @@ Os clientes conseguem:
 
 - [x] Criar banco de dados no PostgreSQL. [Gilliard]
 
-- [ ] Implementar camada de persistência.  [Gilliard]
+- [x] Implementar camada de persistência.  [Gilliard]
 
 - [x] Implementar esqueleto da arquitetura hexagonal. [Gilliard]
 
