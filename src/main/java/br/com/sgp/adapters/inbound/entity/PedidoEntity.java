@@ -37,7 +37,7 @@ public class PedidoEntity {
     private Double valorPago;
 
     @ManyToOne
-    @JoinColumn(name = "temporadaId", nullable = false)
+    @JoinColumn(name = "temporadaId")
     private TemporadaEntity temporada;
 
     //private AlunoEntity aluno;

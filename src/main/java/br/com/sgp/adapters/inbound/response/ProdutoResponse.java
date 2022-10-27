@@ -1,6 +1,6 @@
 package br.com.sgp.adapters.inbound.response;
 
-import br.com.sgp.application.core.domain.*;
+import br.com.sgp.application.core.domain.TipoProduto;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,6 +14,6 @@ public class ProdutoResponse {
     private Boolean prontaEntrega;
     private Boolean chegou;
     private TipoProduto tipo;
-    // private Long pedidoId;
-    // private Long fornecedorId;
+
+    //private Long pedidoId;
 }

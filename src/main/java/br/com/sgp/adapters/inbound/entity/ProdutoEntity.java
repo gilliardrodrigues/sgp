@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Getter
 @Setter
@@ -34,9 +33,6 @@ public class ProdutoEntity {
     protected TipoProduto tipo;
 
     @ManyToOne
-    @JoinColumn(name = "pedidoId", nullable = false)
+    @JoinColumn(name = "pedidoId")
     protected PedidoEntity pedido;
-
-    @OneToMany
-    protected List<FornecedorEntity> fornecedores;
 }

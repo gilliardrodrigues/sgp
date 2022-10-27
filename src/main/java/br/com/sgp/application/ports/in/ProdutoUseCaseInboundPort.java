@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ProdutoUseCaseInboundPort {
 
-    Produto salvar(Produto produto) throws NegocioException;
+    Produto salvarInventario(Produto produto) throws NegocioException;
 
     List<Produto> buscarTodos();
 
@@ -21,7 +21,7 @@ public interface ProdutoUseCaseInboundPort {
 
     Produto buscarPeloId(Long id) throws Throwable;
 
-    // List<Produto> buscarPeloIdPedido(Long idPedido) throws NegocioException;
+    List<Produto> buscarPeloIdPedido(Long idPedido) throws NegocioException;
     List<Produto> buscarInventario();
 
     List<Tirante> buscarTirantePeloModelo(String modelo);

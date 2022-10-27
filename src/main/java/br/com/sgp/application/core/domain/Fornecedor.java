@@ -16,6 +16,7 @@ public class Fornecedor {
     private String email;
     private Integer tempoEntregaEmDias;
     private List<Observacao> observacoes;
+    private List<TipoProduto> produtosOferecidos;
 
     public Observacao cadastrarObservacao(String comentario) {
 

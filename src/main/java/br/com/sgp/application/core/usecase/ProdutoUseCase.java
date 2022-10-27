@@ -11,6 +11,7 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
 
     private final ProdutoUseCaseOutboundPort outboundPort;
 
+
     public ProdutoUseCase(ProdutoUseCaseOutboundPort outboundPort) {
 
         this.outboundPort = outboundPort;
@@ -22,9 +23,19 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
     }
 
     @Override
-    public Produto salvar(Produto produto) throws NegocioException {
+    public Produto salvarInventario(Produto produto) throws NegocioException {
 
-        return outboundPort.salvar(produto);
+        produto.setProntaEntrega(true);
+        if (produto.getTipo().equals(TipoProduto.CAMISA)) {
+            Camisa camisa = (Camisa) produto;
+            return outboundPort.salvarCamisa(camisa);
+        } else if (produto.getTipo().equals(TipoProduto.CANECA)) {
+            Caneca caneca = (Caneca) produto;
+            return outboundPort.salvarCaneca(caneca);
+        } else {
+            Tirante tirante = (Tirante) produto;
+            return outboundPort.salvarTirante(tirante);
+        }
     }
 
     @Override
@@ -61,6 +72,12 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
     public Produto buscarPeloId(Long id) throws Throwable {
 
         return outboundPort.buscarPeloId(id);
+    }
+
+    @Override
+    public List<Produto> buscarPeloIdPedido(Long idPedido) throws NegocioException {
+
+        return outboundPort.buscarPeloIdPedido(idPedido);
     }
 
     @Override
