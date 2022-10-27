@@ -40,34 +40,29 @@ public class ProdutoController {
     public ResponseEntity<List<CamisaResponse>> listarCamisas(@RequestParam(required = false) String cor,
             @RequestParam(required = false) String tamanho, @RequestParam(required = false) String curso) {
 
-        List<Camisa> camisas = inboundPort
-                .buscarCamisas(cor, tamanho, curso);
-        return ResponseEntity.ok(mapper.mapToList(camisas, new TypeToken<List<CamisaResponse>>() {
-        }.getType()));
+        List<Camisa> camisas = inboundPort.buscarCamisas(cor, tamanho, curso);
+        return ResponseEntity.ok(mapper.mapToList(camisas, new TypeToken<List<CamisaResponse>>() {}.getType()));
     }
 
     @GetMapping("/canecas")
     public List<CanecaResponse> listarCanecas() {
 
         var canecas = inboundPort.buscarTodasCanecas();
-        return mapper.mapToList(canecas, new TypeToken<List<CanecaResponse>>() {
-        }.getType());
+        return mapper.mapToList(canecas, new TypeToken<List<CanecaResponse>>() {}.getType());
     }
 
     @GetMapping("/tirantes")
     public List<TiranteResponse> listarTirantes() {
 
         var tirantes = inboundPort.buscarTodosTirantes();
-        return mapper.mapToList(tirantes, new TypeToken<List<TiranteResponse>>() {
-        }.getType());
+        return mapper.mapToList(tirantes, new TypeToken<List<TiranteResponse>>() {}.getType());
     }
 
     @GetMapping("/inventario")
     public List<ProdutoResponse> listarInventario() {
 
         var inventario = inboundPort.buscarInventario();
-        return mapper.mapToList(inventario, new TypeToken<List<ProdutoResponse>>() {
-        }.getType());
+        return mapper.mapToList(inventario, new TypeToken<List<ProdutoResponse>>() {}.getType());
     }
 
     @GetMapping("/{id}")
@@ -81,13 +76,19 @@ public class ProdutoController {
         }
     }
 
+    @GetMapping("/filtro/pedido/{idPedido}")
+    public List<ProdutoResponse> buscarPeloIdPedido(@PathVariable Long idPedido) {
+
+        var produtos = inboundPort.buscarPeloIdPedido(idPedido);
+        return mapper.mapToList(produtos, new TypeToken<List<ProdutoResponse>>() {}.getType());
+    }
+
     @GetMapping("/tirantes/filtro/{modelo}")
     public ResponseEntity<List<TiranteResponse>> pesquisarTirantePorModelo(
             @PathVariable(required = false) String modelo) {
 
         List<Tirante> tirantes = inboundPort.buscarTirantePeloModelo(modelo);
-        return ResponseEntity.ok(mapper.mapToList(tirantes, new TypeToken<List<TiranteResponse>>() {
-        }.getType()));
+        return ResponseEntity.ok(mapper.mapToList(tirantes, new TypeToken<List<TiranteResponse>>() {}.getType()));
     }
 
     @GetMapping("/canecas/filtro/{modelo}")
@@ -95,8 +96,7 @@ public class ProdutoController {
             @PathVariable(required = false) String modelo) {
 
         List<Caneca> canecas = inboundPort.buscarCanecaPeloModelo(modelo);
-        return ResponseEntity.ok(mapper.mapToList(canecas, new TypeToken<List<CanecaResponse>>() {
-        }.getType()));
+        return ResponseEntity.ok(mapper.mapToList(canecas, new TypeToken<List<CanecaResponse>>() {}.getType()));
     }
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -104,7 +104,7 @@ public class ProdutoController {
     public void salvarCamisaNoInventario(@Valid @RequestBody CamisaRequest camisaRequest) throws NegocioException {
 
         var camisa = mapper.mapTo(camisaRequest, Camisa.class);
-        inboundPort.salvar(camisa);
+        inboundPort.salvarInventario(camisa);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -112,7 +112,7 @@ public class ProdutoController {
     public void salvarCanecaNoInventario(@Valid @RequestBody CanecaRequest canecaRequest) throws NegocioException {
 
         var caneca = mapper.mapTo(canecaRequest, Caneca.class);
-        inboundPort.salvar(caneca);
+        inboundPort.salvarInventario(caneca);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -120,7 +120,7 @@ public class ProdutoController {
     public void salvarTiranteNoInventario(@Valid @RequestBody TiranteRequest tiranteRequest) throws NegocioException {
 
         var tirante = mapper.mapTo(tiranteRequest, Tirante.class);
-        inboundPort.salvar(tirante);
+        inboundPort.salvarInventario(tirante);
     }
 
     @PutMapping("/admin/camisas/{id}")
@@ -130,7 +130,7 @@ public class ProdutoController {
         var camisa = mapper.mapTo(camisaRequest, Camisa.class);
         camisa.setId(id);
         return inboundPort.produtoExiste(id)
-                ? ResponseEntity.ok(mapper.mapTo(inboundPort.salvar(camisa), CamisaResponse.class))
+                ? ResponseEntity.ok(mapper.mapTo(inboundPort.salvarInventario(camisa), CamisaResponse.class))
                 : ResponseEntity.notFound().build();
     }
 
@@ -141,7 +141,7 @@ public class ProdutoController {
         var caneca = mapper.mapTo(canecaRequest, Caneca.class);
         caneca.setId(id);
         return inboundPort.produtoExiste(id)
-                ? ResponseEntity.ok(mapper.mapTo(inboundPort.salvar(caneca), CanecaResponse.class))
+                ? ResponseEntity.ok(mapper.mapTo(inboundPort.salvarInventario(caneca), CanecaResponse.class))
                 : ResponseEntity.notFound().build();
     }
 
@@ -152,7 +152,7 @@ public class ProdutoController {
         var tirante = mapper.mapTo(tiranteRequest, Tirante.class);
         tirante.setId(id);
         return inboundPort.produtoExiste(id)
-                ? ResponseEntity.ok(mapper.mapTo(inboundPort.salvar(tirante), TiranteResponse.class))
+                ? ResponseEntity.ok(mapper.mapTo(inboundPort.salvarInventario(tirante), TiranteResponse.class))
                 : ResponseEntity.notFound().build();
     }
 

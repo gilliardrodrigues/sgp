@@ -13,6 +13,5 @@ public class Produto {
     protected Boolean prontaEntrega;
     protected Boolean chegou;
     protected Pedido pedido;
-    protected Fornecedor fornecedor;
     protected TipoProduto tipo;
 }
