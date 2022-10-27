@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class PedidoEntity {
     private OffsetDateTime data;
 
     @Column(name = "VALOR")
-    private Double valor;
+    private BigDecimal valor;
 
     @Column(name = "SITUACAO")
     @Enumerated(value = EnumType.STRING)
@@ -34,7 +35,7 @@ public class PedidoEntity {
     private StatusPagamento statusPagamento;
 
     @Column(name = "VALOR_PAGO")
-    private Double valorPago;
+    private BigDecimal valorPago;
 
     @ManyToOne
     @JoinColumn(name = "temporadaId")
