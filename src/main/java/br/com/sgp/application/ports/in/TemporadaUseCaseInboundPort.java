@@ -13,6 +13,7 @@ public interface TemporadaUseCaseInboundPort {
     Temporada encerrarTemporada(Long id);
     Temporada adicionarProdutos(Temporada temporada, List<TipoProduto> produtos);
     Temporada buscarPeloId(Long id);
+    Temporada buscarAtiva();
     List<Temporada> buscarTodas();
 
     Temporada alterarTemporada(Temporada temporada);

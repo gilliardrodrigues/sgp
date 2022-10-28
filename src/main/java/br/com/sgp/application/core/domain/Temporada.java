@@ -18,7 +18,7 @@ public class Temporada {
     private OffsetDateTime dataFim;
     private List<TipoProduto> produtosDisponiveis;
     private HashMap<TipoProduto, BigDecimal> valores;
-    private List<Pedido> pedidos;
+    // private List<Pedido> pedidos; Gill, acredito que temporada não precisa ter o array de pedidos, basta fazermos a busca nos pedidos pela temporada
 
     public void habilitarProduto(TipoProduto tipoDeProduto) {
 

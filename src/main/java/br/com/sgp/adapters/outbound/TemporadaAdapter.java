@@ -57,4 +57,12 @@ public class TemporadaAdapter implements TemporadaUseCaseOutboundPort {
 
         return repository.existsById(id);
     }
+
+    @Override
+    public Temporada buscarAtiva() {
+        var temporadaEntity = repository.findByDataFimIsNull();
+        return mapper.mapTo(temporadaEntity, Temporada.class);
+    }
+
+    
 }
