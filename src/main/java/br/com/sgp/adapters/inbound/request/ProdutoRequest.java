@@ -14,5 +14,5 @@ public class ProdutoRequest {
     protected BigDecimal valor;
     protected Boolean entregue;
     protected Boolean chegou;
-    protected Pedido pedido;
+    protected Long pedidoId;
 }

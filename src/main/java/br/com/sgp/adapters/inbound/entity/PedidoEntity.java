@@ -42,9 +42,8 @@ public class PedidoEntity {
     @JoinColumn(name = "temporadaId")
     private TemporadaEntity temporada;
 
-    @ManyToOne
-    @JoinColumn(name = "alunoId")
-    private AlunoEntity aluno;
+    @Embedded
+    private AlunoEmbeddable aluno;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido")
     private List<ProdutoEntity> produtos;

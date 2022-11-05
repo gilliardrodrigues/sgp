@@ -1,5 +1,6 @@
 package br.com.sgp.adapters.outbound;
 
+import br.com.sgp.adapters.inbound.entity.ProdutoEntity;
 import br.com.sgp.adapters.inbound.entity.CamisaEntity;
 import br.com.sgp.adapters.inbound.entity.CanecaEntity;
 import br.com.sgp.adapters.inbound.entity.TiranteEntity;

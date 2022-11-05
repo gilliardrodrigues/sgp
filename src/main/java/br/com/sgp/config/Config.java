@@ -30,9 +30,9 @@ public class Config {
         return new ProdutoUseCase(outboundPort);
     }
     @Bean
-    public TemporadaUseCase temporadaUseCase(TemporadaUseCaseOutboundPort outboundPort) {
+    public TemporadaUseCase temporadaUseCase(TemporadaUseCaseOutboundPort outboundPort, PedidoUseCaseOutboundPort pedidoUseCaseOutboundPort) {
 
-        return new TemporadaUseCase(outboundPort);
+        return new TemporadaUseCase(outboundPort, pedidoUseCaseOutboundPort);
     }
     @Bean
     public PedidoUseCase pedidoUseCase(PedidoUseCaseOutboundPort outboundPort, ProdutoUseCaseOutboundPort produtoOutboundPort) {

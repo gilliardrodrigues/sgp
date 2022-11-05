@@ -9,6 +9,8 @@ public interface ProdutoUseCaseInboundPort {
 
     Produto salvarInventario(Produto produto) throws NegocioException;
 
+    Produto salvar(Produto produto) throws NegocioException;
+
     List<Produto> buscarTodos();
 
     List<Camisa> buscarTodasCamisas();

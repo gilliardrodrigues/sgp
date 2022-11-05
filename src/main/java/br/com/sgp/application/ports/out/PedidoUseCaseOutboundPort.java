@@ -17,5 +17,5 @@ public interface PedidoUseCaseOutboundPort {
     List<Pedido> buscarPeloStatusPagamento(String statusPagamento);
 
     List<Pedido> buscarPelaTemporadaAssimComoSituacao(Temporada temporada, StatusPedido situacao);
-
+    Boolean pedidoExiste(Long id);
 }

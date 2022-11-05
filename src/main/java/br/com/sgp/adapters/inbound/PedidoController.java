@@ -4,9 +4,11 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -34,7 +36,7 @@ public class PedidoController {
     private final TemporadaUseCaseInboundPort temporadaInboundPort;
     private final GenericMapper mapper;
 
-    @GetMapping
+    @GetMapping("/admin")
     public ResponseEntity<List<PedidoResponse>> listarPedidos() {
 
         var pedidos = inboundPort.buscarTodos();
@@ -51,7 +53,6 @@ public class PedidoController {
         } catch (Throwable e) {
             return ResponseEntity.notFound().build();
         }
-
     }
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -65,10 +66,37 @@ public class PedidoController {
 
         var pedido = inboundPort.salvar(pedidoToSave);
 
+        // pedido.getProdutos();
+
         try {
             return ResponseEntity.ok(mapper.mapTo(pedido, PedidoResponse.class));
         } catch (Throwable e) {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @PutMapping("/admin/{id}")
+    public ResponseEntity<PedidoResponse> alterarPedido(@Valid @PathVariable Long id,
+            @RequestBody PedidoRequest pedidoRequest) {
+
+        if (!inboundPort.pedidoExiste(id))
+            return ResponseEntity.notFound().build();
+
+        var pedido = inboundPort.buscarPeloId(id);
+
+        if (pedidoRequest.getValorPago() != null)
+            pedido.setValorPago(pedidoRequest.getValorPago());
+
+        return ResponseEntity.ok(mapper.mapTo(inboundPort.salvar(pedido), PedidoResponse.class));
+    }
+
+    @DeleteMapping("/admin/{id}")
+    public ResponseEntity<PedidoResponse> excluir(@PathVariable Long id) {
+
+        if (!inboundPort.pedidoExiste(id))
+            return ResponseEntity.notFound().build();
+
+        inboundPort.excluir(id);
+        return ResponseEntity.noContent().build();
     }
 }

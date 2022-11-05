@@ -5,8 +5,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Administrador extends Pessoa {
+public class Administrador {
 
+    private Long id;
     private String username;
     private String password;
+    private String nome;
+    private String email;
 }

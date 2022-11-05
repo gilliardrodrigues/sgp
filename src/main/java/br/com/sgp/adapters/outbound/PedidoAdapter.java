@@ -74,4 +74,10 @@ public class PedidoAdapter implements PedidoUseCaseOutboundPort {
         var pedidos = repository.findByTemporadaAndSituacao(temporadaEntity, situacao);
         return mapper.mapToList(pedidos, new TypeToken<List<Pedido>>() {}.getType());
     }
+
+    public Boolean pedidoExiste(Long id) {
+
+        return repository.existsById(id);
+    }
+    
 }

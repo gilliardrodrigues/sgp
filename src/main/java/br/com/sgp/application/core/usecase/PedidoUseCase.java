@@ -2,6 +2,7 @@ package br.com.sgp.application.core.usecase;
 
 import br.com.sgp.adapters.inbound.mapper.GenericMapper;
 import br.com.sgp.application.core.domain.Pedido;
+import br.com.sgp.application.core.domain.Produto;
 import br.com.sgp.application.core.domain.StatusPagamento;
 import br.com.sgp.application.core.domain.StatusPedido;
 import br.com.sgp.application.core.domain.Temporada;
@@ -28,10 +29,6 @@ public class PedidoUseCase implements PedidoUseCaseInboundPort {
     @Override
     public Pedido salvar(Pedido pedido) throws NegocioException {
 
-        pedido.setData(OffsetDateTime.now());
-        pedido.setSituacao(StatusPedido.AGUARDANDO_PAGAMENTO);
-        pedido.setStatusPagamento(StatusPagamento.NAO_PAGO);
-        // CONTINUAR SETTANDO AS OUTRAS COISAS, COMO A TEMPORADA E OS PRODUTOS.
         return outboundPort.salvar(pedido);
     }
 
@@ -65,6 +62,7 @@ public class PedidoUseCase implements PedidoUseCaseInboundPort {
 
         return outboundPort.buscarPeloStatusPagamento(statusPagamento);
     }
+    // TODO buscar por nome e data
 
     @Override
     public void adicionarProdutoDoInventario(Pedido pedido, Long idProduto) {
@@ -76,5 +74,18 @@ public class PedidoUseCase implements PedidoUseCaseInboundPort {
     public List<Pedido> buscarPedidosConfirmadosPorTemporada(Temporada temporada) {
 
         return outboundPort.buscarPelaTemporadaAssimComoSituacao(temporada, StatusPedido.CONFIRMADO);
+    }
+
+    public Boolean pedidoExiste(Long id) {
+        return outboundPort.pedidoExiste(id);
+    }
+
+    @Override
+    public void adicionarProduto(Long idPedido, Produto produto) {
+        var pedido = outboundPort.buscarPeloId(idPedido);
+        pedido.adicionarProduto(produto);
+        System.out.println(pedido.getProdutos());
+        salvar(pedido);
+        // return produtoOutboundPort.salvar(produto);
     }
 }
