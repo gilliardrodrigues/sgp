@@ -42,9 +42,9 @@ public class PedidoEntity {
     @JoinColumn(name = "temporadaId")
     private TemporadaEntity temporada;
 
-    // @ManyToOne
-    // @JoinColumn(name = "alunoLoginDCC")
-    // private AlunoEntity aluno;
+    @ManyToOne
+    @JoinColumn(name = "alunoId")
+    private AlunoEntity aluno;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido")
     private List<ProdutoEntity> produtos;
