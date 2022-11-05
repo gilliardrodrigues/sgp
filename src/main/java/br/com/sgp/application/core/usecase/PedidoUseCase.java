@@ -3,27 +3,42 @@ package br.com.sgp.application.core.usecase;
 import br.com.sgp.adapters.inbound.mapper.GenericMapper;
 import br.com.sgp.application.core.domain.Pedido;
 import br.com.sgp.application.core.domain.Produto;
-import br.com.sgp.application.core.domain.StatusPagamento;
 import br.com.sgp.application.core.domain.StatusPedido;
 import br.com.sgp.application.core.domain.Temporada;
 import br.com.sgp.application.core.exception.NegocioException;
 import br.com.sgp.application.ports.in.PedidoUseCaseInboundPort;
 import br.com.sgp.application.ports.out.PedidoUseCaseOutboundPort;
-import br.com.sgp.application.ports.out.ProdutoUseCaseOutboundPort;
+import br.com.sgp.application.ports.out.TemporadaUseCaseOutboundPort;
 
-import java.time.OffsetDateTime;
 import java.util.List;
 
 public class PedidoUseCase implements PedidoUseCaseInboundPort {
 
     private final PedidoUseCaseOutboundPort outboundPort;
-    private final ProdutoUseCaseOutboundPort produtoOutboundPort;
+    private final ProdutoUseCase produtoUseCase;
+    private final TemporadaUseCaseOutboundPort temporadaOutboundPort;
     private GenericMapper mapper;
 
-    public PedidoUseCase(PedidoUseCaseOutboundPort outboundPort, ProdutoUseCaseOutboundPort produtoOutboundPort) {
+    public PedidoUseCase(PedidoUseCaseOutboundPort outboundPort, ProdutoUseCase produtoUseCase, TemporadaUseCaseOutboundPort temporadaOutboundPort) {
 
         this.outboundPort = outboundPort;
-        this.produtoOutboundPort = produtoOutboundPort;
+        this.produtoUseCase = produtoUseCase;
+        this.temporadaOutboundPort = temporadaOutboundPort;
+    }
+
+    @Override
+    public Pedido salvar(Pedido pedido, List<Produto> produtos) throws NegocioException {
+
+        Temporada temporada = temporadaOutboundPort.buscarAtiva();
+        pedido.setTemporada(temporada);
+        var pedidoSalvo = outboundPort.salvar(pedido);
+
+        for (Produto produto : produtos) {
+            produto.setPedido(pedidoSalvo);
+            produtoUseCase.salvar(produto);
+        }
+
+        return outboundPort.buscarPeloId(pedidoSalvo.getId());
     }
 
     @Override

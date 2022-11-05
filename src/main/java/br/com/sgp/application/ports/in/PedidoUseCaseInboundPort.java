@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface PedidoUseCaseInboundPort {
 
+    Pedido salvar(Pedido pedido, List<Produto> produtos) throws NegocioException;
     Pedido salvar(Pedido pedido) throws NegocioException;
     List<Pedido> buscarTodos();
     void excluir(Long id);

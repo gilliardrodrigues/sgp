@@ -1,11 +1,10 @@
 package br.com.sgp.adapters.inbound.request;
 
+import br.com.sgp.application.core.domain.TipoProduto;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-
-import br.com.sgp.application.core.domain.Pedido;
 
 @Getter
 @Setter
@@ -14,5 +13,6 @@ public class ProdutoRequest {
     protected BigDecimal valor;
     protected Boolean entregue;
     protected Boolean chegou;
-    protected Long pedidoId;
+    protected TipoProduto tipo;
+    //protected Long pedidoId;
 }

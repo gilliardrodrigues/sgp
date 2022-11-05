@@ -31,6 +31,7 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
 
     @Override
     public Produto salvar(Produto produto) throws NegocioException {
+
         if (produto.getTipo().equals(TipoProduto.CAMISA)) {
             Camisa camisa = (Camisa) produto;
             return outboundPort.salvarCamisa(camisa);
