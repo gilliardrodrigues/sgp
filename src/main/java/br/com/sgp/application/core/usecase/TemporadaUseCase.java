@@ -78,4 +78,11 @@ public class TemporadaUseCase implements TemporadaUseCaseInboundPort {
 
         return outboundPort.temporadaExiste(id);
     }
+
+    @Override
+    public Temporada buscarAtiva() {
+
+        return outboundPort.buscarAtiva();
+    }
+
 }
