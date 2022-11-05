@@ -1,5 +1,6 @@
 package br.com.sgp.adapters.inbound.entity;
 
+import br.com.sgp.application.core.domain.Aluno;
 import br.com.sgp.application.core.domain.StatusPagamento;
 import br.com.sgp.application.core.domain.StatusPedido;
 import lombok.Getter;
