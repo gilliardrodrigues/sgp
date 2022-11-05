@@ -1,0 +1,58 @@
+<html>
+
+  <head>
+    <link rel="stylesheet" type="text/css" href="../../static/css/main.css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/editarPedido.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css">
+    <title>Área administrativa | SGP</title>
+  </head>
+
+  <body>
+
+    <header class="menu-principal">
+      <main>
+        <div class="header-1">
+          <div class="logo">
+            <img class="img-logo" src="../../static/img/logo.png" alt="Logo SGP" />
+          </div>
+        </div>
+      </main>
+    </header>
+
+    <div class="content">
+
+      <a href="../pedidos/index.html">
+        <button class="back-button"></button>
+      </a>
+
+      <div class="box-editar">
+        <p class="main-title">Editar Pedido</p>
+
+        <div class="label-textfield">
+          <p class="label-attribute">Situação</p>
+          <select name="situacoes" class="select-situacao">
+            <option value="AguardandoPagamento">Aguardando pagamento</option>
+            <option value="Confirmado">Confirmado</option>
+            <option value="ParcialmenteEntregue">Parcialmente entregue</option>
+            <option value="Entregue">Entregue</option>
+          </select>
+        </div>
+
+        <div class="label-textfield">
+          <p class="label-attribute">Status</p>
+          <select name="situacoes" class="select-status">
+            <option value="NaoPago">Não pago</option>
+            <option value="ParcialmentePago">Parcialmente pago</option>
+            <option value="Pago">Pago</option>
+          </select>
+        </div>
+
+        <button class="button-salvar">Salvar</button>
+
+      </div>
+
+    </div>
+
+  </body>
+
+</html>

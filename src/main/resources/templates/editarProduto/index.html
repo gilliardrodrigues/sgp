@@ -1,0 +1,77 @@
+<html>
+
+  <head>
+    <link rel="stylesheet" type="text/css" href="../../static/css/main.css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/editarPedido.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css">
+    <title>Área administrativa | SGP</title>
+  </head>
+
+  <body>
+
+    <header class="menu-principal">
+      <main>
+        <div class="header-1">
+          <div class="logo">
+            <img class="img-logo" src="../../static/img/logo.png" alt="Logo SGP" />
+          </div>
+        </div>
+      </main>
+    </header>
+
+    <div class="content">
+
+      <a href="../produtos/index.html">
+        <button class="back-button"></button>
+      </a>
+
+      <div class="box-editar">
+        <p class="main-title">Editar Produto</p>
+
+        <div class="label-textfield">
+          <p class="label-attribute">Nome*</p>
+          <input type="text" placeholder="Insira o nome" value="Camisa" id="name" name="fname">
+        </div>
+
+        <div class="label-textfield">
+          <p class="label-attribute">Preço*</p>
+          <input type="text" placeholder="Insira o preço" value="R$50,00" id="price" name="fname">
+        </div>
+
+        <div class="label-textfield">
+          <p class="label-attribute">Pronta-entrega*</p>
+          <select name="pronta-entrega" class="select-status">
+            <option value="yes">SIM</option>
+            <option value="no">NÃO</option>
+          </select>
+        </div>
+
+        <div class="label-textfield">
+          <p class="label-attribute">Modelo</p>
+          <input type="text" placeholder="Insira o modelo" value="-" id="model" name="fname">
+        </div>
+
+        <div class="label-textfield">
+          <p class="label-attribute">Curso</p>
+          <input type="text" placeholder="Insira o curso" value="R$50,00" id="course" name="fname">
+        </div>
+
+        <div class="label-textfield">
+          <p class="label-attribute">Tamanho</p>
+          <input type="text" placeholder="Insira o tamanho" id="size" name="fname">
+        </div>
+
+        <div class="label-textfield">
+          <p class="label-attribute">Cor</p>
+          <input type="text" placeholder="Insira a cor" id="color" name="fname">
+        </div>
+
+        <button class="button-salvar">Salvar</button>
+
+      </div>
+
+    </div>
+
+  </body>
+
+</html>
