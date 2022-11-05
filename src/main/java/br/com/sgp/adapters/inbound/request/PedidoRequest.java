@@ -12,8 +12,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PedidoRequest {
+
     private Aluno aluno;
-    
+
     @NotNull(message = "Campo obrigatório não preenchido!")
     private BigDecimal valorPago;
+
+    private List<ProdutoRequest> produtos;
 }

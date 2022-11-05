@@ -8,9 +8,10 @@ import br.com.sgp.adapters.inbound.response.CamisaResponse;
 import br.com.sgp.adapters.inbound.response.CanecaResponse;
 import br.com.sgp.adapters.inbound.response.ProdutoResponse;
 import br.com.sgp.adapters.inbound.response.TiranteResponse;
-import br.com.sgp.application.core.domain.*;
+import br.com.sgp.application.core.domain.Camisa;
+import br.com.sgp.application.core.domain.Caneca;
+import br.com.sgp.application.core.domain.Tirante;
 import br.com.sgp.application.core.exception.NegocioException;
-import br.com.sgp.application.ports.in.PedidoUseCaseInboundPort;
 import br.com.sgp.application.ports.in.ProdutoUseCaseInboundPort;
 import lombok.AllArgsConstructor;
 import org.modelmapper.TypeToken;
@@ -27,7 +28,7 @@ import java.util.List;
 public class ProdutoController {
 
     private final ProdutoUseCaseInboundPort inboundPort;
-    private final PedidoUseCaseInboundPort pedidoInboundPort;
+    //private final PedidoUseCaseInboundPort pedidoInboundPort;
     private final GenericMapper mapper;
 
     @GetMapping
@@ -167,7 +168,7 @@ public class ProdutoController {
         inboundPort.excluir(id);
         return ResponseEntity.noContent().build();
     }
-
+    /*
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/camisas")
     public ResponseEntity<CamisaResponse> pedirCamisa(@Valid @RequestBody CamisaRequest camisaRequest) throws NegocioException {
@@ -194,5 +195,5 @@ public class ProdutoController {
         pedidoInboundPort.adicionarProduto(tiranteRequest.getPedidoId(), tirante);
         return ResponseEntity.ok(mapper.mapTo(inboundPort.salvar(tirante), TiranteResponse.class));
     }
-
+    */
 }
