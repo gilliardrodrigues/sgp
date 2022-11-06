@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="../../static/css/verProdutos.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css">
     <title>Área administrativa | SGP</title>
+    <script type="text/javascript" src="../../static/js/fornecedor.js"></script>
   </head>
 
   <body>
@@ -36,58 +37,65 @@
 
       <div class="tabela">
 
-        <div class="header-column w15">
+        <div class="header-column w12_5">
           <p>Código</p>
         </div>
 
-        <div class="header-column w15">
+        <div class="header-column w12_5">
           <p>Razão social</p>
         </div>
 
-        <div class="header-column w15">
+        <div class="header-column w12_5">
+          <p>Email</p>
+        </div>
+
+        <div class="header-column w12_5">
+            <p>Tempo entrega</p>
+        </div>
+
+        <div class="header-column w12_5">
+          <p>Produtos</p>
+        </div>
+        
+        <div class="header-column w12_5">
           <p>CNPJ</p>
-        </div>
-
-        <div class="header-column w15">
-            <p>Produtos</p>
-        </div>
-
-        <div class="header-column w15">
-          <p>Tempo Entrega</p>
         </div>
 
       </div> <!-- tabela -->
 
       <div class="tabela">
 
-        <div class="column w15 first-column">
+        <div class="column w12_5 first-column">
           <p>#4298383</p>
         </div>
 
-        <div class="column w15">
+        <div class="column w12_5">
           <p>Fornecedor 1 Ltda.</p>
         </div>
 
-        <div class="column w15">
+        <div class="column w12_5">
           <p>21480218042</p>
         </div>
 
-        <div class="column w15">
+        <div class="column w12_5">
           <p>Camisa</p>
         </div>
 
-        <div class="column w15">
+        <div class="column w12_5">
             <p>30 dias</p>
         </div>
 
+        <div class="column w12_5">
+          <p>30 dias</p>
+        </div>
+
         <div class="column ver-obs w12">
-          <a href="../verObsFornecedor/index.html">
-            <button type="submit" style="border: 0; background: transparent">
-              <p>Ver<br>observações</p>
+          <a href="../verObsFornecedor/index.html?id=1">
+            <button type="submit" class="verObservacao" style="border: 0; background: transparent">
+              <p>Ver <br>observações </p>
             </button>
           </a>
         </div>
-
         <div class="column edit-fornecedor w8">
           <a href="../editarFornecedor/index.html">
             <button type="submit" class="edit-button" style="border: 0; background: transparent">
@@ -95,16 +103,16 @@
             </button>
           </a>
         </div>
-
         <div class="column delete-button w5 last-column">
           <a href="">
             <button type="submit" style="border: 0; background: transparent">
               <img src="../../static/img/trash-icon.png" width="20px" alt="submit" />
             </button>
           </a>
-        </div>
+        </div>       
 
-    </div> <!-- content -->
+    </div> 
+    <!-- content -->
 
   </body>
 

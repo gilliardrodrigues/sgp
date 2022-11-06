@@ -15,5 +15,5 @@ public class FornecedorResponse {
     private String CNPJ;
     private String email;
     private Integer tempoEntregaEmDias;
-    List<TipoProduto> produtosDisponiveis;
+    List<TipoProduto> produtosOferecidos;
 }
