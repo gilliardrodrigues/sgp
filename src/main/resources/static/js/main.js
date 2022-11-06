@@ -1,8 +1,3 @@
-function expandFilters() {
-	document.getElementsById("filters-expanded").style.display = "block";
-	alert("how are you");
-}
-
 function addEventListeners() {
 	const loginForm = document.querySelector("#loginForm");
 	loginForm.addEventListener("submit", function (e) {
