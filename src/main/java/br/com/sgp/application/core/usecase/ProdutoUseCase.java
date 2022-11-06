@@ -30,15 +30,14 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
     @Override
     public Produto salvar(Produto produto) throws NegocioException {
 
-        var pedido = pedidoOutboundPort.buscarPeloId(produto.getPedido().getId());
-        if(pedido != null && !outboundPort.produtoExiste(produto.getId())) {
-            pedido.incrementarValor(produto.getValor());
-
-            // if(produto.getValor() + pedido.getValorPago() > pedido.getValor())
-            // throw new NegocioException("Valor pago não pode ser superior ao valor do pedido!");
-            
-
-            pedidoOutboundPort.salvar(pedido);
+        if(produto.getPedido() != null) {
+            var pedido = pedidoOutboundPort.buscarPeloId(produto.getPedido().getId());
+            if(pedido != null && !outboundPort.produtoExiste(produto.getId())) {
+                pedido.incrementarValor(produto.getValor());
+                // if(produto.getValor() + pedido.getValorPago() > pedido.getValor())
+                // throw new NegocioException("Valor pago não pode ser superior ao valor do pedido!");
+                pedidoOutboundPort.salvar(pedido);
+            }
         }
 
         if (produto.getTipo().equals(TipoProduto.CAMISA)) {

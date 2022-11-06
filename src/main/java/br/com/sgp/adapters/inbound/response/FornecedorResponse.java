@@ -1,6 +1,5 @@
 package br.com.sgp.adapters.inbound.response;
 
-import br.com.sgp.application.core.domain.TipoProduto;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,5 +14,5 @@ public class FornecedorResponse {
     private String CNPJ;
     private String email;
     private Integer tempoEntregaEmDias;
-    List<TipoProduto> produtosOferecidos;
+    List<String> produtosOferecidos;
 }
