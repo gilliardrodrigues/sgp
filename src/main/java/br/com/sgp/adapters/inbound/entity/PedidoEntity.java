@@ -44,8 +44,4 @@ public class PedidoEntity {
 
     @Embedded
     private AlunoEmbeddable aluno;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido")
-    private List<ProdutoEntity> produtos;
-
 }

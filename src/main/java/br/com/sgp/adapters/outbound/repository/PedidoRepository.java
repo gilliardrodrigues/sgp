@@ -7,6 +7,8 @@ import br.com.sgp.application.core.domain.StatusPedido;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.OffsetDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -18,5 +20,8 @@ public interface PedidoRepository extends JpaRepository<PedidoEntity, Long> {
 
     List<PedidoEntity> findByTemporadaAndSituacao(TemporadaEntity temporada, StatusPedido situacao);
 
-    // Falta filtrar pela data, pelo nome do aluno e pelo produto.
+    List<PedidoEntity> findByAlunoNome(String nomeAluno);
+
+    List<PedidoEntity> findByDataBetween(OffsetDateTime startDay, OffsetDateTime endDay);
+    
 }

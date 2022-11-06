@@ -13,6 +13,12 @@ import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
+
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -79,5 +85,26 @@ public class PedidoAdapter implements PedidoUseCaseOutboundPort {
 
         return repository.existsById(id);
     }
-    
+
+    public List<Pedido> buscarPeloNomeAluno(String nome) {
+        var pedidos = repository.findByAlunoNome(nome);
+        return mapper.mapToList(pedidos, new TypeToken<List<Pedido>>() {}.getType());
+    }
+
+    public List<Pedido> buscarPeloTipoDeProduto(String tipoDeProduto) {
+        // TODO gill
+        var pedidos = repository.findByAlunoNome(tipoDeProduto);
+        return mapper.mapToList(pedidos, new TypeToken<List<Pedido>>() {}.getType());
+    }
+
+    public List<Pedido> buscarPelaData(Date data) {
+        OffsetDateTime startDay = data.toInstant().atOffset(ZoneOffset.ofHours(-3)).plusHours(3);
+        OffsetDateTime endDay = startDay
+            .withHour(23)
+            .withMinute(59)
+            .withSecond(59)
+            .withNano(999999000).toInstant().atOffset(ZoneOffset.ofHours(-3));
+        var pedidos = repository.findByDataBetween(startDay, endDay);
+        return mapper.mapToList(pedidos, new TypeToken<List<Pedido>>() {}.getType());
+    }
 }

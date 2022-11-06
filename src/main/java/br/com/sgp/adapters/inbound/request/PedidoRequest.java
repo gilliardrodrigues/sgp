@@ -16,7 +16,7 @@ public class PedidoRequest {
     private Aluno aluno;
 
     @NotNull(message = "Campo obrigatório não preenchido!")
-    private BigDecimal valorPago;
+    private int valorPago;
 
-    private List<ProdutoRequest> produtos;
+    // private List<ProdutoRequest> produtos;
 }

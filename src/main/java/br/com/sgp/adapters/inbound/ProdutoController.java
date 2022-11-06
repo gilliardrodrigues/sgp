@@ -12,6 +12,7 @@ import br.com.sgp.application.core.domain.Camisa;
 import br.com.sgp.application.core.domain.Caneca;
 import br.com.sgp.application.core.domain.Tirante;
 import br.com.sgp.application.core.exception.NegocioException;
+import br.com.sgp.application.ports.in.PedidoUseCaseInboundPort;
 import br.com.sgp.application.ports.in.ProdutoUseCaseInboundPort;
 import lombok.AllArgsConstructor;
 import org.modelmapper.TypeToken;
@@ -28,7 +29,7 @@ import java.util.List;
 public class ProdutoController {
 
     private final ProdutoUseCaseInboundPort inboundPort;
-    //private final PedidoUseCaseInboundPort pedidoInboundPort;
+    private final PedidoUseCaseInboundPort pedidoInboundPort;
     private final GenericMapper mapper;
 
     @GetMapping
@@ -168,12 +169,11 @@ public class ProdutoController {
         inboundPort.excluir(id);
         return ResponseEntity.noContent().build();
     }
-    /*
+    
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/camisas")
     public ResponseEntity<CamisaResponse> pedirCamisa(@Valid @RequestBody CamisaRequest camisaRequest) throws NegocioException {
         var camisa = mapper.mapTo(camisaRequest, Camisa.class);
-        pedidoInboundPort.adicionarProduto(camisaRequest.getPedidoId(), camisa);
         return ResponseEntity.ok(mapper.mapTo(inboundPort.salvar(camisa), CamisaResponse.class));
     }
 
@@ -183,7 +183,6 @@ public class ProdutoController {
     public ResponseEntity<CanecaResponse> pedirCaneca(@Valid @RequestBody CanecaRequest canecaRequest) throws NegocioException {
 
         var caneca = mapper.mapTo(canecaRequest, Caneca.class);
-        pedidoInboundPort.adicionarProduto(canecaRequest.getPedidoId(), caneca);
         return ResponseEntity.ok(mapper.mapTo(inboundPort.salvar(caneca), CanecaResponse.class));
     }
 
@@ -192,8 +191,8 @@ public class ProdutoController {
     public ResponseEntity<TiranteResponse> pedirTirante(@Valid @RequestBody TiranteRequest tiranteRequest) throws NegocioException {
 
         var tirante = mapper.mapTo(tiranteRequest, Tirante.class);
-        pedidoInboundPort.adicionarProduto(tiranteRequest.getPedidoId(), tirante);
+        tirante.setPedido(pedidoInboundPort.buscarPeloId(tiranteRequest.getPedidoId()));
         return ResponseEntity.ok(mapper.mapTo(inboundPort.salvar(tirante), TiranteResponse.class));
     }
-    */
+    
 }

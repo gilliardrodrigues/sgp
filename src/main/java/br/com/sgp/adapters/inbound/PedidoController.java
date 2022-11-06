@@ -10,12 +10,14 @@ import br.com.sgp.application.ports.in.ProdutoUseCaseInboundPort;
 import br.com.sgp.application.ports.in.TemporadaUseCaseInboundPort;
 import lombok.AllArgsConstructor;
 import org.modelmapper.TypeToken;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -28,11 +30,11 @@ public class PedidoController {
     private final GenericMapper mapper;
 
     @GetMapping("/admin")
-    public ResponseEntity<List<PedidoResponse>> listarPedidos() {
-
-        var pedidos = inboundPort.buscarTodos();
-        return ResponseEntity.ok(mapper.mapToList(pedidos, new TypeToken<List<PedidoResponse>>() {
-        }.getType()));
+    public ResponseEntity<List<PedidoResponse>> buscarPedidos(@RequestParam(required = false) String situacao, @RequestParam(required = false) String statusPagamento,
+            @RequestParam(required = false) String nome, @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date data,
+            @RequestParam(required = false) String tipoDeProduto) {
+        List<Pedido> pedidos = inboundPort.buscarPedidos(situacao, statusPagamento, nome, data, tipoDeProduto);
+        return ResponseEntity.ok(mapper.mapToList(pedidos, new TypeToken<List<PedidoResponse>>() {}.getType()));
     }
 
     @GetMapping("/{id}")
@@ -53,18 +55,7 @@ public class PedidoController {
         var pedido = new Pedido();
         pedido.setAluno(pedidoRequest.getAluno());
 
-        List<Produto> produtos = new ArrayList<Produto>();
-        for (ProdutoRequest produtoRequest : pedidoRequest.getProdutos()) {
-            if (produtoRequest.getTipo().equals(TipoProduto.CAMISA)) {
-                produtos.add(mapper.mapTo(produtoRequest, Camisa.class));
-            } else if (produtoRequest.getTipo().equals(TipoProduto.CANECA)) {
-                produtos.add(mapper.mapTo(produtoRequest, Caneca.class));
-            } else {
-                produtos.add(mapper.mapTo(produtoRequest, Tirante.class));
-            }
-        }
-
-        var pedidoSalvo = inboundPort.salvar(pedido, produtos);
+        var pedidoSalvo = inboundPort.salvar(pedido);
 
         try {
             return ResponseEntity.ok(mapper.mapTo(pedidoSalvo, PedidoResponse.class));
@@ -76,16 +67,12 @@ public class PedidoController {
     @PutMapping("/admin/{id}")
     public ResponseEntity<PedidoResponse> alterarPedido(@Valid @PathVariable Long id,
             @RequestBody PedidoRequest pedidoRequest) {
-
-        if (!inboundPort.pedidoExiste(id))
+        try {
+            Pedido pedido = inboundPort.darBaixa(id, pedidoRequest.getValorPago());
+            return ResponseEntity.ok(mapper.mapTo(inboundPort.salvar(pedido), PedidoResponse.class));
+        } catch (Throwable e) {
             return ResponseEntity.notFound().build();
-
-        var pedido = inboundPort.buscarPeloId(id);
-
-        if (pedidoRequest.getValorPago() != null)
-            pedido.setValorPago(pedidoRequest.getValorPago());
-
-        return ResponseEntity.ok(mapper.mapTo(inboundPort.salvar(pedido), PedidoResponse.class));
+        }
     }
 
     @DeleteMapping("/admin/{id}")

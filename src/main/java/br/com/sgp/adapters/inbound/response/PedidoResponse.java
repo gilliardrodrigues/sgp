@@ -16,11 +16,11 @@ import java.util.List;
 public class PedidoResponse {
     private Long id;
     private OffsetDateTime data;
-    private BigDecimal valor;
+    private int valor;
     private StatusPedido situacao;
     private StatusPagamento statusPagamento;
     private BigDecimal valorPago;
     private Long temporadaId;
     private Aluno aluno;
-    private List<ProdutoResponse> produtos;
+    private OffsetDateTime previsaoDeEntrega;
 }
