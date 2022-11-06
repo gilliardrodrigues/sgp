@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/administradores")
 @AllArgsConstructor
 public class AdministradorController {
