@@ -32,10 +32,11 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
 
         var pedido = pedidoOutboundPort.buscarPeloId(produto.getPedido().getId());
         if(pedido != null && !outboundPort.produtoExiste(produto.getId())) {
-            if(produto.getValor() + pedido.getValorPago() > pedido.getValor())
-                throw new NegocioException("Valor pago não pode ser superior ao valor do pedido!");
-
             pedido.incrementarValor(produto.getValor());
+
+            // if(produto.getValor() + pedido.getValorPago() > pedido.getValor())
+            // throw new NegocioException("Valor pago não pode ser superior ao valor do pedido!");
+            
 
             pedidoOutboundPort.salvar(pedido);
         }

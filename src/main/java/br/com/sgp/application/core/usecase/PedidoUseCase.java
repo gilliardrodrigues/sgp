@@ -80,13 +80,14 @@ public class PedidoUseCase implements PedidoUseCaseInboundPort {
     }
 
     @Override
-    public Pedido darBaixa(Long id, int valorPago) throws NegocioException{
+    public Pedido darBaixa(Long id, int valorPago) throws NegocioException {
         if (!outboundPort.pedidoExiste(id)) throw new NegocioException("Pedido não encontrado");
         
         var pedido = outboundPort.buscarPeloId(id);
 
-        if (valorPago > 0)
-            pedido.setValorPago(valorPago);
+        if (valorPago < 0 || valorPago > pedido.getValor()) throw new NegocioException("Valor pago inválido");
+        
+        pedido.setValorPago(valorPago);
 
         return outboundPort.salvar(pedido);
     }

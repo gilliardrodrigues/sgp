@@ -19,6 +19,6 @@ public interface PedidoUseCaseInboundPort {
     void adicionarProdutoDoInventario(Pedido pedido, Long idProduto);
     Boolean pedidoExiste(Long id);
     void encerrarTemporadaDePedidos(Temporada temporada);
-    Pedido darBaixa(Long id, int valorPago);
+    Pedido darBaixa(Long id, int valorPago) throws NegocioException;
     // void adicionarProduto(Long idPedido, Produto produto);
 }

@@ -5,6 +5,7 @@ import br.com.sgp.adapters.inbound.request.PedidoRequest;
 import br.com.sgp.adapters.inbound.request.ProdutoRequest;
 import br.com.sgp.adapters.inbound.response.PedidoResponse;
 import br.com.sgp.application.core.domain.*;
+import br.com.sgp.application.core.exception.NegocioException;
 import br.com.sgp.application.ports.in.PedidoUseCaseInboundPort;
 import br.com.sgp.application.ports.in.ProdutoUseCaseInboundPort;
 import br.com.sgp.application.ports.in.TemporadaUseCaseInboundPort;
@@ -67,9 +68,9 @@ public class PedidoController {
 
     @PutMapping("/admin/{id}")
     public ResponseEntity<PedidoResponse> alterarPedido(@Valid @PathVariable Long id,
-            @RequestBody PedidoRequest pedidoRequest) {
+            @RequestBody PedidoRequest pedidoRequest) throws NegocioException {
+        Pedido pedido = inboundPort.darBaixa(id, pedidoRequest.getValorPago());
         try {
-            Pedido pedido = inboundPort.darBaixa(id, pedidoRequest.getValorPago());
             return ResponseEntity.ok(mapper.mapTo(inboundPort.salvar(pedido), PedidoResponse.class));
         } catch (Throwable e) {
             return ResponseEntity.notFound().build();

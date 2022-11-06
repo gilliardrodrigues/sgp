@@ -34,23 +34,32 @@ public class Pedido {
     protected OffsetDateTime previsaoDeEntrega;
 
     public void incrementarValor(int incremento) {
-        this.valorPago = valor;
+        this.valor = incremento + this.valor;
 
-        if(this.valorPago == 0) return;
+        if (this.valor == 0)
+            return;
 
-        if(this.valorPago + incremento >= this.valor)  {
-            this.valorPago = this.valor;
+    }
+
+    public void setValorPago(int valorPago) {
+        this.valorPago = valorPago;
+
+        if (this.valorPago == valor)
             this.statusPagamento = StatusPagamento.INTEGRALMENTE_PAGO;
-        } else
+        else if (this.valorPago > 0)
             this.statusPagamento = StatusPagamento.PARCIALMENTE_PAGO;
+        else
+            this.statusPagamento = StatusPagamento.NAO_PAGO;
 
-        this.situacao = StatusPedido.CONFIRMADO;
+        if(this.valorPago > 0) this.situacao = StatusPedido.CONFIRMADO;
+        else this.situacao = StatusPedido.AGUARDANDO_PAGAMENTO;
     }
 
     public void addPrevisaoDeEntrega(OffsetDateTime previsaoDeEntrega) {
-        if(this.previsaoDeEntrega == null) 
+        if (this.previsaoDeEntrega == null)
             this.previsaoDeEntrega = previsaoDeEntrega;
         else
-            this.previsaoDeEntrega = previsaoDeEntrega.isAfter(this.previsaoDeEntrega) ? previsaoDeEntrega : this.previsaoDeEntrega;
+            this.previsaoDeEntrega = previsaoDeEntrega.isAfter(this.previsaoDeEntrega) ? previsaoDeEntrega
+                    : this.previsaoDeEntrega;
     }
 }
