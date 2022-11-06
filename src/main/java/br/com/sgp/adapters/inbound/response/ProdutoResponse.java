@@ -1,10 +1,8 @@
 package br.com.sgp.adapters.inbound.response;
 
-import br.com.sgp.application.core.domain.TipoProduto;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
 @Getter
@@ -16,7 +14,7 @@ public class ProdutoResponse {
     private Boolean entregue;
     private Boolean prontaEntrega;
     private Boolean chegou;
-    private TipoProduto tipo;
+    private String tipo;
     private Long pedidoId;
     private OffsetDateTime previsaoDeEntrega;
 }

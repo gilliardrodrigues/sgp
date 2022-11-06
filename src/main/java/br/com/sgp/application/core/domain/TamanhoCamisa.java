@@ -17,10 +17,18 @@ public enum TamanhoCamisa {
     private final String descricao;
 
     TamanhoCamisa(String descricao) {
+
         this.descricao = descricao;
     }
 
     public String getDescricao() {
+
+        return descricao;
+    }
+
+    @Override
+    public String toString() {
+
         return descricao;
     }
 }

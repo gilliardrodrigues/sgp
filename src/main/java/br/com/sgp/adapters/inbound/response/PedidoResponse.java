@@ -17,8 +17,8 @@ public class PedidoResponse {
     private Long id;
     private OffsetDateTime data;
     private int valor;
-    private StatusPedido situacao;
-    private StatusPagamento statusPagamento;
+    private String situacao;
+    private String statusPagamento;
     private BigDecimal valorPago;
     private Long temporadaId;
     private Aluno aluno;

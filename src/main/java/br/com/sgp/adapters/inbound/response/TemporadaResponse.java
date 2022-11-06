@@ -17,6 +17,6 @@ public class TemporadaResponse {
     private String descricao;
     private OffsetDateTime dataInicio;
     private OffsetDateTime dataFim;
-    private List<TipoProduto> produtos;
+    private List<String> produtos;
     private HashMap<TipoProduto, BigDecimal> valores;
 }

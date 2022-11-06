@@ -2,21 +2,29 @@ package br.com.sgp.application.core.domain;
 
 public enum CorCamisa {
 
-    PRETO("PRETO"),
-    BRANCO("BRANCO"),
-    AZUL("AZUL"),
-    VINHO("VINHO"),
-    CINZA("CINZA"),
-    ROSA("ROSA"),
-    PETROLEO("PETRÓLEO"),
-    VERDE("VERDE");
+    PRETO("Preto"),
+    BRANCO("Branco"),
+    AZUL("Azul"),
+    VINHO("Vinho"),
+    CINZA("Cinza"),
+    ROSA("Rosa"),
+    PETROLEO("Petróleo"),
+    VERDE("Verde");
     private final String descricao;
 
     CorCamisa(String descricao) {
+
         this.descricao = descricao;
     }
 
     public String getDescricao() {
+
+        return descricao;
+    }
+
+    @Override
+    public String toString() {
+
         return descricao;
     }
 }
