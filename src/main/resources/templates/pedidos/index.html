@@ -5,7 +5,9 @@
     <link rel="stylesheet" type="text/css" href="../../static/css/verPedidos.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css">
     <title>Área administrativa | SGP</title>
-    <script type="text/javascript" src="assets/js/main.js"></script>
+    <!--<script type="text/javascript" src="../../static/js/main.js"></script>-->
+
+    
   </head>
 
   <body>
@@ -30,7 +32,7 @@
     <div class="filtros">
       <p class="p-filtros">Filtros</p>
 
-      <div class="card-filtro color-tapped" onclick="expandFilters()">
+      <div class="card-filtro color-tapped">
         Produto
       </div>
       <div class="card-filtro">
@@ -209,6 +211,18 @@
       </div> <!-- tabela -->
 
     </div>
+
+    <script>
+      const targetDiv = document.getElementById("filters-expanded");
+      const btn = document.getElementsByClassName("card-filtro");
+      btn.onclick = function () {
+        if (targetDiv.style.display !== "none") {
+          targetDiv.style.display = "none";
+        } else {
+          targetDiv.style.display = "block";
+        }
+      };
+    </script>
 
   </body>
 

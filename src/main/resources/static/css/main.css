@@ -100,7 +100,6 @@ main {
   padding: 20px 0px 5px 20px;
   background-color: #f2f2f2;
   border-radius: 20px;
-  display: none;
 }
 
 .p-filtros {
@@ -235,6 +234,10 @@ main {
   width: 5%;
 }
 
+.w6 {
+  width: 6%;
+}
+
 .w7 {
   width: 7%;
 }
@@ -298,6 +301,8 @@ main {
   padding: 0 3px;
   height: 30px;
   border-radius: 10px;
+  display: inline-block;
+  position: absolute;
   margin: auto;
   top: 0;
   left: 0;
@@ -306,12 +311,19 @@ main {
   width: 100px;
 }
 
+
 .parcialmente-entregue {
   background-color: #FCDC6B;
   padding: 0 3px;
   height: 30px;
   border-radius: 10px;
+  display: inline-block;
+  position: absolute;
   margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .entregue {
@@ -319,7 +331,13 @@ main {
   padding: 0 3px;
   height: 30px;
   border-radius: 10px;
+  display: inline-block;
+  position: absolute;
   margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .aguardando-pagamento > p,
@@ -328,7 +346,8 @@ main {
 .parcialmente-entregue > p,
 .pago > p,
 .parcialmente-pago > p,
-.nao-pago > p {
+.nao-pago > p,
+.nao > p {
   color: white;
   text-align: center;
   vertical-align: middle;
@@ -348,7 +367,7 @@ main {
   left: 0;
   right: 0;
   bottom: 0;
-  width: 100px;
+  width: 50px;
 }
 
 .parcialmente-pago {
@@ -366,7 +385,8 @@ main {
   width: 150px;
 }
 
-.nao-pago {
+.nao-pago,
+.nao {
   background-color: #F37373;
   padding: 0 3px;
   height: 30px;
@@ -381,6 +401,9 @@ main {
   bottom: 0;
   width: 100px;
 }
+.nao {
+  width: 50px;
+}
 
 .column button {
   position: absolute;
@@ -392,12 +415,12 @@ main {
   cursor: pointer;
 }
 
-.edit-button p {
+.edit-button button {
   text-decoration: underline;
   cursor: pointer;
 }
 
-.delete-button button img {
+.delete-button button {
   cursor: pointer;
 } 
 
