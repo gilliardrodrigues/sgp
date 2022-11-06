@@ -3,19 +3,17 @@ package br.com.sgp.application.core.usecase;
 import br.com.sgp.application.core.domain.*;
 import br.com.sgp.application.core.exception.NegocioException;
 import br.com.sgp.application.ports.in.ProdutoUseCaseInboundPort;
+import br.com.sgp.application.ports.out.PedidoUseCaseOutboundPort;
 import br.com.sgp.application.ports.out.ProdutoUseCaseOutboundPort;
+import lombok.AllArgsConstructor;
 
 import java.util.List;
 
+@AllArgsConstructor
 public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
 
     private final ProdutoUseCaseOutboundPort outboundPort;
-
-
-    public ProdutoUseCase(ProdutoUseCaseOutboundPort outboundPort) {
-
-        this.outboundPort = outboundPort;
-    }
+    private final PedidoUseCaseOutboundPort pedidoOutboundPort;
 
     public Boolean produtoExiste(Long id) {
 
@@ -31,6 +29,16 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
 
     @Override
     public Produto salvar(Produto produto) throws NegocioException {
+
+        var pedido = pedidoOutboundPort.buscarPeloId(produto.getPedido().getId());
+        if(pedido != null && !outboundPort.produtoExiste(produto.getId())) {
+            if(produto.getValor() + pedido.getValorPago() > pedido.getValor())
+                throw new NegocioException("Valor pago não pode ser superior ao valor do pedido!");
+
+            pedido.incrementarValor(produto.getValor());
+
+            pedidoOutboundPort.salvar(pedido);
+        }
 
         if (produto.getTipo().equals(TipoProduto.CAMISA)) {
             Camisa camisa = (Camisa) produto;

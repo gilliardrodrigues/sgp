@@ -7,6 +7,7 @@ import lombok.ToString;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 @Getter
 @Setter
@@ -14,7 +15,7 @@ import java.time.temporal.ChronoUnit;
 public class Produto {
 
     protected Long id;
-    protected BigDecimal valor;
+    protected int valor;
     protected Boolean entregue;
     protected Boolean prontaEntrega;
     protected Boolean chegou;
@@ -22,6 +23,18 @@ public class Produto {
     protected OffsetDateTime previsaoDeEntrega;
     // protected Fornecedor fornecedor;
     protected Pedido pedido;
+
+    public OffsetDateTime calcularPrevisaoDeEntrega (List<Fornecedor> fornecedores) {
+        for(Fornecedor fornecedor : fornecedores) {
+            for(TipoProduto tipoProduto : fornecedor.getProdutosOferecidos()) {
+                if(tipoProduto.equals(this.tipo)) {
+                    return OffsetDateTime.now().plus(fornecedor.getTempoEntregaEmDias(), ChronoUnit.DAYS);
+                }
+            }
+        }
+
+        return null;
+    }
 
     // public Integer calcularDiasParaEntrega() {
     //     if(this.dataDaEncomenda == null) return 0;

@@ -107,7 +107,7 @@ public class ProdutoAdapter implements ProdutoUseCaseOutboundPort {
      @Override
      public List<Produto> buscarPeloIdPedido(Long idPedido) throws NegocioException {
 
-        var produtos = repository.buscarPeloIdPedido(idPedido);
+        var produtos = repository.findByPedidoId(idPedido);
          return mapper.mapToList(produtos, new TypeToken<List<Produto>>() {}.getType());
      }
     @Override
@@ -179,4 +179,5 @@ public class ProdutoAdapter implements ProdutoUseCaseOutboundPort {
         }
 
     }
+    
 }

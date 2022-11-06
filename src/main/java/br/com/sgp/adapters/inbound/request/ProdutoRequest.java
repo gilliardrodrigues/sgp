@@ -10,9 +10,9 @@ import java.math.BigDecimal;
 @Setter
 public class ProdutoRequest {
 
-    protected BigDecimal valor;
+    protected int valor;
     protected Boolean entregue;
     protected Boolean chegou;
     protected TipoProduto tipo;
-    //protected Long pedidoId;
+    protected Long pedidoId;
 }
