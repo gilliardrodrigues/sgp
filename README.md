@@ -90,18 +90,18 @@ Os clientes conseguem:
 
 - ⬜️ Implementar interface web. [Maíla]
 
-- ⬜️ Criar e implementar rota para pesquisar pedidos existentes. [Samuel, Gilliard]
+- ✅ Criar e implementar rota para pesquisar pedidos existentes. [Samuel, Gilliard]
 
-- ⬜️ Criar e implementar rota para editar pedidos. [Samuel, Gilliard]
+- ✅ Criar e implementar rota para editar pedidos. [Samuel, Gilliard]
 
 - ⬜️ Implementar regras de negócio relativas às edições de pedidos e seus reflexos. [Samuel, Gilliard]
 
-- ⬜️ Criar e implementar rota para remover pedidos. [Samuel, Gilliard]
+- ✅ Criar e implementar rota para remover pedidos. [Samuel, Gilliard]
 
 
 **História:** Como administrador, eu gostaria de poder filtrar os itens dos pedidos por suas características, como tamanho, cor, curso, data, status de pagamento e situação de entrega, para fins de conferência.
 
-- ⬜️ Implementar filtros de busca na tabela de pedidos no back-end. [Gilliard, Samuel]
+- ✅ Implementar filtros de busca na tabela de pedidos no back-end. [Gilliard, Samuel]
 
 - ⬜️ Implementar esses filtros no front-end. [Fernando]
 
@@ -143,7 +143,7 @@ Os clientes conseguem:
 
 - ⬜️ Implementar interface web. [Fernando]
 
-- ⬜️ Criar e implementar rota para criar pedido [Samuel]
+- ✅ Criar e implementar rota para criar pedido [Samuel]
 
 
 **História:** Como usuário, eu gostaria de acompanhar a situação do meu pedido, tendo transparência sobre a situação de pagamento e previsão de retirada.
@@ -152,7 +152,7 @@ Os clientes conseguem:
 
 - ⬜️ Implementar interface web. [Fernando]
 
-- ⬜️ Criar e implementar rota para buscar pedido [Samuel]
+- ✅ Criar e implementar rota para buscar pedido [Samuel]
 
 - ⬜️ Implementar lógica de autenticação do código do pedido. [Samuel]
 
@@ -172,7 +172,7 @@ Os clientes conseguem:
 
 - ⬜️ Implementar interface web. [Maíla]
 
-- ⬜️ Criar e testar rota para definir o prazo de entrega dos pedidos de uma temporada. [Samuel]
+- ✅ Criar e testar rota para definir o prazo de entrega dos pedidos de uma temporada. [Samuel]
 
 
 **Tarefas técnicas**
