@@ -1,31 +1,21 @@
 package br.com.sgp.application.core.usecase;
 
-import br.com.sgp.adapters.inbound.mapper.GenericMapper;
-import br.com.sgp.application.core.domain.Caneca;
-import br.com.sgp.application.core.domain.Fornecedor;
-import br.com.sgp.application.core.domain.Pedido;
-import br.com.sgp.application.core.domain.Produto;
-import br.com.sgp.application.core.domain.StatusPedido;
-import br.com.sgp.application.core.domain.Temporada;
+import br.com.sgp.application.core.domain.*;
 import br.com.sgp.application.core.exception.NegocioException;
 import br.com.sgp.application.ports.in.PedidoUseCaseInboundPort;
-import br.com.sgp.application.ports.in.ProdutoUseCaseInboundPort;
-import br.com.sgp.application.ports.out.FornecedorUseCaseOutboundPort;
 import br.com.sgp.application.ports.out.PedidoUseCaseOutboundPort;
+import br.com.sgp.application.ports.out.ProdutoUseCaseOutboundPort;
 import br.com.sgp.application.ports.out.TemporadaUseCaseOutboundPort;
-import br.com.sgp.adapters.inbound.mapper.GenericMapper;
 import lombok.AllArgsConstructor;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @AllArgsConstructor
 public class PedidoUseCase implements PedidoUseCaseInboundPort {
 
     private final PedidoUseCaseOutboundPort outboundPort;
-    private final ProdutoUseCaseInboundPort produtoInboundPort;
+    private final ProdutoUseCaseOutboundPort produtoOutboundPort;
     private final TemporadaUseCaseOutboundPort temporadaOutboundPort;
-    private final FornecedorUseCaseOutboundPort fornecedorOutboundPort;
     
     @Override
     public Pedido salvar(Pedido pedido) throws NegocioException {
@@ -67,10 +57,33 @@ public class PedidoUseCase implements PedidoUseCaseInboundPort {
         } else if(data != null) {
             return outboundPort.buscarPelaData(data);
         } else if(tipoDeProduto != null && !tipoDeProduto.isEmpty()) {
-            return outboundPort.buscarPeloTipoDeProduto(tipoDeProduto);
+            var pedidos = buscarPeloTipoDeProduto(TipoProduto.valueOf(tipoDeProduto));
+            return new ArrayList<Pedido>(pedidos);
         } else {
             return outboundPort.buscarTodos();
         }
+    }
+    @Override
+    public Set<Pedido> buscarPeloTipoDeProduto(TipoProduto tipoProduto) {
+
+        var pedidos = new HashSet<Pedido>();
+        List<Produto> produtosDoTipo;
+
+        if(tipoProduto.equals(TipoProduto.CAMISA)) {
+            produtosDoTipo = new ArrayList<>(produtoOutboundPort.buscarTodasCamisas());
+        }
+        else if(tipoProduto.equals(TipoProduto.CANECA)) {
+            produtosDoTipo = new ArrayList<>(produtoOutboundPort.buscarTodasCanecas());
+        }
+        else {
+            produtosDoTipo = new ArrayList<>(produtoOutboundPort.buscarTodosTirantes());
+        }
+        for(Produto produto : produtosDoTipo) {
+            if(produto.getPedido() != null) {
+                pedidos.add(produto.getPedido());
+            }
+        }
+        return pedidos;
     }
 
     @Override
@@ -99,6 +112,7 @@ public class PedidoUseCase implements PedidoUseCaseInboundPort {
     }
 
     public Boolean pedidoExiste(Long id) {
+
         return outboundPort.pedidoExiste(id);
     }
 

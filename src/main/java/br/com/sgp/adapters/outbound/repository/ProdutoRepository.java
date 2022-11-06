@@ -27,9 +27,6 @@ public interface ProdutoRepository<E extends ProdutoEntity> extends JpaRepositor
     @Query("from TiranteEntity")
     List<TiranteEntity> findAllTirantes();
 
-    @Query("SELECT pr FROM ProdutoEntity pr WHERE pr.pedido.id = :idPedido")
-    List<ProdutoEntity> buscarPeloIdPedido(Long idPedido);
-
     List<ProdutoEntity> findByPedidoId(Long idPedido);
 
     @Query("SELECT pr FROM ProdutoEntity pr WHERE pr.prontaEntrega = True")

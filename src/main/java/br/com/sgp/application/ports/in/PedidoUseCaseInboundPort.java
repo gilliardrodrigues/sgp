@@ -2,11 +2,12 @@ package br.com.sgp.application.ports.in;
 
 import br.com.sgp.application.core.domain.Pedido;
 import br.com.sgp.application.core.domain.Temporada;
+import br.com.sgp.application.core.domain.TipoProduto;
 import br.com.sgp.application.core.exception.NegocioException;
-import br.com.sgp.application.core.domain.Produto;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 public interface PedidoUseCaseInboundPort {
 
@@ -16,6 +17,7 @@ public interface PedidoUseCaseInboundPort {
     Pedido buscarPeloId(Long id);
     List<Pedido> buscarPedidos(String situacao, String statusPagamento, String nome, Date data,  String tipoDeProduto) ;
     List<Pedido> buscarPedidosConfirmadosPorTemporada(Temporada temporada);
+    Set<Pedido> buscarPeloTipoDeProduto(TipoProduto tipoProduto);
     void adicionarProdutoDoInventario(Pedido pedido, Long idProduto);
     Boolean pedidoExiste(Long id);
     void encerrarTemporadaDePedidos(Temporada temporada);

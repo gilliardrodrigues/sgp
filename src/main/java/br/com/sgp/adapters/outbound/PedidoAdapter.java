@@ -4,7 +4,10 @@ import br.com.sgp.adapters.inbound.entity.PedidoEntity;
 import br.com.sgp.adapters.inbound.entity.TemporadaEntity;
 import br.com.sgp.adapters.inbound.mapper.GenericMapper;
 import br.com.sgp.adapters.outbound.repository.PedidoRepository;
-import br.com.sgp.application.core.domain.*;
+import br.com.sgp.application.core.domain.Pedido;
+import br.com.sgp.application.core.domain.StatusPagamento;
+import br.com.sgp.application.core.domain.StatusPedido;
+import br.com.sgp.application.core.domain.Temporada;
 import br.com.sgp.application.core.exception.EntidadeNaoEncontradaException;
 import br.com.sgp.application.core.exception.NegocioException;
 import br.com.sgp.application.ports.out.PedidoUseCaseOutboundPort;
@@ -13,11 +16,8 @@ import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
-
 import java.time.OffsetDateTime;
-import java.time.ZoneId;
 import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -88,12 +88,6 @@ public class PedidoAdapter implements PedidoUseCaseOutboundPort {
 
     public List<Pedido> buscarPeloNomeAluno(String nome) {
         var pedidos = repository.findByAlunoNome(nome);
-        return mapper.mapToList(pedidos, new TypeToken<List<Pedido>>() {}.getType());
-    }
-
-    public List<Pedido> buscarPeloTipoDeProduto(String tipoDeProduto) {
-        // TODO gill
-        var pedidos = repository.findByAlunoNome(tipoDeProduto);
         return mapper.mapToList(pedidos, new TypeToken<List<Pedido>>() {}.getType());
     }
 

@@ -4,10 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.math.BigDecimal;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -20,7 +18,6 @@ public class Pedido {
         situacao = StatusPedido.AGUARDANDO_PAGAMENTO;
         statusPagamento = StatusPagamento.NAO_PAGO;
         valorPago = 0;
-        // produtos = new ArrayList<Produto>();
     }
 
     private Long id;
@@ -61,5 +58,18 @@ public class Pedido {
         else
             this.previsaoDeEntrega = previsaoDeEntrega.isAfter(this.previsaoDeEntrega) ? previsaoDeEntrega
                     : this.previsaoDeEntrega;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pedido pedido = (Pedido) o;
+        return id.equals(pedido.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

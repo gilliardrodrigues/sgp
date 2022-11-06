@@ -3,7 +3,6 @@ package br.com.sgp.config;
 import br.com.sgp.adapters.outbound.AutenticarAdministradorAdapter;
 import br.com.sgp.application.core.usecase.*;
 import br.com.sgp.application.ports.in.PedidoUseCaseInboundPort;
-import br.com.sgp.application.ports.in.ProdutoUseCaseInboundPort;
 import br.com.sgp.application.ports.out.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,8 +36,8 @@ public class Config {
         return new TemporadaUseCase(outboundPort, pedidoInboundPort);
     }
     @Bean
-    public PedidoUseCase pedidoUseCase(PedidoUseCaseOutboundPort outboundPort, ProdutoUseCaseInboundPort produtoInboundPort, TemporadaUseCaseOutboundPort temporadaOutboundPort, FornecedorUseCaseOutboundPort fornecedorOutboundPort) {
+    public PedidoUseCase pedidoUseCase(PedidoUseCaseOutboundPort outboundPort, ProdutoUseCaseOutboundPort produtoOutboundPort, TemporadaUseCaseOutboundPort temporadaOutboundPort) {
 
-        return new PedidoUseCase(outboundPort, produtoInboundPort, temporadaOutboundPort, fornecedorOutboundPort);
+        return new PedidoUseCase(outboundPort, produtoOutboundPort, temporadaOutboundPort);
     }
 }
