@@ -2,9 +2,13 @@ window.onload = async () => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const id = urlParams.get('id');
-    console.log('aa')
+
+	const title = document.querySelector(".main-title");
+	const fornecedor = await getFornecedor(id);
+	title.innerHTML += fornecedor.razaoSocial;
+	console.log(fornecedor)
+
 	const observacoes = await getObservacoes(id);
-    console.log(observacoes);
 	const content = document.getElementsByClassName("cards")[0];
 	observacoes.forEach(observacao => {
 		const observacaoHTML = montarHTMLObservacao(observacao);
@@ -16,6 +20,10 @@ window.onload = async () => {
 
 async function getObservacoes(id) {
 	return await fetch(`http://localhost:8080/fornecedores/${id}/observacoes`).then(response => response.json());;
+}
+
+async function getFornecedor(id) {
+	return await fetch(`http://localhost:8080/fornecedores/${id}`).then(response => response.json());
 }
 
 function montarHTMLObservacao(observacao) {
