@@ -2,6 +2,8 @@ package br.com.sgp.config;
 
 import br.com.sgp.adapters.outbound.AutenticarAdministradorAdapter;
 import br.com.sgp.application.core.usecase.*;
+import br.com.sgp.application.ports.in.PedidoUseCaseInboundPort;
+import br.com.sgp.application.ports.in.ProdutoUseCaseInboundPort;
 import br.com.sgp.application.ports.out.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,18 +27,18 @@ public class Config {
         return new ObservacaoUseCase(outboundPort, fornecedorUseCaseOutboundPort);
     }
     @Bean
-    public ProdutoUseCase produtoUseCase(ProdutoUseCaseOutboundPort outboundPort) {
+    public ProdutoUseCase produtoUseCase(ProdutoUseCaseOutboundPort outboundPort, PedidoUseCaseOutboundPort pedidoOutboundPort) {
 
-        return new ProdutoUseCase(outboundPort);
+        return new ProdutoUseCase(outboundPort, pedidoOutboundPort);
     }
     @Bean
-    public TemporadaUseCase temporadaUseCase(TemporadaUseCaseOutboundPort outboundPort, PedidoUseCaseOutboundPort pedidoUseCaseOutboundPort) {
+    public TemporadaUseCase temporadaUseCase(TemporadaUseCaseOutboundPort outboundPort, PedidoUseCaseInboundPort pedidoInboundPort) {
 
-        return new TemporadaUseCase(outboundPort, pedidoUseCaseOutboundPort);
+        return new TemporadaUseCase(outboundPort, pedidoInboundPort);
     }
     @Bean
-    public PedidoUseCase pedidoUseCase(PedidoUseCaseOutboundPort outboundPort, TemporadaUseCaseOutboundPort temporadaOutboundPort, ProdutoUseCase produtoUseCase) {
+    public PedidoUseCase pedidoUseCase(PedidoUseCaseOutboundPort outboundPort, ProdutoUseCaseInboundPort produtoInboundPort, TemporadaUseCaseOutboundPort temporadaOutboundPort, FornecedorUseCaseOutboundPort fornecedorOutboundPort) {
 
-        return new PedidoUseCase(outboundPort, produtoUseCase, temporadaOutboundPort);
+        return new PedidoUseCase(outboundPort, produtoInboundPort, temporadaOutboundPort, fornecedorOutboundPort);
     }
 }
