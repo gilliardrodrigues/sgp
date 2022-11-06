@@ -59,10 +59,10 @@ public class TemporadaController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/{id}")
-    public Temporada encerrarTemporada(@PathVariable Long id) {
-
-        return inboundPort.encerrarTemporada(id);
+    @PutMapping("/encerrar/{id}")
+    public ResponseEntity<TemporadaResponse> encerrarTemporada(@Valid @PathVariable Long id) {
+        return ResponseEntity.ok(mapper.mapTo(inboundPort.encerrarTemporada(id), TemporadaResponse.class));
+         
     }
 
 }

@@ -3,8 +3,10 @@ package br.com.sgp.application.core.usecase;
 import br.com.sgp.application.core.domain.Temporada;
 import br.com.sgp.application.core.domain.TipoProduto;
 import br.com.sgp.application.core.exception.NegocioException;
+import br.com.sgp.application.ports.in.PedidoUseCaseInboundPort;
 import br.com.sgp.application.ports.in.TemporadaUseCaseInboundPort;
 import br.com.sgp.application.ports.out.TemporadaUseCaseOutboundPort;
+import lombok.AllArgsConstructor;
 import br.com.sgp.application.ports.out.PedidoUseCaseOutboundPort;
 import br.com.sgp.application.core.domain.StatusPedido;
 import br.com.sgp.application.core.domain.Pedido;
@@ -12,16 +14,12 @@ import br.com.sgp.application.core.domain.Pedido;
 import java.time.OffsetDateTime;
 import java.util.List;
 
+@AllArgsConstructor
 public class TemporadaUseCase implements TemporadaUseCaseInboundPort {
 
     private final TemporadaUseCaseOutboundPort outboundPort;
-    private final PedidoUseCaseOutboundPort pedidoOutboundPort;
+    private final PedidoUseCaseInboundPort pedidoInboundPort;
 
-    public TemporadaUseCase(TemporadaUseCaseOutboundPort outboundPort, PedidoUseCaseOutboundPort pedidoOutboundPort) {
-
-        this.outboundPort = outboundPort;
-        this.pedidoOutboundPort = pedidoOutboundPort;
-    }
 
     @Override
     public Temporada salvar(Temporada temporada) throws NegocioException {
@@ -41,23 +39,8 @@ public class TemporadaUseCase implements TemporadaUseCaseInboundPort {
 
         var temporada = this.buscarPeloId(id);
         temporada.setDataFim(OffsetDateTime.now());
-
-
-        // pedidoOutboundPort.excluirNaoConfirmados();
-
-        List<Pedido> pedidosNaoConfirmados = pedidoOutboundPort.buscarPelaSituacao(StatusPedido.AGUARDANDO_PAGAMENTO.name());
-        pedidosNaoConfirmados.forEach(pedido -> {
-            pedidoOutboundPort.excluir(pedido.getId());
-        });
-
-        // TODO setar data de entrega dos pedidos e produtos
-        // pedidoOutboundPort.setarPrevisaoDeEntrega();
-
-        // List<Pedido> pedidosNaoConfirmados = pedidoOutboundPort.buscarPelaSituacao(StatusPedido.AGUARDANDO_PAGAMENTO.name());
-        // pedidosNaoConfirmados.forEach(pedido -> {
-        //     pedidoOutboundPort.excluir(pedido.getId());
-        // });
-
+        pedidoInboundPort.encerrarTemporadaDePedidos(temporada);
+        
         // A lógica da contabilização de pedidos (apenas com pagamento confirmado) deve ser
         // tratada no caso de uso de pedido (só associar à temporada se tiver confirmado o pagamento)
         return outboundPort.salvar(temporada);
