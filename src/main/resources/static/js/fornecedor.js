@@ -1,14 +1,9 @@
-function loadFornecedores() {
-	console.log(getFornecedores());
-}
-
 window.onload = async () => {
 	const fornecedores = await getFornecedores();
 	const content = document.getElementsByClassName("content")[0];
 	fornecedores.forEach(fornecedor => {
 		const fornecedorHTML = montarHTMLFornecedor(fornecedor);
 		content.append(fornecedorHTML);
-		console.log(fornecedorHTML);
 	}, []);
 
 	const deleteForm = document.querySelector(".delete-button");
