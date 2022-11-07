@@ -5,8 +5,15 @@ import br.com.sgp.application.core.exception.NegocioException;
 import br.com.sgp.application.ports.in.ProdutoUseCaseInboundPort;
 import br.com.sgp.application.ports.out.PedidoUseCaseOutboundPort;
 import br.com.sgp.application.ports.out.ProdutoUseCaseOutboundPort;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.AllArgsConstructor;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.List;
 
 @AllArgsConstructor
@@ -30,6 +37,9 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
     @Override
     public Produto salvar(Produto produto) throws NegocioException {
 
+        if(produto.getProntaEntrega() == null) {
+            produto.setProntaEntrega(false);
+        }
         if(produto.getPedido() != null) {
             var pedido = pedidoOutboundPort.buscarPeloId(produto.getPedido().getId());
             if(pedido != null && !outboundPort.produtoExiste(produto.getId())) {
@@ -53,9 +63,37 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
     }
 
     @Override
-    public List<Produto> buscarTodos() {
+    public String buscarTodos() throws JsonProcessingException {
 
-        return outboundPort.buscarTodos();
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+
+        String camisas = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(buscarTodasCamisas());
+        String canecas = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(buscarTodasCanecas());
+        String tirantes = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(buscarTodosTirantes());
+
+        String produtos = camisas.substring(0, camisas.length() - 1) + "," +
+                          canecas.substring(1, canecas.length() - 1) + "," +
+                          tirantes.substring(1);
+
+        JSONArray jsonArray = new JSONArray(produtos);
+        for(int i = 0; i < jsonArray.length(); i++) {
+            JSONObject produto = jsonArray.getJSONObject(i);
+            var produtoMap = produto.toMap();
+            var pedidoMap = (HashMap<String, Object>) produtoMap.get("pedido");
+            if (pedidoMap != null) {
+                var id = pedidoMap.get("id");
+                produtoMap.remove("pedido");
+                produtoMap.put("pedidoId", id);
+                jsonArray.put(i, produtoMap);
+            }
+            else {
+                jsonArray.put(i, produtoMap);
+            }
+        }
+        produtos = jsonArray.toString();
+        return produtos;
     }
 
     @Override
@@ -117,5 +155,17 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
 
         return outboundPort.buscarCamisas(cor, tamanho, curso);
     }
-
+    @Override
+    public Produto adicionarProdutoDoInventarioAoPedido(Long idProduto, Long idPedido) {
+        //todo
+        Produto produto = null;
+        try {
+            produto = outboundPort.buscarPeloId(idProduto);
+            var pedido = pedidoOutboundPort.buscarPeloId(idPedido);
+            produto.setPedido(pedido);
+            return salvar(produto);
+        } catch (Throwable e) {
+            throw new NegocioException(e.getMessage());
+        }
+    }
 }

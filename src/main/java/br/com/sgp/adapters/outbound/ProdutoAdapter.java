@@ -1,9 +1,6 @@
 package br.com.sgp.adapters.outbound;
 
-import br.com.sgp.adapters.inbound.entity.ProdutoEntity;
-import br.com.sgp.adapters.inbound.entity.CamisaEntity;
-import br.com.sgp.adapters.inbound.entity.CanecaEntity;
-import br.com.sgp.adapters.inbound.entity.TiranteEntity;
+import br.com.sgp.adapters.inbound.entity.*;
 import br.com.sgp.adapters.inbound.mapper.GenericMapper;
 import br.com.sgp.adapters.outbound.repository.ProdutoRepository;
 import br.com.sgp.application.core.domain.*;
@@ -59,7 +56,7 @@ public class ProdutoAdapter implements ProdutoUseCaseOutboundPort {
     @Override
     public List<Produto> buscarTodos() {
 
-        var produtos = repository.findAll();
+        List<ProdutoEntity> produtos = repository.findAll();
         return mapper.mapToList(produtos, new TypeToken<List<Produto>>() {
         }.getType());
     }

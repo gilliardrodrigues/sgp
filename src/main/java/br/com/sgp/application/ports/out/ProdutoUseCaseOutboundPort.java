@@ -1,9 +1,6 @@
 package br.com.sgp.application.ports.out;
 
-import br.com.sgp.application.core.domain.Camisa;
-import br.com.sgp.application.core.domain.Caneca;
-import br.com.sgp.application.core.domain.Produto;
-import br.com.sgp.application.core.domain.Tirante;
+import br.com.sgp.application.core.domain.*;
 import br.com.sgp.application.core.exception.NegocioException;
 
 import java.util.List;
