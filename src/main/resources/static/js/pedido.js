@@ -14,12 +14,12 @@ window.onload = async () => {
 };
 
 async function getPedidos() {
-	const pedidos = await fetch("http://localhost:8080/pedidos").then(response => response.json());
+	const pedidos = await fetch("http://localhost:8080/pedidos/admin").then(response => response.json());
 
 	return pedidos;
 }
 
-function montarHTMLPedidos(pedido) {
+function montarHTMLPedido(pedido) {
 	let tabela = document.createElement("div");
 	tabela.className = "tabela";
 
