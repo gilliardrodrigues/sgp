@@ -3,20 +3,20 @@ package br.com.sgp.adapters.inbound;
 import br.com.sgp.adapters.inbound.mapper.GenericMapper;
 import br.com.sgp.adapters.inbound.request.CamisaRequest;
 import br.com.sgp.adapters.inbound.request.CanecaRequest;
+import br.com.sgp.adapters.inbound.request.IdPedidoRequest;
 import br.com.sgp.adapters.inbound.request.TiranteRequest;
-import br.com.sgp.adapters.inbound.response.CamisaResponse;
-import br.com.sgp.adapters.inbound.response.CanecaResponse;
-import br.com.sgp.adapters.inbound.response.ProdutoResponse;
-import br.com.sgp.adapters.inbound.response.TiranteResponse;
+import br.com.sgp.adapters.inbound.response.*;
 import br.com.sgp.application.core.domain.Camisa;
 import br.com.sgp.application.core.domain.Caneca;
 import br.com.sgp.application.core.domain.Tirante;
 import br.com.sgp.application.core.exception.NegocioException;
 import br.com.sgp.application.ports.in.PedidoUseCaseInboundPort;
 import br.com.sgp.application.ports.in.ProdutoUseCaseInboundPort;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.AllArgsConstructor;
 import org.modelmapper.TypeToken;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,15 +33,17 @@ public class ProdutoController {
     private final PedidoUseCaseInboundPort pedidoInboundPort;
     private final GenericMapper mapper;
 
-    @GetMapping
-    public List<ProdutoResponse> listarProdutos() {
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public String listarProdutos() {
 
-        var produtos = inboundPort.buscarTodos();
-        return mapper.mapToList(produtos, new TypeToken<List<ProdutoResponse>>() {
-        }.getType());
+        try {
+            return inboundPort.buscarTodos();
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    @GetMapping("/camisas")
+    @GetMapping(value = "/camisas")
     public ResponseEntity<List<CamisaResponse>> listarCamisas(@RequestParam(required = false) String cor,
             @RequestParam(required = false) String tamanho, @RequestParam(required = false) String curso) {
 
@@ -195,5 +197,31 @@ public class ProdutoController {
         tirante.setPedido(pedidoInboundPort.buscarPeloId(tiranteRequest.getPedidoId()));
         return ResponseEntity.ok(mapper.mapTo(inboundPort.salvar(tirante), TiranteResponse.class));
     }
-    
+    @PutMapping("/inventario/camisa/{idCamisa}")
+    public ResponseEntity<CamisaResponse> pedirCamisaDoInventario(@Valid @PathVariable Long idCamisa,
+                                                                  @RequestBody IdPedidoRequest idPedidoRequest) {
+        Long idPedido = idPedidoRequest.getId();
+        return inboundPort.produtoExiste(idCamisa) && pedidoInboundPort.pedidoExiste(idPedido)
+                ? ResponseEntity.ok(mapper.mapTo(inboundPort.adicionarProdutoDoInventarioAoPedido(idCamisa, idPedido),
+                                                CamisaResponse.class))
+                : ResponseEntity.notFound().build();
+    }
+    @PutMapping("/inventario/caneca/{idCaneca}")
+    public ResponseEntity<CanecaResponse> pedirCanecaDoInventario(@Valid @PathVariable Long idCaneca,
+                                                                    @RequestBody IdPedidoRequest idPedidoRequest) {
+        Long idPedido = idPedidoRequest.getId();
+        return inboundPort.produtoExiste(idCaneca) && pedidoInboundPort.pedidoExiste(idPedido)
+                ? ResponseEntity.ok(mapper.mapTo(inboundPort.adicionarProdutoDoInventarioAoPedido(idCaneca, idPedido),
+                                                CanecaResponse.class))
+                : ResponseEntity.notFound().build();
+    }
+    @PutMapping("/inventario/tirante/{idTirante}")
+    public ResponseEntity<TiranteResponse> pedirTiranteDoInventario(@Valid @PathVariable Long idTirante,
+                                                                    @RequestBody IdPedidoRequest idPedidoRequest) {
+        Long idPedido = idPedidoRequest.getId();
+        return inboundPort.produtoExiste(idTirante) && pedidoInboundPort.pedidoExiste(idPedido)
+                ? ResponseEntity.ok(mapper.mapTo(inboundPort.adicionarProdutoDoInventarioAoPedido(idTirante, idPedido),
+                                                TiranteResponse.class))
+                : ResponseEntity.notFound().build();
+    }
 }
