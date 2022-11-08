@@ -34,10 +34,7 @@ async function submitForm(e, form) {
 		delete jsonFormData.observacao;
 	}
 
-
 	await criarFornecedor(headers, jsonFormData, comentario);
-
-	location.href = "../fornecedores/index.html";
 }
 
 async function criarFornecedor(headers, jsonFormData, comentario) {
@@ -54,6 +51,8 @@ async function criarFornecedor(headers, jsonFormData, comentario) {
 			response.json().then(body => {
 				criarComentario(headers, body.id, comentario);
 			});
+
+			location.href = "../fornecedores/index.html";
 		}
 	});
 }
