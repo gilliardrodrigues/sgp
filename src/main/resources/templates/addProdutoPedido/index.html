@@ -1,0 +1,87 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="../../static/css/main.css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/editarPedido.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css">
+    <title>Sistema de Pedidos DACompSI</title>
+</head>
+
+<body>
+
+    <header class="menu-principal">
+        <main>
+            <div class="header-1">
+                <div class="logo">
+                    <img class="img-logo" src="../../static/img/logo.png" alt="Logo SGP" />
+                </div>
+            </div>
+        </main>
+    </header>
+
+    <div class="content">
+
+        <a href="../addPedido/index.html">
+            <button class="back-button"></button>
+        </a>
+
+        <div class="box-editar">
+            <p class="main-title">Adicionar Produto ao Pedido</p>
+
+            <div class="label-textfield">
+                <p class="label-attribute">Produto</p>
+                <select name="pronta-entrega" class="select-status">
+                    <option value=""></option>
+                </select>
+            </div>
+
+            <div class="label-textfield">
+                <p class="label-attribute">Modelo</p>
+                <input type="text" placeholder="Insira o modelo" id="model" name="fname">
+            </div>
+
+            <div class="label-textfield">
+                <p class="label-attribute">Curso</p>
+                <select name="pronta-entrega" class="select-status">
+                    <option value=""></option>
+                    <option value="si">Sistemas de Informação</option>
+                    <option value="cc">Ciência da Computação</option>
+                </select>
+            </div>
+
+            <div class="label-textfield">
+                <p class="label-attribute">Tamanho</p>
+                <select name="pronta-entrega" class="select-status">
+                    <option value=""></option>
+                    <option value="tamPP">PP</option>
+                    <option value="tamP">P</option>
+                    <option value="tamM">M</option>
+                    <option value="tamG">G</option>
+                    <option value="tamGG">GG</option>
+                </select>
+            </div>
+
+            <div class="label-textfield">
+                <p class="label-attribute">Cor</p>
+                <select name="pronta-entrega" class="select-status">
+                    <option value=""></option>
+                    <option value="branco">Branco</option>
+                    <option value="rosa">Rosa</option>
+                    <option value="vinho">Vinho</option>
+                    <option value="preto">Preto</option>
+                    <option value="azul">Azul</option>
+                </select>
+            </div>
+            <div class="label-textfield">
+                <p class="label-attribute">Quantidade</p>
+                <input type="text" placeholder="Insira a quantidade" id="model" name="fname">
+            </div>
+            <button class="button-salvar">Salvar</button>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
