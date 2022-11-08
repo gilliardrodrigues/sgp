@@ -54,14 +54,6 @@ public class ProdutoAdapter implements ProdutoUseCaseOutboundPort {
     }
 
     @Override
-    public List<Produto> buscarTodos() {
-
-        List<ProdutoEntity> produtos = repository.findAll();
-        return mapper.mapToList(produtos, new TypeToken<List<Produto>>() {
-        }.getType());
-    }
-
-    @Override
     public List<Camisa> buscarTodasCamisas() {
 
         var camisas = repository.findAllCamisas();

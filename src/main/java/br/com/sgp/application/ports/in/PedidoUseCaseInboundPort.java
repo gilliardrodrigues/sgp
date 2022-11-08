@@ -18,7 +18,6 @@ public interface PedidoUseCaseInboundPort {
     List<Pedido> buscarPedidos(String situacao, String statusPagamento, String nome, Date data,  String tipoDeProduto) ;
     List<Pedido> buscarPedidosConfirmadosPorTemporada(Temporada temporada);
     Set<Pedido> buscarPeloTipoDeProduto(TipoProduto tipoProduto);
-    void adicionarProdutoDoInventario(Pedido pedido, Long idProduto);
     Boolean pedidoExiste(Long id);
     void encerrarTemporadaDePedidos(Temporada temporada);
     Pedido darBaixa(Long id, int valorPago) throws NegocioException;

@@ -29,7 +29,7 @@ public interface ProdutoRepository<E extends ProdutoEntity> extends JpaRepositor
 
     List<ProdutoEntity> findByPedidoId(Long idPedido);
 
-    @Query("SELECT pr FROM ProdutoEntity pr WHERE pr.prontaEntrega = True")
+    @Query("SELECT pr FROM ProdutoEntity pr WHERE pr.prontaEntrega = True AND pr.pedido IS NULL")
     List<ProdutoEntity> buscarInventario();
 
     @Query("SELECT c FROM CanecaEntity c WHERE c.modelo = :modelo")

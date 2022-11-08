@@ -87,18 +87,13 @@ public class PedidoUseCase implements PedidoUseCaseInboundPort {
     }
 
     @Override
-    public void adicionarProdutoDoInventario(Pedido pedido, Long idProduto) {
-
-        //TODO
-    }
-
-    @Override
     public Pedido darBaixa(Long id, int valorPago) throws NegocioException {
         if (!outboundPort.pedidoExiste(id)) throw new NegocioException("Pedido não encontrado");
         
         var pedido = outboundPort.buscarPeloId(id);
 
-        if (valorPago < 0 || valorPago > pedido.getValor()) throw new NegocioException("Valor pago inválido");
+        if (valorPago < 0 || valorPago > pedido.getValor())
+            throw new NegocioException("Valor pago inválido");
         
         pedido.setValorPago(valorPago);
 
