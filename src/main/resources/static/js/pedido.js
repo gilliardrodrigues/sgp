@@ -26,7 +26,15 @@ function montarHTMLPedido(pedido) {
 	Object.keys(pedido).forEach((key, index) => {
 		const col = document.createElement("div");
 		col.classList.add("column");
-		col.classList.add("w10");
+		if (index < 2) {
+      col.classList.add("w10");
+    } else if (index < 4 || index == 7)  {
+      col.classList.add("w15");
+    } else if (index == 4)  {
+      col.classList.add("w12");
+    } else {
+      col.classList.add("w8");
+    }
 		if (index == 0) col.classList.add("first-column");
 
 		const p = document.createElement("p");
