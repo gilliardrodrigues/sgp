@@ -8,20 +8,14 @@ window.onload = async () => {
 		submitForm(e, this, id);
 	});
 
-  const situacao = [
-		"AguardandoPagamento",
-		"Confirmado",
-		"ParcialmenteEntregue",
-    "Entregue",
-	];
+	const situacao = ["AguardandoPagamento", "Confirmado", "ParcialmenteEntregue", "Entregue"];
 
 	const pedido = await fetch(`http://localhost:8080/pedidos/${id}`).then(response => response.json());
-  alert(pedido.previsaoEntrega);
 	document.querySelector(".select-situacao").value = pedido.situacao;
 	document.querySelector(".select-status").value = pedido.statusPagamento;
 	document.querySelector(".previsao-entrega").value = pedido.previsaoEntrega;
 	// document.querySelector(".tempo-entrega").value = pedido.tempoEntregaEmDias;
-/*
+	/*
 	pedido.produtosOferecidos.forEach(produto => {
 		if (produto === "Caneca") {
 			document.querySelector(".caneca").checked = true;
@@ -45,7 +39,13 @@ async function submitForm(e, form, id) {
 	editarPedido(headers, jsonFormData, id);
 }
 async function editarPedido(headers, jsonFormData, id) {
-	await fetch(`http://localhost:8080/pedidos/${id}`, {
+	console.log({
+		url: `http://localhost:8080/pedidos/admin/${id}`,
+		method: "PUT",
+		headers,
+		body: JSON.stringify(jsonFormData),
+	});
+	await fetch(`http://localhost:8080/pedidos/admin/${id}`, {
 		method: "PUT",
 		headers,
 		body: JSON.stringify(jsonFormData),
