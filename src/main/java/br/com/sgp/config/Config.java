@@ -26,9 +26,9 @@ public class Config {
         return new ObservacaoUseCase(outboundPort, fornecedorUseCaseOutboundPort);
     }
     @Bean
-    public ProdutoUseCase produtoUseCase(ProdutoUseCaseOutboundPort outboundPort, PedidoUseCaseOutboundPort pedidoOutboundPort) {
+    public ProdutoUseCase produtoUseCase(ProdutoUseCaseOutboundPort outboundPort, PedidoUseCaseOutboundPort pedidoOutboundPort, TemporadaUseCaseOutboundPort temporadaOutboundPort) {
 
-        return new ProdutoUseCase(outboundPort, pedidoOutboundPort);
+        return new ProdutoUseCase(outboundPort, pedidoOutboundPort, temporadaOutboundPort);
     }
     @Bean
     public TemporadaUseCase temporadaUseCase(TemporadaUseCaseOutboundPort outboundPort, PedidoUseCaseInboundPort pedidoInboundPort) {

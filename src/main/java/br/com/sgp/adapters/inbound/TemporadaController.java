@@ -34,10 +34,10 @@ public class TemporadaController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public void salvar(@Valid @RequestBody TemporadaRequest temporadaRequest) throws NegocioException {
+    public ResponseEntity<TemporadaResponse> salvar(@Valid @RequestBody TemporadaRequest temporadaRequest) throws NegocioException {
 
         var temporada = mapper.mapTo(temporadaRequest, Temporada.class);
-        inboundPort.salvar(temporada);
+        return ResponseEntity.ok(mapper.mapTo(inboundPort.salvar(temporada), TemporadaResponse.class));
     }
 
     @PutMapping("/{id}")
@@ -65,5 +65,8 @@ public class TemporadaController {
         return ResponseEntity.ok(mapper.mapTo(inboundPort.encerrarTemporada(id), TemporadaResponse.class));
          
     }
-
+    @GetMapping("/ativa")
+    public ResponseEntity<TemporadaResponse> buscarTemporadaAtiva() {
+        return ResponseEntity.ok(mapper.mapTo(inboundPort.buscarAtiva(), TemporadaResponse.class));
+    }
 }

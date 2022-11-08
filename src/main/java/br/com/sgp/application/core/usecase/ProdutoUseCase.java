@@ -5,6 +5,7 @@ import br.com.sgp.application.core.exception.NegocioException;
 import br.com.sgp.application.ports.in.ProdutoUseCaseInboundPort;
 import br.com.sgp.application.ports.out.PedidoUseCaseOutboundPort;
 import br.com.sgp.application.ports.out.ProdutoUseCaseOutboundPort;
+import br.com.sgp.application.ports.out.TemporadaUseCaseOutboundPort;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -21,6 +22,7 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
 
     private final ProdutoUseCaseOutboundPort outboundPort;
     private final PedidoUseCaseOutboundPort pedidoOutboundPort;
+    private final TemporadaUseCaseOutboundPort temporadaOutboundPort;
 
     public Boolean produtoExiste(Long id) {
 
@@ -39,6 +41,11 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
 
         if(produto.getProntaEntrega() == null) {
             produto.setProntaEntrega(false);
+        }
+        if(!produto.getProntaEntrega()) {
+            var tipo = produto.getTipo();
+            var catalogo = temporadaOutboundPort.buscarAtiva().getCatalogo();
+            produto.setValor(catalogo.get(tipo));
         }
         if(produto.getPedido() != null) {
             var pedido = pedidoOutboundPort.buscarPeloId(produto.getPedido().getId());

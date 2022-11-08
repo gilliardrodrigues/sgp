@@ -23,8 +23,13 @@ public class TemporadaUseCase implements TemporadaUseCaseInboundPort {
     @Override
     public Temporada salvar(Temporada temporada) throws NegocioException {
 
-        temporada.setDataInicio(OffsetDateTime.now());
-        return outboundPort.salvar(temporada);
+        if(existeTemporadaAtiva()) {
+            throw new NegocioException("Não pode haver duas temporadas ativas ao mesmo tempo! Encerra a atual para abrir uma nova.");
+        }
+        else {
+            temporada.setDataInicio(OffsetDateTime.now());
+            return outboundPort.salvar(temporada);
+        }
     }
 
     @Override
@@ -39,7 +44,7 @@ public class TemporadaUseCase implements TemporadaUseCaseInboundPort {
         var temporada = this.buscarPeloId(id);
         temporada.setDataFim(OffsetDateTime.now());
         pedidoInboundPort.encerrarTemporadaDePedidos(temporada);
-        
+
         // A lógica da contabilização de pedidos (apenas com pagamento confirmado) deve ser
         // tratada no caso de uso de pedido (só associar à temporada se tiver confirmado o pagamento)
         return outboundPort.salvar(temporada);
@@ -89,4 +94,9 @@ public class TemporadaUseCase implements TemporadaUseCaseInboundPort {
         return outboundPort.buscarAtiva();
     }
 
+    @Override
+    public boolean existeTemporadaAtiva() {
+
+        return outboundPort.existeTemporadaAtiva();
+    }
 }
