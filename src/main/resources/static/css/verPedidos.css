@@ -4,3 +4,35 @@ body {
   height: 100%;
   font-family: 'Open Sans';
 }
+
+.box-pesquisar {
+  width: 100%;
+  background-color: #F6F6F6;
+  padding: 20px;
+  margin-top: 30px;
+  border-radius: 10px;
+}
+
+.titulo-box-pesquisar {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 49px;
+  color: #472D62;
+}
+
+.button-add-novo-produto,
+.button-finalizar-pedido {
+  width: 180px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  height: 35px;
+  background: #7F5BA3;
+  border-radius: 24px;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  border: 0;
+  cursor: pointer;
+}

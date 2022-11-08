@@ -1,65 +1,44 @@
-<html>
+<html lang="pt-BR">
+	<head>
+		<link rel="stylesheet" type="text/css" href="../../static/css/main.css" />
+		<link rel="stylesheet" type="text/css" href="../../static/css/editarPedido.css" />
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css" />
+		<title>Área administrativa | SGP</title>
+		<script type="text/javascript" src="../../static/js/editarPedido.js"></script>
+	</head>
 
-  <head>
-    <link rel="stylesheet" type="text/css" href="../../static/css/main.css">
-    <link rel="stylesheet" type="text/css" href="../../static/css/editarPedido.css">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css">
-    <title>Área administrativa | SGP</title>
-    <script type="text/javascript" src="../../static/js/editarPedido.js"></script>
-  </head>
+	<body>
+		<header class="menu-principal">
+			<main>
+				<div class="header-1">
+					<div class="logo">
+						<img class="img-logo" src="../../static/img/logo.png" alt="Logo SGP" />
+					</div>
+				</div>
+			</main>
+		</header>
 
-  <body>
+		<div class="content">
+			<a href="../pedidos/index.html">
+				<button class="back-button"></button>
+			</a>
 
-    <header class="menu-principal">
-      <main>
-        <div class="header-1">
-          <div class="logo">
-            <img class="img-logo" src="../../static/img/logo.png" alt="Logo SGP" />
-          </div>
-        </div>
-      </main>
-    </header>
+			<div class="box-editar">
+				<p class="main-title">Editar Pedido</p>
 
-    <div class="content">
-
-      <a href="../pedidos/index.html">
-        <button class="back-button"></button>
-      </a>
-
-      <div class="box-editar">
-        <p class="main-title">Editar Pedido</p>
-        <form action="" method="POST">
-          <div class="label-textfield">
-            <p class="label-attribute">Situação</p>
-            <select name="situacoes" class="select-situacao">
-              <option value="Aguardando pagamento...">Aguardando Pagamento</option>
-              <option value="Confirmado">Confirmado</option>
-              <option value="Parcialmente entregue">Parcialmente entregue</option>
-              <option value="Entregue">Entregue</option>
-            </select>
-          </div>
-
-          <div class="label-textfield">
-            <p class="label-attribute">Status</p>
-            <select name="situacoes" class="select-status">
-              <option value="Nao pago">Não pago</option>
-              <option value="Parcialmente pago">Parcialmente pago</option>
-              <option value="Pago!">Pago</option>
-            </select>
-          </div>
-        </form>
-
-        <div class="label-textfield">
-          <p class="label-attribute">Previsão de entrega</p>
-          <input  class="previsao-entrega" type="text" placeholder="Insira o a previsão de entrega..." value="30" id="price" name="previsao" />
-        </div>
-
-        <button class="button-salvar">Salvar</button>
-
-      </div>
-
-    </div>
-
-  </body>
-
+				<form action="">
+					<div class="label-textfield">
+						<p class="label-attribute">Valor pago</p>
+						<input
+							class="previsao-entrega"
+							type="text"
+							placeholder="Insira o valor pago..."
+							id="price"
+							name="valorPago" />
+					</div>
+					<button type="submit" class="button-salvar">Salvar</button>
+				</form>
+			</div>
+		</div>
+	</body>
 </html>
