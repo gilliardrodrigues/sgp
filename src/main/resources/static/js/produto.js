@@ -48,7 +48,7 @@ function montarHTMLProduto(produto) {
 		const p = document.createElement("p");
 
 		text = text != null ? text : "-";
-		if (!text) if (field === "id") text = "#" + text;
+		if (field === "id") text = "#" + text;
 
 		let item;
 		if (field === "valor")
