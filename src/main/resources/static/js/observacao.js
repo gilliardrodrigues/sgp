@@ -2,7 +2,7 @@ window.onload = async () => {
 	const queryString = window.location.search;
 	const urlParams = new URLSearchParams(queryString);
 	const id = urlParams.get("id");
-	
+
 	const form = document.querySelector("form");
 	form.addEventListener("submit", function (e) {
 		submitForm(e, this, id);
@@ -18,8 +18,6 @@ window.onload = async () => {
 		const observacaoHTML = montarHTMLObservacao(observacao);
 		content.append(observacaoHTML);
 	}, []);
-
-	
 };
 
 async function submitForm(e, form, id) {
@@ -31,21 +29,12 @@ async function submitForm(e, form, id) {
 
 	const comentario = buildJsonFormData(form);
 
-	console.log(comentario);
-
 	await criarComentario(headers, id, comentario);
 
 	location.reload();
 }
 
 async function criarComentario(headers, fornecedorId, comentario) {
-
-	console.log({
-		url: `http://localhost:8080/fornecedores/${fornecedorId}/observacoes`,
-		method: "POST",
-		headers,
-		body: JSON.stringify(comentario),
-	})
 	await fetch(`http://localhost:8080/fornecedores/${fornecedorId}/observacoes`, {
 		method: "POST",
 		headers,
