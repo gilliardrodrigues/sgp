@@ -1,64 +1,70 @@
 <html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="../../static/css/main.css" />
+		<link rel="stylesheet" type="text/css" href="../../static/css/editarPedido.css" />
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css" />
+		<title>Área administrativa | SGP</title>
+		<script type="text/javascript" src="../../static/js/editarFornecedor.js"></script>
+	</head>
 
-  <head>
-    <link rel="stylesheet" type="text/css" href="../../static/css/main.css">
-    <link rel="stylesheet" type="text/css" href="../../static/css/editarPedido.css">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css">
-    <title>Área administrativa | SGP</title>
-  </head>
+	<body>
+		<header class="menu-principal">
+			<main>
+				<div class="header-1">
+					<div class="logo">
+						<img class="img-logo" src="../../static/img/logo.png" alt="Logo SGP" />
+					</div>
+				</div>
+			</main>
+		</header>
 
-  <body>
+		<div class="content">
+			<a href="../fornecedores/index.html">
+				<button class="back-button"></button>
+			</a>
 
-    <header class="menu-principal">
-      <main>
-        <div class="header-1">
-          <div class="logo">
-            <img class="img-logo" src="../../static/img/logo.png" alt="Logo SGP" />
-          </div>
-        </div>
-      </main>
-    </header>
+			<div class="box-editar">
+				<p class="main-title">Editar Fornecedor</p>
+				<form action="" method="POST">
+					<div class="label-textfield">
+						<p class="label-attribute">Razão Social*</p>
+						<input
+							type="text"
+							placeholder="Insira a razão social..."
+							value="Fornecedor 1 Ltda."
+							id="name"
+							name="razaoSocial"
+              class="razao-social" />
+					</div>
 
-    <div class="content">
+					<div class="label-textfield">
+						<p class="label-attribute">CNPJ*</p>
+						<input  class="cnpj" type="text" placeholder="Insira o CNPJ..." value="098210984290" id="price" name="cnpj" />
+					</div>
 
-      <a href="../fornecedores/index.html">
-        <button class="back-button"></button>
-      </a>
+          <div class="label-textfield">
+						<p class="label-attribute">Email*</p>
+						<input  class="email" type="text" placeholder="Insira o Email..." value="098210984290" id="price" name="email" />
+					</div>
 
-      <div class="box-editar">
-        <p class="main-title">Editar Fornecedor</p>
+					<div class="label-textfield">
+						<p class="label-attribute">Tempo de entrega em dias*</p>
+						<input class="tempo-entrega" type="text" placeholder="Insira o tempo..." value="30" id="time" name="tempoEntregaEmDias" />
+					</div>
 
-        <div class="label-textfield">
-          <p class="label-attribute">Razão Social*</p>
-          <input type="text" placeholder="Insira a razão social..." value="Fornecedor 1 Ltda." id="name" name="fname">
-        </div>
+					<div class="label-textfield">
+						<p class="label-attribute">Produtos</p>
+						<input class="caneca"  type="checkbox" id="caneca" name="caneca" value="caneca" />
+						<label for="caneca"> Caneca</label><br />
+						<input class="tirante" type="checkbox" id="tirante" name="tirante" value="tirante" />
+						<label for="tirante"> Tirante</label><br />
+						<input class="camisa" type="checkbox" id="camisa" name="camisa" value="camisa" />
+						<label for="camisa"> Camisa</label><br />
+					</div>
 
-        <div class="label-textfield">
-          <p class="label-attribute">CNPJ*</p>
-          <input type="text" placeholder="Insira o CNPJ..." value="098210984290" id="price" name="fname">
-        </div>
-
-        <div class="label-textfield">
-          <p class="label-attribute">Tempo de entrega em dias*</p>
-          <input type="text" placeholder="Insira o tempo..." value="30" id="time" name="fname">
-        </div>
-
-        <div class="label-textfield">
-          <p class="label-attribute">Produtos</p>
-          <input type="checkbox" id="caneca" name="caneca" value="caneca">
-          <label for="caneca"> Caneca</label><br>
-          <input type="checkbox" id="tirante" name="tirante" value="tirante">
-          <label for="tirante"> Tirante</label><br>
-          <input type="checkbox" id="camisa" name="camisa" value="camisa">
-          <label for="camisa"> Camisa</label><br>
-        </div>
-
-        <button class="button-salvar">Salvar</button>
-
-      </div>
-
-    </div>
-
-  </body>
-
+					<button type="submit" class="button-salvar">Salvar</button>
+				</form>
+			</div>
+		</div>
+	</body>
 </html>

@@ -52,10 +52,10 @@ public class FornecedorController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public void salvar(@Valid @RequestBody FornecedorRequest fornecedorRequest) throws NegocioException {
+    public ResponseEntity<FornecedorResponse>  salvar(@Valid @RequestBody FornecedorRequest fornecedorRequest) throws NegocioException {
 
         var fornecedor = mapper.mapTo(fornecedorRequest, Fornecedor.class);
-        inboundPort.salvar(fornecedor);
+        return ResponseEntity.ok(mapper.mapTo(inboundPort.salvar(fornecedor), FornecedorResponse.class));
     }
 
     @PutMapping("/{id}")
