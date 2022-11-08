@@ -81,7 +81,7 @@ function formatBool(text) {
 		div.classList.add("pago");
 		text = "SIM";
 	} else {
-		div.classList.add("aguardando-pagamento");
+		div.classList.add("nao-pago");
 		text = "NÃO";
 	}
 
