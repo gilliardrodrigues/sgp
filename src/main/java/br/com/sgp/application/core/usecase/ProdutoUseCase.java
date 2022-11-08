@@ -69,30 +69,51 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
         objectMapper.registerModule(new JavaTimeModule());
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
-        String camisas = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(buscarTodasCamisas());
-        String canecas = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(buscarTodasCanecas());
-        String tirantes = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(buscarTodosTirantes());
-
-        String produtos = camisas.substring(0, camisas.length() - 1) + "," +
-                          canecas.substring(1, canecas.length() - 1) + "," +
-                          tirantes.substring(1);
-
-        JSONArray jsonArray = new JSONArray(produtos);
-        for(int i = 0; i < jsonArray.length(); i++) {
-            JSONObject produto = jsonArray.getJSONObject(i);
-            var produtoMap = produto.toMap();
-            var pedidoMap = (HashMap<String, Object>) produtoMap.get("pedido");
-            if (pedidoMap != null) {
-                var id = pedidoMap.get("id");
-                produtoMap.remove("pedido");
-                produtoMap.put("pedidoId", id);
-                jsonArray.put(i, produtoMap);
+        String produtos = "";
+        List<Camisa> listaDeCamisas = buscarTodasCamisas();
+        if(!listaDeCamisas.isEmpty()) {
+            var camisas = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(listaDeCamisas);
+            produtos = "[" + camisas.substring(1, camisas.length() - 1);
+        }
+        List<Caneca> listaDeCanecas = buscarTodasCanecas();
+        if(!listaDeCanecas.isEmpty()) {
+            var canecas = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(listaDeCanecas);
+            if(produtos.isBlank()) {
+                produtos = "[" + canecas.substring(1, canecas.length() - 1);
             }
             else {
-                jsonArray.put(i, produtoMap);
+                produtos = produtos + "," + canecas.substring(1, canecas.length() - 1);
             }
         }
-        produtos = jsonArray.toString();
+        List<Tirante> listaDeTirantes = buscarTodosTirantes();
+        if(!listaDeTirantes.isEmpty()) {
+            var tirantes = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(listaDeTirantes);
+            if(produtos.isBlank()) {
+                produtos = "[" + tirantes.substring(1, tirantes.length() - 1);
+            }
+            else {
+                produtos = produtos + "," + tirantes.substring(1, tirantes.length() - 1);
+            }
+        }
+        if(!produtos.isBlank()) {
+            produtos += "]";
+            JSONArray jsonArray = new JSONArray(produtos);
+            for(int i = 0; i < jsonArray.length(); i++) {
+                JSONObject produto = jsonArray.getJSONObject(i);
+                var produtoMap = produto.toMap();
+                var pedidoMap = (HashMap<String, Object>) produtoMap.get("pedido");
+                if (pedidoMap != null) {
+                    var id = pedidoMap.get("id");
+                    produtoMap.remove("pedido");
+                    produtoMap.put("pedido", id);
+                    jsonArray.put(i, produtoMap);
+                }
+            }
+            produtos = jsonArray.toString();
+        }
+        else {
+            produtos = "[]";
+        }
         return produtos;
     }
 
