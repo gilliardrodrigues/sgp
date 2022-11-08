@@ -1,5 +1,7 @@
 package br.com.sgp.application.core.domain;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum CorCamisa {
 
     PRETO("Preto"),
@@ -21,7 +23,7 @@ public enum CorCamisa {
 
         return descricao;
     }
-
+    @JsonValue
     @Override
     public String toString() {
 
