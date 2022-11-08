@@ -4,12 +4,12 @@ import br.com.sgp.application.core.domain.TipoProduto;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
+import java.util.HashMap;
 
 @Getter
 @Setter
 public class TemporadaRequest {
 
     private String descricao;
-    List<TipoProduto> produtosDisponiveis;
+    private HashMap<TipoProduto, Integer> catalogo;
 }

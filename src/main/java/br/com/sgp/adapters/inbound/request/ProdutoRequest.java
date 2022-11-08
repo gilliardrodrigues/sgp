@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class ProdutoRequest {
 
-    protected int valor;
+    protected Integer valor;
     protected Boolean entregue;
     protected Boolean chegou;
     //protected TipoProduto tipo;

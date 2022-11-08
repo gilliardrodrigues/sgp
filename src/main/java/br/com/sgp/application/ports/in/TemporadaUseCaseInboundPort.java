@@ -4,6 +4,7 @@ import br.com.sgp.application.core.domain.Temporada;
 import br.com.sgp.application.core.domain.TipoProduto;
 import br.com.sgp.application.core.exception.NegocioException;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface TemporadaUseCaseInboundPort {
@@ -11,12 +12,10 @@ public interface TemporadaUseCaseInboundPort {
     Temporada salvar(Temporada temporada) throws NegocioException;
     void excluir(Long id);
     Temporada encerrarTemporada(Long id);
-    Temporada adicionarProdutos(Temporada temporada, List<TipoProduto> produtos);
+    Temporada adicionarProdutos(Temporada temporada, HashMap<TipoProduto, Integer> produtos);
     Temporada buscarPeloId(Long id);
     Temporada buscarAtiva();
     List<Temporada> buscarTodas();
-
     Temporada alterarTemporada(Temporada temporada);
-
     boolean temporadaExiste(Long id);
 }
