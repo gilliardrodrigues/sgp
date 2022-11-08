@@ -7,12 +7,11 @@ import br.com.sgp.application.ports.in.PedidoUseCaseInboundPort;
 import br.com.sgp.application.ports.in.TemporadaUseCaseInboundPort;
 import br.com.sgp.application.ports.out.TemporadaUseCaseOutboundPort;
 import lombok.AllArgsConstructor;
-import br.com.sgp.application.ports.out.PedidoUseCaseOutboundPort;
-import br.com.sgp.application.core.domain.StatusPedido;
-import br.com.sgp.application.core.domain.Pedido;
 
 import java.time.OffsetDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @AllArgsConstructor
 public class TemporadaUseCase implements TemporadaUseCaseInboundPort {
@@ -47,11 +46,11 @@ public class TemporadaUseCase implements TemporadaUseCaseInboundPort {
     }
 
     @Override
-    public Temporada adicionarProdutos(Temporada temporada, List<TipoProduto> produtos) {
+    public Temporada adicionarProdutos(Temporada temporada, HashMap<TipoProduto, Integer> produtos) {
 
-        for (TipoProduto produto : produtos) {
-            if(!temporada.getProdutosDisponiveis().contains(produto)) {
-                temporada.habilitarProduto(produto);
+        for (Map.Entry<TipoProduto, Integer> produto : produtos.entrySet()) {
+            if(!temporada.getCatalogo().containsKey(produto.getKey())) {
+                temporada.habilitarProduto(produto.getKey(), produto.getValue());
             }
         }
         return temporada;
@@ -62,7 +61,7 @@ public class TemporadaUseCase implements TemporadaUseCaseInboundPort {
 
         var temporada = this.buscarPeloId(temporadaRequest.getId());
         temporada.setDescricao(temporadaRequest.getDescricao());
-        temporada = this.adicionarProdutos(temporada, temporadaRequest.getProdutosDisponiveis());
+        temporada = this.adicionarProdutos(temporada, temporadaRequest.getCatalogo());
         return outboundPort.salvar(temporada);
     }
 

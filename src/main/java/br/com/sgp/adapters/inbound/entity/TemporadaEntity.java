@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -29,15 +28,9 @@ public class TemporadaEntity {
     @Column(name = "DATA_FIM")
     private OffsetDateTime dataFim;
 
-    @ElementCollection(targetClass = TipoProduto.class)
-    @JoinTable(name = "TEMPORADA_PRODUTO_DISPONIVEL", joinColumns = @JoinColumn(name = "id"))
-    @Column(name = "PRODUTO_DISPONIVEL", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private List<TipoProduto> produtosDisponiveis;
-
     @MapKeyColumn
     @MapKeyEnumerated(EnumType.STRING)
-    private HashMap<TipoProduto, BigDecimal> valores;
+    private HashMap<TipoProduto, Integer> catalogo;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "temporada")
     List<PedidoEntity> pedidos;

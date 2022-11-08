@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -15,7 +14,7 @@ import java.util.List;
 public class Produto {
 
     protected Long id;
-    protected int valor;
+    protected Integer valor;
     protected Boolean entregue;
     protected Boolean prontaEntrega;
     protected Boolean chegou;

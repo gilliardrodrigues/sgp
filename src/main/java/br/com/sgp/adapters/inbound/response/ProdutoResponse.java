@@ -10,7 +10,7 @@ import java.time.OffsetDateTime;
 public class ProdutoResponse {
 
     private Long id;
-    private int valor;
+    private Integer valor;
     private Boolean entregue;
     private Boolean prontaEntrega;
     private Boolean chegou;

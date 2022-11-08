@@ -62,37 +62,33 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
         }
     }
 
-    @Override
-    public String buscarTodos() throws JsonProcessingException {
+    public String converterListasDeProdutosParaJson(List<Camisa> camisas, List<Caneca> canecas, List<Tirante> tirantes) throws JsonProcessingException {
 
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
         String produtos = "";
-        List<Camisa> listaDeCamisas = buscarTodasCamisas();
-        if(!listaDeCamisas.isEmpty()) {
-            var camisas = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(listaDeCamisas);
-            produtos = "[" + camisas.substring(1, camisas.length() - 1);
+        if(!camisas.isEmpty()) {
+            var camisasJson = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(camisas);
+            produtos = "[" + camisasJson.substring(1, camisasJson.length() - 1);
         }
-        List<Caneca> listaDeCanecas = buscarTodasCanecas();
-        if(!listaDeCanecas.isEmpty()) {
-            var canecas = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(listaDeCanecas);
+        if(!canecas.isEmpty()) {
+            var canecasJson = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(canecas);
             if(produtos.isBlank()) {
-                produtos = "[" + canecas.substring(1, canecas.length() - 1);
+                produtos = "[" + canecasJson.substring(1, canecasJson.length() - 1);
             }
             else {
-                produtos = produtos + "," + canecas.substring(1, canecas.length() - 1);
+                produtos = produtos + "," + canecasJson.substring(1, canecasJson.length() - 1);
             }
         }
-        List<Tirante> listaDeTirantes = buscarTodosTirantes();
-        if(!listaDeTirantes.isEmpty()) {
-            var tirantes = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(listaDeTirantes);
+        if(!tirantes.isEmpty()) {
+            var tirantesJson = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(tirantes);
             if(produtos.isBlank()) {
-                produtos = "[" + tirantes.substring(1, tirantes.length() - 1);
+                produtos = "[" + tirantesJson.substring(1, tirantesJson.length() - 1);
             }
             else {
-                produtos = produtos + "," + tirantes.substring(1, tirantes.length() - 1);
+                produtos = produtos + "," + tirantesJson.substring(1, tirantesJson.length() - 1);
             }
         }
         if(!produtos.isBlank()) {
@@ -115,6 +111,28 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
             produtos = "[]";
         }
         return produtos;
+    }
+
+    @Override
+    public String buscarTodos() throws JsonProcessingException {
+
+        var camisas = buscarTodasCamisas();
+        var canecas = buscarTodasCanecas();
+        var tirantes = buscarTodosTirantes();
+        String produtos = converterListasDeProdutosParaJson(camisas, canecas, tirantes);
+
+        return produtos;
+    }
+
+    @Override
+    public String buscarInventario() throws JsonProcessingException {
+
+        var camisas = outboundPort.buscarCamisasDoInventario();
+        var canecas = outboundPort.buscarCanecasDoInventario();
+        var tirantes = outboundPort.buscarTirantesDoInventario();
+        String inventario = converterListasDeProdutosParaJson(camisas, canecas, tirantes);
+
+        return inventario;
     }
 
     @Override
@@ -154,12 +172,6 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
     }
 
     @Override
-    public List<Produto> buscarInventario() {
-
-        return outboundPort.buscarInventario();
-    }
-
-    @Override
     public List<Tirante> buscarTirantePeloModelo(String modelo) {
 
         return outboundPort.buscarTirantePeloModelo(modelo);
@@ -178,7 +190,7 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
     }
     @Override
     public Produto adicionarProdutoDoInventarioAoPedido(Long idProduto, Long idPedido) {
-        //todo
+
         Produto produto = null;
         try {
             produto = outboundPort.buscarPeloId(idProduto);
