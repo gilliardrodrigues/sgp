@@ -62,38 +62,77 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
         }
     }
 
-    @Override
-    public String buscarTodos() throws JsonProcessingException {
+    public String converterListasDeProdutosParaJson(List<Camisa> camisas, List<Caneca> canecas, List<Tirante> tirantes) throws JsonProcessingException {
 
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
-        String camisas = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(buscarTodasCamisas());
-        String canecas = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(buscarTodasCanecas());
-        String tirantes = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(buscarTodosTirantes());
-
-        String produtos = camisas.substring(0, camisas.length() - 1) + "," +
-                          canecas.substring(1, canecas.length() - 1) + "," +
-                          tirantes.substring(1);
-
-        JSONArray jsonArray = new JSONArray(produtos);
-        for(int i = 0; i < jsonArray.length(); i++) {
-            JSONObject produto = jsonArray.getJSONObject(i);
-            var produtoMap = produto.toMap();
-            var pedidoMap = (HashMap<String, Object>) produtoMap.get("pedido");
-            if (pedidoMap != null) {
-                var id = pedidoMap.get("id");
-                produtoMap.remove("pedido");
-                produtoMap.put("pedidoId", id);
-                jsonArray.put(i, produtoMap);
+        String produtos = "";
+        if(!camisas.isEmpty()) {
+            var camisasJson = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(camisas);
+            produtos = "[" + camisasJson.substring(1, camisasJson.length() - 1);
+        }
+        if(!canecas.isEmpty()) {
+            var canecasJson = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(canecas);
+            if(produtos.isBlank()) {
+                produtos = "[" + canecasJson.substring(1, canecasJson.length() - 1);
             }
             else {
-                jsonArray.put(i, produtoMap);
+                produtos = produtos + "," + canecasJson.substring(1, canecasJson.length() - 1);
             }
         }
-        produtos = jsonArray.toString();
+        if(!tirantes.isEmpty()) {
+            var tirantesJson = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(tirantes);
+            if(produtos.isBlank()) {
+                produtos = "[" + tirantesJson.substring(1, tirantesJson.length() - 1);
+            }
+            else {
+                produtos = produtos + "," + tirantesJson.substring(1, tirantesJson.length() - 1);
+            }
+        }
+        if(!produtos.isBlank()) {
+            produtos += "]";
+            JSONArray jsonArray = new JSONArray(produtos);
+            for(int i = 0; i < jsonArray.length(); i++) {
+                JSONObject produto = jsonArray.getJSONObject(i);
+                var produtoMap = produto.toMap();
+                var pedidoMap = (HashMap<String, Object>) produtoMap.get("pedido");
+                if (pedidoMap != null) {
+                    var id = pedidoMap.get("id");
+                    produtoMap.remove("pedido");
+                    produtoMap.put("pedido", id);
+                    jsonArray.put(i, produtoMap);
+                }
+            }
+            produtos = jsonArray.toString();
+        }
+        else {
+            produtos = "[]";
+        }
         return produtos;
+    }
+
+    @Override
+    public String buscarTodos() throws JsonProcessingException {
+
+        var camisas = buscarTodasCamisas();
+        var canecas = buscarTodasCanecas();
+        var tirantes = buscarTodosTirantes();
+        String produtos = converterListasDeProdutosParaJson(camisas, canecas, tirantes);
+
+        return produtos;
+    }
+
+    @Override
+    public String buscarInventario() throws JsonProcessingException {
+
+        var camisas = outboundPort.buscarCamisasDoInventario();
+        var canecas = outboundPort.buscarCanecasDoInventario();
+        var tirantes = outboundPort.buscarTirantesDoInventario();
+        String inventario = converterListasDeProdutosParaJson(camisas, canecas, tirantes);
+
+        return inventario;
     }
 
     @Override
@@ -133,12 +172,6 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
     }
 
     @Override
-    public List<Produto> buscarInventario() {
-
-        return outboundPort.buscarInventario();
-    }
-
-    @Override
     public List<Tirante> buscarTirantePeloModelo(String modelo) {
 
         return outboundPort.buscarTirantePeloModelo(modelo);
@@ -157,7 +190,7 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
     }
     @Override
     public Produto adicionarProdutoDoInventarioAoPedido(Long idProduto, Long idPedido) {
-        //todo
+
         Produto produto = null;
         try {
             produto = outboundPort.buscarPeloId(idProduto);

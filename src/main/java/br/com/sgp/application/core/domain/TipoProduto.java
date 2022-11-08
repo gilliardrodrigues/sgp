@@ -1,5 +1,7 @@
 package br.com.sgp.application.core.domain;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum TipoProduto {
 
     CAMISA("Camisa"),
@@ -17,7 +19,7 @@ public enum TipoProduto {
 
         return descricao;
     }
-
+    @JsonValue
     @Override
     public String toString() {
 

@@ -1,237 +1,236 @@
-
 body {
-  margin: 0 auto;
-  width: 100%;
-  height: 100%;
-  font-family: 'Open Sans';
+	margin: 0 auto;
+	width: 100%;
+	height: 100%;
+	font-family: "Open Sans";
 }
 
 .menu-principal {
-  background-color: rgb(245, 243, 248);
-  height: 75px;
+	background-color: rgb(245, 243, 248);
+	height: 75px;
 }
 
 .img-logo {
-  /*height: 50px;*/
-  width: 130px;
+	/*height: 50px;*/
+	width: 130px;
 }
 
 main {
-  margin: 0 auto;
-  width: 90%;
-  position: relative;
+	margin: 0 auto;
+	width: 90%;
+	position: relative;
 }
 
 .box-login {
-  margin: auto;
-  margin-top: 60px;
-  width: 350px;
-  padding: 40px 20px;
-  height: 60%;
-  background-color: rgb(244, 244, 244);
-  border-radius: 16px;
+	margin: auto;
+	margin-top: 60px;
+	width: 350px;
+	padding: 40px 20px;
+	height: 60%;
+	background-color: rgb(244, 244, 244);
+	border-radius: 16px;
 }
 
 .titulo-box-login {
-  font-style: normal;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 33px;
-  font-family: 'Open Sans';
-  color: #352446;
+	font-style: normal;
+	font-weight: 700;
+	font-size: 24px;
+	line-height: 33px;
+	font-family: "Open Sans";
+	color: #352446;
 }
 
 .input-email,
-.input-password  {
-  width: 100%;
-  height: 54px;
-  background-color: white;
-  padding: 0 15px;
-  font-size: 18px;
-  border-width: 0;
-  border-radius: 5px;
+.input-password {
+	width: 100%;
+	height: 54px;
+	background-color: white;
+	padding: 0 15px;
+	font-size: 18px;
+	border-width: 0;
+	border-radius: 5px;
 }
 
 .input-email::placeholder,
-.input-password::placeholder{
-  color: #B5B5B5;
+.input-password::placeholder {
+	color: #b5b5b5;
 }
 
 .email-text,
 .password-text {
-  font-family: 'Open Sans';
-  margin-top: 40px;
+	font-family: "Open Sans";
+	margin-top: 40px;
 }
 
 .login-button {
-  margin-top: 70px;
-  width: 100%;
-  height: 54px;
-  background: linear-gradient(70deg, #66418c, #A379CD);
-  border-radius: 27px;
-  border-width: 0;
-  font-size: 18px;
-  font-weight: bold;
-  color: white;
-  cursor: pointer;
+	margin-top: 70px;
+	width: 100%;
+	height: 54px;
+	background: linear-gradient(70deg, #66418c, #a379cd);
+	border-radius: 27px;
+	border-width: 0;
+	font-size: 18px;
+	font-weight: bold;
+	color: white;
+	cursor: pointer;
 }
 
 .back-button {
-  background-image: url('../img/back-button.png');
-  background-size: cover;
-  background-color: white;
-  border-width: 0;
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
+	background-image: url("../img/back-button.png");
+	background-size: cover;
+	background-color: white;
+	border-width: 0;
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
 }
 
 .filtros {
-  width: 100%;
-  position: relative;
-  padding: 20px 0;
-  margin-bottom: 30px;
+	width: 100%;
+	position: relative;
+	padding: 20px 0;
+	margin-bottom: 30px;
 }
 
 #filters-expanded {
-  width: 100%;
-  clear: both;
-  height: 100px;
-  padding: 20px 0px 5px 20px;
-  background-color: #f2f2f2;
-  border-radius: 20px;
+	width: 100%;
+	clear: both;
+	height: 100px;
+	padding: 20px 0px 5px 20px;
+	background-color: #f2f2f2;
+	border-radius: 20px;
+	display: none;
 }
 
 .p-filtros {
-  font-family: 'Open Sans';
-  font-weight: 300;
-  font-size: 30px;
-  color: #B5B5B5;
+	font-family: "Open Sans";
+	font-weight: 300;
+	font-size: 30px;
+	color: #b5b5b5;
 }
 
 .card-filtro {
-  padding: 5px 12px;
-  background-color: #A379CD;
-  float: left;
-  border-radius: 5px;
-  color: white;
-  font-family: 'Open Sans';
-  font-size: 15px;
-  font-weight: 600;
-  margin-right: 10px;
-  cursor: pointer;
+	padding: 5px 12px;
+	background-color: #a379cd;
+	float: left;
+	border-radius: 5px;
+	color: white;
+	font-family: "Open Sans";
+	font-size: 15px;
+	font-weight: 600;
+	margin-right: 10px;
+	cursor: pointer;
 }
 
 .card-filtro-expanded,
 .card-filtro-expanded-selected {
-  padding: 5px 12px;
-  background-color: #CCCCCC;
-  float: left;
-  border-radius: 5px;
-  color: #352446;
-  font-family: 'Open Sans';
-  font-size: 15px;
-  font-weight: 600;
-  margin-right: 10px;
-  cursor: pointer;
+	padding: 5px 12px;
+	background-color: #cccccc;
+	float: left;
+	border-radius: 5px;
+	color: #352446;
+	font-family: "Open Sans";
+	font-size: 15px;
+	font-weight: 600;
+	margin-right: 10px;
+	cursor: pointer;
 }
 
 .card-filtro-expanded-selected {
-  background-color: #352446;
-  color: #ffffff;
+	background-color: #352446;
+	color: #ffffff;
 }
 
 .color-tapped {
-  background-color: #66418c;
-  padding: 5px 12px;
-  float: left;
-  border-radius: 5px;
-  color: white;
-  font-family: 'Open Sans';
-  font-size: 15px;
-  font-weight: 600;
-  margin-right: 10px;
-  cursor: pointer;
+	background-color: #66418c;
+	padding: 5px 12px;
+	float: left;
+	border-radius: 5px;
+	color: white;
+	font-family: "Open Sans";
+	font-size: 15px;
+	font-weight: 600;
+	margin-right: 10px;
+	cursor: pointer;
 }
 
 .title-pedidos {
-  font-family: 'Open Sans';
-  font-weight: 700;
-  font-size: 34px;
-  color: #352446;
-  float: left;
+	font-family: "Open Sans";
+	font-weight: 700;
+	font-size: 34px;
+	color: #352446;
+	float: left;
 }
 
 .select-temporada {
-  float: right;
-  margin-top: 55px;
-  height: 40px;
-  padding: 0 30px;
-  border-radius: 10px;
-  border-width: 0;
-  background-color: #F5F3F8;
-  color: #6D6969;
-  font-weight: 600;
-  font-size: 16px;
-  cursor: pointer;
+	float: right;
+	margin-top: 55px;
+	height: 40px;
+	padding: 0 30px;
+	border-radius: 10px;
+	border-width: 0;
+	background-color: #f5f3f8;
+	color: #6d6969;
+	font-weight: 600;
+	font-size: 16px;
+	cursor: pointer;
 }
 
 .content {
-  margin: 0 auto;
-  position: relative;
-  padding: 20px;
-  width: 90%;
+	margin: 0 auto;
+	position: relative;
+	padding: 20px;
+	width: 90%;
 }
 
 .box-editar {
-  margin: 0 auto;
-  width: 45%;
-  position: relative;
+	margin: 0 auto;
+	width: 45%;
+	position: relative;
 }
 
 .button-salvar {
-  width: 220px;
-  margin-top: 50px;
-  margin-bottom: 50px;
-  height: 48px;
-  background: #7F5BA3;
-  border-radius: 24px;
-  color: white;
-  font-size: 16px;
-  font-weight: 700;
-  border: 0;
-  cursor: pointer;
+	width: 220px;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	height: 48px;
+	background: #7f5ba3;
+	border-radius: 24px;
+	color: white;
+	font-size: 16px;
+	font-weight: 700;
+	border: 0;
+	cursor: pointer;
 }
 
 /** Ver pedidos: */
 
-
 .pedidos {
-  width: 100%;
-  clear: both;
-  padding: 20px 0 0 0;
+	width: 100%;
+	clear: both;
+	padding: 20px 0 0 0;
 }
 
 .tabela {
-  width: 100%;
-  clear: both;
-  margin-top: 50px;
+	width: 100%;
+	clear: both;
+	margin-top: 50px;
 }
 
 .header-column {
-  height: 50px;
-  float: left;
+	height: 50px;
+	float: left;
 }
 
 .column p,
 .header-column p {
-  text-align: center;
-  vertical-align: middle;
-  font-weight: 600;
+	text-align: center;
+	vertical-align: middle;
+	font-weight: 600;
 }
 
 .w5 {
-  width: 5%;
+	width: 5%;
 }
 
 .w6 {
@@ -239,109 +238,103 @@ main {
 }
 
 .w7 {
-  width: 7%;
+	width: 7%;
 }
 
 .w8 {
-  width: 8%;
+	width: 8%;
 }
 
 .w10 {
-  width: 10%;
+	width: 10%;
 }
 
 .w12 {
-  width: 12%;
+	width: 12%;
 }
 
 .w12_5 {
-  width: 12.5%;
+	width: 12.5%;
 }
 
 .w15 {
-  width: 15%;
+	width: 15%;
 }
 
 .w-50 {
-  width: 50%;
+	width: 50%;
 }
 
 .w-75 {
-  width: 75%;
+	width: 75%;
 }
 
 .w-90 {
-  width: 90%;
+	width: 90%;
 }
 
 .first-column {
-  border-bottom-left-radius: 10px;
-  border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+	border-top-left-radius: 10px;
 }
 
 .last-column {
-  border-bottom-right-radius: 10px;
-  border-top-right-radius: 10px;
-  margin-bottom: 20px;
+	border-bottom-right-radius: 10px;
+	border-top-right-radius: 10px;
+	margin-bottom: 20px;
 }
 
 .column {
-  background-color: #F3F3F3;
-  height: 65px;
-  float: left;
-  position: relative;
+	background-color: #f3f3f3;
+	height: 65px;
+	float: left;
+	position: relative;
 }
 
 .aguardando-pagamento {
-  background-color: #F37373;
-  padding: 0 3px;
-  height: 30px;
-  border-radius: 10px;
-  margin: auto;
+	background-color: #f37373;
+	padding: 0 3px;
+	height: 30px;
+	border-radius: 10px;
+	margin: auto;
+	display: inline-block;
+	position: absolute;
+	margin: auto;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+  width: 100px;
 }
 
 .confirmado {
-  background-color: #F6A648;
-  padding: 0 3px;
-  height: 30px;
-  border-radius: 10px;
-  display: inline-block;
-  position: absolute;
-  margin: auto;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100px;
+	background-color: #f6a648;
+	padding: 0 3px;
+	height: 30px;
+	border-radius: 10px;
+	margin: auto;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100px;
 }
 
 
 .parcialmente-entregue {
-  background-color: #FCDC6B;
-  padding: 0 3px;
-  height: 30px;
-  border-radius: 10px;
-  display: inline-block;
-  position: absolute;
-  margin: auto;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+	background-color: #fcdc6b;
+	padding: 0 3px;
+	height: 30px;
+	border-radius: 10px;
+	margin: auto;
 }
 
 .entregue {
-  background-color: #30E4AE;
-  padding: 0 3px;
-  height: 30px;
-  border-radius: 10px;
-  display: inline-block;
-  position: absolute;
-  margin: auto;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+	background-color: #30e4ae;
+	padding: 0 3px;
+	height: 30px;
+	border-radius: 10px;
+	margin: auto;
 }
 
 .aguardando-pagamento > p,
@@ -352,81 +345,81 @@ main {
 .parcialmente-pago > p,
 .nao-pago > p,
 .nao > p {
-  color: white;
-  text-align: center;
-  vertical-align: middle;
-  font-weight: 600;
-  margin: 0 auto;
+	color: white;
+	text-align: center;
+	vertical-align: middle;
+	font-weight: 600;
+	margin: 0 auto;
 }
 
 .pago {
-  background-color: #30E4AE;
-  padding: 0 3px;
-  height: 30px;
-  border-radius: 10px;
-  display: inline-block;
-  position: absolute;
-  margin: auto;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 50px;
+	background-color: #30e4ae;
+	padding: 0 3px;
+	height: 30px;
+	border-radius: 10px;
+	display: inline-block;
+	position: absolute;
+	margin: auto;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100px;
 }
 
 .parcialmente-pago {
-  background-color: #FCDC6B;
-  padding: 0 3px;
-  height: 30px;
-  border-radius: 10px;
-  display: inline-block;
-  position: absolute;
-  margin: auto;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 150px;
+	background-color: #fcdc6b;
+	padding: 0 3px;
+	height: 30px;
+	border-radius: 10px;
+	display: inline-block;
+	position: absolute;
+	margin: auto;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 150px;
 }
 
-.nao-pago,
-.nao {
-  background-color: #F37373;
-  padding: 0 3px;
-  height: 30px;
-  border-radius: 10px;
-  margin: auto;
-  display: inline-block;
-  position: absolute;
-  margin: auto;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100px;
+.nao-pago {
+	background-color: #f37373;
+	padding: 0 3px;
+	height: 30px;
+	border-radius: 10px;
+	margin: auto;
+	display: inline-block;
+	position: absolute;
+	margin: auto;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100px;
 }
 .nao {
   width: 50px;
 }
 
 .column button {
-  position: absolute;
-  margin: auto;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  cursor: pointer;
+	position: absolute;
+	margin: auto;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	cursor: pointer;
 }
 
-.edit-button button {
-  text-decoration: underline;
-  cursor: pointer;
+
+.edit-button p {
+	text-decoration: underline;
+	cursor: pointer;
 }
 
-.delete-button button {
-  cursor: pointer;
-} 
+.delete-button button img {
+	cursor: pointer;
+}
 
 #name,
 #price,
@@ -436,66 +429,66 @@ main {
 #color,
 #time,
 #obs {
-  height: 54px;
-  padding: 0 30px;
-  border-radius: 10px;
-  border-width: 0;
-  background-color: #F5F3F8;
-  color: #6D6969;
-  font-weight: 600;
-  font-size: 16px;
-  width: 100%;
+	height: 54px;
+	padding: 0 30px;
+	border-radius: 10px;
+	border-width: 0;
+	background-color: #f5f3f8;
+	color: #6d6969;
+	font-weight: 600;
+	font-size: 16px;
+	width: 100%;
 }
 
 #obs {
-  padding: 20px;
-  font-family: 'Open Sans';
-  font-size: 15px;
-  height: 150px;
+	padding: 20px;
+	font-family: "Open Sans";
+	font-size: 15px;
+	height: 150px;
 }
 
 #caneca,
 #tirante,
 #camisa {
-  margin-bottom: 5px;
+	margin-bottom: 5px;
 }
 
 .main-title {
-  font-family: 'Open Sans';
-  font-weight: 700;
-  font-size: 30px;
-  color: #352446;
-  margin-top: 60px;
+	font-family: "Open Sans";
+	font-weight: 700;
+	font-size: 30px;
+	color: #352446;
+	margin-top: 60px;
 }
 
 .ver-obs p {
-  cursor: pointer;
-  text-decoration: underline;
+	cursor: pointer;
+	text-decoration: underline;
 }
 
 .edit-fornecedor button {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 .content-obs {
-  width: 70%;
+	width: 70%;
 }
 
 .card-observacao {
-  width: 100%;
-  background-color: #F6F6F6;
-  padding: 20px;
-  margin-top: 30px;
-  border-radius: 10px;
+	width: 100%;
+	background-color: #f6f6f6;
+	padding: 20px;
+	margin-top: 30px;
+	border-radius: 10px;
 }
 
 #add-obs {
-  width: 100%;
-  padding: 20px;
-  margin-top: 30px;
-  border-radius: 10px;
-  font-family: 'Open Sans';
-  min-height: 50px;
-  height: 100px;
-  font-size: 15px;
+	width: 100%;
+	padding: 20px;
+	margin-top: 30px;
+	border-radius: 10px;
+	font-family: "Open Sans";
+	min-height: 50px;
+	height: 100px;
+	font-size: 15px;
 }

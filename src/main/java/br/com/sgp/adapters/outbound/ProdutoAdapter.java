@@ -54,14 +54,6 @@ public class ProdutoAdapter implements ProdutoUseCaseOutboundPort {
     }
 
     @Override
-    public List<Produto> buscarTodos() {
-
-        List<ProdutoEntity> produtos = repository.findAll();
-        return mapper.mapToList(produtos, new TypeToken<List<Produto>>() {
-        }.getType());
-    }
-
-    @Override
     public List<Camisa> buscarTodasCamisas() {
 
         var camisas = repository.findAllCamisas();
@@ -97,7 +89,15 @@ public class ProdutoAdapter implements ProdutoUseCaseOutboundPort {
 
         var produto = repository.findById(id)
                 .orElseThrow(() -> new EntidadeNaoEncontradaException("Produto não encontrado!"));
-        return mapper.mapTo(produto, Produto.class);
+        if(produto instanceof CamisaEntity) {
+            return mapper.mapTo(produto, Camisa.class);
+        }
+        else if(produto instanceof CanecaEntity) {
+            return mapper.mapTo(produto, Caneca.class);
+        }
+        else {
+            return mapper.mapTo(produto, Tirante.class);
+        }
     }
 
 
@@ -108,10 +108,22 @@ public class ProdutoAdapter implements ProdutoUseCaseOutboundPort {
          return mapper.mapToList(produtos, new TypeToken<List<Produto>>() {}.getType());
      }
     @Override
-    public List<Produto> buscarInventario() {
+    public List<Camisa> buscarCamisasDoInventario() {
 
-        var inventario = repository.buscarInventario();
-        return mapper.mapToList(inventario, new TypeToken<List<Produto>>() {}.getType());
+        var inventario = repository.buscarCamisasDoInventario();
+        return mapper.mapToList(inventario, new TypeToken<List<Camisa>>() {}.getType());
+    }
+    @Override
+    public List<Caneca> buscarCanecasDoInventario() {
+
+        var inventario = repository.buscarCanecasDoInventario();
+        return mapper.mapToList(inventario, new TypeToken<List<Caneca>>() {}.getType());
+    }
+    @Override
+    public List<Tirante> buscarTirantesDoInventario() {
+
+        var inventario = repository.buscarTirantesDoInventario();
+        return mapper.mapToList(inventario, new TypeToken<List<Tirante>>() {}.getType());
     }
 
     @Override

@@ -29,8 +29,14 @@ public interface ProdutoRepository<E extends ProdutoEntity> extends JpaRepositor
 
     List<ProdutoEntity> findByPedidoId(Long idPedido);
 
-    @Query("SELECT pr FROM ProdutoEntity pr WHERE pr.prontaEntrega = True")
-    List<ProdutoEntity> buscarInventario();
+    @Query("SELECT c FROM CamisaEntity c WHERE c.prontaEntrega = True AND c.pedido IS NULL")
+    List<CamisaEntity> buscarCamisasDoInventario();
+
+    @Query("SELECT c FROM CanecaEntity c WHERE c.prontaEntrega = True AND c.pedido IS NULL")
+    List<CanecaEntity> buscarCanecasDoInventario();
+
+    @Query("SELECT t FROM TiranteEntity t WHERE t.prontaEntrega = True AND t.pedido IS NULL")
+    List<TiranteEntity> buscarTirantesDoInventario();
 
     @Query("SELECT c FROM CanecaEntity c WHERE c.modelo = :modelo")
     List<CanecaEntity> findCanecaByModelo(String modelo);

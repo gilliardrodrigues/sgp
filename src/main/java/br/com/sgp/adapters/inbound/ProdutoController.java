@@ -65,11 +65,14 @@ public class ProdutoController {
         return mapper.mapToList(tirantes, new TypeToken<List<TiranteResponse>>() {}.getType());
     }
 
-    @GetMapping("/inventario")
-    public List<ProdutoResponse> listarInventario() {
+    @GetMapping(value = "/inventario", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String listarInventario() {
 
-        var inventario = inboundPort.buscarInventario();
-        return mapper.mapToList(inventario, new TypeToken<List<ProdutoResponse>>() {}.getType());
+        try {
+            return inboundPort.buscarInventario();
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @GetMapping("/{id}")
@@ -77,7 +80,15 @@ public class ProdutoController {
 
         try {
             var produto = inboundPort.buscarPeloId(id);
-            return ResponseEntity.ok(mapper.mapTo(produto, ProdutoResponse.class));
+            if(produto instanceof Camisa) {
+                return ResponseEntity.ok(mapper.mapTo(produto, CamisaResponse.class));
+            }
+            else if(produto instanceof Caneca) {
+                return ResponseEntity.ok(mapper.mapTo(produto, CanecaResponse.class));
+            }
+            else {
+                return ResponseEntity.ok(mapper.mapTo(produto, TiranteResponse.class));
+            }
         } catch (Throwable e) {
             return ResponseEntity.notFound().build();
         }
@@ -197,31 +208,23 @@ public class ProdutoController {
         tirante.setPedido(pedidoInboundPort.buscarPeloId(tiranteRequest.getPedidoId()));
         return ResponseEntity.ok(mapper.mapTo(inboundPort.salvar(tirante), TiranteResponse.class));
     }
-    @PutMapping("/inventario/camisa/{idCamisa}")
-    public ResponseEntity<CamisaResponse> pedirCamisaDoInventario(@Valid @PathVariable Long idCamisa,
-                                                                  @RequestBody IdPedidoRequest idPedidoRequest) {
-        Long idPedido = idPedidoRequest.getId();
-        return inboundPort.produtoExiste(idCamisa) && pedidoInboundPort.pedidoExiste(idPedido)
-                ? ResponseEntity.ok(mapper.mapTo(inboundPort.adicionarProdutoDoInventarioAoPedido(idCamisa, idPedido),
-                                                CamisaResponse.class))
-                : ResponseEntity.notFound().build();
-    }
-    @PutMapping("/inventario/caneca/{idCaneca}")
-    public ResponseEntity<CanecaResponse> pedirCanecaDoInventario(@Valid @PathVariable Long idCaneca,
+
+    @PutMapping("/inventario/{idProduto}")
+    public ResponseEntity<ProdutoResponse> pedirProdutoDoInventario(@Valid @PathVariable Long idProduto,
                                                                     @RequestBody IdPedidoRequest idPedidoRequest) {
         Long idPedido = idPedidoRequest.getId();
-        return inboundPort.produtoExiste(idCaneca) && pedidoInboundPort.pedidoExiste(idPedido)
-                ? ResponseEntity.ok(mapper.mapTo(inboundPort.adicionarProdutoDoInventarioAoPedido(idCaneca, idPedido),
-                                                CanecaResponse.class))
-                : ResponseEntity.notFound().build();
-    }
-    @PutMapping("/inventario/tirante/{idTirante}")
-    public ResponseEntity<TiranteResponse> pedirTiranteDoInventario(@Valid @PathVariable Long idTirante,
-                                                                    @RequestBody IdPedidoRequest idPedidoRequest) {
-        Long idPedido = idPedidoRequest.getId();
-        return inboundPort.produtoExiste(idTirante) && pedidoInboundPort.pedidoExiste(idPedido)
-                ? ResponseEntity.ok(mapper.mapTo(inboundPort.adicionarProdutoDoInventarioAoPedido(idTirante, idPedido),
-                                                TiranteResponse.class))
-                : ResponseEntity.notFound().build();
+        if(inboundPort.produtoExiste(idProduto) && pedidoInboundPort.pedidoExiste(idPedido)) {
+            var produto = inboundPort.adicionarProdutoDoInventarioAoPedido(idProduto, idPedido);
+            if (produto instanceof Camisa) {
+                return ResponseEntity.ok(mapper.mapTo(produto, CamisaResponse.class));
+            } else if (produto instanceof Caneca) {
+                return ResponseEntity.ok(mapper.mapTo(produto, CanecaResponse.class));
+            } else {
+                return ResponseEntity.ok(mapper.mapTo(produto, TiranteResponse.class));
+            }
+        }
+        else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

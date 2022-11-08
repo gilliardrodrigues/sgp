@@ -36,15 +36,15 @@ async function submitForm(e, form, id) {
 	jsonFormData.produtosOferecidos = [];
 	if (jsonFormData.caneca) {
 		delete jsonFormData.caneca;
-		jsonFormData.produtosOferecidos.push("CANECA");
+		jsonFormData.produtosOferecidos.push("Caneca");
 	}
 	if (jsonFormData.tirante) {
 		delete jsonFormData.tirante;
-		jsonFormData.produtosOferecidos.push("TIRANTE");
+		jsonFormData.produtosOferecidos.push("Tirante");
 	}
 	if (jsonFormData.camisa) {
 		delete jsonFormData.camisa;
-		jsonFormData.produtosOferecidos.push("CAMISA");
+		jsonFormData.produtosOferecidos.push("Camisa");
 	}
 
 	editarFornecedor(headers, jsonFormData, id);

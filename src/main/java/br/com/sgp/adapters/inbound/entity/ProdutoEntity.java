@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 
 @Getter
 @Setter
@@ -19,7 +18,7 @@ public class ProdutoEntity {
     protected Long id;
 
     @Column(name = "VALOR")
-    protected BigDecimal valor;
+    protected Integer valor;
 
     @Column(name = "ENTREGUE")
     protected Boolean entregue;

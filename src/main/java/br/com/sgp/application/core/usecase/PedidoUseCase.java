@@ -58,7 +58,7 @@ public class PedidoUseCase implements PedidoUseCaseInboundPort {
             return outboundPort.buscarPelaData(data);
         } else if(tipoDeProduto != null && !tipoDeProduto.isEmpty()) {
             var pedidos = buscarPeloTipoDeProduto(TipoProduto.valueOf(tipoDeProduto));
-            return new ArrayList<Pedido>(pedidos);
+            return new ArrayList<>(pedidos);
         } else {
             return outboundPort.buscarTodos();
         }
@@ -87,18 +87,13 @@ public class PedidoUseCase implements PedidoUseCaseInboundPort {
     }
 
     @Override
-    public void adicionarProdutoDoInventario(Pedido pedido, Long idProduto) {
-
-        //TODO
-    }
-
-    @Override
     public Pedido darBaixa(Long id, int valorPago) throws NegocioException {
         if (!outboundPort.pedidoExiste(id)) throw new NegocioException("Pedido não encontrado");
         
         var pedido = outboundPort.buscarPeloId(id);
 
-        if (valorPago < 0 || valorPago > pedido.getValor()) throw new NegocioException("Valor pago inválido");
+        if (valorPago < 0 || valorPago > pedido.getValor())
+            throw new NegocioException("Valor pago inválido");
         
         pedido.setValorPago(valorPago);
 
@@ -116,8 +111,8 @@ public class PedidoUseCase implements PedidoUseCaseInboundPort {
         return outboundPort.pedidoExiste(id);
     }
 
-    @Override // TODO gill
-    public void encerrarTemporadaDePedidos(Temporada temporada) {
+    @Override
+    public void encerrarTemporadaDePedidos(Temporada temporada) { //TODO gill
     //     List<Pedido> pedidosNaoConfirmados = outboundPort.buscarPelaTemporadaAssimComoSituacao(temporada, StatusPedido.AGUARDANDO_PAGAMENTO);
     //     pedidosNaoConfirmados.forEach(pedido -> {
     //         outboundPort.excluir(pedido.getId());

@@ -17,15 +17,15 @@ async function submitForm(e, form) {
 	jsonFormData.produtosOferecidos = [];
 	if (jsonFormData.caneca) {
 		delete jsonFormData.caneca;
-		jsonFormData.produtosOferecidos.push("CANECA");
+		jsonFormData.produtosOferecidos.push("Caneca");
 	}
 	if (jsonFormData.tirante) {
 		delete jsonFormData.tirante;
-		jsonFormData.produtosOferecidos.push("TIRANTE");
+		jsonFormData.produtosOferecidos.push("Tirante");
 	}
 	if (jsonFormData.camisa) {
 		delete jsonFormData.camisa;
-		jsonFormData.produtosOferecidos.push("CAMISA");
+		jsonFormData.produtosOferecidos.push("Camisa");
 	}
 
 	let comentario;
@@ -34,13 +34,11 @@ async function submitForm(e, form) {
 		delete jsonFormData.observacao;
 	}
 
-
 	await criarFornecedor(headers, jsonFormData, comentario);
-
-	location.href = "../fornecedores/index.html";
 }
 
 async function criarFornecedor(headers, jsonFormData, comentario) {
+	console.log(jsonFormData);
 	await fetch("http://localhost:8080/fornecedores", {
 		method: "POST",
 		headers,
@@ -54,6 +52,8 @@ async function criarFornecedor(headers, jsonFormData, comentario) {
 			response.json().then(body => {
 				criarComentario(headers, body.id, comentario);
 			});
+
+			location.href = "../fornecedores/index.html";
 		}
 	});
 }
