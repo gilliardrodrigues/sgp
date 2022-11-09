@@ -1,6 +1,6 @@
 body {
 	margin: 0 auto;
-	 width: 100%;
+	width: 100%;
 	height: 100%;
 	font-family: "Open Sans";
 }
@@ -236,7 +236,7 @@ main {
 }
 
 .w6 {
-  width: 6%;
+	width: 6%;
 }
 
 .w7 {
@@ -306,7 +306,7 @@ main {
 	left: 0;
 	right: 0;
 	bottom: 0;
-  width: 100px;
+	width: 50px;
 }
 
 .confirmado {
@@ -321,7 +321,6 @@ main {
 	bottom: 0;
 	width: 100px;
 }
-
 
 .parcialmente-entregue {
 	background-color: #fcdc6b;
@@ -398,10 +397,10 @@ main {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	width: 100px;
+	width: 50px;
 }
 .nao {
-  width: 50px;
+	width: 50px;
 }
 
 .column button {
@@ -413,7 +412,6 @@ main {
 	bottom: 0;
 	cursor: pointer;
 }
-
 
 .edit-button p {
 	text-decoration: underline;

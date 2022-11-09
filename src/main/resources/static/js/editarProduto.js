@@ -1,21 +1,26 @@
 window.onload = async () => {
-	document.querySelector(".tamanho").style.display = "none";
-	document.querySelector(".cor").style.display = "none";
-	document.querySelector(".curso").style.display = "none";
-	document.querySelector(".modelo").style.display = "none";
+	const queryString = window.location.search;
+	const urlParams = new URLSearchParams(queryString);
+	const id = urlParams.get("id");
 
 	const form = document.querySelector("form");
 	form.addEventListener("submit", function (e) {
-		submitForm(e, this);
+		submitForm(e, this, id);
 	});
 
-	const tipoInput = document.querySelector(".tipo");
-	tipoInput.addEventListener("change", function (e) {
-		atualizarVisibilidade(e, this);
-	});
+	const objeto = await fetch(`http://localhost:8080/produtos/${id}`).then(response => response.json());
+	console.log(objeto);
+	document.querySelector(".tipo").value = objeto.tipo;
+	atualizarVisibilidade(document.querySelector(".tipo"));
+	document.querySelector(".valor input").value = objeto.valor;
+
+	document.querySelector(".modelo input").value = objeto.modelo ? objeto.modelo : "";
+	document.querySelector(".curso select").value = objeto.curso ? objeto.curso : "";
+	document.querySelector(".tamanho select").value = objeto.tamanho ? objeto.tamanho : "";
+	document.querySelector(".cor select").value = objeto.cor ? objeto.cor : "";
 };
 
-async function submitForm(e, form) {
+async function submitForm(e, form, id) {
 	e.preventDefault();
 
 	const headers = {
@@ -23,15 +28,24 @@ async function submitForm(e, form) {
 	};
 
 	const jsonFormData = buildJsonFormData(form);
-	jsonFormData.entregue = false;
-	jsonFormData.chegou = false;
+	jsonFormData.produtosOferecidos = [];
+	if (jsonFormData.caneca) {
+		delete jsonFormData.caneca;
+		jsonFormData.produtosOferecidos.push("Caneca");
+	}
+	if (jsonFormData.tirante) {
+		delete jsonFormData.tirante;
+		jsonFormData.produtosOferecidos.push("Tirante");
+	}
+	if (jsonFormData.camisa) {
+		delete jsonFormData.camisa;
+		jsonFormData.produtosOferecidos.push("Camisa");
+	}
 
-	await criarProduto(headers, jsonFormData);
+	editarProduto(headers, jsonFormData, id);
 }
-
-async function criarProduto(headers, jsonFormData, comentario) {
+async function editarProduto(headers, jsonFormData, id) {
 	let endpoint;
-
 	if (jsonFormData.tipo === "Camisa") {
 		endpoint = "http://localhost:8080/produtos/admin/camisas";
 	} else if (jsonFormData.tipo === "Caneca") {
@@ -39,30 +53,18 @@ async function criarProduto(headers, jsonFormData, comentario) {
 	} else if (jsonFormData.tipo === "Tirante") {
 		endpoint = "http://localhost:8080/produtos/admin/tirantes";
 	}
-
-	console.log({ endpoint: endpoint, method: "POST", headers, body: JSON.stringify(jsonFormData) });
-
-	await fetch(endpoint, {
-		method: "POST",
+	console.log({
+		url: `${endpoint}/${id}`,
+		method: "PUT",
 		headers,
 		body: JSON.stringify(jsonFormData),
-	}).then(response => {
-		if (!response.ok) {
-			response.json().then(body => {
-				alert(body.titulo);
-			});
-		} else {
-			location.href = "../produtos/index.html";
-		}
 	});
-}
 
-async function criarComentario(headers, fornecedorId, comentario) {
-	await fetch(`http://localhost:8080/fornecedores/${fornecedorId}/observacoes`, {
-		method: "POST",
+	await fetch(`${endpoint}/${id}`, {
+		method: "PUT",
 		headers,
-		body: JSON.stringify({ comentario: comentario }),
-	});
+		body: JSON.stringify(jsonFormData),
+	}).then(() => (location.href = "../produtos/index.html"));
 }
 
 function buildJsonFormData(form) {
@@ -73,7 +75,7 @@ function buildJsonFormData(form) {
 	return jsonFormData;
 }
 
-function atualizarVisibilidade(e, input) {
+function atualizarVisibilidade(input) {
 	if (["Caneca", "Tirante"].indexOf(input.value) !== -1) {
 		document.querySelector(".tamanho").style.display = "none";
 		document.querySelector(".cor").style.display = "none";

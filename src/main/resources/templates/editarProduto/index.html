@@ -1,77 +1,92 @@
 <html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="../../static/css/main.css" />
+		<link rel="stylesheet" type="text/css" href="../../static/css/editarPedido.css" />
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css" />
+		<title>Área administrativa | SGP</title>
+		<script type="text/javascript" src="../../static/js/editarProduto.js"></script>
+	</head>
 
-  <head>
-    <link rel="stylesheet" type="text/css" href="../../static/css/main.css">
-    <link rel="stylesheet" type="text/css" href="../../static/css/editarPedido.css">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css">
-    <title>Área administrativa | SGP</title>
-  </head>
+	<body>
+		<header class="menu-principal">
+			<main>
+				<div class="header-1">
+					<div class="logo">
+						<img class="img-logo" src="../../static/img/logo.png" alt="Logo SGP" />
+					</div>
+				</div>
+			</main>
+		</header>
 
-  <body>
+		<div class="content">
+			<a href="../produtos/index.html">
+				<button class="back-button"></button>
+			</a>
 
-    <header class="menu-principal">
-      <main>
-        <div class="header-1">
-          <div class="logo">
-            <img class="img-logo" src="../../static/img/logo.png" alt="Logo SGP" />
-          </div>
-        </div>
-      </main>
-    </header>
+			<div class="box-editar">
+				<p class="main-title">Editar Produto</p>
+				<form action="">
+					<div class="label-textfield">
+						<p class="label-attribute">Tipo de produto*</p>
+						<input type="text" readonly id="name" class="tipo" name="tipo" />
+					</div>
 
-    <div class="content">
+					<div class="label-textfield valor">
+						<p class="label-attribute">Preço*</p>
+						<input type="text" placeholder="Insira o preço" id="name" name="valor" />
+					</div>
 
-      <a href="../produtos/index.html">
-        <button class="back-button"></button>
-      </a>
+					<div class="label-textfield modelo">
+						<p class="label-attribute">Modelo</p>
+						<input type="text" placeholder="Insira o modelo" class="modelo" id="model" name="fname" />
+					</div>
 
-      <div class="box-editar">
-        <p class="main-title">Editar Produto</p>
+					<div class="label-textfield curso">
+						<p class="label-attribute">Curso*</p>
+						<select name="curso" class="select-status">
+							<option value="">Selecione o curso</option>
+							<option value="Sistemas de Informação">Sistemas de Informação</option>
+							<option value="Ciência da Computação">Ciência da Computação</option>
+						</select>
+					</div>
 
-        <div class="label-textfield">
-          <p class="label-attribute">Nome*</p>
-          <input type="text" placeholder="Insira o nome" value="Camisa" id="name" name="fname">
-        </div>
+					<div class="label-textfield tamanho">
+						<p class="label-attribute">Tamanho*</p>
+						<select name="tamanho" class="select-status">
+							<option value="">Selecione o tamanho</option>
+							<option value="PP">PP</option>
+							<option value="PPBL">PPBL</option>
+							<option value="P">P</option>
+							<option value="PBL">PBL</option>
+							<option value="M">M</option>
+							<option value="MBL">MBL</option>
+							<option value="G">G</option>
+							<option value="GBL">GBL</option>
+							<option value="GG">GG</option>
+							<option value="GGBL">GGBL</option>
+							<option value="XG">XG</option>
+							<option value="XGBL">XG</option>
+						</select>
+					</div>
 
-        <div class="label-textfield">
-          <p class="label-attribute">Preço*</p>
-          <input type="text" placeholder="Insira o preço" value="R$50,00" id="price" name="fname">
-        </div>
+					<div class="label-textfield cor">
+						<p class="label-attribute">Cor*</p>
+						<select name="cor" class="select-status">
+							<option value="">Selecione uma cor</option>
+							<option value="Preto">Preto</option>
+							<option value="Branco">Branco</option>
+							<option value="Azul">Azul</option>
+							<option value="Vinho">Vinho</option>
+							<option value="Cinza">Cinza</option>
+							<option value="Rosa">Rosa</option>
+							<option value="Petróleo">Petróleo</option>
+							<option value="Verde">Verde</option>
+						</select>
+					</div>
 
-        <div class="label-textfield">
-          <p class="label-attribute">Pronta-entrega*</p>
-          <select name="pronta-entrega" class="select-status">
-            <option value="yes">SIM</option>
-            <option value="no">NÃO</option>
-          </select>
-        </div>
-
-        <div class="label-textfield">
-          <p class="label-attribute">Modelo</p>
-          <input type="text" placeholder="Insira o modelo" value="-" id="model" name="fname">
-        </div>
-
-        <div class="label-textfield">
-          <p class="label-attribute">Curso</p>
-          <input type="text" placeholder="Insira o curso" value="R$50,00" id="course" name="fname">
-        </div>
-
-        <div class="label-textfield">
-          <p class="label-attribute">Tamanho</p>
-          <input type="text" placeholder="Insira o tamanho" id="size" name="fname">
-        </div>
-
-        <div class="label-textfield">
-          <p class="label-attribute">Cor</p>
-          <input type="text" placeholder="Insira a cor" id="color" name="fname">
-        </div>
-
-        <button class="button-salvar">Salvar</button>
-
-      </div>
-
-    </div>
-
-  </body>
-
+					<button type="submit" class="button-salvar">Salvar</button>
+				</form>
+			</div>
+		</div>
+	</body>
 </html>
