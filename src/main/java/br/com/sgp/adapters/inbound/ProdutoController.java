@@ -8,6 +8,7 @@ import br.com.sgp.adapters.inbound.request.TiranteRequest;
 import br.com.sgp.adapters.inbound.response.*;
 import br.com.sgp.application.core.domain.Camisa;
 import br.com.sgp.application.core.domain.Caneca;
+import br.com.sgp.application.core.domain.TipoProduto;
 import br.com.sgp.application.core.domain.Tirante;
 import br.com.sgp.application.core.exception.NegocioException;
 import br.com.sgp.application.ports.in.PedidoUseCaseInboundPort;
@@ -34,10 +35,10 @@ public class ProdutoController {
     private final GenericMapper mapper;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public String listarProdutos() {
+    public ResponseEntity<String> listarProdutos() {
 
         try {
-            return inboundPort.buscarTodos();
+            return ResponseEntity.ok(inboundPort.buscarTodos());
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
@@ -52,24 +53,24 @@ public class ProdutoController {
     }
 
     @GetMapping("/canecas")
-    public List<CanecaResponse> listarCanecas() {
+    public ResponseEntity<List<CanecaResponse>> listarCanecas() {
 
         var canecas = inboundPort.buscarTodasCanecas();
-        return mapper.mapToList(canecas, new TypeToken<List<CanecaResponse>>() {}.getType());
+        return ResponseEntity.ok(mapper.mapToList(canecas, new TypeToken<List<CanecaResponse>>() {}.getType()));
     }
 
     @GetMapping("/tirantes")
-    public List<TiranteResponse> listarTirantes() {
+    public ResponseEntity<List<TiranteResponse>> listarTirantes() {
 
         var tirantes = inboundPort.buscarTodosTirantes();
-        return mapper.mapToList(tirantes, new TypeToken<List<TiranteResponse>>() {}.getType());
+        return ResponseEntity.ok(mapper.mapToList(tirantes, new TypeToken<List<TiranteResponse>>() {}.getType()));
     }
 
     @GetMapping(value = "/inventario", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String listarInventario() {
+    public ResponseEntity<String> listarInventario() {
 
         try {
-            return inboundPort.buscarInventario();
+            return ResponseEntity.ok(inboundPort.buscarInventario());
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
@@ -95,10 +96,10 @@ public class ProdutoController {
     }
 
     @GetMapping(value = "/filtro/pedido/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String buscarProdutosPeloIdPedido(@PathVariable Long id) {
+    public ResponseEntity<String> buscarProdutosPeloIdPedido(@PathVariable Long id) {
 
         try {
-            return inboundPort.buscarProdutosPeloIdPedido(id);
+            return ResponseEntity.ok(inboundPort.buscarProdutosPeloIdPedido(id));
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
@@ -195,7 +196,6 @@ public class ProdutoController {
         return ResponseEntity.ok(mapper.mapTo(inboundPort.salvar(camisa), CamisaResponse.class));
     }
 
-
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/canecas")
     public ResponseEntity<CanecaResponse> pedirCaneca(@Valid @RequestBody CanecaRequest canecaRequest) throws NegocioException {
@@ -232,4 +232,10 @@ public class ProdutoController {
         }
     }
 
+    @PutMapping("/admin/chegadaProdutos/{tipoDoProduto}")
+    public ResponseEntity marcarChegadaTipoDeProduto(@PathVariable TipoProduto tipoDoProduto) {
+
+        inboundPort.marcarChegadaTipoDeProduto(tipoDoProduto);
+        return ResponseEntity.ok().build();
+    }
 }

@@ -64,7 +64,6 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
             }
         }
 
-
         if (produto.getTipo().equals(TipoProduto.CAMISA)) {
             Camisa camisa = (Camisa) produto;
             return outboundPort.salvarCamisa(camisa);
@@ -75,6 +74,38 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
             Tirante tirante = (Tirante) produto;
             return outboundPort.salvarTirante(tirante);
         }
+    }
+
+    @Override
+    public void marcarChegadaTipoDeProduto(TipoProduto tipoProduto) {
+
+        if(!temporadaOutboundPort.existeTemporadaAtiva()) {
+            if(tipoProduto.equals(TipoProduto.CAMISA)) {
+                var camisas = outboundPort.buscarTodasCamisas();
+                camisas.forEach(camisa -> {
+                    camisa.setChegou(true);
+                    outboundPort.salvarCamisa(camisa);
+                });
+            }
+            else if(tipoProduto.equals(TipoProduto.CANECA)) {
+                var canecas = outboundPort.buscarTodasCanecas();
+                canecas.forEach(caneca -> {
+                    caneca.setChegou(true);
+                    outboundPort.salvarCaneca(caneca);
+                });
+            }
+            else {
+                var tirantes = outboundPort.buscarTodosTirantes();
+                tirantes.forEach(tirante -> {
+                    tirante.setChegou(true);
+                    outboundPort.salvarTirante(tirante);
+                });
+            }
+        }
+        else {
+            throw new NegocioException("Não é possível prosseguir porque a temporada ainda está em andamento!");
+        }
+
     }
 
     public String converterListasDeProdutosParaJson(List<Camisa> camisas, List<Caneca> canecas, List<Tirante> tirantes) throws JsonProcessingException {
