@@ -133,7 +133,7 @@ Os clientes conseguem:
 
 - ✅ Projetar tela de consulta do usuário no Figma e validar design. [Maíla, Fernando]
 
-- ✅ Implementar interface web. [Fernando]
+- ✅ Implementar interface web. [Maíla]
 
 - ✅ Criar e implementar rota para mostrar apenas produtos disponíveis à pronta-entrega. [Gilliard]
 
@@ -141,7 +141,7 @@ Os clientes conseguem:
 
 - ✅ Projetar telas relativas ao processo de abertura de pedido no Figma e validar design. [Maíla, Fernando]
 
-- ✅ Implementar interface web. [Fernando]
+- ✅ Implementar interface web. [Maíla]
 
 - ✅ Criar e implementar rota para criar pedido [Samuel]
 
@@ -150,7 +150,7 @@ Os clientes conseguem:
 
 - ✅ Projetar tela de acompanhamento de pedidos e validar design. [Maíla]
 
-- ✅ Implementar interface web. [Fernando]
+- ✅ Implementar interface web. [Maíla]
 
 - ✅ Criar e implementar rota para buscar pedido [Samuel]
 
@@ -191,7 +191,7 @@ Os clientes conseguem:
 
 - ✅ Projetar telas de login e tela principal do administrador no Figma e validar design. [Fernando]
 
-- ⬜️ Implementar telas de login, cadastro e tela principal do administrador. [Maíla]
+- ⬜️ Implementar telas de login, cadastro e tela principal do administrador. [Fernando]
 
 
 ### Diagrama de Classes
