@@ -37,9 +37,9 @@ function mostrarProdutos(produtos, htmlElement, isInventory, pedidoId) {
 		const produtoHTML = montarHTMLProduto(produto);
 		if (isInventory) {
 			console.log(produto.id);
-			produtoHTML.innerHTML += `<div class="column w15 last-column"><button onclick="adicionarAoPedido(${produto.id}, ${pedidoId})" style="border: 0; background: transparent"><a ><p>Adicionar</p></a></button></div>`;
+			produtoHTML.innerHTML += `<div class="column w8 last-column"><button onclick="adicionarAoPedido(${produto.id}, ${pedidoId})" style="border: 0; background: transparent"><a ><p>Adicionar</p></a></button></div>`;
 		} else {
-			produtoHTML.innerHTML += `<div class="column delete-button w15 last-column"><button onclick="removerProduto(${produto.id})" style="border: 0; background: transparent"><img src="../../static/img/trash-icon.png" width="20px" alt="submit"/></button></div>`;
+			produtoHTML.innerHTML += `<div class="column delete-button w8 last-column"><button onclick="removerProduto(${produto.id})" style="border: 0; background: transparent"><img src="../../static/img/trash-icon.png" width="20px" alt="submit"/></button></div>`;
 		}
 
 		htmlElement.append(produtoHTML);
@@ -67,7 +67,7 @@ function montarHTMLProduto(produto) {
 
 		const col = document.createElement("div");
 		col.classList.add("column");
-		if (field === "curso") col.classList.add("w15");
+		if (field === "curso" || field === "cor") col.classList.add("w15");
 		else col.classList.add("w10");
 		if (index == 0) col.classList.add("first-column");
 
@@ -131,6 +131,8 @@ async function adicionarAoPedido(id, pedidoId) {
 		headers,
 		body: JSON.stringify({ id: pedidoId }),
 	});
+
+	location.reload();
 }
 
 async function removerProduto(id) {
