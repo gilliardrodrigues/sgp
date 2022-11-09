@@ -1,3 +1,4 @@
+// import moment from moment
 window.onload = async () => {
 	const queryString = window.location.search;
 	const urlParams = new URLSearchParams(queryString);
@@ -11,14 +12,13 @@ window.onload = async () => {
 	//const situacao = ["AguardandoPagamento", "Confirmado", "ParcialmenteEntregue", "Entregue"];
 
 	const temporada = await fetch(`http://localhost:8080/temporadas/${id}`).then(response => response.json());
-
-  console.log(temporada);
+	console.log(temporada);
 	document.querySelector(".descricao").value = temporada.descricao;
-	//document.querySelector(".inicio").value = temporada.inicio;
-	//document.querySelector(".termino").value = temporada.termino;
+	document.querySelector(".inicio").value = new Date(temporada.dataInicio).toLocaleDateString();
+	document.querySelector(".termino").value = temporada.dataFim ? new Date(temporada.dataFim).toLocaleDateString() : "";
 	// document.querySelector(".tempo-entrega").value = temporada.tempoEntregaEmDias;
-	/*
-	temporada.produtosOferecidos.forEach(produto => {
+
+	temporada.catalogo.forEach(produto => {
 		if (produto === "Caneca") {
 			document.querySelector(".caneca").checked = true;
 		} else if (produto === "Tirante") {
@@ -26,7 +26,7 @@ window.onload = async () => {
 		} else if (produto === "Camisa") {
 			document.querySelector(".camisa").checked = true;
 		}
-	});*/
+	});
 };
 
 async function submitForm(e, form, id) {

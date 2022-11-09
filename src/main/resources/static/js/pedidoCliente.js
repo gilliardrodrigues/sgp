@@ -3,6 +3,9 @@ window.onload = async () => {
 	const urlParams = new URLSearchParams(queryString);
 	const pedidoId = urlParams.get("id");
 
+	const mainTitle = document.querySelector(".main-title");
+	mainTitle.innerHTML += `#${pedidoId}`;
+
 	const produtos = await getProdutos(pedidoId);
 	console.log({
 		produtos: produtos,
@@ -11,19 +14,21 @@ window.onload = async () => {
 	mostrarProdutos(produtos, content);
 
 	const produtosProntaEntrega = await getProdutosProntaEntrega();
-	console.log(produtosProntaEntrega);
+	console.log({
+		produtosProntaEntrega: produtosProntaEntrega,
+	});
 
 	const divProntaEntrega = document.querySelector(".produtosProntaEntrega");
 	mostrarProdutos(produtosProntaEntrega, divProntaEntrega, true, pedidoId);
 
-	// const deleteForm = document.querySelector(".delete-button");
-	// deleteForm.addEventListener("submit", function (e) {
-	// 	submitForm(e, this);
-	// });
-
 	const addNovoProduto = document.querySelector(".button-add-novo-produto");
 	addNovoProduto.addEventListener("click", () => {
 		location.href = `../addProdutoPedido/index.html?id=${pedidoId}`;
+	});
+
+	const finalizarPedidoBtn = document.querySelector(".button-finalizar-pedido");
+	finalizarPedidoBtn.addEventListener("click", () => {
+		location.href = `../homeCliente/index.html`;
 	});
 };
 
@@ -32,9 +37,9 @@ function mostrarProdutos(produtos, htmlElement, isInventory, pedidoId) {
 		const produtoHTML = montarHTMLProduto(produto);
 		if (isInventory) {
 			console.log(produto.id);
-			produtoHTML.innerHTML += `<div class="column w10 last-column"><button onclick="adicionarAoPedido(${produto.id}, ${pedidoId})" style="border: 0; background: transparent"><a href=""><p>Adicionar</p></a></button></div>`;
+			produtoHTML.innerHTML += `<div class="column w15 last-column"><button onclick="adicionarAoPedido(${produto.id}, ${pedidoId})" style="border: 0; background: transparent"><a ><p>Adicionar</p></a></button></div>`;
 		} else {
-			produtoHTML.innerHTML += `<div class="column delete-button w10 last-column"><button onclick="removerProduto(${produto.id})" style="border: 0; background: transparent"><img src="../../static/img/trash-icon.png" width="20px" alt="submit"/></button></div>`;
+			produtoHTML.innerHTML += `<div class="column delete-button w15 last-column"><button onclick="removerProduto(${produto.id})" style="border: 0; background: transparent"><img src="../../static/img/trash-icon.png" width="20px" alt="submit"/></button></div>`;
 		}
 
 		htmlElement.append(produtoHTML);

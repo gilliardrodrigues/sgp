@@ -10,7 +10,6 @@ window.onload = async () => {
 		content.append(temporadaHTML);
 		console.log(temporadaHTML);
 	}, []);
-
 };
 
 async function getTemporadas() {
@@ -31,17 +30,14 @@ function montarHTMLTemporada(temporada) {
 
 		const p = document.createElement("p");
 
-
-
-
 		p.textContent = key === "id" ? "#" + temporada[key] : temporada[key];
 
 		col.appendChild(p);
 		tabela.appendChild(col);
 	});
 
-	tabela.innerHTML += `<div class="column ver-obs w12"> <a href=""> <button type="submit" style="border: 0; background: transparent"> <p>Finalizar<br>temporada</p></button> </a> </div><div class="column edit-temporada w8"> <a href="../editartemporada/index.html?id=${temporada.id}"> <button type="submit" class="edit-button" style="border: 0; background: transparent"> <img src="../../static/img/edit-button.svg" width="20px" alt="submit"/> </button> </a> </div><div class="column delete-button w5 last-column"> <button onclick="removertemporada(${temporada.id})"style="border: 0; background: transparent"> <img src="../../static/img/trash-icon.png" width="20px" alt="submit"/> </button></div>`
-	
+	tabela.innerHTML += `<div class="column ver-obs w12"> <a href=""> <button type="submit" style="border: 0; background: transparent"> <p>Finalizar<br>temporada</p></button> </a> </div><div class="column edit-temporada w8"> <a href="../editarTemporada/index.html?id=${temporada.id}"> <button type="submit" class="edit-button" style="border: 0; background: transparent"> <img src="../../static/img/edit-button.svg" width="20px" alt="submit"/> </button> </a> </div><div class="column delete-button w5 last-column"> <button onclick="removertemporada(${temporada.id})"style="border: 0; background: transparent"> <img src="../../static/img/trash-icon.png" width="20px" alt="submit"/> </button></div>`;
+
 	return tabela;
 }
 

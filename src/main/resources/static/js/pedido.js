@@ -1,7 +1,3 @@
-function loadPedidos() {
-	console.log(getPedidos());
-}
-
 window.onload = async () => {
 	const pedidos = await getPedidos();
 	const content = document.getElementsByClassName("content")[0];

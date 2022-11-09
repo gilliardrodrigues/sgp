@@ -18,9 +18,7 @@
 		</header>
 
 		<div class="content">
-			<a href="../temporadas/index.html">
-				<button class="back-button"></button>
-			</a>
+			<button onclick="window.history.go(-1); return false;" class="back-button"></button>
 
 			<div class="box-editar">
 				<p class="main-title">Adicionar Temporada de Vendas</p>
@@ -32,38 +30,37 @@
 							placeholder="Insira a descrição da temporada..."
 							id="name"
 							name="descricao"
-              class="descricao" />
+							class="descricao" />
 					</div>
 
-          <div class="label-textfield">
+					<div class="label-textfield">
 						<p class="label-attribute">Início*</p>
-						<input
-							type="text"
-							placeholder="Insira o início da temporada..."
-							id="name"
-							name="inicio"
-              class="inicio" />
+						<input type="text" placeholder="Insira o início da temporada..." id="name" name="inicio" class="inicio" />
 					</div>
 
-          <div class="label-textfield">
+					<div class="label-textfield">
 						<p class="label-attribute">Término*</p>
 						<input
 							type="text"
 							placeholder="Insira o término da temporada..."
 							id="name"
 							name="termino"
-              class="termino" />
+							class="termino" />
 					</div>
 
 					<div class="label-textfield">
 						<p class="label-attribute">Produtos</p>
-						<input class="caneca"  type="checkbox" id="caneca" name="caneca" value="caneca" />
+						<input class="caneca" type="checkbox" id="caneca" name="caneca" value="caneca" />
 						<label for="caneca"> Caneca</label><br />
-						<input class="tirante" type="checkbox" id="tirante" name="tirante" value="tirante" />
-						<label for="tirante"> Tirante</label><br />
-						<input class="camisa" type="checkbox" id="camisa" name="camisa" value="camisa" />
-						<label for="camisa"> Camisa</label><br />
 					</div>
+
+					<input class="caneca" type="checkbox" id="caneca" name="caneca" value="caneca" />
+					<label for="caneca"> Caneca</label><br />
+
+					<input class="tirante" type="checkbox" id="tirante" name="tirante" value="tirante" />
+					<label for="tirante"> Tirante</label><br />
+					<input class="camisa" type="checkbox" id="camisa" name="camisa" value="camisa" />
+					<label for="camisa"> Camisa</label><br />
 
 					<button type="submit" class="button-salvar">Salvar</button>
 				</form>
