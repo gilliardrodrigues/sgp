@@ -119,7 +119,7 @@ public class PedidoUseCase implements PedidoUseCaseInboundPort {
     }
 
     @Override
-    public void encerrarTemporadaDePedidos(Temporada temporada) { //TODO gill
+    public void encerrarTemporadaDePedidos(Temporada temporada) {
          List<Pedido> pedidosNaoConfirmados = outboundPort.buscarPelaTemporadaAssimComoSituacao(temporada, StatusPedido.AGUARDANDO_PAGAMENTO);
          pedidosNaoConfirmados.forEach(pedido -> outboundPort.excluir(pedido.getId()));
 

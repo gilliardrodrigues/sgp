@@ -126,9 +126,8 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
         var camisas = buscarTodasCamisas();
         var canecas = buscarTodasCanecas();
         var tirantes = buscarTodosTirantes();
-        String produtos = converterListasDeProdutosParaJson(camisas, canecas, tirantes);
 
-        return produtos;
+        return converterListasDeProdutosParaJson(camisas, canecas, tirantes);
     }
 
     @Override
@@ -137,9 +136,18 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
         var camisas = outboundPort.buscarCamisasDoInventario();
         var canecas = outboundPort.buscarCanecasDoInventario();
         var tirantes = outboundPort.buscarTirantesDoInventario();
-        String inventario = converterListasDeProdutosParaJson(camisas, canecas, tirantes);
 
-        return inventario;
+        return converterListasDeProdutosParaJson(camisas, canecas, tirantes);
+    }
+
+    @Override
+    public String buscarProdutosPeloIdPedido(Long idPedido) throws JsonProcessingException {
+
+        var camisas = outboundPort.buscarCamisasPeloIdPedido(idPedido);
+        var canecas = outboundPort.buscarCanecasPeloIdPedido(idPedido);
+        var tirantes = outboundPort.buscarTirantesPeloIdPedido(idPedido);
+
+        return converterListasDeProdutosParaJson(camisas, canecas, tirantes);
     }
 
     @Override
@@ -173,12 +181,6 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
     }
 
     @Override
-    public List<Produto> buscarPeloIdPedido(Long idPedido) throws NegocioException {
-
-        return outboundPort.buscarPeloIdPedido(idPedido);
-    }
-
-    @Override
     public List<Tirante> buscarTirantePeloModelo(String modelo) {
 
         return outboundPort.buscarTirantePeloModelo(modelo);
@@ -198,7 +200,7 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
     @Override
     public Produto adicionarProdutoDoInventarioAoPedido(Long idProduto, Long idPedido) {
 
-        Produto produto = null;
+        Produto produto;
         try {
             produto = outboundPort.buscarPeloId(idProduto);
             var pedido = pedidoOutboundPort.buscarPeloId(idPedido);

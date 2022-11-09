@@ -94,11 +94,14 @@ public class ProdutoController {
         }
     }
 
-    @GetMapping("/filtro/pedido/{idPedido}")
-    public List<ProdutoResponse> buscarPeloIdPedido(@PathVariable Long idPedido) {
+    @GetMapping(value = "/filtro/pedido/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String buscarProdutosPeloIdPedido(@PathVariable Long id) {
 
-        var produtos = inboundPort.buscarPeloIdPedido(idPedido);
-        return mapper.mapToList(produtos, new TypeToken<List<ProdutoResponse>>() {}.getType());
+        try {
+            return inboundPort.buscarProdutosPeloIdPedido(id);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @GetMapping("/tirantes/filtro/{modelo}")
@@ -228,4 +231,5 @@ public class ProdutoController {
             return ResponseEntity.notFound().build();
         }
     }
+
 }

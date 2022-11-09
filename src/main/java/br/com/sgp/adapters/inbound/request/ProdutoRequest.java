@@ -10,6 +10,5 @@ public class ProdutoRequest {
     protected Integer valor;
     protected Boolean entregue;
     protected Boolean chegou;
-    //protected TipoProduto tipo;
     protected Long pedidoId;
 }
