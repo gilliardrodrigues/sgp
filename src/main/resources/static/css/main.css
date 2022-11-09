@@ -306,7 +306,7 @@ main {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	width: 50px;
+	width: 150px;
 }
 
 .confirmado {
@@ -320,7 +320,7 @@ main {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	width: 100px;
+	width: 150px;
 }
 
 .parcialmente-entregue {
@@ -378,7 +378,7 @@ main {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	width: 50px;
+	width: 80px;
 }
 
 .parcialmente-pago {
@@ -411,7 +411,7 @@ main {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	width: 100px;
+	width: 80px;
 }
 .nao {
 	width: 50px;

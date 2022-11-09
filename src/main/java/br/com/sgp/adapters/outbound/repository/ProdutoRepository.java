@@ -39,9 +39,9 @@ public interface ProdutoRepository<E extends ProdutoEntity> extends JpaRepositor
     @Query("SELECT t FROM TiranteEntity t WHERE t.prontaEntrega = True AND t.pedido IS NULL")
     List<TiranteEntity> buscarTirantesDoInventario();
     @Query("SELECT c FROM CanecaEntity c WHERE c.modelo = :modelo")
-    List<CanecaEntity> findCanecaByModelo(String modelo);
+    List<CanecaEntity> findCanecaByModelo(@Param("modelo") String modelo);
     @Query("SELECT c FROM TiranteEntity c WHERE c.modelo = :modelo")
-    List<TiranteEntity> findTiranteByModelo(String modelo);
+    List<TiranteEntity> findTiranteByModelo(@Param("modelo") String modelo);
     List<CamisaEntity> findByCor(CorCamisa corCamisa);
     List<CamisaEntity> findByTamanho(TamanhoCamisa tamanhoCamisa);
     List<CamisaEntity> findByCurso(Curso curso);

@@ -1,112 +1,93 @@
 <html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="../../static/css/main.css" />
+		<link rel="stylesheet" type="text/css" href="../../static/css/verPedidos.css" />
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css" />
+		<title>Área administrativa | SGP</title>
+		<!--<script type="text/javascript" src="../../static/js/main.js"></script>-->
+		<script type="text/javascript" src="../../static/js/pedido.js"></script>
+	</head>
 
-<head>
-  <link rel="stylesheet" type="text/css" href="../../static/css/main.css">
-  <link rel="stylesheet" type="text/css" href="../../static/css/verPedidos.css">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css">
-  <title>Área administrativa | SGP</title>
-  <!--<script type="text/javascript" src="../../static/js/main.js"></script>-->
-  <script type="text/javascript" src="../../static/js/pedido.js"></script>
+	<body>
+		<header class="menu-principal">
+			<main>
+				<div class="header-1">
+					<div class="logo">
+						<img class="img-logo" src="../../static/img/logo.png" alt="Logo SGP" />
+					</div>
+				</div>
+			</main>
+		</header>
 
-</head>
+		<div class="content">
+			<button onclick="window.history.go(-1); return false;" class="back-button"></button>
 
-<body>
+			<div class="filtros">
+				<p class="p-filtros">Filtros</p>
 
-  <header class="menu-principal">
-    <main>
-      <div class="header-1">
-        <div class="logo">
-          <img class="img-logo" src="../../static/img/logo.png" alt="Logo SGP" />
-        </div>
-      </div>
-    </main>
+				<button class="color-tapped" onclick="filterSelection('all')">Produto</button>
+				<button class="card-filtro" onclick="filterSelection('data')">Data</button>
+				<button class="card-filtro" onclick="filterSelection('entrega')">Situação de entrega</button>
+				<button class="card-filtro" onclick="filterSelection('status')">Status de pagamento</button>
 
-  </header>
+				<div id="filters-expanded">
+					<button class="card-filtro-expanded">Camisa</button>
+					<div class="card-filtro-expanded card-filtro-expanded-selected">Caneca</div>
+					<div class="card-filtro-expanded">Tirante</div>
+				</div>
 
-  <div class="content">
+				<div class="pedidos">
+					<p class="title-pedidos">Pedidos</p>
 
-    <button onclick="window.history.go(-1); return false;" class="back-button"></button>
-
-    <div class="filtros">
-      <p class="p-filtros">Filtros</p>
-
-
-      <button class="color-tapped" onclick="filterSelection('all')">Produto</button>
-      <button class="card-filtro" onclick="filterSelection('data')">Data</button>
-      <button class="card-filtro" onclick="filterSelection('entrega')">Situação de entrega</button>
-      <button class="card-filtro" onclick="filterSelection('status')">Status de pagamento</button>
-
-
-      <div id="filters-expanded">
-        <button class="card-filtro-expanded">
-          Camisa
-        </button>
-        <div class="card-filtro-expanded card-filtro-expanded-selected">
-          Caneca
-        </div>
-        <div class="card-filtro-expanded">
-          Tirante
-        </div>
-      </div>
-
-      <div class="pedidos">
-        <p class="title-pedidos">
-          Pedidos
-        </p>
-
-        <select name="temporadas" class="select-temporada">
-          <option value="Temporada1">Temporada 1</option>
+					<select name="temporadas" class="select-temporada">
+						<!-- <option value="Temporada2"></option> -->
+						<!-- <option value="Temporada1">Temporada 1</option>
           <option value="Temporada2">Temporada 2</option>
           <option value="Temporada3">Temporada 3</option>
-          <option value="Temporada4">Temporada 4</option>
-        </select>
+          <option value="Temporada4">Temporada 4</option> -->
+					</select>
+				</div>
 
-      </div>
+				<div class="tabela">
+					<div class="header-column w8">
+						<p>Pedido</p>
+					</div>
 
+					<div class="header-column w15">
+						<p>Data</p>
+					</div>
 
-      <div class="tabela">
+					<div class="header-column w8">
+						<p>Valor total</p>
+					</div>
 
-        <div class="header-column w8">
-          <p>Pedido</p>
-        </div>
+					<div class="header-column w12">
+						<p>Situação</p>
+					</div>
 
-        <div class="header-column w15">
-          <p>Data</p>
-        </div>
+					<div class="header-column w12">
+						<p>Status</p>
+					</div>
 
-        <div class="header-column w8">
-          <p>Valor total</p>
-        </div>
+					<div class="header-column w8">
+						<p>Valor pago</p>
+					</div>
 
-        <div class="header-column w12">
-          <p>Situação</p>
-        </div>
+					<div class="header-column w6">
+						<p>Temporada</p>
+					</div>
 
-        <div class="header-column w12">
-          <p>Status</p>
-        </div>
+					<div class="header-column w15">
+						<p>Aluno</p>
+					</div>
 
-        <div class="header-column w8">
-          <p>Valor pago</p>
-        </div>
-
-        <div class="header-column w6">
-          <p>Temporada</p>
-        </div>
-
-        <div class="header-column w15">
-          <p>Aluno</p>
-        </div>
-
-        <div class="header-column w10">
-          <p>Prev. Entrega</p>
-        </div>
-      </div> <!-- tabela -->
-
-    </div>
-
-    <div class="footer-space"></div>
-
-</body>
-
+					<div class="header-column w10">
+						<p>Prev. Entrega</p>
+					</div>
+				</div>
+				<!-- tabela -->
+			</div>
+		</div>
+		<div class="footer-space"></div>
+	</body>
 </html>
