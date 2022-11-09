@@ -10,6 +10,9 @@ public interface ProdutoUseCaseInboundPort {
 
     Produto salvarInventario(Produto produto) throws NegocioException;
     Produto salvar(Produto produto) throws NegocioException;
+
+    void marcarChegadaTipoDeProduto(TipoProduto tipoProduto);
+
     String buscarTodos() throws JsonProcessingException;
     List<Camisa> buscarTodasCamisas();
     List<Caneca> buscarTodasCanecas();
