@@ -110,19 +110,19 @@ public class ProdutoAdapter implements ProdutoUseCaseOutboundPort {
      @Override
      public List<Camisa> buscarCamisasPeloIdPedido(Long idPedido) {
 
-        List<CamisaEntity> camisas = repository.findCamisasByPedidoId(idPedido);
+        List<CamisaEntity> camisas = repository.findAllCamisasByPedidoId(idPedido);
          return mapper.mapToList(camisas, new TypeToken<List<Camisa>>() {}.getType());
      }
     @Override
     public List<Caneca> buscarCanecasPeloIdPedido(Long idPedido) {
 
-        List<CanecaEntity> canecas = repository.findCanecasByPedidoId(idPedido);
+        List<CanecaEntity> canecas = repository.findAllCanecasByPedidoId(idPedido);
         return mapper.mapToList(canecas, new TypeToken<List<Caneca>>() {}.getType());
     }
     @Override
     public List<Tirante> buscarTirantesPeloIdPedido(Long idPedido) {
 
-        List<TiranteEntity> tirantes = repository.findTirantesByPedidoId(idPedido);
+        List<TiranteEntity> tirantes = repository.findAllTirantesByPedidoId(idPedido);
         return mapper.mapToList(tirantes, new TypeToken<List<Tirante>>() {}.getType());
     }
     @Override

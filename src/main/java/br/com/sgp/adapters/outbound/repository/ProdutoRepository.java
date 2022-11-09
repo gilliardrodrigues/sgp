@@ -25,12 +25,12 @@ public interface ProdutoRepository<E extends ProdutoEntity> extends JpaRepositor
     @Query("from TiranteEntity")
     List<TiranteEntity> findAllTirantes();
     List<ProdutoEntity> findByPedidoId(Long pedidoId);
-    @Query("SELECT c FROM CamisaEntity c WHERE c.pedido.id = :pedidoId")
-    List<CamisaEntity> findCamisasByPedidoId(Long pedidoId);
-    @Query("SELECT c FROM CanecaEntity c WHERE c.pedido.id = :pedidoId")
-    List<CanecaEntity> findCanecasByPedidoId(Long pedidoId);
-    @Query("SELECT t FROM TiranteEntity t WHERE t.pedido.id = :pedidoId")
-    List<TiranteEntity> findTirantesByPedidoId(Long pedidoId);
+    @Query("from CamisaEntity")
+    List<CamisaEntity> findAllCamisasByPedidoId(Long pedidoId);
+    @Query("from CanecaEntity")
+    List<CanecaEntity> findAllCanecasByPedidoId(Long pedidoId);
+    @Query("from TiranteEntity")
+    List<TiranteEntity> findAllTirantesByPedidoId(Long pedidoId);
     @Query("SELECT c FROM CamisaEntity c WHERE c.prontaEntrega = True AND c.pedido IS NULL")
     List<CamisaEntity> buscarCamisasDoInventario();
     @Query("SELECT c FROM CanecaEntity c WHERE c.prontaEntrega = True AND c.pedido IS NULL")
