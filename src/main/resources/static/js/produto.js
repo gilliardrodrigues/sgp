@@ -23,6 +23,7 @@ function montarHTMLProduto(produto) {
 	const fieldsOrder = [
 		"tipo",
 		"id",
+		"pedido",
 		"valor",
 		"prontaEntrega",
 		"modelo",
@@ -41,14 +42,13 @@ function montarHTMLProduto(produto) {
 
 		const col = document.createElement("div");
 		col.classList.add("column");
-		if (field === "curso") col.classList.add("w15");
+		if (field === "curso") col.classList.add("w10");
 		else col.classList.add("w8");
 		if (index == 0) col.classList.add("first-column");
 
 		const p = document.createElement("p");
-
+		if (field === "id" || field === "pedido") text = text ? "#" + text : text;
 		text = text != null ? text : "-";
-		if (field === "id") text = "#" + text;
 
 		let item;
 		if (field === "valor")
