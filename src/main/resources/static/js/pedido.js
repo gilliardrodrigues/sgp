@@ -18,60 +18,6 @@ async function getPedidos() {
 
 	return pedidos;
 }
-/*
-function montarHTMLPedido(pedido) {
-  const fieldsOrder = [
-		"pedido",
-		"data",
-		"valor",
-		"situacao",
-		"statusPagamento",
-		"valorPago",
-		"temporadaId",
-		"nome",
-	];
-
-	let tabela = document.createElement("div");
-	tabela.className = "tabela";
-
-	Object.keys(pedido).forEach((key, index) => {
-		const col = document.createElement("div");
-		col.classList.add("column");
-		if (index == 0 || index == 2) {
-      col.classList.add("w10");
-    } else if (index == 1 || index == 3 || index == 7)  {
-      col.classList.add("w15");
-    } else if (index == 4)  {
-      col.classList.add("w12");
-    } else if (index == 5 || index == 6) {
-      col.classList.add("w8");
-    }
-		if (index == 0) col.classList.add("first-column");
-
-		const p = document.createElement("p");
-    //alert('Opaaa -> '+pedido[key]);
-
-    if (key == "valorPago") {
-      //p.textContent = "R$" + pedido[key] + ",00";
-      //alert('Opaaa -> '+ typeof pedido[key]);
-    }
-
-    alert(key);
-
-		p.textContent = key === "id" ? "#" + pedido[key] : pedido[key];
-
-    
-
-    
-
-		col.appendChild(p);
-		tabela.appendChild(col);
-	});
-
-	tabela.innerHTML += `<div class="column w7 last-column"> <a href="../editarPedido/index.html?id=${pedido.id}"> <button type="submit" class="edit-button" style="border: 0; background: transparent"> <img src="../../static/img/edit-button.svg" width="20px" alt="submit"/> </div>`
-	
-	return tabela;
-}*/
 
 function montarHTMLPedido(pedido) {
 	const fieldsOrder = [
