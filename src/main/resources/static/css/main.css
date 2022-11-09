@@ -505,3 +505,27 @@ main {
 	color: #472D62;
 	margin-top: 50px;
 }
+
+.input-pesquisa {
+	float: left;
+	width: 95%;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.search-button {
+	float: left;
+	width: 54px;
+	height: 54px;
+	background-color: #A379CD;
+	border: 0;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+.button-search-order img {
+	margin: auto;
+	width: 25px;
+}
