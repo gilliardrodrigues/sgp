@@ -191,7 +191,7 @@ Os clientes conseguem:
 
 - ✅ Projetar telas de login e tela principal do administrador no Figma e validar design. [Fernando]
 
-- ⬜️ Implementar telas de login, cadastro e tela principal do administrador. [Maíla]
+- ⬜️ Implementar telas de login, cadastro e tela principal do administrador. [Fernando]
 
 
 ### Diagrama de Classes
