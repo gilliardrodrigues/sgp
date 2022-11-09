@@ -315,6 +315,7 @@ main {
 	height: 30px;
 	border-radius: 10px;
 	margin: auto;
+	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
@@ -328,6 +329,11 @@ main {
 	height: 30px;
 	border-radius: 10px;
 	margin: auto;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
 }
 
 .entregue {
@@ -336,6 +342,12 @@ main {
 	height: 30px;
 	border-radius: 10px;
 	margin: auto;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100px;
 }
 
 .aguardando-pagamento > p,
@@ -345,7 +357,8 @@ main {
 .pago > p,
 .parcialmente-pago > p,
 .nao-pago > p,
-.nao > p {
+.nao > p,
+.sim > p {
 	color: white;
 	text-align: center;
 	vertical-align: middle;
@@ -384,7 +397,8 @@ main {
 }
 
 .nao-pago,
-.nao {
+.nao,
+.sim {
 	background-color: #f37373;
 	padding: 0 3px;
 	height: 30px;
@@ -397,9 +411,13 @@ main {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	width: 50px;
+	width: 100px;
 }
 .nao {
+	width: 50px;
+}
+.sim {
+	background-color: #30E4AE;
 	width: 50px;
 }
 
@@ -497,4 +515,44 @@ main {
 .footer-space {
 	height: 200px;
 	width: 100%;
+}
+
+.title-area-cliente {
+	font-family: 'Open Sans', arial;
+	font-weight: 300;
+	color: #472D62;
+	margin-top: 50px;
+}
+
+.input-pesquisa {
+	float: left;
+	width: 95%;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.search-button {
+	float: left;
+	width: 54px;
+	height: 54px;
+	background-color: #A379CD;
+	border: 0;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	cursor: pointer;
+}
+
+.button-search-order img {
+	margin: auto;
+	width: 25px;
+}
+
+.title-produtos {
+	margin-top: 170px;
+	margin-left: 20px;
+	font-family: 'Open Sans', arial;
+	font-weight: 300;
+	color: #472D62;
 }
