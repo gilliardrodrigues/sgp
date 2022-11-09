@@ -498,3 +498,10 @@ main {
 	height: 200px;
 	width: 100%;
 }
+
+.title-area-cliente {
+	font-family: 'Open Sans', arial;
+	font-weight: 300;
+	color: #472D62;
+	margin-top: 50px;
+}
