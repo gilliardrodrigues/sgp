@@ -39,14 +39,11 @@ public class TemporadaUseCase implements TemporadaUseCaseInboundPort {
     }
 
     @Override
-    public Temporada encerrarTemporada(Long id) {
+    public Temporada encerrarTemporadaAtual() {
 
-        var temporada = this.buscarPeloId(id);
+        var temporada = this.buscarAtiva();
         temporada.setDataFim(OffsetDateTime.now());
         pedidoInboundPort.encerrarTemporadaDePedidos(temporada);
-
-        // A lógica da contabilização de pedidos (apenas com pagamento confirmado) deve ser
-        // tratada no caso de uso de pedido (só associar à temporada se tiver confirmado o pagamento)
         return outboundPort.salvar(temporada);
     }
 
@@ -64,7 +61,7 @@ public class TemporadaUseCase implements TemporadaUseCaseInboundPort {
     @Override
     public Temporada alterarTemporada(Temporada temporadaRequest) {
 
-        var temporada = this.buscarPeloId(temporadaRequest.getId());
+        var temporada = this.buscarAtiva();
         temporada.setDescricao(temporadaRequest.getDescricao());
         temporada = this.adicionarProdutos(temporada, temporadaRequest.getCatalogo());
         return outboundPort.salvar(temporada);

@@ -120,27 +120,34 @@ public class PedidoUseCase implements PedidoUseCaseInboundPort {
 
     @Override
     public void encerrarTemporadaDePedidos(Temporada temporada) { //TODO gill
-    //     List<Pedido> pedidosNaoConfirmados = outboundPort.buscarPelaTemporadaAssimComoSituacao(temporada, StatusPedido.AGUARDANDO_PAGAMENTO);
-    //     pedidosNaoConfirmados.forEach(pedido -> {
-    //         outboundPort.excluir(pedido.getId());
-    //     });
+         List<Pedido> pedidosNaoConfirmados = outboundPort.buscarPelaTemporadaAssimComoSituacao(temporada, StatusPedido.AGUARDANDO_PAGAMENTO);
+         pedidosNaoConfirmados.forEach(pedido -> outboundPort.excluir(pedido.getId()));
 
-
-    //     List<Pedido> pedidosConfirmados = outboundPort.buscarPelaTemporadaAssimComoSituacao(temporada, StatusPedido.CONFIRMADO);
-    //     List<Fornecedor> fornecedores = fornecedorOutboundPort.buscarTodos();
-    //     pedidosConfirmados.forEach(pedido -> {
-
-    //         List<Produto> produtos = produtoInboundPort.buscarPeloIdPedido(pedido.getId());
-
-    //         produtos.forEach(produto -> {
-
-    //             var previsaoDeEntrega = produto.calcularPrevisaoDeEntrega(fornecedores);
-    //             pedido.addPrevisaoDeEntrega(previsaoDeEntrega);
-    //             produto.setPrevisaoDeEntrega(previsaoDeEntrega);
-    //             produtoInboundPort.salvar(produto);
-    //         });
-
-    //         outboundPort.salvar(pedido);
-    //     });
+         List<Pedido> pedidosConfirmados = outboundPort.buscarPelaTemporadaAssimComoSituacao(temporada, StatusPedido.CONFIRMADO);
+         List<Fornecedor> fornecedores = fornecedorOutboundPort.buscarTodos();
+         pedidosConfirmados.forEach(pedido -> {
+             List<Camisa> camisas = produtoOutboundPort.buscarCamisasPeloIdPedido(pedido.getId());
+             camisas.forEach(camisa -> {
+                 var previsaoDeEntrega = camisa.calcularPrevisaoDeEntrega(fornecedores);
+                 pedido.addPrevisaoDeEntrega(previsaoDeEntrega);
+                 camisa.setPrevisaoDeEntrega(previsaoDeEntrega);
+                 produtoOutboundPort.salvarCamisa(camisa);
+             });
+             List<Caneca> canecas = produtoOutboundPort.buscarCanecasPeloIdPedido(pedido.getId());
+             canecas.forEach(caneca -> {
+                 var previsaoDeEntrega = caneca.calcularPrevisaoDeEntrega(fornecedores);
+                 pedido.addPrevisaoDeEntrega(previsaoDeEntrega);
+                 caneca.setPrevisaoDeEntrega(previsaoDeEntrega);
+                 produtoOutboundPort.salvarCaneca(caneca);
+             });
+             List<Tirante> tirantes = produtoOutboundPort.buscarTirantesPeloIdPedido(pedido.getId());
+             tirantes.forEach(tirante -> {
+                 var previsaoDeEntrega = tirante.calcularPrevisaoDeEntrega(fornecedores);
+                 pedido.addPrevisaoDeEntrega(previsaoDeEntrega);
+                 tirante.setPrevisaoDeEntrega(previsaoDeEntrega);
+                 produtoOutboundPort.salvarTirante(tirante);
+             });
+             outboundPort.salvar(pedido);
+         });
     }
 }

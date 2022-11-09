@@ -40,14 +40,12 @@ public class TemporadaController {
         return ResponseEntity.ok(mapper.mapTo(inboundPort.salvar(temporada), TemporadaResponse.class));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<TemporadaResponse> alterar(@Valid @PathVariable Long id, @RequestBody TemporadaRequest temporadaRequest) throws NegocioException {
+    @PutMapping
+    public ResponseEntity<TemporadaResponse> alterar(@RequestBody TemporadaRequest temporadaRequest) throws NegocioException {
 
         var temporada = mapper.mapTo(temporadaRequest, Temporada.class);
-        temporada.setId(id);
-        return inboundPort.temporadaExiste(id)
-                ? ResponseEntity.ok(mapper.mapTo(inboundPort.alterarTemporada(temporada), TemporadaResponse.class))
-                : ResponseEntity.notFound().build();
+        //temporada.setId(id);
+        return ResponseEntity.ok(mapper.mapTo(inboundPort.alterarTemporada(temporada), TemporadaResponse.class));
     }
 
     @DeleteMapping("/{id}")
@@ -60,9 +58,14 @@ public class TemporadaController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/encerrar/{id}")
-    public ResponseEntity<TemporadaResponse> encerrarTemporada(@Valid @PathVariable Long id) {
-        return ResponseEntity.ok(mapper.mapTo(inboundPort.encerrarTemporada(id), TemporadaResponse.class));
+    @PutMapping("/encerrar")
+    public ResponseEntity<TemporadaResponse> encerrarTemporadaAtual() {
+        if(inboundPort.existeTemporadaAtiva()) {
+            return ResponseEntity.ok(mapper.mapTo(inboundPort.encerrarTemporadaAtual(), TemporadaResponse.class));
+        }
+        else {
+            return ResponseEntity.notFound().build();
+        }
          
     }
     @GetMapping("/ativa")

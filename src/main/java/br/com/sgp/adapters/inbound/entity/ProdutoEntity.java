@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.OffsetDateTime;
 
 @Getter
 @Setter
@@ -35,4 +36,7 @@ public class ProdutoEntity {
     @ManyToOne
     @JoinColumn(name = "pedidoId")
     protected PedidoEntity pedido;
+
+    @Column(name = "PREVISAO_DE_ENTREGA")
+    private OffsetDateTime previsaoDeEntrega;
 }
