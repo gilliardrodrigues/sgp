@@ -3,6 +3,7 @@ package br.com.sgp.application.core.usecase;
 import br.com.sgp.application.core.domain.*;
 import br.com.sgp.application.core.exception.NegocioException;
 import br.com.sgp.application.ports.in.PedidoUseCaseInboundPort;
+import br.com.sgp.application.ports.out.FornecedorUseCaseOutboundPort;
 import br.com.sgp.application.ports.out.PedidoUseCaseOutboundPort;
 import br.com.sgp.application.ports.out.ProdutoUseCaseOutboundPort;
 import br.com.sgp.application.ports.out.TemporadaUseCaseOutboundPort;
@@ -16,6 +17,7 @@ public class PedidoUseCase implements PedidoUseCaseInboundPort {
     private final PedidoUseCaseOutboundPort outboundPort;
     private final ProdutoUseCaseOutboundPort produtoOutboundPort;
     private final TemporadaUseCaseOutboundPort temporadaOutboundPort;
+    private final FornecedorUseCaseOutboundPort fornecedorOutboundPort;
     
     @Override
     public Pedido salvar(Pedido pedido) throws NegocioException {
@@ -28,9 +30,9 @@ public class PedidoUseCase implements PedidoUseCaseInboundPort {
     }
 
     @Override
-    public List<Pedido> buscarTodos() {
+    public List<Pedido> buscarTodosPorTemporada(Long idTemporada) {
 
-        return outboundPort.buscarTodos();
+        return outboundPort.buscarTodosPorTemporada(idTemporada);
     }
 
     @Override
@@ -47,24 +49,25 @@ public class PedidoUseCase implements PedidoUseCaseInboundPort {
     }
 
     @Override
-    public List<Pedido> buscarPedidos(String situacao, String statusPagamento, String nome, Date data, String tipoDeProduto) {
+    public List<Pedido> buscarPedidos(String situacao, String statusPagamento, String nome, Date data,
+                                      String tipoDeProduto, Long idTemporada) {
         if(situacao != null && !situacao.isEmpty()) {
-            return outboundPort.buscarPelaSituacao(situacao);
+            return outboundPort.buscarPedidosDaTemporadaPelaSituacao(idTemporada, situacao);
         } else if(statusPagamento != null && !statusPagamento.isEmpty()) {
-            return outboundPort.buscarPeloStatusPagamento(statusPagamento);
+            return outboundPort.buscarPedidosDaTemporadaPeloStatusPagamento(idTemporada, statusPagamento);
         } else if(nome != null && !nome.isEmpty()) {
-            return outboundPort.buscarPeloNomeAluno(nome);
+            return outboundPort.buscarPedidosDaTemporadaPeloNomeAluno(idTemporada, nome);
         } else if(data != null) {
-            return outboundPort.buscarPelaData(data);
+            return outboundPort.buscarPedidosDaTemporadaPelaData(idTemporada, data);
         } else if(tipoDeProduto != null && !tipoDeProduto.isEmpty()) {
-            var pedidos = buscarPeloTipoDeProduto(TipoProduto.valueOf(tipoDeProduto));
+            var pedidos = buscarPedidosDaTemporadaPeloTipoDeProduto(idTemporada, TipoProduto.valueOf(tipoDeProduto));
             return new ArrayList<>(pedidos);
         } else {
-            return outboundPort.buscarTodos();
+            return buscarTodosPorTemporada(idTemporada);
         }
     }
     @Override
-    public Set<Pedido> buscarPeloTipoDeProduto(TipoProduto tipoProduto) {
+    public Set<Pedido> buscarPedidosDaTemporadaPeloTipoDeProduto(Long idTemporada, TipoProduto tipoProduto) {
 
         var pedidos = new HashSet<Pedido>();
         List<Produto> produtosDoTipo;
@@ -79,8 +82,12 @@ public class PedidoUseCase implements PedidoUseCaseInboundPort {
             produtosDoTipo = new ArrayList<>(produtoOutboundPort.buscarTodosTirantes());
         }
         for(Produto produto : produtosDoTipo) {
-            if(produto.getPedido() != null) {
-                pedidos.add(produto.getPedido());
+            var pedido = produto.getPedido();
+            if(pedido != null) {
+                var temporada = pedido.getTemporada();
+                if(temporada.getId().equals(idTemporada)) {
+                    pedidos.add(produto.getPedido());
+                }
             }
         }
         return pedidos;

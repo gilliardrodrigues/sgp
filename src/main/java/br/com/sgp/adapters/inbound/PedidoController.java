@@ -2,9 +2,8 @@ package br.com.sgp.adapters.inbound;
 
 import br.com.sgp.adapters.inbound.mapper.GenericMapper;
 import br.com.sgp.adapters.inbound.request.PedidoRequest;
-import br.com.sgp.adapters.inbound.request.ProdutoRequest;
 import br.com.sgp.adapters.inbound.response.PedidoResponse;
-import br.com.sgp.application.core.domain.*;
+import br.com.sgp.application.core.domain.Pedido;
 import br.com.sgp.application.core.exception.NegocioException;
 import br.com.sgp.application.ports.in.PedidoUseCaseInboundPort;
 import br.com.sgp.application.ports.in.ProdutoUseCaseInboundPort;
@@ -17,7 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -31,11 +29,12 @@ public class PedidoController {
     private final ProdutoUseCaseInboundPort produtoInboundPort;
     private final GenericMapper mapper;
 
-    @GetMapping("/admin")
-    public ResponseEntity<List<PedidoResponse>> buscarPedidos(@RequestParam(required = false) String situacao, @RequestParam(required = false) String statusPagamento,
-            @RequestParam(required = false) String nome, @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date data,
-            @RequestParam(required = false) String tipoDeProduto) {
-        List<Pedido> pedidos = inboundPort.buscarPedidos(situacao, statusPagamento, nome, data, tipoDeProduto);
+    @GetMapping("/admin/{idTemporada}")
+    public ResponseEntity<List<PedidoResponse>> buscarPedidos(@PathVariable Long idTemporada,
+            @RequestParam(required = false) String situacao, @RequestParam(required = false) String statusPagamento,
+            @RequestParam(required = false) String nome, @RequestParam(required = false) String tipoDeProduto,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date data) {
+        List<Pedido> pedidos = inboundPort.buscarPedidos(situacao, statusPagamento, nome, data, tipoDeProduto, idTemporada);
         return ResponseEntity.ok(mapper.mapToList(pedidos, new TypeToken<List<PedidoResponse>>() {}.getType()));
     }
 
