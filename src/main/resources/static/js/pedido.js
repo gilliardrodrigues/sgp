@@ -7,9 +7,11 @@ window.onload = async () => {
 	listTemporadas(temporadaIds, temporadaListElement);
 
 	const temporadaAtivaId = await getTemporadaAtiva();
-	selectTemporadaAtiva(temporadaAtivaId, temporadaListElement);
+	if (temporadaAtivaId) {
+		selectTemporadaAtiva(temporadaAtivaId, temporadaListElement);
+	}
 
-	const pedidos = await getPedidos(temporadaAtivaId);
+	const pedidos = await getPedidos(temporadaListElement.value);
 	const pedidosElement = document.getElementsByClassName("content")[0];
 	mostrarPedidos(pedidos, pedidosElement);
 };

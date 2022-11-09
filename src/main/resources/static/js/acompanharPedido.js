@@ -19,7 +19,7 @@ window.onload = async () => {
 		style: "currency",
 		currency: "BRL",
 	});
-	document.querySelector(".previsaoDeEntrega p").innerHTML = pedido.previsaoDeEntrega;
+	document.querySelector(".previsaoDeEntrega p").innerHTML = new Date(pedido.previsaoDeEntrega).toLocaleDateString();
 
 	const produtos = await getProdutos(pedidoId);
 

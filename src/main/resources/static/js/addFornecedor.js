@@ -39,31 +39,42 @@ async function submitForm(e, form) {
 
 async function criarFornecedor(headers, jsonFormData, comentario) {
 	console.log(jsonFormData);
+	let comentarioId;
 	await fetch("http://localhost:8080/fornecedores", {
 		method: "POST",
 		headers,
 		body: JSON.stringify(jsonFormData),
-	}).then(response => {
-		if (!response.ok) {
-			response.json().then(body => {
-				alert(body.titulo);
-			});
-		} else {
-			response.json().then(body => {
-				criarComentario(headers, body.id, comentario);
-			});
+	})
+		.then(response => {
+			if (!response.ok) {
+				return response.json().then(body => {
+					alert(body.titulo);
+					throw new Error(body.titulo);
+				});
+			}
 
-			location.href = "../fornecedores/index.html";
-		}
-	});
+			return response.json();
+		})
+		.then(body => {
+			console.log({
+				body: body,
+			});
+			criarComentario(headers, body.id, comentario).then(response => response.json());
+		});
 }
 
 async function criarComentario(headers, fornecedorId, comentario) {
-	await fetch(`http://localhost:8080/fornecedores/${fornecedorId}/observacoes`, {
+	console.log({
+		url: `http://localhost:8080/fornecedores/${fornecedorId}/observacoes`,
 		method: "POST",
 		headers,
 		body: JSON.stringify({ comentario: comentario }),
 	});
+	await fetch(`http://localhost:8080/fornecedores/${fornecedorId}/observacoes`, {
+		method: "POST",
+		headers,
+		body: JSON.stringify({ comentario: comentario }),
+	}).then(() => (location.href = "../fornecedores/index.html"));
 }
 
 function buildJsonFormData(form) {

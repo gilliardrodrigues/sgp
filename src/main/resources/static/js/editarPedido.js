@@ -11,9 +11,12 @@ window.onload = async () => {
 	const situacao = ["AguardandoPagamento", "Confirmado", "ParcialmenteEntregue", "Entregue"];
 
 	const pedido = await fetch(`http://localhost:8080/pedidos/${id}`).then(response => response.json());
-	document.querySelector(".select-situacao").value = pedido.situacao;
-	document.querySelector(".select-status").value = pedido.statusPagamento;
-	document.querySelector(".previsao-entrega").value = pedido.previsaoEntrega;
+	// document.querySelector(".select-situacao").value = pedido.situacao;
+	// document.querySelector(".select-status").value = pedido.statusPagamento;
+	// document.querySelector(".previsao-entrega").value = pedido.previsaoEntrega;
+	document.querySelector(".valorTotal").value = pedido.valor;
+	console.log(pedido.valor)
+
 	// document.querySelector(".tempo-entrega").value = pedido.tempoEntregaEmDias;
 	/*
 	pedido.produtosOferecidos.forEach(produto => {
