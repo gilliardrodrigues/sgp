@@ -1,14 +1,11 @@
 package br.com.sgp.adapters.inbound.response;
 
 import br.com.sgp.application.core.domain.Aluno;
-import br.com.sgp.application.core.domain.StatusPagamento;
-import br.com.sgp.application.core.domain.StatusPedido;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
-import java.util.List;
 
 
 @Getter
@@ -16,7 +13,7 @@ import java.util.List;
 public class PedidoResponse {
     private Long id;
     private OffsetDateTime data;
-    private int valor;
+    private Integer valor;
     private String situacao;
     private String statusPagamento;
     private BigDecimal valorPago;

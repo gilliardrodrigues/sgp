@@ -6,8 +6,10 @@ public enum StatusPedido {
 
     AGUARDANDO_PAGAMENTO("Aguardando pagamento..."),
     CONFIRMADO("Confirmado!"),
+    PARCIALMENTE_PRONTO_PARA_ENTREGA("Alguns itens chegaram!"),
+    PRONTO_PARA_ENTREGA("Pronto para entrega!"),
     PARCIALMENTE_ENTREGUE("Parcialmente entregue!"),
-    PEDIDO_ENTREGUE("Entregue!");
+    ENTREGUE("Entregue!");
 
     private final String descricao;
 

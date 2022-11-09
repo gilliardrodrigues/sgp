@@ -33,6 +33,7 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
     public Produto salvarInventario(Produto produto) throws NegocioException {
 
         produto.setProntaEntrega(true);
+        produto.setChegou(true);
         return salvar(produto);
     }
 
@@ -49,6 +50,12 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
         }
         if(produto.getPedido() != null) {
             var pedido = pedidoOutboundPort.buscarPeloId(produto.getPedido().getId());
+            if(produto.getChegou() && pedido.getSituacao().equals(StatusPedido.CONFIRMADO)) {
+                pedido.setSituacao(StatusPedido.PARCIALMENTE_PRONTO_PARA_ENTREGA);
+            }
+            if(produto.getEntregue()) {
+                pedido.setSituacao(StatusPedido.PARCIALMENTE_ENTREGUE);
+            }
             if(pedido != null && !outboundPort.produtoExiste(produto.getId())) {
                 pedido.incrementarValor(produto.getValor());
                 // if(produto.getValor() + pedido.getValorPago() > pedido.getValor())
@@ -56,6 +63,7 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
                 pedidoOutboundPort.salvar(pedido);
             }
         }
+
 
         if (produto.getTipo().equals(TipoProduto.CAMISA)) {
             Camisa camisa = (Camisa) produto;
