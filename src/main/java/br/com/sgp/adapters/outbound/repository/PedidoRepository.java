@@ -8,20 +8,20 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.time.OffsetDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Repository
 public interface PedidoRepository extends JpaRepository<PedidoEntity, Long> {
 
-    List<PedidoEntity> findBySituacao(StatusPedido situacao);
+    List<PedidoEntity> findAllByTemporadaId(Long temporadaId);
+    List<PedidoEntity> findBySituacaoAndTemporadaId(StatusPedido situacao, Long temporadaId);
 
-    List<PedidoEntity> findByStatusPagamento(StatusPagamento statusPagamento);
+    List<PedidoEntity> findByStatusPagamentoAndTemporadaId(StatusPagamento statusPagamento, Long temporadaId);
 
     List<PedidoEntity> findByTemporadaAndSituacao(TemporadaEntity temporada, StatusPedido situacao);
 
-    List<PedidoEntity> findByAlunoNome(String nomeAluno);
+    List<PedidoEntity> findByAlunoNomeAndTemporadaId(String nomeAluno, Long temporadaId);
 
-    List<PedidoEntity> findByDataBetween(OffsetDateTime startDay, OffsetDateTime endDay);
+    List<PedidoEntity> findByDataBetweenAndTemporadaId(OffsetDateTime startDay, OffsetDateTime endDay, Long temporadaId);
     
 }

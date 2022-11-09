@@ -11,11 +11,12 @@ public interface TemporadaUseCaseInboundPort {
 
     Temporada salvar(Temporada temporada) throws NegocioException;
     void excluir(Long id);
-    Temporada encerrarTemporada(Long id);
+    Temporada encerrarTemporadaAtual();
     Temporada adicionarProdutos(Temporada temporada, HashMap<TipoProduto, Integer> produtos);
     Temporada buscarPeloId(Long id);
     Temporada buscarAtiva();
     List<Temporada> buscarTodas();
     Temporada alterarTemporada(Temporada temporada);
     boolean temporadaExiste(Long id);
+    boolean existeTemporadaAtiva();
 }

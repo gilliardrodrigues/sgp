@@ -20,42 +20,32 @@ public interface ProdutoRepository<E extends ProdutoEntity> extends JpaRepositor
 
     @Query("from CamisaEntity")
     List<CamisaEntity> findAllCamisas();
-
     @Query("from CanecaEntity")
     List<CanecaEntity> findAllCanecas();
-
     @Query("from TiranteEntity")
     List<TiranteEntity> findAllTirantes();
-
-    List<ProdutoEntity> findByPedidoId(Long idPedido);
-
+    List<ProdutoEntity> findByPedidoId(Long pedidoId);
+    @Query("SELECT c FROM CamisaEntity c WHERE c.pedido.id = :pedidoId")
+    List<CamisaEntity> findCamisasByPedidoId(Long pedidoId);
+    @Query("SELECT c FROM CanecaEntity c WHERE c.pedido.id = :pedidoId")
+    List<CanecaEntity> findCanecasByPedidoId(Long pedidoId);
+    @Query("SELECT t FROM TiranteEntity t WHERE t.pedido.id = :pedidoId")
+    List<TiranteEntity> findTirantesByPedidoId(Long pedidoId);
     @Query("SELECT c FROM CamisaEntity c WHERE c.prontaEntrega = True AND c.pedido IS NULL")
     List<CamisaEntity> buscarCamisasDoInventario();
-
     @Query("SELECT c FROM CanecaEntity c WHERE c.prontaEntrega = True AND c.pedido IS NULL")
     List<CanecaEntity> buscarCanecasDoInventario();
-
     @Query("SELECT t FROM TiranteEntity t WHERE t.prontaEntrega = True AND t.pedido IS NULL")
     List<TiranteEntity> buscarTirantesDoInventario();
-
     @Query("SELECT c FROM CanecaEntity c WHERE c.modelo = :modelo")
     List<CanecaEntity> findCanecaByModelo(String modelo);
-
     @Query("SELECT c FROM TiranteEntity c WHERE c.modelo = :modelo")
     List<TiranteEntity> findTiranteByModelo(String modelo);
-
     List<CamisaEntity> findByCor(CorCamisa corCamisa);
-
     List<CamisaEntity> findByTamanho(TamanhoCamisa tamanhoCamisa);
-
     List<CamisaEntity> findByCurso(Curso curso);
-
     List<CamisaEntity> findByCorAndTamanhoAndCurso(CorCamisa corCamisa, TamanhoCamisa tamanhoCamisa, Curso curso);
-
     List<CamisaEntity> findByCorAndTamanho(CorCamisa corCamisa, TamanhoCamisa tamanhoCamisa);
-
     List<CamisaEntity> findByCorAndCurso(CorCamisa corCamisa, Curso curso);
-
     List<CamisaEntity> findByTamanhoAndCurso(TamanhoCamisa tamanhoCamisa, Curso curso);
-
 }

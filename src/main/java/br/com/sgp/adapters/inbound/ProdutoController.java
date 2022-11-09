@@ -94,11 +94,14 @@ public class ProdutoController {
         }
     }
 
-    @GetMapping("/filtro/pedido/{idPedido}")
-    public List<ProdutoResponse> buscarPeloIdPedido(@PathVariable Long idPedido) {
+    @GetMapping(value = "/filtro/pedido/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String buscarProdutosPeloIdPedido(@PathVariable Long id) {
 
-        var produtos = inboundPort.buscarPeloIdPedido(idPedido);
-        return mapper.mapToList(produtos, new TypeToken<List<ProdutoResponse>>() {}.getType());
+        try {
+            return inboundPort.buscarProdutosPeloIdPedido(id);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @GetMapping("/tirantes/filtro/{modelo}")
@@ -119,26 +122,26 @@ public class ProdutoController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/admin/camisas")
-    public void salvarCamisaNoInventario(@Valid @RequestBody CamisaRequest camisaRequest) throws NegocioException {
+    public ResponseEntity<CamisaResponse> salvarCamisaNoInventario(@Valid @RequestBody CamisaRequest camisaRequest) throws NegocioException {
 
         var camisa = mapper.mapTo(camisaRequest, Camisa.class);
-        inboundPort.salvarInventario(camisa);
+        return ResponseEntity.ok(mapper.mapTo(inboundPort.salvarInventario(camisa), CamisaResponse.class));
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/admin/canecas")
-    public void salvarCanecaNoInventario(@Valid @RequestBody CanecaRequest canecaRequest) throws NegocioException {
+    public ResponseEntity<CanecaResponse> salvarCanecaNoInventario(@Valid @RequestBody CanecaRequest canecaRequest) throws NegocioException {
 
         var caneca = mapper.mapTo(canecaRequest, Caneca.class);
-        inboundPort.salvarInventario(caneca);
+        return ResponseEntity.ok(mapper.mapTo(inboundPort.salvarInventario(caneca), CanecaResponse.class));
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/admin/tirantes")
-    public void salvarTiranteNoInventario(@Valid @RequestBody TiranteRequest tiranteRequest) throws NegocioException {
+    public ResponseEntity<TiranteResponse> salvarTiranteNoInventario(@Valid @RequestBody TiranteRequest tiranteRequest) throws NegocioException {
 
         var tirante = mapper.mapTo(tiranteRequest, Tirante.class);
-        inboundPort.salvarInventario(tirante);
+        return ResponseEntity.ok(mapper.mapTo(inboundPort.salvarInventario(tirante), TiranteResponse.class));
     }
 
     @PutMapping("/admin/camisas/{id}")
@@ -187,6 +190,7 @@ public class ProdutoController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/camisas")
     public ResponseEntity<CamisaResponse> pedirCamisa(@Valid @RequestBody CamisaRequest camisaRequest) throws NegocioException {
+        camisaRequest.setValor(null);
         var camisa = mapper.mapTo(camisaRequest, Camisa.class);
         return ResponseEntity.ok(mapper.mapTo(inboundPort.salvar(camisa), CamisaResponse.class));
     }
@@ -195,7 +199,7 @@ public class ProdutoController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/canecas")
     public ResponseEntity<CanecaResponse> pedirCaneca(@Valid @RequestBody CanecaRequest canecaRequest) throws NegocioException {
-
+        canecaRequest.setValor(null);
         var caneca = mapper.mapTo(canecaRequest, Caneca.class);
         return ResponseEntity.ok(mapper.mapTo(inboundPort.salvar(caneca), CanecaResponse.class));
     }
@@ -203,7 +207,7 @@ public class ProdutoController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/tirantes")
     public ResponseEntity<TiranteResponse> pedirTirante(@Valid @RequestBody TiranteRequest tiranteRequest) throws NegocioException {
-
+        tiranteRequest.setValor(null);
         var tirante = mapper.mapTo(tiranteRequest, Tirante.class);
         tirante.setPedido(pedidoInboundPort.buscarPeloId(tiranteRequest.getPedidoId()));
         return ResponseEntity.ok(mapper.mapTo(inboundPort.salvar(tirante), TiranteResponse.class));
@@ -227,4 +231,5 @@ public class ProdutoController {
             return ResponseEntity.notFound().build();
         }
     }
+
 }

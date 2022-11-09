@@ -52,12 +52,11 @@ public class Pedido {
         else this.situacao = StatusPedido.AGUARDANDO_PAGAMENTO;
     }
 
-    public void addPrevisaoDeEntrega(OffsetDateTime previsaoDeEntrega) {
+    public void addPrevisaoDeEntrega(OffsetDateTime novaData) {
         if (this.previsaoDeEntrega == null)
-            this.previsaoDeEntrega = previsaoDeEntrega;
+            this.previsaoDeEntrega = novaData;
         else
-            this.previsaoDeEntrega = previsaoDeEntrega.isAfter(this.previsaoDeEntrega) ? previsaoDeEntrega
-                    : this.previsaoDeEntrega;
+            this.previsaoDeEntrega = previsaoDeEntrega.isAfter(this.previsaoDeEntrega) ? novaData : this.previsaoDeEntrega;
     }
 
     @Override

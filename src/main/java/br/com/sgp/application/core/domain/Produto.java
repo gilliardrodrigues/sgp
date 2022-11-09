@@ -20,7 +20,6 @@ public class Produto {
     protected Boolean chegou;
     protected TipoProduto tipo;
     protected OffsetDateTime previsaoDeEntrega;
-    // protected Fornecedor fornecedor;
     protected Pedido pedido;
 
     public OffsetDateTime calcularPrevisaoDeEntrega (List<Fornecedor> fornecedores) {

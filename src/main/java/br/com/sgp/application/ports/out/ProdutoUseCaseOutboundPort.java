@@ -16,6 +16,9 @@ public interface ProdutoUseCaseOutboundPort {
     void excluir(Long id);
     Produto buscarPeloId(Long id) throws Throwable;
     List<Produto> buscarPeloIdPedido(Long idPedido) throws NegocioException;
+    List<Camisa> buscarCamisasPeloIdPedido(Long idPedido);
+    List<Caneca> buscarCanecasPeloIdPedido(Long idPedido);
+    List<Tirante> buscarTirantesPeloIdPedido(Long idPedido);
     List<Camisa> buscarCamisasDoInventario();
     List<Caneca> buscarCanecasDoInventario();
     List<Tirante> buscarTirantesDoInventario();

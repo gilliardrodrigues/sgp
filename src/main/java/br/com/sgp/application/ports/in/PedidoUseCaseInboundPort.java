@@ -12,12 +12,12 @@ import java.util.Set;
 public interface PedidoUseCaseInboundPort {
 
     Pedido salvar(Pedido pedido) throws NegocioException;
-    List<Pedido> buscarTodos();
+    List<Pedido> buscarTodosPorTemporada(Long idTemporada);
     void excluir(Long id);
     Pedido buscarPeloId(Long id);
-    List<Pedido> buscarPedidos(String situacao, String statusPagamento, String nome, Date data,  String tipoDeProduto) ;
+    List<Pedido> buscarPedidos(String situacao, String statusPagamento, String nome, Date data, String tipoDeProduto, Long idTemporada);
     List<Pedido> buscarPedidosConfirmadosPorTemporada(Temporada temporada);
-    Set<Pedido> buscarPeloTipoDeProduto(TipoProduto tipoProduto);
+    Set<Pedido> buscarPedidosDaTemporadaPeloTipoDeProduto(Long idTemporada, TipoProduto tipoProduto);
     Boolean pedidoExiste(Long id);
     void encerrarTemporadaDePedidos(Temporada temporada);
     Pedido darBaixa(Long id, int valorPago) throws NegocioException;
