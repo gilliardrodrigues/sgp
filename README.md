@@ -71,7 +71,7 @@ Os clientes conseguem:
 
 - ✅ Projetar tela de gerenciamento de temporada no Figma e validar design. [Maíla]
 
-- ⬜️ Implementar interface web. [Fernando]
+- ✅ Implementar interface web. [Fernando]
 
 - ✅ Criar e implementar rota para pesquisar temporadas existentes. [Gilliard]
 
@@ -88,7 +88,7 @@ Os clientes conseguem:
 
 - ✅ Projetar tela de gerenciamento de pedidos no Figma e validar design. [Fernando]
 
-- ⬜️ Implementar interface web. [Maíla]
+- ✅ Implementar interface web. [Maíla]
 
 - ✅ Criar e implementar rota para pesquisar pedidos existentes. [Samuel, Gilliard]
 
@@ -133,7 +133,7 @@ Os clientes conseguem:
 
 - ✅ Projetar tela de consulta do usuário no Figma e validar design. [Maíla, Fernando]
 
-- ⬜️ Implementar interface web. [Fernando]
+- ✅ Implementar interface web. [Fernando]
 
 - ✅ Criar e implementar rota para mostrar apenas produtos disponíveis à pronta-entrega. [Gilliard]
 
@@ -141,7 +141,7 @@ Os clientes conseguem:
 
 - ✅ Projetar telas relativas ao processo de abertura de pedido no Figma e validar design. [Maíla, Fernando]
 
-- ⬜️ Implementar interface web. [Fernando]
+- ✅ Implementar interface web. [Fernando]
 
 - ✅ Criar e implementar rota para criar pedido [Samuel]
 
@@ -150,7 +150,7 @@ Os clientes conseguem:
 
 - ✅ Projetar tela de acompanhamento de pedidos e validar design. [Maíla]
 
-- ⬜️ Implementar interface web. [Fernando]
+- ✅ Implementar interface web. [Fernando]
 
 - ✅ Criar e implementar rota para buscar pedido [Samuel]
 
@@ -161,7 +161,7 @@ Os clientes conseguem:
 
 - ✅ Projetar tela de acompanhamento de pedidos da temporada. [Maíla]
 
-- ⬜️ Implementar interface web. [Fernando]
+- ✅ Implementar interface web. [Fernando]
 
 - ⬜️ Criar e testar rota para atualizar todos os pedidos pagos da temporada para serem considerados encomendados e impedir novos pedidos na temporada [Samuel]
 
