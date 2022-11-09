@@ -1,4 +1,8 @@
 window.onload = async () => {
+	const queryString = window.location.search;
+	const urlParams = new URLSearchParams(queryString);
+	const pedidoId = urlParams.get("id");
+
 	document.querySelector(".tamanho").style.display = "none";
 	document.querySelector(".cor").style.display = "none";
 	document.querySelector(".curso").style.display = "none";
@@ -6,7 +10,7 @@ window.onload = async () => {
 
 	const form = document.querySelector("form");
 	form.addEventListener("submit", function (e) {
-		submitForm(e, this);
+		submitForm(e, this, pedidoId);
 	});
 
 	const tipoInput = document.querySelector(".tipo");
@@ -15,7 +19,7 @@ window.onload = async () => {
 	});
 };
 
-async function submitForm(e, form) {
+async function submitForm(e, form, pedidoId) {
 	e.preventDefault();
 
 	const headers = {
@@ -25,6 +29,7 @@ async function submitForm(e, form) {
 	const jsonFormData = buildJsonFormData(form);
 	jsonFormData.entregue = false;
 	jsonFormData.chegou = false;
+	jsonFormData.pedidoId = pedidoId;
 
 	await criarProduto(headers, jsonFormData);
 }
@@ -40,8 +45,6 @@ async function criarProduto(headers, jsonFormData, comentario) {
 		endpoint = "http://localhost:8080/produtos/admin/tirantes";
 	}
 
-	console.log({ endpoint: endpoint, method: "POST", headers, body: JSON.stringify(jsonFormData) });
-
 	await fetch(endpoint, {
 		method: "POST",
 		headers,
@@ -52,7 +55,7 @@ async function criarProduto(headers, jsonFormData, comentario) {
 				alert(body.titulo);
 			});
 		} else {
-			location.href = "../produtos/index.html";
+			location.href = "../addPedido/index.html";
 		}
 	});
 }
