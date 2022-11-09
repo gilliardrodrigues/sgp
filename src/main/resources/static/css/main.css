@@ -556,3 +556,24 @@ main {
 	font-weight: 300;
 	color: #472D62;
 }
+
+.footer {
+	width: 100%;
+	height: 200px;
+	padding: 30px 0;
+	background-image: linear-gradient(90deg, #352446, #6a488c);
+}
+
+.footer p,
+.footer h4 {
+	text-align: center;
+	font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+}
+
+.footer h4 {
+	color: white;
+}
+
+.footer p {
+	color: #A379CD;
+}
