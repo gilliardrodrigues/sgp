@@ -12,21 +12,20 @@ window.onload = async () => {
 	//const situacao = ["AguardandoPagamento", "Confirmado", "ParcialmenteEntregue", "Entregue"];
 
 	const temporada = await fetch(`http://localhost:8080/temporadas/${id}`).then(response => response.json());
-	console.log(temporada);
+	console.log({ temporada: temporada });
 	document.querySelector(".descricao").value = temporada.descricao;
 	document.querySelector(".inicio").value = new Date(temporada.dataInicio).toLocaleDateString();
-	document.querySelector(".termino").value = temporada.dataFim ? new Date(temporada.dataFim).toLocaleDateString() : "";
-	// document.querySelector(".tempo-entrega").value = temporada.tempoEntregaEmDias;
-
-	temporada.catalogo.forEach(produto => {
-		if (produto === "Caneca") {
-			document.querySelector(".caneca").checked = true;
-		} else if (produto === "Tirante") {
-			document.querySelector(".tirante").checked = true;
-		} else if (produto === "Camisa") {
-			document.querySelector(".camisa").checked = true;
-		}
+	console.log({
+		a: temporada.catalogo.Caneca,
 	});
+	document.querySelector(".caneca").checked = temporada.catalogo.Caneca ? true : false;
+	document.querySelector(".tirante").checked = temporada.catalogo.Tirante ? true : false;
+	document.querySelector(".camisa").checked = temporada.catalogo.Camisa ? true : false;
+	document.querySelector(".valorCaneca").value = temporada.catalogo.Caneca ? temporada.catalogo.Caneca : "";
+	document.querySelector(".valorTirante").value = temporada.catalogo.Tirante ? temporada.catalogo.Tirante : "";
+	document.querySelector(".valorCamisa").value = temporada.catalogo.Camisa ? temporada.catalogo.Camisa : "";
+
+	atualizarVisibilidade();
 };
 
 async function submitForm(e, form, id) {
@@ -38,20 +37,34 @@ async function submitForm(e, form, id) {
 
 	const jsonFormData = buildJsonFormData(form);
 
-	editarTemporada(headers, jsonFormData, id);
+	const temporadaJson = {};
+	temporadaJson.descricao = jsonFormData.descricao;
+	temporadaJson.catalogo = {};
+	if (jsonFormData.valorCaneca) {
+		temporadaJson.catalogo.Caneca = jsonFormData.valorCaneca;
+	}
+	if (jsonFormData.valorTirante) {
+		temporadaJson.catalogo.Tirante = jsonFormData.valorTirante;
+	}
+	if (jsonFormData.valorCamisa) {
+		temporadaJson.catalogo.Camisa = jsonFormData.valorCamisa;
+	}
+
+	editarTemporada(headers, temporadaJson, id);
 }
-async function editarTemporada(headers, jsonFormData, id) {
+async function editarTemporada(headers, jsonFormData) {
 	console.log({
-		url: `http://localhost:8080/temporadas/${id}`,
+		url: `http://localhost:8080/temporadas`,
 		method: "PUT",
 		headers,
 		body: JSON.stringify(jsonFormData),
 	});
-	await fetch(`http://localhost:8080/temporadas/${id}`, {
+	await fetch(`http://localhost:8080/temporadas`, {
 		method: "PUT",
 		headers,
 		body: JSON.stringify(jsonFormData),
-	}).then(() => (location.href = "../temporadas/index.html"));
+	})
+	// .then(() => (location.href = "../temporadas/index.html"));
 }
 
 function buildJsonFormData(form) {
@@ -60,4 +73,16 @@ function buildJsonFormData(form) {
 		jsonFormData[pair[0]] = pair[1];
 	}
 	return jsonFormData;
+}
+
+function atualizarVisibilidade() {
+	const caneca = document.querySelector(".caneca");
+	const tirante = document.querySelector(".tirante");
+	const camisa = document.querySelector(".camisa");
+
+	console.log(caneca);
+	console.log(caneca.checked);
+	document.querySelector(".valorCaneca").style.display = caneca.checked ? "" : "none";
+	document.querySelector(".valorTirante").style.display = tirante.checked ? "" : "none";
+	document.querySelector(".valorCamisa").style.display = camisa.checked ? "" : "none";
 }

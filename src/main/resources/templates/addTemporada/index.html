@@ -4,6 +4,7 @@
 		<link rel="stylesheet" type="text/css" href="../../static/css/editarPedido.css" />
 		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css" />
 		<title>Área administrativa | SGP</title>
+		<script type="text/javascript" src="../../static/js/addTemporada.js"></script>
 	</head>
 
 	<body>
@@ -33,34 +34,25 @@
 							class="descricao" />
 					</div>
 
+					<p class="label-attribute">Produtos</p>
+
 					<div class="label-textfield">
-						<p class="label-attribute">Início*</p>
-						<input type="text" placeholder="Insira o início da temporada..." id="name" name="inicio" class="inicio" />
+						<input onchange="atualizarVisibilidade()" class="caneca" type="checkbox" id="caneca" name="caneca" value="caneca" />
+						<label for="caneca"> Caneca</label>
+						<input class="valorCaneca" id="name" name="valorCaneca" placeholder="Insira o valor da caneca..." />
 					</div>
 
 					<div class="label-textfield">
-						<p class="label-attribute">Término*</p>
-						<input
-							type="text"
-							placeholder="Insira o término da temporada..."
-							id="name"
-							name="termino"
-							class="termino" />
+						<input onchange="atualizarVisibilidade()" class="tirante" type="checkbox" id="tirante" name="tirante" value="tirante" />
+						<label for="tirante"> Tirante</label>
+						<input class="valorTirante" id="name" name="valorTirante" placeholder="Insira o valor da tirante..." />
 					</div>
 
 					<div class="label-textfield">
-						<p class="label-attribute">Produtos</p>
-						<input class="caneca" type="checkbox" id="caneca" name="caneca" value="caneca" />
-						<label for="caneca"> Caneca</label><br />
+						<input onchange="atualizarVisibilidade()" class="camisa" type="checkbox" id="camisa" name="camisa" value="camisa" />
+						<label for="camisa"> Camisa</label>
+						<input class="valorCamisa" id="name" name="valorCamisa" placeholder="Insira o valor da camisa..." />
 					</div>
-
-					<input class="caneca" type="checkbox" id="caneca" name="caneca" value="caneca" />
-					<label for="caneca"> Caneca</label><br />
-
-					<input class="tirante" type="checkbox" id="tirante" name="tirante" value="tirante" />
-					<label for="tirante"> Tirante</label><br />
-					<input class="camisa" type="checkbox" id="camisa" name="camisa" value="camisa" />
-					<label for="camisa"> Camisa</label><br />
 
 					<button type="submit" class="button-salvar">Salvar</button>
 				</form>
