@@ -31,10 +31,10 @@ async function submitForm(e, form, pedidoId) {
 	jsonFormData.chegou = false;
 	jsonFormData.pedidoId = pedidoId;
 
-	await criarProduto(headers, jsonFormData);
+	await criarProduto(headers, jsonFormData, pedidoId);
 }
 
-async function criarProduto(headers, jsonFormData, comentario) {
+async function criarProduto(headers, jsonFormData, pedidoId) {
 	let endpoint;
 
 	if (jsonFormData.tipo === "Camisa") {
@@ -44,7 +44,7 @@ async function criarProduto(headers, jsonFormData, comentario) {
 	} else if (jsonFormData.tipo === "Tirante") {
 		endpoint = "http://localhost:8080/produtos/admin/tirantes";
 	}
-
+	console.log({ endpoint: endpoint, method: "POST", headers, body: JSON.stringify(jsonFormData) });
 	await fetch(endpoint, {
 		method: "POST",
 		headers,
@@ -55,16 +55,8 @@ async function criarProduto(headers, jsonFormData, comentario) {
 				alert(body.titulo);
 			});
 		} else {
-			location.href = "../addPedido/index.html";
+			location.href = `../pedidoCliente/index.html?id=${pedidoId}`;
 		}
-	});
-}
-
-async function criarComentario(headers, fornecedorId, comentario) {
-	await fetch(`http://localhost:8080/fornecedores/${fornecedorId}/observacoes`, {
-		method: "POST",
-		headers,
-		body: JSON.stringify({ comentario: comentario }),
 	});
 }
 

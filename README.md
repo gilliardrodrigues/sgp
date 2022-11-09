@@ -27,7 +27,6 @@ Os clientes conseguem:
 - Fazer pedidos, consultar status de pedidos através de seus códigos e também ver os itens disponíveis à pronta-entrega.
 
 
-
 ### Tecnologias 
 - Front-end
 	- HTML
@@ -42,6 +41,7 @@ Os clientes conseguem:
 	- PostgreSQL
 - Deploy
   - AWS ou Heroku
+
 
 ### Product Backlog
 
@@ -71,7 +71,7 @@ Os clientes conseguem:
 
 - ✅ Projetar tela de gerenciamento de temporada no Figma e validar design. [Maíla]
 
-- ⬜️ Implementar interface web. [Fernando]
+- ✅ Implementar interface web. [Fernando]
 
 - ✅ Criar e implementar rota para pesquisar temporadas existentes. [Gilliard]
 
@@ -88,13 +88,13 @@ Os clientes conseguem:
 
 - ✅ Projetar tela de gerenciamento de pedidos no Figma e validar design. [Fernando]
 
-- ⬜️ Implementar interface web. [Maíla]
+- ✅ Implementar interface web. [Maíla]
 
 - ✅ Criar e implementar rota para pesquisar pedidos existentes. [Samuel, Gilliard]
 
 - ✅ Criar e implementar rota para editar pedidos. [Samuel, Gilliard]
 
-- ⬜️ Implementar regras de negócio relativas às edições de pedidos e seus reflexos. [Samuel, Gilliard]
+- ✅ Implementar regras de negócio relativas às edições de pedidos e seus reflexos. [Samuel, Gilliard]
 
 - ✅ Criar e implementar rota para remover pedidos. [Samuel, Gilliard]
 
@@ -103,7 +103,7 @@ Os clientes conseguem:
 
 - ✅ Implementar filtros de busca na tabela de pedidos no back-end. [Gilliard, Samuel]
 
-- ⬜️ Implementar esses filtros no front-end. [Fernando]
+- ⬜️ Implementar esses filtros no front-end. [Fernando, Maíla]
 
 **História:** Como administrador, eu gostaria de cadastrar fornecedores com observações específicas para cada um.
 
@@ -133,7 +133,7 @@ Os clientes conseguem:
 
 - ✅ Projetar tela de consulta do usuário no Figma e validar design. [Maíla, Fernando]
 
-- ⬜️ Implementar interface web. [Fernando]
+- ✅ Implementar interface web. [Fernando]
 
 - ✅ Criar e implementar rota para mostrar apenas produtos disponíveis à pronta-entrega. [Gilliard]
 
@@ -141,7 +141,7 @@ Os clientes conseguem:
 
 - ✅ Projetar telas relativas ao processo de abertura de pedido no Figma e validar design. [Maíla, Fernando]
 
-- ⬜️ Implementar interface web. [Fernando]
+- ✅ Implementar interface web. [Fernando]
 
 - ✅ Criar e implementar rota para criar pedido [Samuel]
 
@@ -150,27 +150,27 @@ Os clientes conseguem:
 
 - ✅ Projetar tela de acompanhamento de pedidos e validar design. [Maíla]
 
-- ⬜️ Implementar interface web. [Fernando]
+- ✅ Implementar interface web. [Fernando]
 
 - ✅ Criar e implementar rota para buscar pedido [Samuel]
 
-- ⬜️ Implementar lógica de autenticação do código do pedido. [Samuel]
+- ✅ Implementar lógica de autenticação do código do pedido. [Gilliard]
 
 
 **História:** Como administrador, eu gostaria de poder fechar temporadas de recebimento de pedidos, gerando aviso aos clientes de que o pedido já foi repassado para a produção.
 
 - ✅ Projetar tela de acompanhamento de pedidos da temporada. [Maíla]
 
-- ⬜️ Implementar interface web. [Fernando]
+- ✅ Implementar interface web. [Fernando]
 
-- ⬜️ Criar e testar rota para atualizar todos os pedidos pagos da temporada para serem considerados encomendados e impedir novos pedidos na temporada [Samuel]
+- ✅ Criar e testar rota para atualizar todos os pedidos pagos da temporada para serem considerados encomendados e impedir novos pedidos na temporada [Samuel, Gilliard]
 
 
 **História:** Como administrador, eu gostaria de notificar os clientes a respeito do tempo de entrega específico de cada tipo de produto, de acordo com o tempo do fornecedor.
 
-- ⬜️ Projetar tela de acompanhamento de pedidos da temporada. [Fernando]
+- ✅ Projetar tela de acompanhamento de pedidos da temporada. [Fernando]
 
-- ⬜️ Implementar interface web. [Maíla]
+- ✅ Implementar interface web. [Maíla]
 
 - ✅ Criar e testar rota para definir o prazo de entrega dos pedidos de uma temporada. [Samuel]
 
@@ -191,7 +191,57 @@ Os clientes conseguem:
 
 - ✅ Projetar telas de login e tela principal do administrador no Figma e validar design. [Fernando]
 
-- ⬜️ Implementar telas de login, cadastro e tela principal do administrador. [Maíla]
+- ✅ Implementar telas de login, cadastro e tela principal do administrador. [Maíla]
+
+
+### Documentação da arquitetura:
+- A Arquitetura Hexagonal foi adotada no sistema com o objetivo de separar o domínio da tecnologia.
+- A descrição abaixo explicita os componentes da arquitetura:
+```
+├── adapters    -> diretório contendo os adaptadores
+│   ├── inbound    -> diretório contendo os adaptadores para a interface web                               
+│   │   ├── entity   -> diretório contendo classes anotadas com Hibernate para mapeamento objeto-relacional
+│   │   │   └── ...
+│   │   ├── exceptionHandler   -> diretório contendo classes que capturam e montam o corpo dos erros para as respostas de requisições
+│   │   │   └── ...
+│   │   ├── mapper   -> diretório contendo um mapper genérico implementado com ModelMapper
+│   │   │   └── ...
+│   │   ├── request  -> diretório contendo classes DTOs para serem utilizados nas requisições
+│   │   │   └── ...
+│   │   ├── response  -> diretório contendo classes DTOs para serem utilizados nas respostas das requisições
+│   │   │   └── ...
+│   │   ├── AdministradorController
+│   │   ├── FornecedorController
+│   │   ├── ObservacaoController   
+│   │   ├── PedidoController
+│   │   ├── ProdutoController
+│   │   └── TemporadaController
+│   │
+│   └── outbound    -> diretório contendo os adaptadores para a camada de persistência
+│       ├── repository   -> diretório contendo os repositórios que estendem a interface JpaRepository do Spring
+│       │   └── ...
+│       ├── AutenticarAdministradorAdapter
+│       ├── CadastrarObservacaoAdapter
+│       ├── FornecedorAdapter   
+│       ├── PedidoAdapter
+│       ├── ProdutoAdapter
+│       └── TemporadaAdapter
+│
+├── application
+│   ├── core
+│   │   ├── domain   -> diretório contendo as classes do domínio
+│   │   ├── exception   -> diretório contendo as classes relativas às exceções personalizadas
+│   │   └── usecase   -> diretório contendo as classes relativas aos serviços e regras de negócio do domínio.
+│   │
+│   └── ports   -> diretório contendo as portas
+│       ├── in   -> diretório contendo as interfaces relativas às portas de entrada
+│       └── out   -> diretório contendo as interfaces relativas às portas de saída
+│
+├── config   -> diretório contendo as classes de configuração do ModelMapper e dos beans do Spring
+└── SgpApplication
+
+``` 
+Os arquivos referentes ao front-end (HTML, CSS, JS e imagens) estão no diretório _resources_.
 
 
 ### Diagrama de Classes

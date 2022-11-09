@@ -1,54 +1,50 @@
 <html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="../../static/css/main.css" />
+		<link rel="stylesheet" type="text/css" href="../../static/css/verProdutos.css" />
+		<link rel="stylesheet" type="text/css" href="../../static/css/verPedidos.css" />
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css" />
+		<title>Sistema de Pedidos DACompSI</title>
+		<meta http-equiv=”Content-Type” content=”text/html; charset=utf-8″>
+		<script src="../../static/js/cliente.js"></script>
+	</head>
 
-<head>
-    <link rel="stylesheet" type="text/css" href="../../static/css/main.css">
-    <link rel="stylesheet" type="text/css" href="../../static/css/verProdutos.css">
-    <link rel="stylesheet" type="text/css" href="../../static/css/verPedidos.css">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css">
-    <title>Sistema de Pedidos DACompSI</title>
-    <meta http-equiv=”Content-Type” content=”text/html; charset=utf-8″>
-</head>
+	<body>
+		<header class="menu-principal">
+			<main>
+				<div class="header-1">
+					<div class="logo">
+						<img class="img-logo" src="../../static/img/logo.png" alt="Logo SGP" />
+					</div>
+				</div>
+			</main>
+		</header>
 
-<body>
+		<div class="content">
+			<h2 class="title-area-cliente">Sistema de Pedidos DACompSI</h2>
 
-    <header class="menu-principal">
-        <main>
-            <div class="header-1">
-                <div class="logo">
-                    <img class="img-logo" src="../../static/img/logo.png" alt="Logo SGP" />
-                </div>
-            </div>
-        </main>
-    </header>
-
-    <div class="content">
-        <h2 class="title-area-cliente">
-            Sistema de Pedidos DACompSI
-        </h2>
-
-        <div class="container">
-            <a href="../criarPedido/index.html">
-                <div class="box-add-pedido">
-                    <h1>+</h1>
-                    <p>Fazer pedido</p>
-                </div>
-            </a>
-
-            <div class="box-pesquisar">
-                <p class = "titulo-box-pesquisar">Deseja acompanhar o seu pedido?</p>
-                <input class="input-pesquisa" placeholder="Digite o seu código..." />
-                <div class="button-search-order">
-                    <a href="../acompanharPedido/index.html">
-                        <button type="submit" class="search-button">
-                            <img class="img-search" src="../../static/img/search-icon.png" alt="Logo SGP" />
-                        </button>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-    </div> <!-- content -->
-
-</body>
-
+			<div class="container">
+				<a href="../criarPedido/index.html">
+					<div class="box-add-pedido">
+						<h1>+</h1>
+						<p>Fazer pedido</p>
+					</div>
+				</a>
+				<form action="">
+					<div class="box-pesquisar">
+						<p class="titulo-box-pesquisar">Deseja acompanhar o seu pedido?</p>
+						<input class="input-pesquisa" placeholder="Digite o seu código..." name="id" />
+						<div class="button-search-order">
+							<!-- <a href="../acompanharPedido/index.html"> -->
+							<button type="submit" class="search-button">
+								<img class="img-search" src="../../static/img/search-icon.png"alt="Logo SGP" />
+							</button>
+							<!-- </a> -->
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<!-- content -->
+	</body>
 </html>

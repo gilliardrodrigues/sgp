@@ -19,9 +19,7 @@
 		</header>
 
 		<div class="content">
-			<a href="../temporadas/index.html">
-				<button class="back-button"></button>
-			</a>
+			<button onclick="window.history.go(-1); return false;" class="back-button"></button>
 
 			<div class="box-editar">
 				<p class="main-title">Editar Temporada de Vendas</p>
@@ -34,10 +32,10 @@
 							value="Temporada de pedidos DACompSI 2023/1"
 							id="name"
 							name="descricao"
-              class="descricao" />
+							class="descricao" />
 					</div>
 
-          <div class="label-textfield">
+					<div class="label-textfield">
 						<p class="label-attribute">Início*</p>
 						<input
 							type="text"
@@ -45,10 +43,10 @@
 							value="01/02/2023"
 							id="name"
 							name="inicio"
-              class="inicio" />
+							class="inicio" />
 					</div>
 
-          <div class="label-textfield">
+					<div class="label-textfield">
 						<p class="label-attribute">Término*</p>
 						<input
 							type="text"
@@ -56,12 +54,12 @@
 							value="01/07/2023"
 							id="name"
 							name="termino"
-              class="termino" />
+							class="termino" />
 					</div>
 
 					<div class="label-textfield">
 						<p class="label-attribute">Produtos</p>
-						<input class="caneca"  type="checkbox" id="caneca" name="caneca" value="caneca" />
+						<input class="caneca" type="checkbox" id="caneca" name="caneca" value="caneca" />
 						<label for="caneca"> Caneca</label><br />
 						<input class="tirante" type="checkbox" id="tirante" name="tirante" value="tirante" />
 						<label for="tirante"> Tirante</label><br />

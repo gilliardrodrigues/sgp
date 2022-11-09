@@ -1,96 +1,92 @@
 <html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="../../static/css/main.css" />
+		<link rel="stylesheet" type="text/css" href="../../static/css/verProdutos.css" />
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css" />
+		<title>Área administrativa | SGP</title>
+		<script src="../../static/js/produto.js"></script>
+	</head>
 
-<head>
-	<link rel="stylesheet" type="text/css" href="../../static/css/main.css" />
-	<link rel="stylesheet" type="text/css" href="../../static/css/verProdutos.css" />
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css" />
-	<title>Área administrativa | SGP</title>
-	<script src="../../static/js/produto.js"></script>
-</head>
+	<body>
+		<header class="menu-principal">
+			<main>
+				<div class="header-1">
+					<div class="logo">
+						<img class="img-logo" src="../../static/img/logo.png" alt="Logo SGP" />
+					</div>
+				</div>
+			</main>
+		</header>
 
-<body>
-	<header class="menu-principal">
-		<main>
-			<div class="header-1">
-				<div class="logo">
-					<img class="img-logo" src="../../static/img/logo.png" alt="Logo SGP" />
+		<div class="content">
+			<button onclick="window.history.go(-1); return false;" class="back-button"></button>
+
+			<a href="../addProduto/index.html">
+				<div class="box-add-produto">
+					<h1>+</h1>
+					<p>Adicionar produto</p>
+				</div>
+			</a>
+
+			<div class="filtros">
+				<p class="p-filtros">Filtros</p>
+
+				<button class="color-tapped" onclick="filterSelection('all')">Nome</button>
+				<button class="card-filtro" onclick="filterSelection('pronta-entrega')">Pronta-entrega</button>
+				<button class="card-filtro" onclick="filterSelection('modelo')">Modelo</button>
+				<button class="card-filtro" onclick="filterSelection('curso')">Curso</button>
+				<button class="card-filtro" onclick="filterSelection('tamanho')">Tamanho</button>
+				<button class="card-filtro" onclick="filterSelection('cor')">Cor</button>
+				<button class="card-filtro" onclick="filterSelection('id-pedido')">Id pedido</button>
+			</div>
+
+			<div class="pedidos">
+				<p class="title-pedidos">Produtos</p>
+			</div>
+
+			<div class="tabela">
+				<div class="header-column w8">
+					<p>Nome</p>
+				</div>
+
+				<div class="header-column w8">
+					<p>Id pedido</p>
+				</div>
+
+				<div class="header-column w8">
+					<p>Preço</p>
+				</div>
+
+				<div class="header-column w8">
+					<p>P. Entrega</p>
+				</div>
+
+				<div class="header-column w8">
+					<p>Modelo</p>
+				</div>
+
+				<div class="header-column w15">
+					<p>Curso</p>
+				</div>
+
+				<div class="header-column w8">
+					<p>Tam.</p>
+				</div>
+
+				<div class="header-column w8">
+					<p>Cor</p>
+				</div>
+
+				<div class="header-column w8">
+					<p>Chegou</p>
+				</div>
+
+				<div class="header-column w8">
+					<p>Entregue</p>
 				</div>
 			</div>
-		</main>
-	</header>
-
-	<div class="content">
-		<a href="../homeAdmin/index.html">
-			<button class="back-button"></button>
-		</a>
-
-		<a href="../addProduto/index.html">
-			<div class="box-add-produto">
-				<h1>+</h1>
-				<p>Adicionar produto</p>
-			</div>
-		</a>
-
-		<div class="filtros">
-			<p class="p-filtros">Filtros</p>
-
-			<button class="color-tapped" onclick="filterSelection('all')">Nome</button>
-			<button class="card-filtro" onclick="filterSelection('pronta-entrega')">Pronta-entrega</button>
-			<button class="card-filtro" onclick="filterSelection('modelo')">Modelo</button>
-			<button class="card-filtro" onclick="filterSelection('curso')">Curso</button>
-			<button class="card-filtro" onclick="filterSelection('tamanho')">Tamanho</button>
-			<button class="card-filtro" onclick="filterSelection('cor')">Cor</button>
-			<button class="card-filtro" onclick="filterSelection('id-pedido')">Id pedido</button>
+			<!-- tabela -->
 		</div>
-
-		<div class="pedidos">
-			<p class="title-pedidos">Produtos</p>
-		</div>
-
-		<div class="tabela">
-			<div class="header-column w8">
-				<p>Nome</p>
-			</div>
-
-			<div class="header-column w8">
-				<p>Id pedido</p>
-			</div>
-
-			<div class="header-column w8">
-				<p>Preço</p>
-			</div>
-
-			<div class="header-column w8">
-				<p>P. Entrega</p>
-			</div>
-
-			<div class="header-column w8">
-				<p>Modelo</p>
-			</div>
-
-			<div class="header-column w15">
-				<p>Curso</p>
-			</div>
-
-			<div class="header-column w8">
-				<p>Tam.</p>
-			</div>
-
-			<div class="header-column w8">
-				<p>Cor</p>
-			</div>
-
-			<div class="header-column w8">
-				<p>Chegou</p>
-			</div>
-
-			<div class="header-column w8">
-				<p>Entregue</p>
-			</div>
-		</div>
-		<!-- tabela -->
-	</div>
-	<!-- content -->
-</body>
-
+		<!-- content -->
+	</body>
 </html>

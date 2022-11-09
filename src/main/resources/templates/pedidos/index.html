@@ -25,16 +25,14 @@
 
   <div class="content">
 
-    <a href="../homeAdmin/index.html">
-      <button class="back-button"></button>
-    </a>
+    <button onclick="window.history.go(-1); return false;" class="back-button"></button>
 
     <div class="filtros">
       <p class="p-filtros">Filtros</p>
 
 
       <button class="color-tapped" onclick="filterSelection('all')">Produto</button>
-      <button class="card-filtro" onclick="filterSelection('datae')">Data</button>
+      <button class="card-filtro" onclick="filterSelection('data')">Data</button>
       <button class="card-filtro" onclick="filterSelection('entrega')">Situação de entrega</button>
       <button class="card-filtro" onclick="filterSelection('status')">Status de pagamento</button>
 

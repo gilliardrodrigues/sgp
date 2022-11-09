@@ -21,12 +21,17 @@ public class PedidoUseCase implements PedidoUseCaseInboundPort {
     
     @Override
     public Pedido salvar(Pedido pedido) throws NegocioException {
-        Temporada temporada = temporadaOutboundPort.buscarAtiva();
-            
-        pedido.setTemporada(temporada);
-        var pedidoSalvo = outboundPort.salvar(pedido);
 
-        return outboundPort.buscarPeloId(pedidoSalvo.getId());
+        if(!temporadaOutboundPort.existeTemporadaAtiva()) {
+            throw new NegocioException("Não foi possível criar o pedido, pois não há temporada ativa no momento!");
+        }
+        else {
+            Temporada temporada = temporadaOutboundPort.buscarAtiva();
+            pedido.setTemporada(temporada);
+            var pedidoSalvo = outboundPort.salvar(pedido);
+
+            return outboundPort.buscarPeloId(pedidoSalvo.getId());
+        }
     }
 
     @Override

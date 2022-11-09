@@ -1,188 +1,179 @@
 <html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="../../static/css/main.css" />
+		<link rel="stylesheet" type="text/css" href="../../static/css/verProdutos.css" />
+		<link rel="stylesheet" type="text/css" href="../../static/css/verPedidos.css" />
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css" />
+		<title>Sistema de Pedidos DACompSI</title>
+		<meta http-equiv=”Content-Type” content=”text/html; charset=utf-8″>
+	</head>
 
-<head>
-    <link rel="stylesheet" type="text/css" href="../../static/css/main.css">
-    <link rel="stylesheet" type="text/css" href="../../static/css/verProdutos.css">
-    <link rel="stylesheet" type="text/css" href="../../static/css/verPedidos.css">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css">
-    <title>Sistema de Pedidos DACompSI</title>
-    <meta http-equiv=”Content-Type” content=”text/html; charset=utf-8″>
-</head>
+	<body>
+		<header class="menu-principal">
+			<main>
+				<div class="header-1">
+					<div class="logo">
+						<img class="img-logo" src="../../static/img/logo.png" alt="Logo SGP" />
+					</div>
+				</div>
+			</main>
+		</header>
 
-<body>
+		<div class="content">
+			<button onclick="window.history.go(-1); return false;" class="back-button"></button>
 
-    <header class="menu-principal">
-        <main>
-            <div class="header-1">
-                <div class="logo">
-                    <img class="img-logo" src="../../static/img/logo.png" alt="Logo SGP" />
-                </div>
-            </div>
-        </main>
-    </header>
+			<p class="main-title">Pedido - #203492</p>
 
-    <div class="content">
+			<div class="tabela">
+				<div class="header-column w10 first-column">
+					<p>Data</p>
+				</div>
 
-      <a href="../homeCliente/index.html">
-				<button class="back-button"></button>
-			</a>
+				<div class="header-column w12">
+					<p>Valor Total</p>
+				</div>
 
-      <p class="main-title">Pedido - #203492</p>
+				<div class="header-column w12">
+					<p>Situação</p>
+				</div>
 
-      <div class="tabela">
-        <div class="header-column w10 first-column">
-          <p>Data</p>
-        </div>
+				<div class="header-column w15">
+					<p>Status</p>
+				</div>
 
-        <div class="header-column w12">
-          <p>Valor Total</p>
-        </div>
+				<div class="header-column w12">
+					<p>Valor pago</p>
+				</div>
 
-        <div class="header-column w12">
-            <p>Situação</p>
-        </div>
+				<div class="header-column w15">
+					<p>Temporada</p>
+				</div>
 
-        <div class="header-column w15">
-            <p>Status</p>
-        </div>
+				<div class="header-column w12">
+					<p>Aluno</p>
+				</div>
 
-        <div class="header-column w12">
-          <p>Valor pago</p>
-        </div>
+				<div class="header-column w12 last-column">
+					<p>Prev. Entrega</p>
+				</div>
+			</div>
+			<!-- tabela -->
 
-        <div class="header-column w15">
-          <p>Temporada</p>
-        </div>
+			<div class="tabela">
+				<div class="column w10 first-column">
+					<p>05/09/2022 15:25:59</p>
+				</div>
 
-        <div class="header-column w12">
-          <p>Aluno</p>
-        </div>
-        
-        <div class="header-column w12 last-column">
-          <p>Prev. Entrega</p>
-        </div>
+				<div class="column w12">
+					<p>R$ 30,00</p>
+				</div>
 
-      </div> <!-- tabela -->
+				<div class="column w12">
+					<div class="nao-pago">
+						<p>Não pago</p>
+					</div>
+				</div>
 
-      <div class="tabela">
-        <div class="column w10 first-column">
-          <p>05/09/2022 15:25:59</p>
-        </div>
+				<div class="column w15">
+					<div class="confirmado">
+						<p>Confirmado</p>
+					</div>
+				</div>
 
-        <div class="column w12">
-          <p>R$ 30,00</p>
-        </div>
+				<div class="column w12">
+					<p>R$ 0,00</p>
+				</div>
 
-        <div class="column w12">
-          <div class="nao-pago">
-            <p>Não pago</p>
-          </div>
-        </div>
+				<div class="column w15">
+					<p>2</p>
+				</div>
 
-        <div class="column w15">
-          <div class="confirmado">
-            <p>Confirmado</p>
-          </div>
-        </div>
+				<div class="column w12">
+					<p>João</p>
+				</div>
 
-        <div class="column w12">
-            <p>R$ 0,00</p>
-        </div>
+				<div class="column w12 last-column">
+					<p>25/11/2022</p>
+				</div>
+			</div>
+			<!-- tabela -->
 
-        <div class="column w15">
-          <p>2</p>
-        </div>
+			<h2 class="title-produtos">Produtos deste pedido:</h2>
 
-        <div class="column w12">
-          <p>João</p>
-        </div>
-        
-        <div class="column w12 last-column">
-          <p>25/11/2022</p>
-        </div>
+			<div class="tabela">
+				<div class="header-column w12">
+					<p>Nome</p>
+				</div>
 
-      </div> <!-- tabela -->
+				<div class="header-column w12">
+					<p>Preço</p>
+				</div>
 
-      <h2 class="title-produtos">
-        Produtos deste pedido:
-      </h2>
+				<div class="header-column w12">
+					<p>Modelo</p>
+				</div>
 
-      <div class="tabela">
-        <div class="header-column w12">
-          <p>Nome</p>
-        </div>
-  
-        <div class="header-column w12">
-          <p>Preço</p>
-        </div>
-  
-        <div class="header-column w12">
-          <p>Modelo</p>
-        </div>
-  
-        <div class="header-column w15">
-          <p>Curso</p>
-        </div>
-  
-        <div class="header-column w12">
-          <p>Tam.</p>
-        </div>
-  
-        <div class="header-column w12">
-          <p>Cor</p>
-        </div>
-  
-        <div class="header-column w12">
-          <p>Chegou</p>
-        </div>
-  
-        <div class="header-column w12">
-          <p>Entregue</p>
-        </div>
-      </div>
-      <!-- tabela -->
+				<div class="header-column w15">
+					<p>Curso</p>
+				</div>
 
-      <div class="tabela">
-        <div class="column w12 first-column">
-          <p>Camisa</p>
-        </div>
-  
-        <div class="column w12">
-          <p>R$ 30,00</p>
-        </div>
-  
-        <div class="column w12">
-          <p>-</p>
-        </div>
-  
-        <div class="column w15">
-          <p>Sistemas de Informação</p>
-        </div>
-  
-        <div class="column w12">
-          <p>M</p>
-        </div>
-  
-        <div class="column w12">
-          <p>Vinho</p>
-        </div>
-  
-        <div class="column w12">
-          <div class="sim">
-            <p>Sim</p>
-          </div>
-        </div>
-  
-        <div class="column w12 last-column">
-          <div class="entregue">
-            <p>Entregue</p>
-          </div>
-        </div>
-      </div>
-      <!-- tabela -->
+				<div class="header-column w12">
+					<p>Tam.</p>
+				</div>
 
-    </div> <!-- content -->
+				<div class="header-column w12">
+					<p>Cor</p>
+				</div>
 
-</body>
+				<div class="header-column w12">
+					<p>Chegou</p>
+				</div>
 
+				<div class="header-column w12">
+					<p>Entregue</p>
+				</div>
+			</div>
+			<!-- tabela -->
+
+			<div class="tabela">
+				<div class="column w12 first-column">
+					<p>Camisa</p>
+				</div>
+
+				<div class="column w12">
+					<p>R$ 30,00</p>
+				</div>
+
+				<div class="column w12">
+					<p>-</p>
+				</div>
+
+				<div class="column w15">
+					<p>Sistemas de Informação</p>
+				</div>
+
+				<div class="column w12">
+					<p>M</p>
+				</div>
+
+				<div class="column w12">
+					<p>Vinho</p>
+				</div>
+
+				<div class="column w12">
+					<div class="sim">
+						<p>Sim</p>
+					</div>
+				</div>
+
+				<div class="column w12 last-column">
+					<div class="entregue">
+						<p>Entregue</p>
+					</div>
+				</div>
+			</div>
+			<!-- tabela -->
+		</div>
+		<!-- content -->
+	</body>
 </html>

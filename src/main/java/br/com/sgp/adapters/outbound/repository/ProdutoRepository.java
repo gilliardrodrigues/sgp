@@ -10,6 +10,7 @@ import br.com.sgp.application.core.domain.TamanhoCamisa;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 
@@ -26,11 +27,11 @@ public interface ProdutoRepository<E extends ProdutoEntity> extends JpaRepositor
     List<TiranteEntity> findAllTirantes();
     List<ProdutoEntity> findByPedidoId(Long pedidoId);
     @Query("SELECT c FROM CamisaEntity c WHERE c.pedido.id = :pedidoId")
-    List<CamisaEntity> findCamisasByPedidoId(Long pedidoId);
+    List<CamisaEntity> findAllCamisasByPedidoId(@Param("pedidoId") Long pedidoId);
     @Query("SELECT c FROM CanecaEntity c WHERE c.pedido.id = :pedidoId")
-    List<CanecaEntity> findCanecasByPedidoId(Long pedidoId);
+    List<CanecaEntity> findAllCanecasByPedidoId(@Param("pedidoId") Long pedidoId);
     @Query("SELECT t FROM TiranteEntity t WHERE t.pedido.id = :pedidoId")
-    List<TiranteEntity> findTirantesByPedidoId(Long pedidoId);
+    List<TiranteEntity> findAllTirantesByPedidoId(@Param("pedidoId") Long pedidoId);
     @Query("SELECT c FROM CamisaEntity c WHERE c.prontaEntrega = True AND c.pedido IS NULL")
     List<CamisaEntity> buscarCamisasDoInventario();
     @Query("SELECT c FROM CanecaEntity c WHERE c.prontaEntrega = True AND c.pedido IS NULL")
