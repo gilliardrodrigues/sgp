@@ -45,7 +45,9 @@ public class PedidoUseCase implements PedidoUseCaseInboundPort {
     @Override
     public Pedido buscarPeloId(Long id) {
 
-        return outboundPort.buscarPeloId(id);
+        var pedido = outboundPort.buscarPeloId(id);
+        pedido = validarStatusPedido(pedido.getId());
+        return pedido;
     }
 
     @Override
@@ -105,6 +107,26 @@ public class PedidoUseCase implements PedidoUseCaseInboundPort {
         pedido.setValorPago(valorPago);
 
         return outboundPort.salvar(pedido);
+    }
+    @Override
+    public Pedido validarStatusPedido(Long idPedido) {
+
+        var produtos = produtoOutboundPort.buscarPeloIdPedido(idPedido);
+        var pedido = outboundPort.buscarPeloId(idPedido);
+        var situacao = pedido.getSituacao();
+        if(!(situacao.equals(StatusPedido.PARCIALMENTE_ENTREGUE) || situacao.equals(StatusPedido.ENTREGUE))) {
+            if(produtos.stream().allMatch(Produto::getChegou)) {
+                pedido.setSituacao(StatusPedido.PRONTO_PARA_ENTREGA);
+                return outboundPort.salvar(pedido);
+            }
+        }
+        else {
+            if(produtos.stream().allMatch(Produto::getEntregue)) {
+                pedido.setSituacao(StatusPedido.ENTREGUE);
+                return outboundPort.salvar(pedido);
+            }
+        }
+        return pedido;
     }
 
     @Override

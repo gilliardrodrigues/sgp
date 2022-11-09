@@ -22,26 +22,22 @@ public class Pedido {
 
     private Long id;
     private OffsetDateTime data;
-    private int valor;
+    private Integer valor;
     private StatusPedido situacao;
     private StatusPagamento statusPagamento;
-    private int valorPago;
+    private Integer valorPago;
     private Temporada temporada;
     private Aluno aluno;
     protected OffsetDateTime previsaoDeEntrega;
 
-    public void incrementarValor(int incremento) {
+    public void incrementarValor(Integer incremento) {
         this.valor = incremento + this.valor;
-
-        if (this.valor == 0)
-            return;
-
     }
 
-    public void setValorPago(int valorPago) {
+    public void setValorPago(Integer valorPago) {
         this.valorPago = valorPago;
 
-        if (this.valorPago == valor)
+        if (this.valorPago.equals(valor))
             this.statusPagamento = StatusPagamento.INTEGRALMENTE_PAGO;
         else if (this.valorPago > 0)
             this.statusPagamento = StatusPagamento.PARCIALMENTE_PAGO;

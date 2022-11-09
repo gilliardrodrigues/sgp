@@ -33,6 +33,7 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
     public Produto salvarInventario(Produto produto) throws NegocioException {
 
         produto.setProntaEntrega(true);
+        produto.setChegou(true);
         return salvar(produto);
     }
 
@@ -49,6 +50,12 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
         }
         if(produto.getPedido() != null) {
             var pedido = pedidoOutboundPort.buscarPeloId(produto.getPedido().getId());
+            if(produto.getChegou() && pedido.getSituacao().equals(StatusPedido.CONFIRMADO)) {
+                pedido.setSituacao(StatusPedido.PARCIALMENTE_PRONTO_PARA_ENTREGA);
+            }
+            if(produto.getEntregue()) {
+                pedido.setSituacao(StatusPedido.PARCIALMENTE_ENTREGUE);
+            }
             if(pedido != null && !outboundPort.produtoExiste(produto.getId())) {
                 pedido.incrementarValor(produto.getValor());
                 // if(produto.getValor() + pedido.getValorPago() > pedido.getValor())
@@ -67,6 +74,38 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
             Tirante tirante = (Tirante) produto;
             return outboundPort.salvarTirante(tirante);
         }
+    }
+
+    @Override
+    public void marcarChegadaTipoDeProduto(TipoProduto tipoProduto) {
+
+        if(!temporadaOutboundPort.existeTemporadaAtiva()) {
+            if(tipoProduto.equals(TipoProduto.CAMISA)) {
+                var camisas = outboundPort.buscarTodasCamisas();
+                camisas.forEach(camisa -> {
+                    camisa.setChegou(true);
+                    outboundPort.salvarCamisa(camisa);
+                });
+            }
+            else if(tipoProduto.equals(TipoProduto.CANECA)) {
+                var canecas = outboundPort.buscarTodasCanecas();
+                canecas.forEach(caneca -> {
+                    caneca.setChegou(true);
+                    outboundPort.salvarCaneca(caneca);
+                });
+            }
+            else {
+                var tirantes = outboundPort.buscarTodosTirantes();
+                tirantes.forEach(tirante -> {
+                    tirante.setChegou(true);
+                    outboundPort.salvarTirante(tirante);
+                });
+            }
+        }
+        else {
+            throw new NegocioException("Não é possível prosseguir porque a temporada ainda está em andamento!");
+        }
+
     }
 
     public String converterListasDeProdutosParaJson(List<Camisa> camisas, List<Caneca> canecas, List<Tirante> tirantes) throws JsonProcessingException {
