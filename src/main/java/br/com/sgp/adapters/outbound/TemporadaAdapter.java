@@ -63,5 +63,9 @@ public class TemporadaAdapter implements TemporadaUseCaseOutboundPort {
         return mapper.mapTo(temporadaEntity, Temporada.class);
     }
 
-    
+    @Override
+    public boolean existeTemporadaAtiva() {
+        var resultado = repository.findAllByDataFimIsNull();
+        return !resultado.isEmpty();
+    }
 }

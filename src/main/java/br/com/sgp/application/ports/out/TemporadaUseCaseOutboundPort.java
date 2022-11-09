@@ -12,4 +12,5 @@ public interface TemporadaUseCaseOutboundPort {
     List<Temporada> buscarTodas();
     boolean temporadaExiste(Long id);
     Temporada buscarAtiva();
+    boolean existeTemporadaAtiva();
 }

@@ -11,13 +11,13 @@ import java.util.List;
 public interface PedidoUseCaseOutboundPort {
 
     Pedido salvar(Pedido pedido) throws NegocioException;
-    List<Pedido> buscarTodos();
+    List<Pedido> buscarTodosPorTemporada(Long idTemporada);
     void excluir(Long id);
     Pedido buscarPeloId(Long id);
-    List<Pedido> buscarPelaSituacao(String situacao);
-    List<Pedido> buscarPeloStatusPagamento(String statusPagamento);
-    List<Pedido> buscarPeloNomeAluno(String nome);
-    List<Pedido> buscarPelaData(Date data);
+    List<Pedido> buscarPedidosDaTemporadaPelaSituacao(Long idTemporada, String situacao);
+    List<Pedido> buscarPedidosDaTemporadaPeloStatusPagamento(Long idTemporada, String statusPagamento);
+    List<Pedido> buscarPedidosDaTemporadaPeloNomeAluno(Long idTemporada, String nome);
+    List<Pedido> buscarPedidosDaTemporadaPelaData(Long idTemporada, Date data);
     List<Pedido> buscarPelaTemporadaAssimComoSituacao(Temporada temporada, StatusPedido situacao);
     Boolean pedidoExiste(Long id);
 }

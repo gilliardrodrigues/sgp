@@ -5,6 +5,7 @@ import br.com.sgp.application.core.exception.NegocioException;
 import br.com.sgp.application.ports.in.ProdutoUseCaseInboundPort;
 import br.com.sgp.application.ports.out.PedidoUseCaseOutboundPort;
 import br.com.sgp.application.ports.out.ProdutoUseCaseOutboundPort;
+import br.com.sgp.application.ports.out.TemporadaUseCaseOutboundPort;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -21,6 +22,7 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
 
     private final ProdutoUseCaseOutboundPort outboundPort;
     private final PedidoUseCaseOutboundPort pedidoOutboundPort;
+    private final TemporadaUseCaseOutboundPort temporadaOutboundPort;
 
     public Boolean produtoExiste(Long id) {
 
@@ -39,6 +41,11 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
 
         if(produto.getProntaEntrega() == null) {
             produto.setProntaEntrega(false);
+        }
+        if(!produto.getProntaEntrega()) {
+            var tipo = produto.getTipo();
+            var catalogo = temporadaOutboundPort.buscarAtiva().getCatalogo();
+            produto.setValor(catalogo.get(tipo));
         }
         if(produto.getPedido() != null) {
             var pedido = pedidoOutboundPort.buscarPeloId(produto.getPedido().getId());
@@ -119,9 +126,8 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
         var camisas = buscarTodasCamisas();
         var canecas = buscarTodasCanecas();
         var tirantes = buscarTodosTirantes();
-        String produtos = converterListasDeProdutosParaJson(camisas, canecas, tirantes);
 
-        return produtos;
+        return converterListasDeProdutosParaJson(camisas, canecas, tirantes);
     }
 
     @Override
@@ -130,9 +136,18 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
         var camisas = outboundPort.buscarCamisasDoInventario();
         var canecas = outboundPort.buscarCanecasDoInventario();
         var tirantes = outboundPort.buscarTirantesDoInventario();
-        String inventario = converterListasDeProdutosParaJson(camisas, canecas, tirantes);
 
-        return inventario;
+        return converterListasDeProdutosParaJson(camisas, canecas, tirantes);
+    }
+
+    @Override
+    public String buscarProdutosPeloIdPedido(Long idPedido) throws JsonProcessingException {
+
+        var camisas = outboundPort.buscarCamisasPeloIdPedido(idPedido);
+        var canecas = outboundPort.buscarCanecasPeloIdPedido(idPedido);
+        var tirantes = outboundPort.buscarTirantesPeloIdPedido(idPedido);
+
+        return converterListasDeProdutosParaJson(camisas, canecas, tirantes);
     }
 
     @Override
@@ -166,12 +181,6 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
     }
 
     @Override
-    public List<Produto> buscarPeloIdPedido(Long idPedido) throws NegocioException {
-
-        return outboundPort.buscarPeloIdPedido(idPedido);
-    }
-
-    @Override
     public List<Tirante> buscarTirantePeloModelo(String modelo) {
 
         return outboundPort.buscarTirantePeloModelo(modelo);
@@ -191,7 +200,7 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
     @Override
     public Produto adicionarProdutoDoInventarioAoPedido(Long idProduto, Long idPedido) {
 
-        Produto produto = null;
+        Produto produto;
         try {
             produto = outboundPort.buscarPeloId(idProduto);
             var pedido = pedidoOutboundPort.buscarPeloId(idPedido);

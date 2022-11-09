@@ -38,9 +38,9 @@ public class PedidoAdapter implements PedidoUseCaseOutboundPort {
     }
 
     @Override
-    public List<Pedido> buscarTodos() {
+    public List<Pedido> buscarTodosPorTemporada(Long idTemporada) {
 
-        var pedidos = repository.findAll();
+        var pedidos = repository.findAllByTemporadaId(idTemporada);
         return mapper.mapToList(pedidos, new TypeToken<List<Pedido>>() {}.getType());
     }
 
@@ -61,19 +61,34 @@ public class PedidoAdapter implements PedidoUseCaseOutboundPort {
     }
 
     @Override
-    public List<Pedido> buscarPelaSituacao(String situacao) {
+    public List<Pedido> buscarPedidosDaTemporadaPelaSituacao(Long idTemporada, String situacao) {
 
-        var pedidos = repository.findBySituacao(StatusPedido.valueOf(situacao.toUpperCase()));
+        var pedidos = repository.findBySituacaoAndTemporadaId(StatusPedido.valueOf(situacao.toUpperCase()), idTemporada);
         return mapper.mapToList(pedidos, new TypeToken<List<Pedido>>() {}.getType());
     }
 
     @Override
-    public List<Pedido> buscarPeloStatusPagamento(String statusPagamento) {
+    public List<Pedido> buscarPedidosDaTemporadaPeloStatusPagamento(Long idTemporada, String statusPagamento) {
 
-        var pedidos = repository.findByStatusPagamento(StatusPagamento.valueOf(statusPagamento.toUpperCase()));
+        var pedidos = repository.findByStatusPagamentoAndTemporadaId(StatusPagamento.valueOf(statusPagamento.toUpperCase()), idTemporada);
         return mapper.mapToList(pedidos, new TypeToken<List<Pedido>>() {}.getType());
     }
+    public List<Pedido> buscarPedidosDaTemporadaPeloNomeAluno(Long idTemporada, String nome) {
 
+        var pedidos = repository.findByAlunoNomeAndTemporadaId(nome, idTemporada);
+        return mapper.mapToList(pedidos, new TypeToken<List<Pedido>>() {}.getType());
+    }
+    public List<Pedido> buscarPedidosDaTemporadaPelaData(Long idTemporada, Date data) {
+
+        OffsetDateTime startDay = data.toInstant().atOffset(ZoneOffset.ofHours(-3)).plusHours(3);
+        OffsetDateTime endDay = startDay
+                .withHour(23)
+                .withMinute(59)
+                .withSecond(59)
+                .withNano(999999000).toInstant().atOffset(ZoneOffset.ofHours(-3));
+        var pedidos = repository.findByDataBetweenAndTemporadaId(startDay, endDay, idTemporada);
+        return mapper.mapToList(pedidos, new TypeToken<List<Pedido>>() {}.getType());
+    }
     public List<Pedido> buscarPelaTemporadaAssimComoSituacao(Temporada temporada, StatusPedido situacao) {
 
         var temporadaEntity = mapper.mapTo(temporada, TemporadaEntity.class);
@@ -84,21 +99,5 @@ public class PedidoAdapter implements PedidoUseCaseOutboundPort {
     public Boolean pedidoExiste(Long id) {
 
         return repository.existsById(id);
-    }
-
-    public List<Pedido> buscarPeloNomeAluno(String nome) {
-        var pedidos = repository.findByAlunoNome(nome);
-        return mapper.mapToList(pedidos, new TypeToken<List<Pedido>>() {}.getType());
-    }
-
-    public List<Pedido> buscarPelaData(Date data) {
-        OffsetDateTime startDay = data.toInstant().atOffset(ZoneOffset.ofHours(-3)).plusHours(3);
-        OffsetDateTime endDay = startDay
-            .withHour(23)
-            .withMinute(59)
-            .withSecond(59)
-            .withNano(999999000).toInstant().atOffset(ZoneOffset.ofHours(-3));
-        var pedidos = repository.findByDataBetween(startDay, endDay);
-        return mapper.mapToList(pedidos, new TypeToken<List<Pedido>>() {}.getType());
     }
 }
