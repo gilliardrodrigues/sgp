@@ -40,7 +40,7 @@ function montarHTMLTemporada(temporada) {
 		tabela.appendChild(col);
 	});
 
-	tabela.innerHTML += `<div class="column ver-obs w12"> <a href=""> <button onclick="encerrarTemporada(${temporada.id})" style="border: 0; background: transparent"> <p>Finalizar <br>temporada </p></button> </a></div><div class="column edit-temporada w8 last-column"> <a href="../editarTemporada/index.html?id=${temporada.id}"> <button type="submit" class="edit-button" style="border: 0; background: transparent"> <img src="../../static/img/edit-button.svg" width="20px" alt="submit"/> </button> </a></div>`
+	tabela.innerHTML += `<div class="column ver-obs w12"> <a> <button onclick="encerrarTemporada()" style="border: 0; background: transparent"> <p>Finalizar <br>temporada </p></button> </a></div><div class="column edit-temporada w8 last-column"> <a href="../editarTemporada/index.html?id=${temporada.id}"> <button type="submit" class="edit-button" style="border: 0; background: transparent"> <img src="../../static/img/edit-button.svg" width="20px" alt="submit"/> </button> </a></div>`
 
 	return tabela;
 }
@@ -52,12 +52,11 @@ async function removerTemporada(id) {
 	location.reload();
 }
 
-async function encerrarTemporada(id) {
-	console.log(id);
-	await fetch(`http://localhost:8080/temporadas/encerrar/${id}`, {
+async function encerrarTemporada() {
+	await fetch(`http://localhost:8080/temporadas/encerrar`, {
 		method: "PUT",
 	});
-	// location.reload();
+	location.reload();
 }
 
 async function submitForm(e, form) {

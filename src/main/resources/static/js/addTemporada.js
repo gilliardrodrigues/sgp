@@ -45,7 +45,7 @@ async function criarTemporada(headers, jsonFormData, comentario) {
 		if (!response.ok) {
 			response.json().then(body => alert(body.titulo));
 		} else {
-			// location.href = "../temporadas/index.html";
+			location.href = "../temporadas/index.html";
 		}
 	});
 }

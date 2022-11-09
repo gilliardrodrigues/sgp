@@ -18,12 +18,19 @@ window.onload = async () => {
 	console.log({
 		a: temporada.catalogo.Caneca,
 	});
+	document.querySelector(".caneca").disabled = temporada.catalogo.Caneca ? "disabled" : "";
+	document.querySelector(".tirante").disabled = temporada.catalogo.Tirante ? "disabled" : "";
+	document.querySelector(".camisa").disabled = temporada.catalogo.Camisa ? "disabled" : "";
 	document.querySelector(".caneca").checked = temporada.catalogo.Caneca ? true : false;
 	document.querySelector(".tirante").checked = temporada.catalogo.Tirante ? true : false;
 	document.querySelector(".camisa").checked = temporada.catalogo.Camisa ? true : false;
 	document.querySelector(".valorCaneca").value = temporada.catalogo.Caneca ? temporada.catalogo.Caneca : "";
 	document.querySelector(".valorTirante").value = temporada.catalogo.Tirante ? temporada.catalogo.Tirante : "";
 	document.querySelector(".valorCamisa").value = temporada.catalogo.Camisa ? temporada.catalogo.Camisa : "";
+
+	document.querySelector(".valorCaneca").readOnly = temporada.catalogo.Caneca ? temporada.catalogo.Caneca : "";
+	document.querySelector(".valorTirante").readOnly = temporada.catalogo.Tirante ? temporada.catalogo.Tirante : "";
+	document.querySelector(".valorCamisa").readOnly = temporada.catalogo.Camisa ? temporada.catalogo.Camisa : "";
 
 	atualizarVisibilidade();
 };
@@ -63,8 +70,7 @@ async function editarTemporada(headers, jsonFormData) {
 		method: "PUT",
 		headers,
 		body: JSON.stringify(jsonFormData),
-	})
-	// .then(() => (location.href = "../temporadas/index.html"));
+	}).then(() => (location.href = "../temporadas/index.html"));
 }
 
 function buildJsonFormData(form) {
