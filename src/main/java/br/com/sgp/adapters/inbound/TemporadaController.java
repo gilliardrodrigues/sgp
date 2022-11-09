@@ -29,22 +29,31 @@ public class TemporadaController {
     public List<FornecedorResponse> listar() {
 
         var temporadas = inboundPort.buscarTodas();
-        return mapper.mapToList(temporadas, new TypeToken<List<TemporadaResponse>>() {}.getType());
+        return mapper.mapToList(temporadas, new TypeToken<List<TemporadaResponse>>() {
+        }.getType());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<TemporadaResponse> buscarPeloId(@PathVariable Long id) {
+        var temporada = inboundPort.buscarPeloId(id);
+        return ResponseEntity.ok(mapper.mapTo(temporada, TemporadaResponse.class));
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public ResponseEntity<TemporadaResponse> salvar(@Valid @RequestBody TemporadaRequest temporadaRequest) throws NegocioException {
+    public ResponseEntity<TemporadaResponse> salvar(@Valid @RequestBody TemporadaRequest temporadaRequest)
+            throws NegocioException {
 
         var temporada = mapper.mapTo(temporadaRequest, Temporada.class);
         return ResponseEntity.ok(mapper.mapTo(inboundPort.salvar(temporada), TemporadaResponse.class));
     }
 
     @PutMapping
-    public ResponseEntity<TemporadaResponse> alterar(@RequestBody TemporadaRequest temporadaRequest) throws NegocioException {
+    public ResponseEntity<TemporadaResponse> alterar(@RequestBody TemporadaRequest temporadaRequest)
+            throws NegocioException {
 
         var temporada = mapper.mapTo(temporadaRequest, Temporada.class);
-        //temporada.setId(id);
+        // temporada.setId(id);
         return ResponseEntity.ok(mapper.mapTo(inboundPort.alterarTemporada(temporada), TemporadaResponse.class));
     }
 
@@ -60,14 +69,14 @@ public class TemporadaController {
 
     @PutMapping("/encerrar")
     public ResponseEntity<TemporadaResponse> encerrarTemporadaAtual() {
-        if(inboundPort.existeTemporadaAtiva()) {
+        if (inboundPort.existeTemporadaAtiva()) {
             return ResponseEntity.ok(mapper.mapTo(inboundPort.encerrarTemporadaAtual(), TemporadaResponse.class));
-        }
-        else {
+        } else {
             return ResponseEntity.notFound().build();
         }
-         
+
     }
+
     @GetMapping("/ativa")
     public ResponseEntity<TemporadaResponse> buscarTemporadaAtiva() {
         return ResponseEntity.ok(mapper.mapTo(inboundPort.buscarAtiva(), TemporadaResponse.class));
