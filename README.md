@@ -178,7 +178,7 @@ Os clientes conseguem:
 
 - ✅ Implementar esqueleto da arquitetura hexagonal. [Gilliard]
 
-- ⬜️ Implementar autenticação e autorização de usuários. [Gilliard]
+- ✅ Implementar autenticação e autorização de usuários. [Gilliard]
 
 - ✅ Projetar telas de login e tela principal do administrador no Figma e validar design. [Fernando]
 
@@ -236,6 +236,6 @@ Os clientes conseguem:
 
 Os arquivos referentes ao front-end (HTML, CSS, JS e imagens) estão no diretório _resources_.
 
-### Diagrama de Classes
+### Diagrama da Arquitetura Hexagonal
 
-![Diagrama de Classes](diagrama_de_classes.png)
+![Diagrama da Arquitetura Hexagonal](diagrama_arquitetural.png)
