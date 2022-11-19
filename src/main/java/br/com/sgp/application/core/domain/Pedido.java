@@ -28,7 +28,7 @@ public class Pedido {
     private Integer valorPago;
     private Temporada temporada;
     private Aluno aluno;
-    protected OffsetDateTime previsaoDeEntrega;
+    private OffsetDateTime previsaoDeEntrega;
 
     public void incrementarValor(Integer incremento) {
         this.valor = incremento + this.valor;
