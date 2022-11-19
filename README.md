@@ -239,3 +239,7 @@ Os arquivos referentes ao front-end (HTML, CSS, JS e imagens) estão no diretór
 ### Diagrama da Arquitetura Hexagonal
 
 ![Diagrama da Arquitetura Hexagonal](diagrama_arquitetural.png)
+
+### Diagrama de Classes
+
+![Diagrama de Classes](diagrama_de_classes.png)
