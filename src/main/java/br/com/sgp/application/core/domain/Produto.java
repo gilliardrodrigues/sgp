@@ -33,12 +33,4 @@ public class Produto {
 
         return null;
     }
-
-    // public Integer calcularDiasParaEntrega() {
-    //     if(this.dataDaEncomenda == null) return 0;
-        
-    //     Integer diasAposEncomenda = (int) ChronoUnit.DAYS.between(OffsetDateTime.now(), dataDaEncomenda);
-
-    //     return Math.min(this.fornecedor.getTempoEntregaEmDias() - diasAposEncomenda, 0);
-    // }
 }
