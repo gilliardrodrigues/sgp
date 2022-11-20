@@ -59,8 +59,6 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
             }
             if(pedido != null && !outboundPort.produtoExiste(produto.getId())) {
                 pedido.incrementarValor(produto.getValor());
-                // if(produto.getValor() + pedido.getValorPago() > pedido.getValor())
-                // throw new NegocioException("Valor pago não pode ser superior ao valor do pedido!");
                 pedidoOutboundPort.salvar(pedido);
             }
         }
@@ -288,6 +286,8 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
             produto = outboundPort.buscarPeloId(idProduto);
             var pedido = pedidoOutboundPort.buscarPeloId(idPedido);
             produto.setPedido(pedido);
+            pedido.incrementarValor(produto.getValor());
+            pedidoOutboundPort.salvar(pedido);
             return salvar(produto);
         } catch (Throwable e) {
             throw new NegocioException(e.getMessage());
