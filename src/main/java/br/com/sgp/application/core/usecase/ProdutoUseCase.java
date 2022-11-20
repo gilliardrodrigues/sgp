@@ -1,6 +1,7 @@
 package br.com.sgp.application.core.usecase;
 
 import br.com.sgp.application.core.domain.*;
+import br.com.sgp.application.core.exception.EntidadeNaoEncontradaException;
 import br.com.sgp.application.core.exception.NegocioException;
 import br.com.sgp.application.ports.in.ProdutoUseCaseInboundPort;
 import br.com.sgp.application.ports.out.PedidoUseCaseOutboundPort;
@@ -74,6 +75,49 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
             Tirante tirante = (Tirante) produto;
             return outboundPort.salvarTirante(tirante);
         }
+    }
+    @Override
+    public Camisa alterarCamisa(Camisa camisaRequest) {
+
+        Camisa camisaSalva;
+        try {
+            camisaSalva = (Camisa) outboundPort.buscarPeloId(camisaRequest.getId());
+            camisaSalva.setCor(camisaRequest.getCor());
+            camisaSalva.setCurso(camisaRequest.getCurso());
+            camisaSalva.setTamanho(camisaRequest.getTamanho());
+            camisaSalva.setValor(camisaRequest.getValor());
+        } catch (Throwable e) {
+            throw new EntidadeNaoEncontradaException(e.getMessage());
+        }
+        return outboundPort.salvarCamisa(camisaSalva);
+    }
+
+    @Override
+    public Caneca alterarCaneca(Caneca canecaRequest) {
+
+        Caneca canecaSalva;
+        try {
+            canecaSalva = (Caneca) outboundPort.buscarPeloId(canecaRequest.getId());
+            canecaSalva.setModelo(canecaRequest.getModelo());
+            canecaSalva.setValor(canecaRequest.getValor());
+        } catch (Throwable e) {
+            throw new EntidadeNaoEncontradaException(e.getMessage());
+        }
+        return outboundPort.salvarCaneca(canecaSalva);
+    }
+
+    @Override
+    public Tirante alterarTirante(Tirante tiranteRequest) {
+
+        Tirante tiranteSalvo;
+        try {
+            tiranteSalvo = (Tirante) outboundPort.buscarPeloId(tiranteRequest.getId());
+            tiranteSalvo.setModelo(tiranteRequest.getModelo());
+            tiranteSalvo.setValor(tiranteRequest.getValor());
+        } catch (Throwable e) {
+            throw new EntidadeNaoEncontradaException(e.getMessage());
+        }
+        return outboundPort.salvarTirante(tiranteSalvo);
     }
 
     @Override
