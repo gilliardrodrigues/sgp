@@ -152,7 +152,7 @@ public class ProdutoController {
         var camisa = mapper.mapTo(camisaRequest, Camisa.class);
         camisa.setId(id);
         return inboundPort.produtoExiste(id)
-                ? ResponseEntity.ok(mapper.mapTo(inboundPort.salvar(camisa), CamisaResponse.class))
+                ? ResponseEntity.ok(mapper.mapTo(inboundPort.alterarCamisa(camisa), CamisaResponse.class))
                 : ResponseEntity.notFound().build();
     }
 
@@ -163,7 +163,7 @@ public class ProdutoController {
         var caneca = mapper.mapTo(canecaRequest, Caneca.class);
         caneca.setId(id);
         return inboundPort.produtoExiste(id)
-                ? ResponseEntity.ok(mapper.mapTo(inboundPort.salvar(caneca), CanecaResponse.class))
+                ? ResponseEntity.ok(mapper.mapTo(inboundPort.alterarCaneca(caneca), CanecaResponse.class))
                 : ResponseEntity.notFound().build();
     }
 
@@ -174,7 +174,7 @@ public class ProdutoController {
         var tirante = mapper.mapTo(tiranteRequest, Tirante.class);
         tirante.setId(id);
         return inboundPort.produtoExiste(id)
-                ? ResponseEntity.ok(mapper.mapTo(inboundPort.salvar(tirante), TiranteResponse.class))
+                ? ResponseEntity.ok(mapper.mapTo(inboundPort.alterarTirante(tirante), TiranteResponse.class))
                 : ResponseEntity.notFound().build();
     }
 
@@ -219,6 +219,25 @@ public class ProdutoController {
         Long idPedido = idPedidoRequest.getId();
         if(inboundPort.produtoExiste(idProduto) && pedidoInboundPort.pedidoExiste(idPedido)) {
             var produto = inboundPort.adicionarProdutoDoInventarioAoPedido(idProduto, idPedido);
+            if (produto instanceof Camisa) {
+                return ResponseEntity.ok(mapper.mapTo(produto, CamisaResponse.class));
+            } else if (produto instanceof Caneca) {
+                return ResponseEntity.ok(mapper.mapTo(produto, CanecaResponse.class));
+            } else {
+                return ResponseEntity.ok(mapper.mapTo(produto, TiranteResponse.class));
+            }
+        }
+        else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("/inventario/pedido/{idProduto}")
+    public ResponseEntity<ProdutoResponse> desassociarProdutoDoPedido(@Valid @PathVariable Long idProduto,
+                                                                    @RequestBody IdPedidoRequest idPedidoRequest) {
+        Long idPedido = idPedidoRequest.getId();
+        if(inboundPort.produtoExiste(idProduto) && pedidoInboundPort.pedidoExiste(idPedido)) {
+            var produto = inboundPort.desassociarProdutoDoPedido(idProduto, idPedido);
             if (produto instanceof Camisa) {
                 return ResponseEntity.ok(mapper.mapTo(produto, CamisaResponse.class));
             } else if (produto instanceof Caneca) {

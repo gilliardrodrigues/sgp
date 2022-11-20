@@ -11,6 +11,12 @@ public interface ProdutoUseCaseInboundPort {
     Produto salvarInventario(Produto produto) throws NegocioException;
     Produto salvar(Produto produto) throws NegocioException;
 
+    Camisa alterarCamisa(Camisa camisaRequest);
+
+    Caneca alterarCaneca(Caneca canecaRequest);
+
+    Tirante alterarTirante(Tirante tiranteRequest);
+
     void marcarChegadaTipoDeProduto(TipoProduto tipoProduto);
 
     String buscarTodos() throws JsonProcessingException;
@@ -26,4 +32,6 @@ public interface ProdutoUseCaseInboundPort {
     List<Camisa> buscarCamisas(String cor, String tamanho, String curso);
     Boolean produtoExiste(Long id);
     Produto adicionarProdutoDoInventarioAoPedido(Long idProduto, Long idPedido);
+
+    Produto desassociarProdutoDoPedido(Long idProduto, Long idPedido);
 }

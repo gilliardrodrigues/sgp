@@ -1,6 +1,7 @@
 package br.com.sgp.application.core.usecase;
 
 import br.com.sgp.application.core.domain.*;
+import br.com.sgp.application.core.exception.EntidadeNaoEncontradaException;
 import br.com.sgp.application.core.exception.NegocioException;
 import br.com.sgp.application.ports.in.ProdutoUseCaseInboundPort;
 import br.com.sgp.application.ports.out.PedidoUseCaseOutboundPort;
@@ -58,8 +59,6 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
             }
             if(pedido != null && !outboundPort.produtoExiste(produto.getId())) {
                 pedido.incrementarValor(produto.getValor());
-                // if(produto.getValor() + pedido.getValorPago() > pedido.getValor())
-                // throw new NegocioException("Valor pago não pode ser superior ao valor do pedido!");
                 pedidoOutboundPort.salvar(pedido);
             }
         }
@@ -74,6 +73,49 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
             Tirante tirante = (Tirante) produto;
             return outboundPort.salvarTirante(tirante);
         }
+    }
+    @Override
+    public Camisa alterarCamisa(Camisa camisaRequest) {
+
+        Camisa camisaSalva;
+        try {
+            camisaSalva = (Camisa) outboundPort.buscarPeloId(camisaRequest.getId());
+            camisaSalva.setCor(camisaRequest.getCor());
+            camisaSalva.setCurso(camisaRequest.getCurso());
+            camisaSalva.setTamanho(camisaRequest.getTamanho());
+            camisaSalva.setValor(camisaRequest.getValor());
+        } catch (Throwable e) {
+            throw new EntidadeNaoEncontradaException(e.getMessage());
+        }
+        return outboundPort.salvarCamisa(camisaSalva);
+    }
+
+    @Override
+    public Caneca alterarCaneca(Caneca canecaRequest) {
+
+        Caneca canecaSalva;
+        try {
+            canecaSalva = (Caneca) outboundPort.buscarPeloId(canecaRequest.getId());
+            canecaSalva.setModelo(canecaRequest.getModelo());
+            canecaSalva.setValor(canecaRequest.getValor());
+        } catch (Throwable e) {
+            throw new EntidadeNaoEncontradaException(e.getMessage());
+        }
+        return outboundPort.salvarCaneca(canecaSalva);
+    }
+
+    @Override
+    public Tirante alterarTirante(Tirante tiranteRequest) {
+
+        Tirante tiranteSalvo;
+        try {
+            tiranteSalvo = (Tirante) outboundPort.buscarPeloId(tiranteRequest.getId());
+            tiranteSalvo.setModelo(tiranteRequest.getModelo());
+            tiranteSalvo.setValor(tiranteRequest.getValor());
+        } catch (Throwable e) {
+            throw new EntidadeNaoEncontradaException(e.getMessage());
+        }
+        return outboundPort.salvarTirante(tiranteSalvo);
     }
 
     @Override
@@ -210,6 +252,18 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
     @Override
     public void excluir(Long id) {
 
+        Produto produto;
+        try {
+            produto = buscarPeloId(id);
+        } catch (Throwable e) {
+            throw new EntidadeNaoEncontradaException(e.getMessage());
+        }
+        if(produto.getPedido() != null) {
+            var pedido = produto.getPedido();
+            if(!pedido.getStatusPagamento().equals(StatusPagamento.NAO_PAGO)) {
+                throw new NegocioException("Não foi possível excluir o produto, pois ele está associado a um pedido pago!");
+            }
+        }
         outboundPort.excluir(id);
     }
 
@@ -244,6 +298,24 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
             produto = outboundPort.buscarPeloId(idProduto);
             var pedido = pedidoOutboundPort.buscarPeloId(idPedido);
             produto.setPedido(pedido);
+            pedido.incrementarValor(produto.getValor());
+            pedidoOutboundPort.salvar(pedido);
+            return salvar(produto);
+        } catch (Throwable e) {
+            throw new NegocioException(e.getMessage());
+        }
+    }
+
+    @Override
+    public Produto desassociarProdutoDoPedido(Long idProduto, Long idPedido) {
+
+        Produto produto;
+        try {
+            produto = outboundPort.buscarPeloId(idProduto);
+            var pedido = pedidoOutboundPort.buscarPeloId(idPedido);
+            produto.setPedido(null);
+            pedido.setValor(pedido.getValor() - produto.getValor());
+            pedidoOutboundPort.salvar(pedido);
             return salvar(produto);
         } catch (Throwable e) {
             throw new NegocioException(e.getMessage());

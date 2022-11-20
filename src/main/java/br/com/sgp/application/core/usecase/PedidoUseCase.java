@@ -1,6 +1,7 @@
 package br.com.sgp.application.core.usecase;
 
 import br.com.sgp.application.core.domain.*;
+import br.com.sgp.application.core.exception.EntidadeNaoEncontradaException;
 import br.com.sgp.application.core.exception.NegocioException;
 import br.com.sgp.application.ports.in.PedidoUseCaseInboundPort;
 import br.com.sgp.application.ports.out.FornecedorUseCaseOutboundPort;
@@ -43,7 +44,15 @@ public class PedidoUseCase implements PedidoUseCaseInboundPort {
     @Override
     public void excluir(Long id) {
 
-
+        Pedido pedido;
+        try {
+            pedido = buscarPeloId(id);
+        } catch (Throwable e) {
+            throw new EntidadeNaoEncontradaException(e.getMessage());
+        }
+        if(!pedido.getStatusPagamento().equals(StatusPagamento.NAO_PAGO)) {
+            throw new NegocioException("Não foi possível excluir o pedido, pois ele já foi pago!");
+        }
         outboundPort.excluir(id);
     }
 
