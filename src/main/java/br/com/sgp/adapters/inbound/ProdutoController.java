@@ -232,6 +232,25 @@ public class ProdutoController {
         }
     }
 
+    @PutMapping("/inventario/pedido/{idProduto}")
+    public ResponseEntity<ProdutoResponse> desassociarProdutoDoPedido(@Valid @PathVariable Long idProduto,
+                                                                    @RequestBody IdPedidoRequest idPedidoRequest) {
+        Long idPedido = idPedidoRequest.getId();
+        if(inboundPort.produtoExiste(idProduto) && pedidoInboundPort.pedidoExiste(idPedido)) {
+            var produto = inboundPort.desassociarProdutoDoPedido(idProduto, idPedido);
+            if (produto instanceof Camisa) {
+                return ResponseEntity.ok(mapper.mapTo(produto, CamisaResponse.class));
+            } else if (produto instanceof Caneca) {
+                return ResponseEntity.ok(mapper.mapTo(produto, CanecaResponse.class));
+            } else {
+                return ResponseEntity.ok(mapper.mapTo(produto, TiranteResponse.class));
+            }
+        }
+        else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @PutMapping("/admin/chegadaProdutos/{tipoDoProduto}")
     public ResponseEntity marcarChegadaTipoDeProduto(@PathVariable TipoProduto tipoDoProduto) {
 

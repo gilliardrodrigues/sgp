@@ -32,4 +32,6 @@ public interface ProdutoUseCaseInboundPort {
     List<Camisa> buscarCamisas(String cor, String tamanho, String curso);
     Boolean produtoExiste(Long id);
     Produto adicionarProdutoDoInventarioAoPedido(Long idProduto, Long idPedido);
+
+    Produto desassociarProdutoDoPedido(Long idProduto, Long idPedido);
 }

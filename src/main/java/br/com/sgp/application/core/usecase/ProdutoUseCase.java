@@ -293,4 +293,20 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
             throw new NegocioException(e.getMessage());
         }
     }
+
+    @Override
+    public Produto desassociarProdutoDoPedido(Long idProduto, Long idPedido) {
+
+        Produto produto;
+        try {
+            produto = outboundPort.buscarPeloId(idProduto);
+            var pedido = pedidoOutboundPort.buscarPeloId(idPedido);
+            produto.setPedido(null);
+            pedido.setValor(pedido.getValor() - produto.getValor());
+            pedidoOutboundPort.salvar(pedido);
+            return salvar(produto);
+        } catch (Throwable e) {
+            throw new NegocioException(e.getMessage());
+        }
+    }
 }
