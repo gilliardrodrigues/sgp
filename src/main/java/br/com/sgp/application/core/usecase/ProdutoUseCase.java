@@ -252,6 +252,18 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
     @Override
     public void excluir(Long id) {
 
+        Produto produto;
+        try {
+            produto = buscarPeloId(id);
+        } catch (Throwable e) {
+            throw new EntidadeNaoEncontradaException(e.getMessage());
+        }
+        if(produto.getPedido() != null) {
+            var pedido = produto.getPedido();
+            if(!pedido.getStatusPagamento().equals(StatusPagamento.NAO_PAGO)) {
+                throw new NegocioException("Não foi possível excluir o produto, pois ele está associado a um pedido pago!");
+            }
+        }
         outboundPort.excluir(id);
     }
 
