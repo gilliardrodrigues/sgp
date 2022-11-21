@@ -8,7 +8,7 @@ window.onload = async () => {
 };
 
 async function getFornecedores() {
-	const fornecedores = await fetch("http://localhost:8080/fornecedores").then(response => response.json());
+	const fornecedores = await fetch("http://sgp-dev.us-east-1.elasticbeanstalk.com/fornecedores").then(response => response.json());
 
 	return fornecedores;
 }
@@ -37,7 +37,7 @@ function montarHTMLFornecedor(fornecedor) {
 }
 
 async function removerFornecedor(id) {
-	await fetch(`http://localhost:8080/fornecedores/${id}`, {
+	await fetch(`http://sgp-dev.us-east-1.elasticbeanstalk.com/fornecedores/${id}`, {
 		method: "DELETE",
 	});
 	location.reload();

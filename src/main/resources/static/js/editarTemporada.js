@@ -11,7 +11,7 @@ window.onload = async () => {
 
 	//const situacao = ["AguardandoPagamento", "Confirmado", "ParcialmenteEntregue", "Entregue"];
 
-	const temporada = await fetch(`http://localhost:8080/temporadas/${id}`).then(response => response.json());
+	const temporada = await fetch(`http://sgp-dev.us-east-1.elasticbeanstalk.com/temporadas/${id}`).then(response => response.json());
 	console.log({ temporada: temporada });
 	document.querySelector(".descricao").value = temporada.descricao;
 	document.querySelector(".inicio").value = new Date(temporada.dataInicio).toLocaleDateString();
@@ -61,12 +61,12 @@ async function submitForm(e, form, id) {
 }
 async function editarTemporada(headers, jsonFormData) {
 	console.log({
-		url: `http://localhost:8080/temporadas`,
+		url: `http://sgp-dev.us-east-1.elasticbeanstalk.com/temporadas`,
 		method: "PUT",
 		headers,
 		body: JSON.stringify(jsonFormData),
 	});
-	await fetch(`http://localhost:8080/temporadas`, {
+	await fetch(`http://sgp-dev.us-east-1.elasticbeanstalk.com/temporadas`, {
 		method: "PUT",
 		headers,
 		body: JSON.stringify(jsonFormData),

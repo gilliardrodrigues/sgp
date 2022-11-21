@@ -38,11 +38,11 @@ async function criarProduto(headers, jsonFormData, pedidoId) {
 	let endpoint;
 
 	if (jsonFormData.tipo === "Camisa") {
-		endpoint = "http://localhost:8080/produtos/camisas";
+		endpoint = "http://sgp-dev.us-east-1.elasticbeanstalk.com/produtos/camisas";
 	} else if (jsonFormData.tipo === "Caneca") {
-		endpoint = "http://localhost:8080/produtos/canecas";
+		endpoint = "http://sgp-dev.us-east-1.elasticbeanstalk.com/produtos/canecas";
 	} else if (jsonFormData.tipo === "Tirante") {
-		endpoint = "http://localhost:8080/produtos/tirantes";
+		endpoint = "http://sgp-dev.us-east-1.elasticbeanstalk.com/produtos/tirantes";
 	}
 	console.log({ endpoint: endpoint, method: "POST", headers, body: JSON.stringify(jsonFormData) });
 	await fetch(endpoint, {

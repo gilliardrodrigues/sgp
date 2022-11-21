@@ -14,7 +14,7 @@ async function submitForm(e, form) {
 
 	const jsonFormData = buildJsonFormData(form);
 
-	await fetch("http://localhost:8080/administradores", {
+	await fetch("http://sgp-dev.us-east-1.elasticbeanstalk.com/administradores", {
 		method: "POST",
 		headers,
 		body: JSON.stringify(jsonFormData),

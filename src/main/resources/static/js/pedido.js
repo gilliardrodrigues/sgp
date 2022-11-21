@@ -17,7 +17,7 @@ window.onload = async () => {
 };
 
 async function getPedidos(temporadaAtivaId) {
-	const pedidos = await fetch(`http://localhost:8080/pedidos/admin/${temporadaAtivaId}`).then(response =>
+	const pedidos = await fetch(`http://sgp-dev.us-east-1.elasticbeanstalk.com/pedidos/admin/${temporadaAtivaId}`).then(response =>
 		response.json()
 	);
 	console.log(pedidos);
@@ -25,7 +25,7 @@ async function getPedidos(temporadaAtivaId) {
 }
 
 async function getTemporadas() {
-	const temporadas = await fetch("http://localhost:8080/temporadas").then(response => response.json());
+	const temporadas = await fetch("http://sgp-dev.us-east-1.elasticbeanstalk.com/temporadas").then(response => response.json());
 	console.log({
 		temporadas: temporadas,
 	});
@@ -33,7 +33,7 @@ async function getTemporadas() {
 }
 
 async function getTemporadaAtiva() {
-	const temporadaAtiva = await fetch("http://localhost:8080/temporadas/ativa").then(response => response.json());
+	const temporadaAtiva = await fetch("http://sgp-dev.us-east-1.elasticbeanstalk.com/temporadas/ativa").then(response => response.json());
 	console.log({
 		temporadaAtiva: temporadaAtiva,
 	});
@@ -41,7 +41,7 @@ async function getTemporadaAtiva() {
 }
 
 async function removerPedido(id) {
-	await fetch(`http://localhost:8080/pedidos/${id}`, {
+	await fetch(`http://sgp-dev.us-east-1.elasticbeanstalk.com/pedidos/${id}`, {
 		method: "DELETE",
 	});
 	location.reload();
@@ -179,7 +179,7 @@ async function submitForm(e, form) {
 
 	const jsonFormData = buildJsonFormData(form);
 
-	await fetch(`http://localhost:8080/pedidos/${id}`, {
+	await fetch(`http://sgp-dev.us-east-1.elasticbeanstalk.com/pedidos/${id}`, {
 		method: "DELETE",
 		headers,
 		body: JSON.stringify(jsonFormData),

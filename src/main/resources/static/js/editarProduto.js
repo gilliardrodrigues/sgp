@@ -8,7 +8,7 @@ window.onload = async () => {
 		submitForm(e, this, id);
 	});
 
-	const objeto = await fetch(`http://localhost:8080/produtos/${id}`).then(response => response.json());
+	const objeto = await fetch(`http://sgp-dev.us-east-1.elasticbeanstalk.com/produtos/${id}`).then(response => response.json());
 	console.log(objeto);
 	document.querySelector(".tipo").value = objeto.tipo;
 	atualizarVisibilidade(document.querySelector(".tipo"));
@@ -47,11 +47,11 @@ async function submitForm(e, form, id) {
 async function editarProduto(headers, jsonFormData, id) {
 	let endpoint;
 	if (jsonFormData.tipo === "Camisa") {
-		endpoint = "http://localhost:8080/produtos/admin/camisas";
+		endpoint = "http://sgp-dev.us-east-1.elasticbeanstalk.com/produtos/admin/camisas";
 	} else if (jsonFormData.tipo === "Caneca") {
-		endpoint = "http://localhost:8080/produtos/admin/canecas";
+		endpoint = "http://sgp-dev.us-east-1.elasticbeanstalk.com/produtos/admin/canecas";
 	} else if (jsonFormData.tipo === "Tirante") {
-		endpoint = "http://localhost:8080/produtos/admin/tirantes";
+		endpoint = "http://sgp-dev.us-east-1.elasticbeanstalk.com/produtos/admin/tirantes";
 	}
 	console.log({
 		url: `${endpoint}/${id}`,

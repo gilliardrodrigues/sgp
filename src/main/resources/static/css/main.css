@@ -124,6 +124,11 @@ main {
 	cursor: pointer;
 }
 
+.link-login {
+    float : right;
+    margin-top : 25px;
+}
+
 .card-filtro-expanded,
 .card-filtro-expanded-selected {
 	padding: 5px 12px;

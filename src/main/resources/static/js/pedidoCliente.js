@@ -28,7 +28,7 @@ window.onload = async () => {
 
 	const finalizarPedidoBtn = document.querySelector(".button-finalizar-pedido");
 	finalizarPedidoBtn.addEventListener("click", () => {
-		location.href = `../homeCliente/index.html`;
+		location.href = `../index.html`;
 	});
 };
 
@@ -47,13 +47,13 @@ function mostrarProdutos(produtos, htmlElement, isInventory, pedidoId) {
 }
 
 async function getProdutos(id) {
-	const produto = await fetch(`http://localhost:8080/produtos/filtro/pedido/${id}`).then(response => response.json());
+	const produto = await fetch(`http://sgp-dev.us-east-1.elasticbeanstalk.com/produtos/filtro/pedido/${id}`).then(response => response.json());
 
 	return produto;
 }
 
 async function getProdutosProntaEntrega() {
-	return await fetch(`http://localhost:8080/produtos/inventario`).then(response => response.json());
+	return await fetch(`http://sgp-dev.us-east-1.elasticbeanstalk.com/produtos/inventario`).then(response => response.json());
 }
 
 function montarHTMLProduto(produto) {
@@ -121,12 +121,12 @@ async function adicionarAoPedido(id, pedidoId) {
 		"Content-Type": "application/json",
 	};
 	console.log({
-		url: `http://localhost:8080/produtos/inventario/${id}`,
+		url: `http://sgp-dev.us-east-1.elasticbeanstalk.com/produtos/inventario/${id}`,
 		method: "PUT",
 		headers,
 		body: { id: pedidoId },
 	});
-	await fetch(`http://localhost:8080/produtos/inventario/${id}`, {
+	await fetch(`http://sgp-dev.us-east-1.elasticbeanstalk.com/produtos/inventario/${id}`, {
 		method: "PUT",
 		headers,
 		body: JSON.stringify({ id: pedidoId }),
@@ -136,7 +136,7 @@ async function adicionarAoPedido(id, pedidoId) {
 }
 
 async function removerProduto(id) {
-	await fetch(`http://localhost:8080/produtos/admin/${id}`, {
+	await fetch(`http://sgp-dev.us-east-1.elasticbeanstalk.com/produtos/admin/${id}`, {
 		method: "DELETE",
 	});
 	location.reload();
@@ -151,7 +151,7 @@ async function submitForm(e, form) {
 
 	const jsonFormData = buildJsonFormData(form);
 
-	await fetch(`http://localhost:8080/produto/${id}`, {
+	await fetch(`http://sgp-dev.us-east-1.elasticbeanstalk.com/produto/${id}`, {
 		method: "DELETE",
 		headers,
 		body: JSON.stringify(jsonFormData),

@@ -1,18 +1,20 @@
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="../static/css/main.css" />
-		<link
-			href="https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,600,700"
-			rel="stylesheet"
-			type="text/css" />
-		<title>SGP - Entrar</title>
-		<script src="../static/js/main.js"></script>
+		<link rel="stylesheet" type="text/css" href="../static/css/verProdutos.css" />
+		<link rel="stylesheet" type="text/css" href="../static/css/verPedidos.css" />
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css" />
+		<title>Sistema de Pedidos DACompSI</title>
+		<meta http-equiv=”Content-Type” content=”text/html; charset=utf-8″>
+		<script src="../static/js/cliente.js"></script>
+		<meta charset="utf-8" />
 	</head>
 
-	<body onload="addEventListeners()">
+	<body>
 		<header class="menu-principal">
 			<main>
 				<div class="header-1">
+					<a class="link-login" href="login/index.html">Área administrativa - Login</a>
 					<div class="logo">
 						<img class="img-logo" src="../static/img/logo.png" alt="Logo SGP" />
 					</div>
@@ -20,17 +22,37 @@
 			</main>
 		</header>
 
-		<div class="box-login">
-			<p class="titulo-box-login">Área administrativa - Entrar</p>
-			<form action="" id="loginForm">
-				<p class="username-text">Usuário:</p>
-				<input class="input-email" name="username" type="username" placeholder="Digite seu usuário..." />
+		<div class="content">
+			<h2 class="title-area-cliente">Sistema de Pedidos DACompSI</h2>
 
-				<p class="password-text">Senha:</p>
-				<input class="input-password" name="password" type="password" placeholder="Digite sua senha..." />
+			<div class="container">
+				<a href="criarPedido/index.html">
+					<div class="box-add-pedido">
+						<h1>+</h1>
+						<p>Fazer pedido</p>
+					</div>
+				</a>
+				<form action="">
+					<div class="box-pesquisar">
+						<p class="titulo-box-pesquisar">Deseja acompanhar o seu pedido?</p>
+						<input class="input-pesquisa" placeholder="Digite o seu código..." name="id" />
+						<div class="button-search-order">
+							<!-- <a href="../acompanharPedido/index.html"> -->
+							<button type="submit" class="search-button">
+								<img alt="Logo SGP" class="img-search" src="../static/img/search-icon.png"/>
+							</button>
+							<!-- </a> -->
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<!-- content -->
 
-				<button type="submit" class="login-button">Entrar</button>
-			</form>
+		<div class="footer">
+			<h4>SGP - Sistema de Gerenciamento de Pedidos</h4>
+			<p>dacompsi@gmail.com - ICEx, Sala 2038</p>
+			<p>DACompSI UFMG | 2022</p>
 		</div>
 	</body>
 </html>

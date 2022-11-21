@@ -37,7 +37,7 @@ async function submitForm(e, form) {
 
 async function criarTemporada(headers, jsonFormData, comentario) {
 	console.log(jsonFormData);
-	await fetch("http://localhost:8080/temporadas", {
+	await fetch("http://sgp-dev.us-east-1.elasticbeanstalk.com/temporadas", {
 		method: "POST",
 		headers,
 		body: JSON.stringify(jsonFormData),
@@ -51,7 +51,7 @@ async function criarTemporada(headers, jsonFormData, comentario) {
 }
 
 async function criarComentario(headers, fornecedorId, comentario) {
-	await fetch(`http://localhost:8080/fornecedores/${fornecedorId}/observacoes`, {
+	await fetch(`http://sgp-dev.us-east-1.elasticbeanstalk.com/fornecedores/${fornecedorId}/observacoes`, {
 		method: "POST",
 		headers,
 		body: JSON.stringify({ comentario: comentario }),

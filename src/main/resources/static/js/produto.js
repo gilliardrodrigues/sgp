@@ -14,7 +14,7 @@ window.onload = async () => {
 };
 
 async function getProdutos() {
-	const produto = await fetch("http://localhost:8080/produtos").then(response => response.json());
+	const produto = await fetch("http://sgp-dev.us-east-1.elasticbeanstalk.com/produtos").then(response => response.json());
 
 	return produto;
 }
@@ -93,7 +93,7 @@ function formatBool(text) {
 }
 
 async function removerProduto(id) {
-	await fetch(`http://localhost:8080/produtos/admin/${id}`, {
+	await fetch(`http://sgp-dev.us-east-1.elasticbeanstalk.com/produtos/admin/${id}`, {
 		method: "DELETE",
 	});
 	location.reload();
@@ -108,7 +108,7 @@ async function submitForm(e, form) {
 
 	const jsonFormData = buildJsonFormData(form);
 
-	await fetch(`http://localhost:8080/produto/${id}`, {
+	await fetch(`http://sgp-dev.us-east-1.elasticbeanstalk.com/produto/${id}`, {
 		method: "DELETE",
 		headers,
 		body: JSON.stringify(jsonFormData),

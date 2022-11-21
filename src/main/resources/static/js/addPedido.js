@@ -27,7 +27,7 @@ async function criarObjeto(headers, jsonFormData) {
 		body: JSON.stringify(jsonFormData),
 	});
 
-	await fetch("http://localhost:8080/pedidos", {
+	await fetch("http://sgp-dev.us-east-1.elasticbeanstalk.com/pedidos", {
 		method: "POST",
 		headers,
 		body: JSON.stringify(jsonFormData),

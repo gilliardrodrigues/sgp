@@ -35,7 +35,7 @@ async function submitForm(e, form, id) {
 }
 
 async function criarComentario(headers, fornecedorId, comentario) {
-	await fetch(`http://localhost:8080/fornecedores/${fornecedorId}/observacoes`, {
+	await fetch(`http://sgp-dev.us-east-1.elasticbeanstalk.com/fornecedores/${fornecedorId}/observacoes`, {
 		method: "POST",
 		headers,
 		body: JSON.stringify(comentario),
@@ -43,11 +43,11 @@ async function criarComentario(headers, fornecedorId, comentario) {
 }
 
 async function getObservacoes(id) {
-	return await fetch(`http://localhost:8080/fornecedores/${id}/observacoes`).then(response => response.json());
+	return await fetch(`http://sgp-dev.us-east-1.elasticbeanstalk.com/fornecedores/${id}/observacoes`).then(response => response.json());
 }
 
 async function getFornecedor(id) {
-	return await fetch(`http://localhost:8080/fornecedores/${id}`).then(response => response.json());
+	return await fetch(`http://sgp-dev.us-east-1.elasticbeanstalk.com/fornecedores/${id}`).then(response => response.json());
 }
 
 function montarHTMLObservacao(observacao) {
