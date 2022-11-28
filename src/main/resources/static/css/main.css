@@ -582,3 +582,59 @@ main {
 .footer p {
 	color: #A379CD;
 }
+
+.container-404 {
+	margin: auto;
+	margin-top: 60px;
+	width: 900px;
+	padding: 40px 20px;
+	height: 60%;
+}
+.container-404 > img {
+	width: 50%;
+	float: left;
+}
+
+.container-404 .text404 {
+	width: 50%;
+	float: left;
+	margin-top: 120px;
+}
+
+.container-404 h1 {
+	color: #352446;
+	margin-left: 50px;
+}
+
+.container-404 h3 {
+	font-weight: 400;
+	margin-left: 50px;
+}
+
+.container-no-access {
+	margin: auto;
+	margin-top: 60px;
+	width: 900px;
+	padding: 40px 20px;
+	height: 60%;
+}
+.container-no-access > img {
+	width: 40%;
+	float: left;
+}
+
+.container-no-access .text-no-access {
+	width: 60%;
+	float: left;
+	margin-top: 90px;
+}
+
+.container-no-access h1 {
+	color: #352446;
+	margin-left: 50px;
+}
+
+.container-no-access h3 {
+	font-weight: 400;
+	margin-left: 50px;
+}
