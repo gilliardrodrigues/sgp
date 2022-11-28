@@ -1,9 +1,11 @@
 package br.com.sgp.application.core.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -17,6 +19,16 @@ public class Fornecedor {
     private Integer tempoEntregaEmDias;
     private List<Observacao> observacoes;
     private List<TipoProduto> produtosOferecidos;
+
+    public Fornecedor(Long id, String razaoSocial, String CNPJ, String email, Integer tempoEntregaEmDias) {
+        this.id = id;
+        this.razaoSocial = razaoSocial;
+        this.CNPJ = CNPJ;
+        this.email = email;
+        this.tempoEntregaEmDias = tempoEntregaEmDias;
+        this.observacoes = new ArrayList<>();
+        this.produtosOferecidos = new ArrayList<>();
+    }
 
     public Observacao cadastrarObservacao(String comentario) {
 
