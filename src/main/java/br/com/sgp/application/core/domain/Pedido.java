@@ -52,7 +52,7 @@ public class Pedido {
         if (this.previsaoDeEntrega == null)
             this.previsaoDeEntrega = novaData;
         else
-            this.previsaoDeEntrega = previsaoDeEntrega.isAfter(this.previsaoDeEntrega) ? novaData : this.previsaoDeEntrega;
+            this.previsaoDeEntrega = novaData.isAfter(this.previsaoDeEntrega) ? novaData : this.previsaoDeEntrega;
     }
 
     @Override
