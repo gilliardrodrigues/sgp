@@ -2,6 +2,7 @@ package br.com.sgp.adapters.inbound.entity;
 
 
 import br.com.sgp.application.core.domain.TipoProduto;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "FORNECEDOR")
+@AllArgsConstructor
 public class FornecedorEntity {
 
     @Id

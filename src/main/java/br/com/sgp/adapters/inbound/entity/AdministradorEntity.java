@@ -1,5 +1,6 @@
 package br.com.sgp.adapters.inbound.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,6 +13,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Table(name = "ADMINISTRADOR")
+@AllArgsConstructor
 public class AdministradorEntity {
 
     @Id
