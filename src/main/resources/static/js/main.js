@@ -22,7 +22,7 @@ async function submitForm(e, form) {
 		if (!response.ok) {
 			response.json().then(body => alert(body.titulo));
 		} else {
-			location.href = "homeAdmin/index.html";
+			location.href = "/homeAdmin/";
 		}
 	});
 }
