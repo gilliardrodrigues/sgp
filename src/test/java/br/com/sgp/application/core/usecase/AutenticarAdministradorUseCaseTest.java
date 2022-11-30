@@ -1,17 +1,8 @@
-package br.com.sgp.application.domain;
+package br.com.sgp.application.core.usecase;
 
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-import br.com.sgp.application.core.domain.Fornecedor;
-
-import java.util.List;
-
-public class FornecedorTest {
-
+public class AutenticarAdministradorUseCaseTest {
     @Test
-    void cadastroDeObservacao() {
+    void autenticarAdministrador() {
         Fornecedor fornecedor = new Fornecedor(1L, "razaoSocial", "123456789", "email", 20);
 
         assertEquals(0, fornecedor.getObservacoes().size());
