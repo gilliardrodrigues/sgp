@@ -1,5 +1,5 @@
 # SGP - Sistema de Gerenciamento de Pedidos
-
+![Coverage](.github/badges/jacoco.svg)
 ### Membros e papéis:
 
 - Fernando Eduardo Pinto Moreira - desenvolvedor front-end;
@@ -178,7 +178,7 @@ Os clientes conseguem:
 
 - ✅ Implementar esqueleto da arquitetura hexagonal. [Gilliard]
 
-- ✅ Implementar autenticação e autorização de usuários. [Gilliard]
+- ⬜️ Implementar autenticação e autorização de usuários. [Gilliard]
 
 - ✅ Projetar telas de login e tela principal do administrador no Figma e validar design. [Fernando]
 
