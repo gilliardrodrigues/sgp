@@ -2,6 +2,9 @@ package br.com.sgp.application.core.domain;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
+import br.com.sgp.config.Generated;
+
+@Generated
 public enum TamanhoCamisa {
 
     PP("PP"),
@@ -23,10 +26,13 @@ public enum TamanhoCamisa {
         this.descricao = descricao;
     }
 
+    @Generated
     public String getDescricao() {
 
         return descricao;
     }
+
+    @Generated
     @JsonValue
     @Override
     public String toString() {

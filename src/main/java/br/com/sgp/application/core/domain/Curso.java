@@ -2,6 +2,9 @@ package br.com.sgp.application.core.domain;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
+import br.com.sgp.config.Generated;
+
+@Generated
 public enum Curso {
 
     CIENCIA_DA_COMPUTACAO("Ciência da Computação"),
@@ -14,11 +17,13 @@ public enum Curso {
         this.descricao = descricao;
     }
 
+    @Generated
     public String getDescricao() {
 
         return descricao;
     }
 
+    @Generated
     @JsonValue
     @Override
     public String toString() {

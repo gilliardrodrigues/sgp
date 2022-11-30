@@ -7,6 +7,8 @@ import lombok.ToString;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 
+import br.com.sgp.config.Generated;
+
 @Getter
 @Setter
 @ToString
@@ -44,8 +46,10 @@ public class Pedido {
         else
             this.statusPagamento = StatusPagamento.NAO_PAGO;
 
-        if(this.valorPago > 0) this.situacao = StatusPedido.CONFIRMADO;
-        else this.situacao = StatusPedido.AGUARDANDO_PAGAMENTO;
+        if (this.valorPago > 0)
+            this.situacao = StatusPedido.CONFIRMADO;
+        else
+            this.situacao = StatusPedido.AGUARDANDO_PAGAMENTO;
     }
 
     public void addPrevisaoDeEntrega(OffsetDateTime novaData) {
@@ -55,14 +59,18 @@ public class Pedido {
             this.previsaoDeEntrega = novaData.isAfter(this.previsaoDeEntrega) ? novaData : this.previsaoDeEntrega;
     }
 
+    @Generated
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Pedido pedido = (Pedido) o;
         return id.equals(pedido.id);
     }
 
+    @Generated
     @Override
     public int hashCode() {
         return Objects.hash(id);
