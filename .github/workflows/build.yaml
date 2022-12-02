@@ -91,5 +91,5 @@ jobs:
           application_name: sgp
           environment_name: Sgp-env
           version_label: ${{github.SHA}}
-          region: us-east-1f
+          region: us-east-1
           deployment_package: sgp-0.0.1-SNAPSHOT.jar    
