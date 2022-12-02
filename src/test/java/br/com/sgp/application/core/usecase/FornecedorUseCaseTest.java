@@ -39,9 +39,9 @@ public class FornecedorUseCaseTest {
     Fornecedor fornecedor;
     FornecedorEntity fornecedorEntity;
 
-    final Long ID_BUSCADO = 1L;
-    final String NOME_BUSCADO = "Fornecedor1";
-    final String CNPJ_BUSCADO = "56.856.809/0001-74";
+    private final Long ID_BUSCADO = 1L;
+    private final String NOME_BUSCADO = "Fornecedor1";
+    private final String CNPJ_BUSCADO = "56.856.809/0001-74";
 
     @BeforeEach
     void setUp() {
