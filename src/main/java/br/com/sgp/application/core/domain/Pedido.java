@@ -1,8 +1,6 @@
 package br.com.sgp.application.core.domain;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.OffsetDateTime;
 import java.util.Objects;
@@ -12,6 +10,7 @@ import br.com.sgp.config.Generated;
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
 public class Pedido {
 
     public Pedido() {

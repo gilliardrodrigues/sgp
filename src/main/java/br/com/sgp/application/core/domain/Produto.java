@@ -1,8 +1,6 @@
 package br.com.sgp.application.core.domain;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.OffsetDateTime;
 import java.time.temporal.ChronoUnit;
@@ -11,6 +9,8 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class Produto {
 
     protected Long id;
