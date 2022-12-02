@@ -59,7 +59,9 @@ public class TemporadaAdapter implements TemporadaUseCaseOutboundPort {
 
     @Override
     public Temporada buscarAtiva() {
-        var temporadaEntity = repository.findByDataFimIsNull();
+
+        var temporadaEntity = repository.findByDataFimIsNull()
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Não existe temporada ativa!"));
         return mapper.mapTo(temporadaEntity, Temporada.class);
     }
 

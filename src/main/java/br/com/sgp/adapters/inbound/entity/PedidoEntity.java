@@ -2,7 +2,9 @@ package br.com.sgp.adapters.inbound.entity;
 
 import br.com.sgp.application.core.domain.StatusPagamento;
 import br.com.sgp.application.core.domain.StatusPedido;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -13,6 +15,8 @@ import java.time.OffsetDateTime;
 @Setter
 @Entity
 @Table(name = "PEDIDO")
+@AllArgsConstructor
+@NoArgsConstructor
 public class PedidoEntity {
 
     @Id

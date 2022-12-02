@@ -1,7 +1,9 @@
 package br.com.sgp.adapters.inbound.entity;
 
 import br.com.sgp.application.core.domain.TipoProduto;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -12,6 +14,8 @@ import java.time.OffsetDateTime;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "product_type", discriminatorType = DiscriminatorType.STRING)
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProdutoEntity {
 
     @Id
@@ -38,5 +42,5 @@ public class ProdutoEntity {
     protected PedidoEntity pedido;
 
     @Column(name = "PREVISAO_DE_ENTREGA")
-    private OffsetDateTime previsaoDeEntrega;
+    protected OffsetDateTime previsaoDeEntrega;
 }
