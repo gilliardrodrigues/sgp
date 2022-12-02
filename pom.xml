@@ -132,7 +132,7 @@
 					<excludes>
 						<exclude>**/br/com/sgp/adapters/**</exclude>
 						<exclude>**/br/com/sgp/application/core/exception/**</exclude>
-						<exclude>**/br/com/sgp/application/core/usecase/**</exclude>
+						<!--<exclude>**/br/com/sgp/application/core/usecase/**</exclude> -->
 						<exclude>**/config/**</exclude>
 						<exclude>**/br/com/sgp/SgpApplication.java</exclude>
 
