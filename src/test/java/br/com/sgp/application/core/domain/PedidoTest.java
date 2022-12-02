@@ -9,7 +9,7 @@ import java.time.OffsetDateTime;
 public class PedidoTest {
 
     @Test
-    void incrementarPedido() {
+    void testIncrementarPedido() {
         Pedido pedido = new Pedido();
 
         assertEquals(0, pedido.getValor());
@@ -19,7 +19,7 @@ public class PedidoTest {
     }
 
     @Test
-    void pagarIntegralmente() {
+    void testPagarIntegralmente() {
         Pedido pedido = new Pedido();
 
         pedido.incrementarValor(10);
@@ -29,7 +29,7 @@ public class PedidoTest {
     }
 
     @Test
-    void pagarParcialmente() {
+    void testPagarParcialmente() {
         Pedido pedido = new Pedido();
 
         pedido.incrementarValor(10);
@@ -39,7 +39,7 @@ public class PedidoTest {
     }
 
     @Test
-    void naoPagar() {
+    void testNaoPagar() {
         Pedido pedido = new Pedido();
 
         pedido.incrementarValor(10);
@@ -49,7 +49,7 @@ public class PedidoTest {
     }
 
     @Test
-    void calcularPrevisaoDeEntrega() {
+    void testCalcularPrevisaoDeEntrega() {
         Pedido pedido = new Pedido();
 
         var date = OffsetDateTime.now();

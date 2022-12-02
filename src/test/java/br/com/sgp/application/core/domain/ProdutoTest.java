@@ -2,15 +2,15 @@ package br.com.sgp.application.core.domain;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.time.OffsetDateTime;
-import java.util.Calendar;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ProdutoTest {
     @Test
-    void calcularPrevisaoDeEntrega() {
+    void testCalcularPrevisaoDeEntrega() {
         Produto produto = new Caneca();
 
         var fornecedor = new Fornecedor(1L, "razaoSocial", "123456789", "email", 20);
