@@ -66,3 +66,5 @@ mvnw.cmd
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+SCRIPT_INSERT_ADMINISTRADOR.py
