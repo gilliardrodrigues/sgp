@@ -139,7 +139,6 @@ public class FornecedorUseCaseTest {
 
         assertTrue(fornecedorExiste);
         verify(this.repository, times(1)).existsById(ID_BUSCADO);
-
     }
 
     @Test
@@ -160,6 +159,18 @@ public class FornecedorUseCaseTest {
         when(this.repository.save(any(FornecedorEntity.class))).thenReturn(fornecedorEntity);
 
         final Fornecedor fornecedorResponse = this.usecase.salvar(fornecedor);
+
+        assertNotNull(fornecedorResponse);
+        verify(this.repository, times(1)).save(any(FornecedorEntity.class));
+    }
+
+    @Test
+    void testAlterarFornecedor() {
+
+        fornecedor.setTempoEntregaEmDias(45);
+        when(this.repository.save(any(FornecedorEntity.class))).thenReturn(fornecedorEntity);
+
+        final Fornecedor fornecedorResponse = this.usecase.alterar(fornecedor);
 
         assertNotNull(fornecedorResponse);
         verify(this.repository, times(1)).save(any(FornecedorEntity.class));
