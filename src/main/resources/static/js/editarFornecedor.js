@@ -8,7 +8,7 @@ window.onload = async () => {
 		submitForm(e, this, id);
 	});
 
-	const fornecedor = await fetch(`http://sgp-dev.us-east-1.elasticbeanstalk.com/fornecedores/${id}`).then(response => response.json());
+	const fornecedor = await fetch("http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/fornecedores/${id}").then(response => response.json());
 	document.querySelector(".razao-social").value = fornecedor.razaoSocial;
 	document.querySelector(".cnpj").value = fornecedor.cnpj;
 	document.querySelector(".email").value = fornecedor.email;
@@ -50,7 +50,7 @@ async function submitForm(e, form, id) {
 	editarFornecedor(headers, jsonFormData, id);
 }
 async function editarFornecedor(headers, jsonFormData, id) {
-	await fetch(`http://sgp-dev.us-east-1.elasticbeanstalk.com/fornecedores/${id}`, {
+	await fetch("http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/fornecedores/${id}", {
 		method: "PUT",
 		headers,
 		body: JSON.stringify(jsonFormData),
@@ -58,7 +58,7 @@ async function editarFornecedor(headers, jsonFormData, id) {
 }
 
 async function criarComentario(headers, fornecedorId, comentario) {
-	await fetch(`http://sgp-dev.us-east-1.elasticbeanstalk.com/fornecedores/${fornecedorId}/observacoes`, {
+	await fetch("http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/fornecedores/${fornecedorId}/observacoes", {
 		method: "POST",
 		headers,
 		body: JSON.stringify({ comentario: comentario }),

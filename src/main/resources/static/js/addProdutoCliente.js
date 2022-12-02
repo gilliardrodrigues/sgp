@@ -38,11 +38,11 @@ async function criarProduto(headers, jsonFormData, pedidoId) {
 	let endpoint;
 
 	if (jsonFormData.tipo === "Camisa") {
-		endpoint = "http://sgp-dev.us-east-1.elasticbeanstalk.com/produtos/camisas";
+		endpoint = "http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/produtos/camisas";
 	} else if (jsonFormData.tipo === "Caneca") {
-		endpoint = "http://sgp-dev.us-east-1.elasticbeanstalk.com/produtos/canecas";
+		endpoint = "http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/produtos/canecas";
 	} else if (jsonFormData.tipo === "Tirante") {
-		endpoint = "http://sgp-dev.us-east-1.elasticbeanstalk.com/produtos/tirantes";
+		endpoint = "http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/produtos/tirantes";
 	}
 	console.log({ endpoint: endpoint, method: "POST", headers, body: JSON.stringify(jsonFormData) });
 	await fetch(endpoint, {
@@ -55,7 +55,7 @@ async function criarProduto(headers, jsonFormData, pedidoId) {
 				alert(body.titulo);
 			});
 		} else {
-			location.href = `../pedidoCliente/index.html?id=${pedidoId}`;
+			location.href = "../pedidoCliente/index.html?id=${pedidoId}";
 		}
 	});
 }

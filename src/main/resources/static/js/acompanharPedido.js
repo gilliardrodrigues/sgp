@@ -39,13 +39,13 @@ window.onload = async () => {
 };
 
 async function getPedido(pedidoId) {
-	const pedidos = await fetch(`http://sgp-dev.us-east-1.elasticbeanstalk.com/pedidos/${pedidoId}`).then(response => response.json());
+	const pedidos = await fetch("http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/pedidos/${pedidoId}").then(response => response.json());
 
 	return pedidos;
 }
 
 async function getProdutos(id) {
-	const produto = await fetch(`http://sgp-dev.us-east-1.elasticbeanstalk.com/produtos/filtro/pedido/${id}`).then(response => response.json());
+	const produto = await fetch("http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/produtos/filtro/pedido/${id}").then(response => response.json());
 
 	return produto;
 }
@@ -205,7 +205,7 @@ async function submitForm(e, form) {
 
 	const jsonFormData = buildJsonFormData(form);
 
-	await fetch(`http://sgp-dev.us-east-1.elasticbeanstalk.com/pedidos/${id}`, {
+	await fetch("http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/pedidos/${id}", {
 		method: "DELETE",
 		headers,
 		body: JSON.stringify(jsonFormData),

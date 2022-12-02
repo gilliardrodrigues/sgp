@@ -33,11 +33,11 @@ async function criarProduto(headers, jsonFormData, comentario) {
 	let endpoint;
 
 	if (jsonFormData.tipo === "Camisa") {
-		endpoint = "http://sgp-dev.us-east-1.elasticbeanstalk.com/produtos/admin/camisas";
+		endpoint = "http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/produtos/admin/camisas";
 	} else if (jsonFormData.tipo === "Caneca") {
-		endpoint = "http://sgp-dev.us-east-1.elasticbeanstalk.com/produtos/admin/canecas";
+		endpoint = "http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/produtos/admin/canecas";
 	} else if (jsonFormData.tipo === "Tirante") {
-		endpoint = "http://sgp-dev.us-east-1.elasticbeanstalk.com/produtos/admin/tirantes";
+		endpoint = "http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/produtos/admin/tirantes";
 	}
 
 	console.log({ endpoint: endpoint, method: "POST", headers, body: JSON.stringify(jsonFormData) });
@@ -58,7 +58,7 @@ async function criarProduto(headers, jsonFormData, comentario) {
 }
 
 async function criarComentario(headers, fornecedorId, comentario) {
-	await fetch(`http://sgp-dev.us-east-1.elasticbeanstalk.com/fornecedores/${fornecedorId}/observacoes`, {
+	await fetch("http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/fornecedores/${fornecedorId}/observacoes", {
 		method: "POST",
 		headers,
 		body: JSON.stringify({ comentario: comentario }),

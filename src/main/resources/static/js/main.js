@@ -14,7 +14,7 @@ async function submitForm(e, form) {
 
 	const jsonFormData = buildJsonFormData(form);
 
-	await fetch("http://sgp-dev.us-east-1.elasticbeanstalk.com/administradores", {
+	await fetch("http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/administradores", {
 		method: "POST",
 		headers,
 		body: JSON.stringify(jsonFormData),

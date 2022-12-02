@@ -27,7 +27,7 @@ async function criarObjeto(headers, jsonFormData) {
 		body: JSON.stringify(jsonFormData),
 	});
 
-	await fetch("http://sgp-dev.us-east-1.elasticbeanstalk.com/pedidos", {
+	await fetch("http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/pedidos", {
 		method: "POST",
 		headers,
 		body: JSON.stringify(jsonFormData),
@@ -35,7 +35,7 @@ async function criarObjeto(headers, jsonFormData) {
 		.then(response => response.json())
 		.then(objeto => {
 			console.log(objeto);
-			location.href = `../pedidoCliente/index.html?id=${objeto.id}`;
+			location.href = "../pedidoCliente/index.html?id=${objeto.id}";
 		});
 }
 

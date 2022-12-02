@@ -14,7 +14,7 @@ async function submitForm(e, form) {
 
     const jsonFormData = buildJsonFormData(form);
 
-    location.href = `../acompanharPedido/index.html?id=${jsonFormData.id}`;
+    location.href = "../acompanharPedido/index.html?id=${jsonFormData.id}";
 }
 
 function buildJsonFormData(form) {
