@@ -46,7 +46,7 @@ function montarHTMLTemporada(temporada) {
 }
 
 async function removerTemporada(id) {
-	await fetch("http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/temporadas/${id}", {
+	await fetch(`http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/temporadas/${id}`, {
 		method: "DELETE",
 	});
 	location.reload();
@@ -68,7 +68,7 @@ async function submitForm(e, form) {
 
 	const jsonFormData = buildJsonFormData(form);
 
-	await fetch("http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/temporadas/${id}", {
+	await fetch(`http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/temporadas/${id}`, {
 		method: "DELETE",
 		headers,
 		body: JSON.stringify(jsonFormData),

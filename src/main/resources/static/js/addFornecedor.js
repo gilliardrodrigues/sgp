@@ -65,12 +65,12 @@ async function criarFornecedor(headers, jsonFormData, comentario) {
 
 async function criarComentario(headers, fornecedorId, comentario) {
 	console.log({
-		url: "http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/fornecedores/${fornecedorId}/observacoes",
+		url: `http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/fornecedores/${fornecedorId}/observacoes`,
 		method: "POST",
 		headers,
 		body: JSON.stringify({ comentario: comentario }),
 	});
-	await fetch("http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/fornecedores/${fornecedorId}/observacoes", {
+	await fetch(`http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/fornecedores/${fornecedorId}/observacoes`, {
 		method: "POST",
 		headers,
 		body: JSON.stringify({ comentario: comentario }),

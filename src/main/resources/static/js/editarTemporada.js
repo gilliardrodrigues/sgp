@@ -11,7 +11,7 @@ window.onload = async () => {
 
 	//const situacao = ["AguardandoPagamento", "Confirmado", "ParcialmenteEntregue", "Entregue"];
 
-	const temporada = await fetch("http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/temporadas/${id}").then(response => response.json());
+	const temporada = await fetch(`http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/temporadas/${id}`).then(response => response.json());
 	console.log({ temporada: temporada });
 	document.querySelector(".descricao").value = temporada.descricao;
 	document.querySelector(".inicio").value = new Date(temporada.dataInicio).toLocaleDateString();

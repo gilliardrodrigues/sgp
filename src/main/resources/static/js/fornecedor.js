@@ -37,7 +37,7 @@ function montarHTMLFornecedor(fornecedor) {
 }
 
 async function removerFornecedor(id) {
-	await fetch("http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/fornecedores/${id}", {
+	await fetch(`http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/fornecedores/${id}`, {
 		method: "DELETE",
 	});
 	location.reload();

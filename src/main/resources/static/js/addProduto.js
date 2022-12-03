@@ -58,7 +58,7 @@ async function criarProduto(headers, jsonFormData, comentario) {
 }
 
 async function criarComentario(headers, fornecedorId, comentario) {
-	await fetch("http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/fornecedores/${fornecedorId}/observacoes", {
+	await fetch(`http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/fornecedores/${fornecedorId}/observacoes`, {
 		method: "POST",
 		headers,
 		body: JSON.stringify({ comentario: comentario }),

@@ -8,7 +8,7 @@ window.onload = async () => {
 		submitForm(e, this, id);
 	});
 
-	const objeto = await fetch("http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/produtos/${id}").then(response => response.json());
+	const objeto = await fetch(`http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/produtos/${id}`).then(response => response.json());
 	console.log(objeto);
 	document.querySelector(".tipo").value = objeto.tipo;
 	atualizarVisibilidade(document.querySelector(".tipo"));

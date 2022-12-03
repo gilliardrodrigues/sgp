@@ -10,7 +10,7 @@ window.onload = async () => {
 
 	const situacao = ["AguardandoPagamento", "Confirmado", "ParcialmenteEntregue", "Entregue"];
 
-	const pedido = await fetch("http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/pedidos/${id}").then(response => response.json());
+	const pedido = await fetch(`http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/pedidos/${id}`).then(response => response.json());
 	// document.querySelector(".select-situacao").value = pedido.situacao;
 	// document.querySelector(".select-status").value = pedido.statusPagamento;
 	// document.querySelector(".previsao-entrega").value = pedido.previsaoEntrega;
@@ -43,12 +43,12 @@ async function submitForm(e, form, id) {
 }
 async function editarPedido(headers, jsonFormData, id) {
 	console.log({
-		url: "http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/pedidos/admin/${id}",
+		url: `http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/pedidos/admin/${id}`,
 		method: "PUT",
 		headers,
 		body: JSON.stringify(jsonFormData),
 	});
-	await fetch("http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/pedidos/admin/${id}", {
+	await fetch(`http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/pedidos/admin/${id}`, {
 		method: "PUT",
 		headers,
 		body: JSON.stringify(jsonFormData),

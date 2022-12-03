@@ -35,7 +35,7 @@ async function criarObjeto(headers, jsonFormData) {
 		.then(response => response.json())
 		.then(objeto => {
 			console.log(objeto);
-			location.href = "../pedidoCliente/index.html?id=${objeto.id}";
+			location.href = `../pedidoCliente/index.html?id=${objeto.id}`;
 		});
 }
 

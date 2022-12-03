@@ -47,7 +47,7 @@ function mostrarProdutos(produtos, htmlElement, isInventory, pedidoId) {
 }
 
 async function getProdutos(id) {
-	const produto = await fetch("http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/produtos/filtro/pedido/${id}").then(response => response.json());
+	const produto = await fetch(`http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/produtos/filtro/pedido/${id}`).then(response => response.json());
 
 	return produto;
 }
@@ -121,12 +121,12 @@ async function adicionarAoPedido(id, pedidoId) {
 		"Content-Type": "application/json",
 	};
 	console.log({
-		url: "http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/produtos/inventario/${id}",
+		url: `http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/produtos/inventario/${id}`,
 		method: "PUT",
 		headers,
 		body: { id: pedidoId },
 	});
-	await fetch("http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/produtos/inventario/${id}", {
+	await fetch(`http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/produtos/inventario/${id}`, {
 		method: "PUT",
 		headers,
 		body: JSON.stringify({ id: pedidoId }),
@@ -136,7 +136,7 @@ async function adicionarAoPedido(id, pedidoId) {
 }
 
 async function removerProduto(id) {
-	await fetch("http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/produtos/admin/${id}", {
+	await fetch(`http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/produtos/admin/${id}`, {
 		method: "DELETE",
 	});
 	location.reload();
@@ -151,7 +151,7 @@ async function submitForm(e, form) {
 
 	const jsonFormData = buildJsonFormData(form);
 
-	await fetch("http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/produto/${id}", {
+	await fetch(`http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/produto/${id}`, {
 		method: "DELETE",
 		headers,
 		body: JSON.stringify(jsonFormData),

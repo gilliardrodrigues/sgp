@@ -93,7 +93,7 @@ function formatBool(text) {
 }
 
 async function removerProduto(id) {
-	await fetch("http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/produtos/admin/${id}", {
+	await fetch(`http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/produtos/admin/${id}`, {
 		method: "DELETE",
 	});
 	location.reload();
@@ -108,7 +108,7 @@ async function submitForm(e, form) {
 
 	const jsonFormData = buildJsonFormData(form);
 
-	await fetch("http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/produto/${id}", {
+	await fetch(`http://sgp-dacompsi.us-east-1.elasticbeanstalk.com/produto/${id}`, {
 		method: "DELETE",
 		headers,
 		body: JSON.stringify(jsonFormData),
