@@ -60,18 +60,24 @@ public class PedidoUseCaseTest {
     Temporada temporada;
     TemporadaEntity temporadaEntity;
 
+    AlunoEmbeddable alunoEmbeddable;
+
     @BeforeEach
     void setUp() {
 
-        AlunoEmbeddable alunoEmbeddable = new AlunoEmbeddable("Joãozinho", "joaozinho@gmail.com", "(99) 9 9999-9999");
+        alunoEmbeddable = new AlunoEmbeddable("Joãozinho", "joaozinho@gmail.com", "(99) 9 9999-9999");
         Aluno aluno = new Aluno("Joãozinho", "joaozinho@gmail.com", "(99) 9 9999-9999");
         HashMap<TipoProduto, Integer> catalogo = new HashMap<>();
         catalogo.put(TipoProduto.CAMISA, 30);
-        temporada = new Temporada(ID_BUSCADO, "Temporada 2022/2", OffsetDateTime.now(), null, catalogo, new ArrayList<>());
-        temporadaEntity = new TemporadaEntity(ID_BUSCADO, "Temporada 2022/2", OffsetDateTime.now(), null, catalogo, new ArrayList<>());
-        pedido = new Pedido(ID_BUSCADO, OffsetDateTime.now(), 0, StatusPedido.AGUARDANDO_PAGAMENTO, StatusPagamento.NAO_PAGO,
-        0, temporada, aluno, null);
-        pedidoEntity = new PedidoEntity(ID_BUSCADO, OffsetDateTime.now(), BigDecimal.ZERO, StatusPedido.AGUARDANDO_PAGAMENTO, StatusPagamento.NAO_PAGO,
+        temporada = new Temporada(ID_BUSCADO, "Temporada 2022/2", OffsetDateTime.now(), null, catalogo,
+                new ArrayList<>());
+        temporadaEntity = new TemporadaEntity(ID_BUSCADO, "Temporada 2022/2", OffsetDateTime.now(), null, catalogo,
+                new ArrayList<>());
+        pedido = new Pedido(ID_BUSCADO, OffsetDateTime.now(), 0, StatusPedido.AGUARDANDO_PAGAMENTO,
+                StatusPagamento.NAO_PAGO,
+                0, temporada, aluno, null);
+        pedidoEntity = new PedidoEntity(ID_BUSCADO, OffsetDateTime.now(), BigDecimal.ZERO,
+                StatusPedido.AGUARDANDO_PAGAMENTO, StatusPagamento.NAO_PAGO,
                 BigDecimal.ZERO, temporadaEntity, alunoEmbeddable, null);
 
         given(mapper.mapTo(temporadaEntity, Temporada.class)).willReturn(temporada);
@@ -161,7 +167,8 @@ public class PedidoUseCaseTest {
     @Test
     void testRemoverPedidoQuandoNaoExiste() {
 
-        Exception exception = assertThrows(EntidadeNaoEncontradaException.class, () -> this.usecase.excluir(ID_BUSCADO));
+        Exception exception = assertThrows(EntidadeNaoEncontradaException.class,
+                () -> this.usecase.excluir(ID_BUSCADO));
 
         assertEquals("Pedido não encontrado!", exception.getMessage());
     }
@@ -185,7 +192,8 @@ public class PedidoUseCaseTest {
     @Test
     void testBuscarPeloIdQuandoNaoExiste() {
 
-        Exception exception = assertThrows(EntidadeNaoEncontradaException.class, () -> this.usecase.buscarPeloId(ID_BUSCADO));
+        Exception exception = assertThrows(EntidadeNaoEncontradaException.class,
+                () -> this.usecase.buscarPeloId(ID_BUSCADO));
 
         assertEquals("Pedido não encontrado!", exception.getMessage());
     }
@@ -214,7 +222,8 @@ public class PedidoUseCaseTest {
         pedidoEntity.setStatusPagamento(StatusPagamento.NAO_PAGO);
         pedidoEntity.setSituacao(StatusPedido.AGUARDANDO_PAGAMENTO);
         List<PedidoEntity> pedidosEntity = List.of(pedidoEntity);
-        when(this.repository.findByStatusPagamentoAndTemporadaId(StatusPagamento.NAO_PAGO, ID_BUSCADO)).thenReturn(pedidosEntity);
+        when(this.repository.findByStatusPagamentoAndTemporadaId(StatusPagamento.NAO_PAGO, ID_BUSCADO))
+                .thenReturn(pedidosEntity);
 
         List<Pedido> pedidosResponse = this.usecase.buscarPedidos(null, "NAO_PAGO", null, null, null, ID_BUSCADO);
 
@@ -293,7 +302,8 @@ public class PedidoUseCaseTest {
         List<CamisaEntity> camisasEntity = List.of(camisaEntity);
         when(produtoRepository.findAllCamisas()).thenReturn(camisasEntity);
 
-        Set<Pedido> pedidosResponse = this.usecase.buscarPedidosDaTemporadaPeloTipoDeProduto(ID_BUSCADO, TipoProduto.CAMISA);
+        Set<Pedido> pedidosResponse = this.usecase.buscarPedidosDaTemporadaPeloTipoDeProduto(ID_BUSCADO,
+                TipoProduto.CAMISA);
 
         assertNotNull(pedidosResponse);
         verify(this.produtoRepository, times(1)).findAllCamisas();
@@ -307,7 +317,8 @@ public class PedidoUseCaseTest {
         List<CanecaEntity> canecasEntity = List.of(canecaEntity);
         when(produtoRepository.findAllCanecas()).thenReturn(canecasEntity);
 
-        Set<Pedido> pedidosResponse = this.usecase.buscarPedidosDaTemporadaPeloTipoDeProduto(ID_BUSCADO, TipoProduto.CANECA);
+        Set<Pedido> pedidosResponse = this.usecase.buscarPedidosDaTemporadaPeloTipoDeProduto(ID_BUSCADO,
+                TipoProduto.CANECA);
 
         assertNotNull(pedidosResponse);
         verify(this.produtoRepository, times(1)).findAllCanecas();
@@ -321,10 +332,11 @@ public class PedidoUseCaseTest {
         List<TiranteEntity> tirantesEntity = List.of(tiranteEntity);
         when(produtoRepository.findAllTirantes()).thenReturn(tirantesEntity);
 
-        Set<Pedido> pedidosResponse = this.usecase.buscarPedidosDaTemporadaPeloTipoDeProduto(ID_BUSCADO, TipoProduto.TIRANTE);
+        Set<Pedido> pedidosResponse = this.usecase.buscarPedidosDaTemporadaPeloTipoDeProduto(ID_BUSCADO,
+                TipoProduto.TIRANTE);
 
         assertNotNull(pedidosResponse);
-        verify(this.produtoRepository, times(1)).findAllTirantes    ();
+        verify(this.produtoRepository, times(1)).findAllTirantes();
     }
 
     @Test
@@ -381,8 +393,6 @@ public class PedidoUseCaseTest {
     @Test
     void testValidarStatusPedidoQuandoProdutoApenasChegou() {
 
-
-
         CamisaEntity camisaEntity = new CamisaEntity(Curso.SISTEMAS_DE_INFORMACAO, TamanhoCamisa.G, CorCamisa.BRANCO,
                 ID_BUSCADO, 30, false, true, true, TipoProduto.CAMISA, pedidoEntity, null);
         List<CamisaEntity> camisasEntity = List.of(camisaEntity);
@@ -405,11 +415,12 @@ public class PedidoUseCaseTest {
     }
 
     /*
-    @Test
-    void testValidarStatusPedidoQuandoProdutoFoiEntregue() {
-
-        //TODO
-    }*/
+     * @Test
+     * void testValidarStatusPedidoQuandoProdutoFoiEntregue() {
+     * 
+     * //TODO
+     * }
+     */
 
     @Test
     void testBuscarPedidosConfirmadosPorTemporada() {
@@ -419,14 +430,16 @@ public class PedidoUseCaseTest {
         pedidoEntity.setStatusPagamento(StatusPagamento.INTEGRALMENTE_PAGO);
         pedidoEntity.setSituacao(StatusPedido.CONFIRMADO);
         List<PedidoEntity> pedidosEntity = List.of(pedidoEntity);
-        when(repository.findByTemporadaAndSituacao(any(TemporadaEntity.class), eq(StatusPedido.CONFIRMADO))).thenReturn(pedidosEntity);
+        when(repository.findByTemporadaAndSituacao(any(TemporadaEntity.class), eq(StatusPedido.CONFIRMADO)))
+                .thenReturn(pedidosEntity);
 
         List<Pedido> pedidosResponse = this.usecase.buscarPedidosConfirmadosPorTemporada(temporada);
 
         assertNotNull(pedidosResponse);
         assertTrue(pedidosResponse.get(0).getTemporada().getId().equals(ID_BUSCADO) &&
                 pedidosResponse.get(0).getSituacao().equals(StatusPedido.CONFIRMADO));
-        verify(this.repository, times(1)).findByTemporadaAndSituacao(any(TemporadaEntity.class), eq(StatusPedido.CONFIRMADO));
+        verify(this.repository, times(1)).findByTemporadaAndSituacao(any(TemporadaEntity.class),
+                eq(StatusPedido.CONFIRMADO));
     }
 
     @Test
@@ -440,10 +453,37 @@ public class PedidoUseCaseTest {
         verify(this.repository, times(1)).existsById(ID_BUSCADO);
     }
 
-    /*
     @Test
-    void EncerrarTemporadaDePedidos() {
+    void testEncerrarTemporadaDePedidos() {
+        var pedidoEntity = new PedidoEntity(ID_BUSCADO, OffsetDateTime.now(), BigDecimal.ZERO,
+                StatusPedido.CONFIRMADO, StatusPagamento.INTEGRALMENTE_PAGO,
+                BigDecimal.ZERO, temporadaEntity, alunoEmbeddable, null);
 
-        //TODO
-    }*/
+        var canecaEntity = new CanecaEntity("modelo", 1L, 100, false, false, false,
+                TipoProduto.CANECA, pedidoEntity,
+                null);
+        var tiranteEntity = new TiranteEntity("modelo", 1L, 100, null, null, null,
+                null, pedidoEntity, null);
+        var camisaEntity = new CamisaEntity(Curso.CIENCIA_DA_COMPUTACAO,
+                TamanhoCamisa.G, CorCamisa.AZUL, 1L, null,
+                null, null,
+                null, null, pedidoEntity, null);
+
+        when(this.produtoRepository.findAllCanecasByPedidoId(anyLong())).thenReturn(List.of(canecaEntity));
+        when(this.produtoRepository.findAllTirantesByPedidoId(anyLong()))
+                .thenReturn(List.of(tiranteEntity));
+        when(this.produtoRepository.findAllCamisasByPedidoId(anyLong())).thenReturn(List.of(camisaEntity));
+        when(this.repository.findByTemporadaAndSituacao(any(TemporadaEntity.class), eq(StatusPedido.CONFIRMADO)))
+                .thenReturn(List.of(pedidoEntity));
+
+        when(this.produtoRepository.save(any(CanecaEntity.class))).thenReturn(canecaEntity);
+        when(this.produtoRepository.save(any(TiranteEntity.class))).thenReturn(tiranteEntity);
+        when(this.produtoRepository.save(any(CamisaEntity.class))).thenReturn(camisaEntity);
+        when(this.repository.save(any(PedidoEntity.class))).thenReturn(pedidoEntity);
+
+
+
+        assertDoesNotThrow(() -> this.usecase.encerrarTemporadaDePedidos(temporada));
+
+    }
 }

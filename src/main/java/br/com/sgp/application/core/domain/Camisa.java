@@ -18,6 +18,7 @@ public class Camisa extends Produto {
         this.cor = cor;
         this.curso = curso;
         this.tamanho = tamanho;
+        this.tipo = TipoProduto.CAMISA;
     }
 
     private Curso curso;

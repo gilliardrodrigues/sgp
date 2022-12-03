@@ -74,6 +74,7 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
             return outboundPort.salvarTirante(tirante);
         }
     }
+    
     @Override
     public Camisa alterarCamisa(Camisa camisaRequest) {
 
@@ -290,6 +291,7 @@ public class ProdutoUseCase implements ProdutoUseCaseInboundPort {
 
         return outboundPort.buscarCamisas(cor, tamanho, curso);
     }
+    
     @Override
     public Produto adicionarProdutoDoInventarioAoPedido(Long idProduto, Long idPedido) {
 

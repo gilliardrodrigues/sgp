@@ -3,6 +3,7 @@ package br.com.sgp.adapters.inbound.entity;
 import br.com.sgp.application.core.domain.TipoProduto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Column;
@@ -15,6 +16,7 @@ import java.time.OffsetDateTime;
 @Entity
 @DiscriminatorValue(value = "TIRANTE")
 @AllArgsConstructor
+@NoArgsConstructor
 public class TiranteEntity extends ProdutoEntity {
 
     public TiranteEntity(String modelo, Long id, Integer valor, Boolean entregue, Boolean prontaEntrega,
