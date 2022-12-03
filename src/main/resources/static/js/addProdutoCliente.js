@@ -55,7 +55,7 @@ async function criarProduto(headers, jsonFormData, pedidoId) {
 				alert(body.titulo);
 			});
 		} else {
-			location.href = ``../pedidoCliente/index.html?id=${pedidoId}`;
+			location.href = `../pedidoCliente/index.html?id=${pedidoId}`;
 		}
 	});
 }
